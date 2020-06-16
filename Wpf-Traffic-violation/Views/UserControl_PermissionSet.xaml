@@ -1,0 +1,235 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControl_PermissionSet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             mc:Ignorable="d" 
+            d:DesignHeight="560" d:DesignWidth="1360">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="929*"/>
+            <ColumnDefinition Width="431*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="1">
+
+            <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
+                <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center" >
+
+                    <!--top-->
+
+                    <Button  x:Name="But_Permission"  Margin="50 0 0 0"  Click="But_Permission_Click"
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">صلاحيات</TextBlock>
+                            <materialDesign:PackIcon Kind="EyeSettings" Margin="5 0 0 0" Width="24" Height="24" />
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="But_Delete_User" 
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0"  Width="80" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">حذف</TextBlock>
+                            <materialDesign:PackIcon Kind="Delete" Margin="5 0 0 0" Width="24" Height="24" />
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="But_Edit_Set" 
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">تعديل</TextBlock>
+                            <materialDesign:PackIcon Kind="Edit" Margin="5 0 0 0" Width="24" Height="24" />
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="But_Add_PermissionSet" Click="But_Add_PermissionSet_Click"
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">إضافة</TextBlock>
+                            <materialDesign:PackIcon Kind="Add" Margin="5 0 0 0" Width="24" Height="24" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+
+            </Border>
+            <StackPanel DockPanel.Dock="Top" Background="White" >
+
+
+                <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="10,5,5,0" ItemsSource="{Binding Items3}" 
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="400" HorizontalAlignment="Right"
+                          >
+                    <DataGrid.Resources>
+
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Binding="{Binding Code}"
+                                        Header="رقم المجموعة" MinWidth="100"
+                                         />
+                        <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="أسم المجموعة"  MinWidth="200"
+                                                        
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </materialDesign:DataGridTextColumn>
+                        <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
+
+                        <!-- set a max length to get an indicator in the editor -->
+                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                                                           Header="الحالة"
+                                                       MinWidth="100"
+                                                           MaxLength="255" 
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+
+
+
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </DockPanel>
+        <DockPanel x:Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft" Visibility="Hidden">
+            <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
+                <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Left"  >
+
+                    <!--top-->
+                    <TextBlock Text="أسم المجموعة :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="20 0 010 0"  />
+                    <TextBlock Text="المسؤولين عن النزول الميداني" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16"  FontWeight="Bold"  Width="250" Margin="0,18" />
+                    <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="20 0 010 0"  />
+                    <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="150" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 40 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                        <ComboBoxItem IsSelected="True">الإعدادات</ComboBoxItem>
+
+                        <ComboBoxItem>المستخدمين</ComboBoxItem>
+                        <ComboBoxItem>المخالفات</ComboBoxItem>
+                        <ComboBoxItem>الإعتراضات</ComboBoxItem>
+                        <ComboBoxItem>البلاغات</ComboBoxItem>
+                        <ComboBoxItem>الحسابات</ComboBoxItem>
+                        <ComboBoxItem>التهيئة</ComboBoxItem>
+                        <ComboBoxItem>التقارير</ComboBoxItem>
+                        
+                  
+
+                    </ComboBox>
+                    <Button  x:Name="But_Save_ParmissionSet" 
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0"  Width="80" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave" Margin="0 0 0 0" Width="24" Height="24" />
+                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">حفظ</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="But_Cancel" 
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cancel" Margin="0 0 0 0" Width="24" Height="24" />
+                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">الغاء</TextBlock>
+                        </StackPanel>
+                    </Button>
+                  
+                  
+                </StackPanel>
+
+            </Border>
+            <StackPanel DockPanel.Dock="Top" Background="White" >
+
+
+                <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="5,5,5,0" ItemsSource="{Binding Items3}" 
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="900" HorizontalAlignment="Left"
+                          >
+                    <DataGrid.Resources>
+
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                MinWidth="40" MaxWidth="80">
+                            <DataGridCheckBoxColumn.Header>
+                                <!--padding to allow hit test to pass thru for sorting -->
+                                <Border Background="Transparent" Padding="6 0 6 0" HorizontalAlignment="Center">
+                                    <CheckBox HorizontalAlignment="Center"
+                                               />
+                                </Border>
+                            </DataGridCheckBoxColumn.Header>
+                        </DataGridCheckBoxColumn>
+                       
+                        <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                                                        Header="أسم الشاشة"  MinWidth="300"
+                                                        
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </materialDesign:DataGridTextColumn>
+                        <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
+
+                        <!-- set a max length to get an indicator in the editor -->
+                        
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                Header="تفعيل" MinWidth="40" MaxWidth="80">
+                           
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                Header="إضافة" MinWidth="40" MaxWidth="80">
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                Header="تعديل" MinWidth="40" MaxWidth="80">
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                Header="حذف" MinWidth="40" MaxWidth="80">
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                Header="عرض" MinWidth="40" MaxWidth="80">
+                        </DataGridCheckBoxColumn>
+
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

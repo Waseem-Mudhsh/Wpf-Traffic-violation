@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControl_RestoreTheBackup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="512" d:DesignWidth="1360">
+    <Grid Background="White">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Tajawal"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="#022551"/>
+            </Style>
+        </Grid.Resources>
+        <Border BorderThickness="1" BorderBrush="LightBlue" Height="214" Width="430" Margin="10 10 10 100">
+            <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Height="214" Width="430" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#FFF5F5F5">
+
+                <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
+
+                <Grid DockPanel.Dock="Bottom" Height="40">
+                    <Button Content=" إستعادة"  VerticalAlignment="Bottom" Margin="2 0 2 2"></Button>
+                </Grid>
+                <!--///////////////////////////////////////////Center///////////////////////////////////////////////-->
+                <Grid FlowDirection="RightToLeft">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                       
+                    </Grid.RowDefinitions>
+                   
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="مسار النسخة :" Margin="15 0 35 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
+                        <TextBox    x:Name="text_OpenFolder"   Height="40" Width="195.999"
+                        materialDesign:HintAssist.Hint="مسار إستعادة النسخة..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                        <Button Height="40" Width="40" Margin="6 0" Padding="0" x:Name="but_OpenFolder" Click="but_OpenFolder_Click">
+                            <materialDesign:PackIcon Kind="FolderOpen" Width="24" Height="24"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="تاريخ النسخة :" Margin="15 0 35 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
+                        <TextBox   IsEnabled="False"    Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="تاريخ النسخة..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="الوصف :" Margin="15 0 35 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
+                        <TextBox    IsEnabled="False"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="الوصف..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
+                    </StackPanel>
+
+
+                </Grid>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

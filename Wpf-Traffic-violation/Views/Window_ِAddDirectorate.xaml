@@ -1,0 +1,94 @@
+﻿<Window x:Class="Wpf_Traffic_violation.Views.Window_ِAddDirectorate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        mc:Ignorable="d"
+        Title="Window_ِAddDirectorate" Height="198" Width="810"  FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="198" Width="810" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
+        <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
+            <StackPanel Orientation="Horizontal" Height="30" >
+
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                <TextBlock Text="إضافة بيانات مديرية جديدة" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="600,0,0,0" >
+                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
+
+        <Grid DockPanel.Dock="Bottom" Height="40">
+            <Button Content=" حفــظ"></Button>
+        </Grid>
+        <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
+        <Grid FlowDirection="RightToLeft" >
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Tajawal"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="#022551"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="المحافظة :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">تعز</ComboBoxItem>
+                    <ComboBoxItem Content="تعز"/>
+                    <ComboBoxItem>صنعاء</ComboBoxItem>
+                    <ComboBoxItem>عدن</ComboBoxItem>
+                    <ComboBoxItem>اب</ComboBoxItem>
+                    <ComboBoxItem>أمانة العاصمة</ComboBoxItem>
+                    <ComboBoxItem>حضرموت</ComboBoxItem>
+                    <ComboBoxItem>الحديدة</ComboBoxItem>
+                    <ComboBoxItem>أبين</ComboBoxItem>
+                    <ComboBoxItem>البيضاء</ComboBoxItem>
+                    <ComboBoxItem>لحج</ComboBoxItem>
+                    <ComboBoxItem>مارب</ComboBoxItem>
+                    <ComboBoxItem>شبوة</ComboBoxItem>
+                    <ComboBoxItem>الجوف</ComboBoxItem>
+                    <ComboBoxItem>المهرة</ComboBoxItem>
+                    <ComboBoxItem>المحويت</ComboBoxItem>
+                    <ComboBoxItem>صعدة</ComboBoxItem>
+                    <ComboBoxItem>حجة</ComboBoxItem>
+                    <ComboBoxItem>الضالع</ComboBoxItem>
+                    <ComboBoxItem>عمران</ComboBoxItem>
+                    <ComboBoxItem>ذمار</ComboBoxItem>
+                    <ComboBoxItem>ريمة</ComboBoxItem>
+
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="رقم المديرية :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم المديرية..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="أسم المديرية :" Margin="29 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <TextBox    x:Name="textBox1"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="أسم المديرية..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
+            </StackPanel>
+
+        </Grid>
+        <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->
+        <!--<Frame x:Name="Frame_Window" NavigationUIVisibility="Hidden" Width="1300" Height="270"></Frame>-->
+    </DockPanel>
+</Window>

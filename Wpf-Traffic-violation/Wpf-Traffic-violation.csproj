@@ -1,0 +1,683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6C65B9E0-722F-4D46-A0E0-47EE4836AD7E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Wpf_Traffic_violation</RootNamespace>
+    <AssemblyName>Wpf-Traffic-violation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.2.2\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.0.0-alpha0748\lib\net452\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.5.1465, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.5\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.MahApps, Version=0.1.2.1465, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.MahApps.0.1.2-ci1465\lib\net452\MaterialDesignThemes.MahApps.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.1.2.1465, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.1.2-ci1465\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Models\Citizen.cs" />
+    <Compile Include="Models\Class_SqlConnection.cs" />
+    <Compile Include="Models\TrafficMan.cs" />
+    <Compile Include="Models\TrafficmanModel.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\ComboBoxes.cs" />
+    <Compile Include="ViewModel\Trafficman_ViewModel.cs" />
+    <Compile Include="ViewModel\User_ViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel_Home.cs" />
+    <Compile Include="Views\ElementMenu.xaml.cs">
+      <DependentUpon>ElementMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\ItemMenu.cs" />
+    <Compile Include="ViewModel\SubItem.cs" />
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl1GridDataCommunications.xaml.cs">
+      <DependentUpon>UserControl1GridDataCommunications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlForm1.xaml.cs">
+      <DependentUpon>UserControlForm1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControllMenuItem.xaml.cs">
+      <DependentUpon>UserControllMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlsubSetting.xaml.cs">
+      <DependentUpon>UserControlsubSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Accounts.xaml.cs">
+      <DependentUpon>UserControl_Accounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_AddObjection.xaml.cs">
+      <DependentUpon>UserControl_AddObjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_BackUp.xaml.cs">
+      <DependentUpon>UserControl_BackUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_BondOfExchange.xaml.cs">
+      <DependentUpon>UserControl_BondOfExchange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_CancelTheDeportation.xaml.cs">
+      <DependentUpon>UserControl_CancelTheDeportation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_CategoriesOfLicenses.xaml.cs">
+      <DependentUpon>UserControl_CategoriesOfLicenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_CommunicationOperation.xaml.cs">
+      <DependentUpon>UserControl_CommunicationOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Communications.xaml.cs">
+      <DependentUpon>UserControl_Communications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Configuration.xaml.cs">
+      <DependentUpon>UserControl_Configuration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_ConnectDatabase.xaml.cs">
+      <DependentUpon>UserControl_ConnectDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_DataCitizen.xaml.cs">
+      <DependentUpon>UserControl_DataCitizen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_DataDrivingLicense.xaml.cs">
+      <DependentUpon>UserControl_DataDrivingLicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_DataSystem.xaml.cs">
+      <DependentUpon>UserControl_DataSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_DataTrafficMan.xaml.cs">
+      <DependentUpon>UserControl_DataTrafficMan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_DataVehicle.xaml.cs">
+      <DependentUpon>UserControl_DataVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Deportation.xaml.cs">
+      <DependentUpon>UserControl_Deportation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Directorate.xaml.cs">
+      <DependentUpon>UserControl_Directorate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_GiveThePermissions.xaml.cs">
+      <DependentUpon>UserControl_GiveThePermissions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Home.xaml.cs">
+      <DependentUpon>UserControl_Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Login.xaml.cs">
+      <DependentUpon>UserControl_Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Main.xaml.cs">
+      <DependentUpon>UserControl_Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_ManagmentPropertys.xaml.cs">
+      <DependentUpon>UserControl_ManagmentPropertys.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_NotificationSystem.xaml.cs">
+      <DependentUpon>UserControl_NotificationSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Objections.xaml.cs">
+      <DependentUpon>UserControl_Objections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_OperationAcconts.xaml.cs">
+      <DependentUpon>UserControl_OperationAcconts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_OperationViolation.xaml.cs">
+      <DependentUpon>UserControl_OperationViolation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_PermissionSet.xaml.cs">
+      <DependentUpon>UserControl_PermissionSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_QueryPersonalNumber.xaml.cs">
+      <DependentUpon>UserControl_QueryPersonalNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_QueryReferenceNumber.xaml.cs">
+      <DependentUpon>UserControl_QueryReferenceNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_QureyIdNumber.xaml.cs">
+      <DependentUpon>UserControl_QureyIdNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_QureyViolation.xaml.cs">
+      <DependentUpon>UserControl_QureyViolation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_ReasonsToObject.xaml.cs">
+      <DependentUpon>UserControl_ReasonsToObject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Receipt.xaml.cs">
+      <DependentUpon>UserControl_Receipt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_RestoreTheBackup.xaml.cs">
+      <DependentUpon>UserControl_RestoreTheBackup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_ScanCommunication.xaml.cs">
+      <DependentUpon>UserControl_ScanCommunication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_ScanObjection.xaml.cs">
+      <DependentUpon>UserControl_ScanObjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Streets.xaml.cs">
+      <DependentUpon>UserControl_Streets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_SystemMaintenance.xaml.cs">
+      <DependentUpon>UserControl_SystemMaintenance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_TypesOfPlates.xaml.cs">
+      <DependentUpon>UserControl_TypesOfPlates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_TypesViolations.xaml.cs">
+      <DependentUpon>UserControl_TypesViolations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_UserOperations.xaml.cs">
+      <DependentUpon>UserControl_UserOperations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Users.xaml.cs">
+      <DependentUpon>UserControl_Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControl_Violations.xaml.cs">
+      <DependentUpon>UserControl_Violations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddAccont.xaml.cs">
+      <DependentUpon>Window_AddAccont.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddBondOfExchange.xaml.cs">
+      <DependentUpon>Window_AddBondOfExchange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddCategoriesOfLicenses.xaml.cs">
+      <DependentUpon>Window_AddCategoriesOfLicenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddCitizen.xaml.cs">
+      <DependentUpon>Window_AddCitizen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddCommunication.xaml.cs">
+      <DependentUpon>Window_AddCommunication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddDataDrivinglicense.xaml.cs">
+      <DependentUpon>Window_AddDataDrivinglicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddDataSystem.xaml.cs">
+      <DependentUpon>Window_AddDataSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddDataVehicle.xaml.cs">
+      <DependentUpon>Window_AddDataVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddObjection.xaml.cs">
+      <DependentUpon>Window_AddObjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddPermissionSet.xaml.cs">
+      <DependentUpon>Window_AddPermissionSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddReasonsToObject.xaml.cs">
+      <DependentUpon>Window_AddReasonsToObject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddReceipt.xaml.cs">
+      <DependentUpon>Window_AddReceipt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddStreet.xaml.cs">
+      <DependentUpon>Window_AddStreet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddTrafficMan.xaml.cs">
+      <DependentUpon>Window_AddTrafficMan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddTypeOfplates.xaml.cs">
+      <DependentUpon>Window_AddTypeOfplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddTypeOFViolations.xaml.cs">
+      <DependentUpon>Window_AddTypeOFViolations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddUser.xaml.cs">
+      <DependentUpon>Window_AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_AddViolation.xaml.cs">
+      <DependentUpon>Window_AddViolation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_EditCitizen.xaml.cs">
+      <DependentUpon>Window_EditCitizen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_PayViolation.xaml.cs">
+      <DependentUpon>Window_PayViolation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_ScanCommunication.xaml.cs">
+      <DependentUpon>Window_ScanCommunication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_ScanObjection.xaml.cs">
+      <DependentUpon>Window_ScanObjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window_ِAddDirectorate.xaml.cs">
+      <DependentUpon>Window_ِAddDirectorate.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\ElementMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl1GridDataCommunications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlForm1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControllMenuItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlsubSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_AddObjection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_BackUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_BondOfExchange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_CancelTheDeportation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_CategoriesOfLicenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_CommunicationOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Communications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_ConnectDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_DataCitizen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_DataDrivingLicense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_DataSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_DataTrafficMan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_DataVehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Deportation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Directorate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_GiveThePermissions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_ManagmentPropertys.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_NotificationSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Objections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_OperationAcconts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_OperationViolation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_PermissionSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_QueryPersonalNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_QueryReferenceNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_QureyIdNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_QureyViolation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_ReasonsToObject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Receipt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_RestoreTheBackup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_ScanCommunication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_ScanObjection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Streets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_SystemMaintenance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_TypesOfPlates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_TypesViolations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_UserOperations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl_Violations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddAccont.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddBondOfExchange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddCategoriesOfLicenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddCitizen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddCommunication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddDataDrivinglicense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddDataSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddDataVehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddObjection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddPermissionSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddReasonsToObject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddReceipt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddStreet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddTrafficMan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddTypeOfplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddTypeOFViolations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_AddViolation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_EditCitizen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_PayViolation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_ScanCommunication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_ScanObjection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window_ِAddDirectorate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Screenshot_20200119_210524_com.facebook.katana copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\customs_officer_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Group 59.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Username.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Group 60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons8_open_in_browser.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Violation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Accounts.png" />
+    <Resource Include="Assets\Objection.png" />
+    <Resource Include="Assets\Reports.png" />
+    <Resource Include="Assets\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Communication1.png" />
+    <Resource Include="Assets\Configuration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Setting1.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

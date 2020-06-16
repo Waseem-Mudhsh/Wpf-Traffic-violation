@@ -1,0 +1,141 @@
+﻿<Window x:Class="Wpf_Traffic_violation.Views.Window_AddDataSystem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        mc:Ignorable="d"
+        Title="Window_AddDataSystem"  Height="300" Width="1200" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="300" Width="1200" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
+        <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
+            <StackPanel Orientation="Horizontal" Height="30" >
+
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                <TextBlock Text="إضافة بيانات نظام جديد" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="995,0,0,0" >
+                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
+
+        <Grid DockPanel.Dock="Bottom" Height="40">
+            <Button Content=" حفــظ"></Button>
+        </Grid>
+        <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
+        <Grid FlowDirection="RightToLeft" >
+
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Tajawal"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="#022551"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="793*"/>
+                <ColumnDefinition Width="407*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <TextBlock Text="أسم النظام :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="أسم النظام..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="الأسم المختصر :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <TextBox       Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="الأسم المختصر..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="2 0 0 0" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="المجال:" Margin="35 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox1"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="المجال ..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <TextBlock Text="العنوان :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox      Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="العنوان..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="الإيميل :" Margin="27 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <TextBox      Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="الإيميل..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="الشعار :" Margin="35 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <Button Width="145" Height="40" x:Name="but_SelectLogo" Click="but_SelectLogo_Click" Padding="0" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="123">
+                        <materialDesign:PackIcon Kind="Wallpaper"   Width="24" Height="24"    HorizontalAlignment="Center"/>
+                        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="10 2 2 2 " >تحديد شعار</TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <TextBlock Text="رقم الهاتف 1 :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox      Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم الهاتف 1..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="رقم الهاتف 2 :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <TextBox      Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم الهاتف 2..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="3 9 0 9" FontFamily="Tajawal" FontSize="14" />
+
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <TextBlock Text="السنة المالية :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <DatePicker  materialDesign:HintAssist.Hint="التاريخ ..."  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
+                <TextBlock Text="الحالة :" Margin="26 0 19 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                              ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="False" Margin="10  0 0 0" Width="53" />
+            </StackPanel>
+            <Border  BorderThickness="2" BorderBrush="LightBlue" materialDesign:ShadowAssist.ShadowDepth="Depth2" Grid.RowSpan="2" Grid.Column="1" Background="White" Height="100" Margin="148,6,115,10" Grid.Row="2" >
+            <StackPanel  >
+                <Image x:Name="logo" Width="144" Height="100" Stretch="Fill"/>
+            </StackPanel>
+            </Border>
+        </Grid>
+        <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->
+        <!--<Frame x:Name="Frame_Window" NavigationUIVisibility="Hidden" Width="1300" Height="270"></Frame>-->
+    </DockPanel>
+</Window>

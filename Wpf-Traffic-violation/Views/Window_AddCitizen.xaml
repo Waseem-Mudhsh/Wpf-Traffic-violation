@@ -1,0 +1,188 @@
+﻿<Window x:Class="Wpf_Traffic_violation.Views.Window_AddCitizen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" x:Name="Wondow_AddCitizen1"
+        xmlns:w="clr-namespace:Wpf_Traffic_violation.ViewModel"
+        Title="Window_AddCitizen" Height="300" Width="1200" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
+
+    <DockPanel Background="WhiteSmoke" Height="300" Width="1200" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
+        <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
+            <StackPanel Orientation="Horizontal" Height="30" >
+
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                <TextBlock Text="إضافة بيانات مواطن جديد" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="995,0,0,0" >
+                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
+
+        <Grid DockPanel.Dock="Bottom" Height="40">
+            <Button Content=" حفــظ"></Button>
+        </Grid>
+        <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
+        <Grid FlowDirection="RightToLeft" >
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Tajawal"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="#022551"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="أسم المواطن :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="أسم المواطن..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="نوع الهوية :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40" BorderThickness="1 1 1 1"
+                          Padding="10,10,0,0" Background="White" Margin="10 0 25 0" FontSize="14" FontFamily="Tajawal">
+                    <ComboBoxItem IsSelected="True">شخصية</ComboBoxItem>
+                    <ComboBoxItem Content="جواز سفر"></ComboBoxItem>
+                    <ComboBoxItem>رقم جلوس</ComboBoxItem>
+                    <ComboBoxItem>أنتخابية</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="رقم الهوية:" Margin="0 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox1"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم الهوية ..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="الجنسية :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">شخصية</ComboBoxItem>
+                    <ComboBoxItem Content="جواز سفر"></ComboBoxItem>
+                    <ComboBoxItem>رقم جلوس</ComboBoxItem>
+                    <ComboBoxItem>أنتخابية</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="الجنس :" Margin="4 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <CheckBox x:Name="MaterialDesignFilledComboBoxEnabledComboBox"
+                              IsChecked="False" Margin="10,0,0,8" Content="ذكر" FontSize="14" FontFamily="Tajawal" Width="64" />
+                <CheckBox x:Name="MaterialDesignFilledComboBoxEnabledComboBox1"
+                              IsChecked="False" Margin="50,0,0,8" Content="أنثى" Width="64" FontSize="14" FontFamily="Tajawal" />
+                <TextBlock Text="الديانة :" Margin="88 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 20 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">مسلم</ComboBoxItem>
+                    <ComboBoxItem Content="مسيحي"></ComboBoxItem>
+                    <ComboBoxItem>رقم جلوس</ComboBoxItem>
+
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <TextBlock Text="تاريخ الميلاد :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <DatePicker  materialDesign:HintAssist.Hint="التاريخ ..."  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
+                <TextBlock Text="فصيلة الدم :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="10 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">+ O</ComboBoxItem>
+                    <ComboBoxItem Content="- O"/>
+                    <ComboBoxItem>+ A</ComboBoxItem>
+                    <ComboBoxItem>- A</ComboBoxItem>
+                    <ComboBoxItem>+ AB</ComboBoxItem>
+                    <ComboBoxItem>- AB</ComboBoxItem>
+                    <ComboBoxItem>- B</ComboBoxItem>
+
+                </ComboBox>
+                <TextBlock Text="الحالة الأجتماعية :" Margin="0 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">عازب</ComboBoxItem>
+                    <ComboBoxItem>متزوج</ComboBoxItem>
+                   
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Text="المحافظة :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">تعز</ComboBoxItem>
+                    <ComboBoxItem Content="تعز"/>
+                    <ComboBoxItem>صنعاء</ComboBoxItem>
+                    <ComboBoxItem>عدن</ComboBoxItem>
+                    <ComboBoxItem>اب</ComboBoxItem>
+                    <ComboBoxItem>أمانة العاصمة</ComboBoxItem>
+                    <ComboBoxItem>حضرموت</ComboBoxItem>
+                    <ComboBoxItem>الحديدة</ComboBoxItem>
+                    <ComboBoxItem>أبين</ComboBoxItem>
+                    <ComboBoxItem>البيضاء</ComboBoxItem>
+                    <ComboBoxItem>لحج</ComboBoxItem>
+                    <ComboBoxItem>مارب</ComboBoxItem>
+                    <ComboBoxItem>شبوة</ComboBoxItem>
+                    <ComboBoxItem>الجوف</ComboBoxItem>
+                    <ComboBoxItem>المهرة</ComboBoxItem>
+                    <ComboBoxItem>المحويت</ComboBoxItem>
+                    <ComboBoxItem>صعدة</ComboBoxItem>
+                    <ComboBoxItem>حجة</ComboBoxItem>
+                    <ComboBoxItem>الضالع</ComboBoxItem>
+                    <ComboBoxItem>عمران</ComboBoxItem>
+                    <ComboBoxItem>ذمار</ComboBoxItem>
+                    <ComboBoxItem>ريمة</ComboBoxItem>
+
+                </ComboBox>
+                <TextBlock Text="المديرية :" Margin="2 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <!--<ComboBox  x:Name="FilledComboBox"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
+                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
+                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                    <ComboBoxItem Content="Item 1"/>
+                    <ComboBoxItem Content="Item 2"   />
+                    <ComboBoxItem Content="Item 3"   />
+                </ComboBox>-->
+                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="9 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">شخصية</ComboBoxItem>
+                    <ComboBoxItem Content="جواز سفر"></ComboBoxItem>
+                    <ComboBoxItem>رقم جلوس</ComboBoxItem>
+                    <ComboBoxItem>أنتخابية</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text="رقم التلفون:" Margin="0 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox    x:Name="textBox8"   Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم التلفون ..." BorderThickness="1"
+                          Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
+            </StackPanel>
+
+        </Grid>
+        <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->
+        <!--<Frame x:Name="Frame_Window" NavigationUIVisibility="Hidden" Width="1300" Height="270"></Frame>-->
+    </DockPanel>
+</Window>

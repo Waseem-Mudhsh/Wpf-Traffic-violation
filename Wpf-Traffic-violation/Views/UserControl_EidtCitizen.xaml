@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControl_AddCitizen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="1300">
+    <Grid>
+        <TextBlock Text=" welcome" FontSize="200"/>
+    </Grid>
+</UserControl>

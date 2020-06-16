@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControlForm1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+           
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="665" d:DesignWidth="1360">
+    <UserControl.Resources>
+        <!--<Style TargetType="Button" x:Key="sub1" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Foreground" Value="#BCBEC0"/>
+            <Setter Property="Background" Value="#E6E7E8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true" >
+
+                    <Setter Property="Foreground" Value="#022551"></Setter>
+
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+       
+    </UserControl.Resources>
+    <DockPanel Background="{x:Null}">
+        <!--panalDock top-->
+
+        <Grid   Background="#eceff1" DockPanel.Dock="Top"  Height="40" Margin="0,0,0,0" ><!--decrease margin 0 5 0 0 and background null-->
+            
+        <StackPanel Orientation="Horizontal" Background="#F1F2F2"   Height="40"   VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                       Uid="1" Click="but1_Click" x:Name="but1" Margin="0,0,0,0"  >
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  VerticalAlignment="Center"><Run FlowDirection="RightToLeft" Text="التقارير"/></TextBlock>
+                    <materialDesign:PackIcon Kind="Assignment" Margin="12 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                       BorderBrush="Gray" Uid="2" Click="but1_Click" x:Name="but2" Margin="0,0,0,0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  VerticalAlignment="Center"><Run FlowDirection="RightToLeft" Text="التهيئة"/></TextBlock>
+                        <materialDesign:PackIcon Kind="Sitemap" Margin="12 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                      Uid="3" Click="but1_Click" x:Name="but3" Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  VerticalAlignment="Center">الحسابات</TextBlock>
+                    <materialDesign:PackIcon Kind="LocalAtm" Margin="12 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                       Uid="4" Click="but1_Click" x:Name="but4" Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  VerticalAlignment="Center">البلاغات</TextBlock>
+                    <materialDesign:PackIcon Kind="Warning" Margin="12 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                       Uid="5" Click="but1_Click" x:Name="but5" Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  VerticalAlignment="Center">الأعتراضات</TextBlock>
+                    <materialDesign:PackIcon Kind="HandLeft" Margin="14 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                      Uid="6" Click="but1_Click" x:Name="but6" Margin="0,0,1,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  VerticalAlignment="Center">المخالفات</TextBlock>
+                        <materialDesign:PackIcon Kind="TrafficLight" Margin="12 0 0 0" Width="24" Height="24"  />
+                </StackPanel>
+            </Button>
+                <Button  Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                         Uid="7" Click="but1_Click" x:Name="but7" >
+                <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center">المستخدمين</TextBlock>
+                    
+                        <!--<Image  Margin="12 0 0 0" Width="24" Height="24" Source="/Wpf-Traffic-violation;component/Assets/icons8_open_in_browser.ico" OpacityMask="#FFD60D0D"  />-->
+                        <materialDesign:PackIcon Kind="Users" Margin="12 0 0 0" Width="24" Height="24" />
+                </StackPanel>
+            </Button>
+                <Button  Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                         Uid="8" Click="but1_Click" x:Name="but8" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center">الأعدادات</TextBlock>
+
+                        <!--<Image  Margin="12 0 0 0" Width="24" Height="24" Source="/Wpf-Traffic-violation;component/Assets/icons8_open_in_browser.ico" OpacityMask="#FFD60D0D"  />-->
+                        <materialDesign:PackIcon Kind="Settings" Margin="12 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+            
+        </Grid>
+        <Frame DockPanel.Dock="Top" Width="1360" Height="625" x:Name="GridPageFrom1"   NavigationUIVisibility="Hidden" />
+
+        <!--<StackPanel DockPanel.Dock="Top"  Background="Gray" Width="1360" Height="625" x:Name="StackPanelForm1">
+            <Button  Margin="188"></Button>
+        </StackPanel>-->
+
+    </DockPanel>
+</UserControl>

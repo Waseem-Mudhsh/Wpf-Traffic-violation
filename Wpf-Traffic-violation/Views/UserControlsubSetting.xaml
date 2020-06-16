@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControlsubSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             FontFamily="tajway"
+             mc:Ignorable="d" 
+             d:DesignHeight="625" d:DesignWidth="1360">
+
+
+    <DockPanel Background="Gray" >
+        <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                          Uid="7" x:Name="but7" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="DesktopWindows"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock FontFamily="Tajawal ExtraBold"     >بيانات النظام</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                          Uid="6" x:Name="but6" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="FileReport"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >توقيعات التقارير</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="5" x:Name="but5" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Notifications"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >تنبيهات النظام</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="4" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Tools"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >صيانة النظام</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="3" x:Name="but3" Margin="0,4,7,4"  Click="but_sub_ButtonClick">
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Reply"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >ألغاء الترحيل</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Https"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >الأقفالات</TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+
+            </StackPanel>
+        </StackPanel>
+        <Frame x:Name="Frame_Setting" DockPanel.Dock="Bottom" Height="560" BorderThickness="1" BorderBrush="Blue" NavigationUIVisibility="Hidden">
+            <Frame.Background>
+                <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/Setting1.png"/>
+            </Frame.Background>
+
+        </Frame>
+
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.ElementMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation"
+            
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="725" Width="1360">
+    <UserControl.Resources>
+        <Style  TargetType="Button">
+            <!--<Setter Property="Background" Value="Black"></Setter>-->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Aqua"></Setter>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="200" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="60" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid FlowDirection="RightToLeft">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Mode="PrimaryMid" HorizontalAlignment="Stretch" Grid.Row="0">
+        <Grid  >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="But_Close"  HorizontalAlignment="Left" Width="40" Height="40"  Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="أغلاق" Margin="10 0 0 0 " Click="But_Close_Click">
+                    <materialDesign:PackIcon Foreground="White" Kind="PowerSettingsNew" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+
+
+                <Button x:Name="But_min" HorizontalAlignment="Left" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,0,0" ToolTip="تصغير" >
+                    <materialDesign:PackIcon Foreground="White" Kind="Minus" Width="30" Height="30" VerticalAlignment="Bottom"   />
+                </Button>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+
+                    <Button Style="{x:Null}" x:Name="But_user"  Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="الصفحة الشخصية" Margin="1 0 10 0 " >
+                    <materialDesign:PackIcon Foreground="White" Kind="User" Width="30" Height="30" VerticalAlignment="Bottom"    />
+                </Button>
+                    <TextBlock x:Name="TextBlockUserName" Text="سليمان اليوسفي" VerticalAlignment="Center" FontFamily="Tajway" FontSize="16" Margin="0 0 60 0 " />
+                    <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="10 0 0 0 "  />
+            </StackPanel>
+
+        
+        </Grid>
+        </materialDesign:ColorZone>
+        <DockPanel x:Name="GridAll" Grid.Row="1">
+            <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>-->
+            <Grid DockPanel.Dock="Bottom" Background="Aqua"  Height="30">
+                <materialDesign:ColorZone Mode="Dark" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="30">
+                    <Grid   >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button x:Name="But_Close1"  HorizontalAlignment="Left" Width="24" Height="24" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="أغلاق" Margin="10 0 0 0 ">
+                                <materialDesign:PackIcon Foreground="White" Kind="About" Width="20" Height="20"  />
+                            </Button>
+
+
+                            <Button x:Name="But_min1" HorizontalAlignment="Left" Width="24" Height="24" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,0,0" ToolTip="تصغير" >
+                                <materialDesign:PackIcon Foreground="White" Kind="Calculator" Width="20" Height="20" VerticalAlignment="Bottom"   />
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <materialDesign:TimePicker></materialDesign:TimePicker>
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+
+
+                            <TextBlock x:Name="TextB1locProjectName" Text="مشروع تخرج - طلاب كلية الهندسة و تقنية المعلومات - جامعة تعز" VerticalAlignment="Center" FontFamily="Tajway" FontSize="16" Margin="0 0 60 0 " />
+
+                        </StackPanel>
+
+
+                    </Grid>
+                </materialDesign:ColorZone>
+            </Grid>
+            <Grid x:Name="GridMenu" DockPanel.Dock="Left" Width="60"   Background="{StaticResource PrimaryHueMidBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="326*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0" Background="White" HorizontalAlignment="Left" Width="210">
+
+                    <Button x:Name="ButtonCloseMenu" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden"  Click="ButtonCloseMenu_Click" Style="{StaticResource MaterialDesignFlatButton}" >
+                        <materialDesign:PackIcon Foreground="#FF1B207C" Kind="ArrowRight" Width="25" Height="25" />
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonOpenMenu_Click" Style="{StaticResource MaterialDesignFlatButton}" >
+                        <materialDesign:PackIcon Foreground="DarkCyan" Kind="Menu" Width="25" Height="25"/>
+                    </Button>
+
+                </Grid>
+                <!--<materialDesign:Card Grid.Row="1"    Height="50"  >
+                    <StackPanel Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="Home" Height="24" Width="24" Margin="18 0" VerticalAlignment="Center"/>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Tajway" FontSize="16" > الرئيسية</TextBlock>
+
+                    </StackPanel>-->
+                <!--<StackPanel Grid.Row="1" Orientation="Horizontal">
+                    
+                    <Button  Height="50" Background="{x:Null}" Foreground="#FF2196F3" BorderBrush="{x:Null}"  HorizontalAlignment="Right">
+                        <StackPanel>
+                        <materialDesign:PackIcon Kind="Home"  Width="24" Height="24"  HorizontalAlignment="Right" Foreground="White" Margin="15 0" />
+                        </StackPanel>
+                    </Button>
+                    <TextBlock></TextBlock>
+                </StackPanel>-->
+                
+                <!--</materialDesign:Card>-->
+                <ListView Grid.Row="1"  Foreground="#FF1368BD" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
+                    <ListViewItem x:Name="But_New" Height="50" HorizontalAlignment="Left" ToolTip="جديد" Width="200"  >
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon Kind="Home" Width="24" Height="24" VerticalAlignment="Center" Margin="10 0" Foreground="White"/>
+                            <TextBlock Text="الرئيسية" VerticalAlignment="Center" Margin="30 0" Foreground="White" FontSize="16"  FontFamily="Tajway"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView><!--زر 1لهوم-->
+                <ScrollViewer Grid.Row="2" HorizontalAlignment="Right" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" FlowDirection="LeftToRight" >
+
+                    <StackPanel x:Name="Menu" Margin="0" />
+
+                </ScrollViewer><!--القائمة-->
+
+            </Grid>
+           
+            <StackPanel x:Name="StackPanelmain" Background="RosyBrown" >
+                <!--<Frame Content="{Binding Path=SubItems.Screen}"/>-->
+
+            </StackPanel>
+            <!--صقحة العرض-->
+
+        </DockPanel>
+    </Grid>
+</UserControl>
