@@ -11,26 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Views
 {
     /// <summary>
-    /// Interaction logic for Window_AddUser.xaml
+    /// Interaction logic for Window_AddTrafficMan.xaml
     /// </summary>
-    public partial class Window_AddUser : Window
+    public partial class Window_AddTrafficMan : Window
     {
-        public Window_AddUser()
+        public Window_AddTrafficMan()
         {
             InitializeComponent();
-            User_ViewModel w = new User_ViewModel();
-            w.Save_User = new Models.User();
         }
 
-        private void But_close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            
-        }
+        
     }
 }

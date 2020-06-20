@@ -58,6 +58,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,20 +76,28 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DateTimeConverter.cs" />
     <Compile Include="Models\Citizen.cs" />
+    <Compile Include="Models\CitizenModel.cs" />
     <Compile Include="Models\Class_SqlConnection.cs" />
+    <Compile Include="Models\Provinces.cs" />
     <Compile Include="Models\TrafficMan.cs" />
     <Compile Include="Models\TrafficmanModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserTypes.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\Citizen_ViewModel.cs" />
     <Compile Include="ViewModel\ComboBoxes.cs" />
     <Compile Include="ViewModel\Trafficman_ViewModel.cs" />
     <Compile Include="ViewModel\User_ViewModel.cs" />
@@ -106,61 +120,61 @@
     <Compile Include="Views\UserControllMenuItem.xaml.cs">
       <DependentUpon>UserControllMenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControlsubSetting.xaml.cs">
+    <Compile Include="Views\Settings\UserControlsubSetting.xaml.cs">
       <DependentUpon>UserControlsubSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Accounts.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_Accounts.xaml.cs">
       <DependentUpon>UserControl_Accounts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_AddObjection.xaml.cs">
+    <Compile Include="Views\Objections\UserControl_AddObjection.xaml.cs">
       <DependentUpon>UserControl_AddObjection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_BackUp.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_BackUp.xaml.cs">
       <DependentUpon>UserControl_BackUp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_BondOfExchange.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_BondOfExchange.xaml.cs">
       <DependentUpon>UserControl_BondOfExchange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_CancelTheDeportation.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_CancelTheDeportation.xaml.cs">
       <DependentUpon>UserControl_CancelTheDeportation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_CategoriesOfLicenses.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_CategoriesOfLicenses.xaml.cs">
       <DependentUpon>UserControl_CategoriesOfLicenses.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_CommunicationOperation.xaml.cs">
+    <Compile Include="Views\Communications\UserControl_CommunicationOperation.xaml.cs">
       <DependentUpon>UserControl_CommunicationOperation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Communications.xaml.cs">
+    <Compile Include="Views\Communications\UserControl_Communications.xaml.cs">
       <DependentUpon>UserControl_Communications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Configuration.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_Configuration.xaml.cs">
       <DependentUpon>UserControl_Configuration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_ConnectDatabase.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_ConnectDatabase.xaml.cs">
       <DependentUpon>UserControl_ConnectDatabase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_DataCitizen.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_DataCitizen.xaml.cs">
       <DependentUpon>UserControl_DataCitizen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_DataDrivingLicense.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_DataDrivingLicense.xaml.cs">
       <DependentUpon>UserControl_DataDrivingLicense.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_DataSystem.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_DataSystem.xaml.cs">
       <DependentUpon>UserControl_DataSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_DataTrafficMan.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_DataTrafficMan.xaml.cs">
       <DependentUpon>UserControl_DataTrafficMan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_DataVehicle.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_DataVehicle.xaml.cs">
       <DependentUpon>UserControl_DataVehicle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Deportation.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_Deportation.xaml.cs">
       <DependentUpon>UserControl_Deportation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Directorate.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_Directorate.xaml.cs">
       <DependentUpon>UserControl_Directorate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_GiveThePermissions.xaml.cs">
+    <Compile Include="Views\Users\UserControl_GiveThePermissions.xaml.cs">
       <DependentUpon>UserControl_GiveThePermissions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControl_Home.xaml.cs">
@@ -172,139 +186,139 @@
     <Compile Include="Views\UserControl_Main.xaml.cs">
       <DependentUpon>UserControl_Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_ManagmentPropertys.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_ManagmentPropertys.xaml.cs">
       <DependentUpon>UserControl_ManagmentPropertys.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_NotificationSystem.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_NotificationSystem.xaml.cs">
       <DependentUpon>UserControl_NotificationSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Objections.xaml.cs">
+    <Compile Include="Views\Objections\UserControl_Objections.xaml.cs">
       <DependentUpon>UserControl_Objections.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_OperationAcconts.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_OperationAcconts.xaml.cs">
       <DependentUpon>UserControl_OperationAcconts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_OperationViolation.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_OperationViolation.xaml.cs">
       <DependentUpon>UserControl_OperationViolation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_PermissionSet.xaml.cs">
+    <Compile Include="Views\Users\UserControl_PermissionSet.xaml.cs">
       <DependentUpon>UserControl_PermissionSet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_QueryPersonalNumber.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_QueryPersonalNumber.xaml.cs">
       <DependentUpon>UserControl_QueryPersonalNumber.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_QueryReferenceNumber.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_QueryReferenceNumber.xaml.cs">
       <DependentUpon>UserControl_QueryReferenceNumber.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_QureyIdNumber.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_QureyIdNumber.xaml.cs">
       <DependentUpon>UserControl_QureyIdNumber.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_QureyViolation.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_QureyViolation.xaml.cs">
       <DependentUpon>UserControl_QureyViolation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_ReasonsToObject.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_ReasonsToObject.xaml.cs">
       <DependentUpon>UserControl_ReasonsToObject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Receipt.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_Receipt.xaml.cs">
       <DependentUpon>UserControl_Receipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_RestoreTheBackup.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_RestoreTheBackup.xaml.cs">
       <DependentUpon>UserControl_RestoreTheBackup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_ScanCommunication.xaml.cs">
+    <Compile Include="Views\Communications\UserControl_ScanCommunication.xaml.cs">
       <DependentUpon>UserControl_ScanCommunication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_ScanObjection.xaml.cs">
+    <Compile Include="Views\Objections\UserControl_ScanObjection.xaml.cs">
       <DependentUpon>UserControl_ScanObjection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Streets.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_Streets.xaml.cs">
       <DependentUpon>UserControl_Streets.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_SystemMaintenance.xaml.cs">
+    <Compile Include="Views\Settings\UserControl_SystemMaintenance.xaml.cs">
       <DependentUpon>UserControl_SystemMaintenance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_TypesOfPlates.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_TypesOfPlates.xaml.cs">
       <DependentUpon>UserControl_TypesOfPlates.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_TypesViolations.xaml.cs">
+    <Compile Include="Views\Configurations\UserControl_TypesViolations.xaml.cs">
       <DependentUpon>UserControl_TypesViolations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_UserOperations.xaml.cs">
+    <Compile Include="Views\Users\UserControl_UserOperations.xaml.cs">
       <DependentUpon>UserControl_UserOperations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Users.xaml.cs">
+    <Compile Include="Views\Users\UserControl_Users.xaml.cs">
       <DependentUpon>UserControl_Users.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControl_Violations.xaml.cs">
+    <Compile Include="Views\Users\UserControl_Violations.xaml.cs">
       <DependentUpon>UserControl_Violations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddAccont.xaml.cs">
+    <Compile Include="Views\Accounts\Window_AddAccont.xaml.cs">
       <DependentUpon>Window_AddAccont.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddBondOfExchange.xaml.cs">
+    <Compile Include="Views\Accounts\Window_AddBondOfExchange.xaml.cs">
       <DependentUpon>Window_AddBondOfExchange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddCategoriesOfLicenses.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddCategoriesOfLicenses.xaml.cs">
       <DependentUpon>Window_AddCategoriesOfLicenses.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddCitizen.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddCitizen.xaml.cs">
       <DependentUpon>Window_AddCitizen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddCommunication.xaml.cs">
+    <Compile Include="Views\Communications\Window_AddCommunication.xaml.cs">
       <DependentUpon>Window_AddCommunication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddDataDrivinglicense.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddDataDrivinglicense.xaml.cs">
       <DependentUpon>Window_AddDataDrivinglicense.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddDataSystem.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddDataSystem.xaml.cs">
       <DependentUpon>Window_AddDataSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddDataVehicle.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddDataVehicle.xaml.cs">
       <DependentUpon>Window_AddDataVehicle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddObjection.xaml.cs">
+    <Compile Include="Views\Objections\Window_AddObjection.xaml.cs">
       <DependentUpon>Window_AddObjection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddPermissionSet.xaml.cs">
+    <Compile Include="Views\Users\Window_AddPermissionSet.xaml.cs">
       <DependentUpon>Window_AddPermissionSet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddReasonsToObject.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddReasonsToObject.xaml.cs">
       <DependentUpon>Window_AddReasonsToObject.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddReceipt.xaml.cs">
+    <Compile Include="Views\Accounts\Window_AddReceipt.xaml.cs">
       <DependentUpon>Window_AddReceipt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddStreet.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddStreet.xaml.cs">
       <DependentUpon>Window_AddStreet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddTrafficMan.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddTrafficMan.xaml.cs">
       <DependentUpon>Window_AddTrafficMan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddTypeOfplates.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddTypeOfplates.xaml.cs">
       <DependentUpon>Window_AddTypeOfplates.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddTypeOFViolations.xaml.cs">
+    <Compile Include="Views\Configurations\Window_AddTypeOFViolations.xaml.cs">
       <DependentUpon>Window_AddTypeOFViolations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddUser.xaml.cs">
+    <Compile Include="Views\Users\Window_AddUser.xaml.cs">
       <DependentUpon>Window_AddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_AddViolation.xaml.cs">
+    <Compile Include="Views\Violations\Window_AddViolation.xaml.cs">
       <DependentUpon>Window_AddViolation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_EditCitizen.xaml.cs">
+    <Compile Include="Views\Configurations\Window_EditCitizen.xaml.cs">
       <DependentUpon>Window_EditCitizen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_PayViolation.xaml.cs">
+    <Compile Include="Views\Violations\Window_PayViolation.xaml.cs">
       <DependentUpon>Window_PayViolation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_ScanCommunication.xaml.cs">
+    <Compile Include="Views\Communications\Window_ScanCommunication.xaml.cs">
       <DependentUpon>Window_ScanCommunication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_ScanObjection.xaml.cs">
+    <Compile Include="Views\Objections\Window_ScanObjection.xaml.cs">
       <DependentUpon>Window_ScanObjection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window_ِAddDirectorate.xaml.cs">
+    <Compile Include="Views\Configurations\Window_ِAddDirectorate.xaml.cs">
       <DependentUpon>Window_ِAddDirectorate.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ElementMenu.xaml">
@@ -339,79 +353,79 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControlsubSetting.xaml">
+    <Page Include="Views\Settings\UserControlsubSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Accounts.xaml">
+    <Page Include="Views\Accounts\UserControl_Accounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_AddObjection.xaml">
+    <Page Include="Views\Objections\UserControl_AddObjection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_BackUp.xaml">
+    <Page Include="Views\Settings\UserControl_BackUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_BondOfExchange.xaml">
+    <Page Include="Views\Accounts\UserControl_BondOfExchange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_CancelTheDeportation.xaml">
+    <Page Include="Views\Settings\UserControl_CancelTheDeportation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_CategoriesOfLicenses.xaml">
+    <Page Include="Views\Configurations\UserControl_CategoriesOfLicenses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_CommunicationOperation.xaml">
+    <Page Include="Views\Communications\UserControl_CommunicationOperation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Communications.xaml">
+    <Page Include="Views\Communications\UserControl_Communications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Configuration.xaml">
+    <Page Include="Views\Configurations\UserControl_Configuration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_ConnectDatabase.xaml">
+    <Page Include="Views\Settings\UserControl_ConnectDatabase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_DataCitizen.xaml">
+    <Page Include="Views\Configurations\UserControl_DataCitizen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_DataDrivingLicense.xaml">
+    <Page Include="Views\Configurations\UserControl_DataDrivingLicense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_DataSystem.xaml">
+    <Page Include="Views\Configurations\UserControl_DataSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_DataTrafficMan.xaml">
+    <Page Include="Views\Configurations\UserControl_DataTrafficMan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_DataVehicle.xaml">
+    <Page Include="Views\Configurations\UserControl_DataVehicle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Deportation.xaml">
+    <Page Include="Views\Accounts\UserControl_Deportation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Directorate.xaml">
+    <Page Include="Views\Configurations\UserControl_Directorate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_GiveThePermissions.xaml">
+    <Page Include="Views\Users\UserControl_GiveThePermissions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,183 +441,183 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_ManagmentPropertys.xaml">
+    <Page Include="Views\Settings\UserControl_ManagmentPropertys.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_NotificationSystem.xaml">
+    <Page Include="Views\Settings\UserControl_NotificationSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Objections.xaml">
+    <Page Include="Views\Objections\UserControl_Objections.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_OperationAcconts.xaml">
+    <Page Include="Views\Accounts\UserControl_OperationAcconts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_OperationViolation.xaml">
+    <Page Include="Views\Violations\UserControl_OperationViolation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_PermissionSet.xaml">
+    <Page Include="Views\Users\UserControl_PermissionSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_QueryPersonalNumber.xaml">
+    <Page Include="Views\Violations\UserControl_QueryPersonalNumber.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_QueryReferenceNumber.xaml">
+    <Page Include="Views\Violations\UserControl_QueryReferenceNumber.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_QureyIdNumber.xaml">
+    <Page Include="Views\Violations\UserControl_QureyIdNumber.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_QureyViolation.xaml">
+    <Page Include="Views\Violations\UserControl_QureyViolation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_ReasonsToObject.xaml">
+    <Page Include="Views\Configurations\UserControl_ReasonsToObject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Receipt.xaml">
+    <Page Include="Views\Accounts\UserControl_Receipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_RestoreTheBackup.xaml">
+    <Page Include="Views\Settings\UserControl_RestoreTheBackup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_ScanCommunication.xaml">
+    <Page Include="Views\Communications\UserControl_ScanCommunication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_ScanObjection.xaml">
+    <Page Include="Views\Objections\UserControl_ScanObjection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Streets.xaml">
+    <Page Include="Views\Configurations\UserControl_Streets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_SystemMaintenance.xaml">
+    <Page Include="Views\Settings\UserControl_SystemMaintenance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_TypesOfPlates.xaml">
+    <Page Include="Views\Configurations\UserControl_TypesOfPlates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_TypesViolations.xaml">
+    <Page Include="Views\Configurations\UserControl_TypesViolations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_UserOperations.xaml">
+    <Page Include="Views\Users\UserControl_UserOperations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Users.xaml">
+    <Page Include="Views\Users\UserControl_Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl_Violations.xaml">
+    <Page Include="Views\Users\UserControl_Violations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddAccont.xaml">
+    <Page Include="Views\Accounts\Window_AddAccont.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddBondOfExchange.xaml">
+    <Page Include="Views\Accounts\Window_AddBondOfExchange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddCategoriesOfLicenses.xaml">
+    <Page Include="Views\Configurations\Window_AddCategoriesOfLicenses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddCitizen.xaml">
+    <Page Include="Views\Configurations\Window_AddCitizen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddCommunication.xaml">
+    <Page Include="Views\Communications\Window_AddCommunication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddDataDrivinglicense.xaml">
+    <Page Include="Views\Configurations\Window_AddDataDrivinglicense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddDataSystem.xaml">
+    <Page Include="Views\Configurations\Window_AddDataSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddDataVehicle.xaml">
+    <Page Include="Views\Configurations\Window_AddDataVehicle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddObjection.xaml">
+    <Page Include="Views\Objections\Window_AddObjection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddPermissionSet.xaml">
+    <Page Include="Views\Users\Window_AddPermissionSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddReasonsToObject.xaml">
+    <Page Include="Views\Configurations\Window_AddReasonsToObject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddReceipt.xaml">
+    <Page Include="Views\Accounts\Window_AddReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddStreet.xaml">
+    <Page Include="Views\Configurations\Window_AddStreet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddTrafficMan.xaml">
+    <Page Include="Views\Configurations\Window_AddTrafficMan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddTypeOfplates.xaml">
+    <Page Include="Views\Configurations\Window_AddTypeOfplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddTypeOFViolations.xaml">
+    <Page Include="Views\Configurations\Window_AddTypeOFViolations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddUser.xaml">
+    <Page Include="Views\Users\Window_AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_AddViolation.xaml">
+    <Page Include="Views\Violations\Window_AddViolation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_EditCitizen.xaml">
+    <Page Include="Views\Configurations\Window_EditCitizen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_PayViolation.xaml">
+    <Page Include="Views\Violations\Window_PayViolation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_ScanCommunication.xaml">
+    <Page Include="Views\Communications\Window_ScanCommunication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_ScanObjection.xaml">
+    <Page Include="Views\Objections\Window_ScanObjection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window_ِAddDirectorate.xaml">
+    <Page Include="Views\Configurations\Window_ِAddDirectorate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -672,6 +686,7 @@
   <ItemGroup>
     <Resource Include="Assets\Setting1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.2-ci1465\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

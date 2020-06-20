@@ -9,6 +9,7 @@ namespace Wpf_Traffic_violation.Models
 {
     public class User : BindableBase
     {
+        public UserTypes Type{ get; set; }
         int userid;
         public int Userid
         {
@@ -21,10 +22,36 @@ namespace Wpf_Traffic_violation.Models
                 if (userid != value)
                 {
                     userid = value;
+                    Combine();
                     RaisePropertyChanged("Userid");
                 }
             }
         }
+       
+
+        private void Combine()
+        {
+            Search = string.Join("  ", Userid.ToString(), Username);
+        }
+
+        string search;
+        public string Search
+        {
+            get
+            {
+                return search;
+            }
+            set
+            {
+                if (search != value)
+                {
+                    search = value;
+                    RaisePropertyChanged("Search");
+                }
+            }
+        }
+
+
         string username;
         public string Username
         {
@@ -37,6 +64,8 @@ namespace Wpf_Traffic_violation.Models
                 if (username != value)
                 {
                     username = value;
+                    Combine();
+
                     RaisePropertyChanged("Username");
                 }
             }
@@ -73,8 +102,8 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
         }
-        int userstatus;
-        public int Userstatus
+        bool  userstatus;
+        public bool Userstatus
         {
             get
             {
@@ -136,20 +165,20 @@ namespace Wpf_Traffic_violation.Models
         public override void CollectErrors()
         {
             Errors.Clear();
-            if(Userid!=0)
+            if(Userid==0)
             {
                 Errors.Add("Userid", "يجب أن لايكون فارغ أو يحمل القيمة صفر");
             }
-            if (string.IsNullOrWhiteSpace(Username))
-            {
-                Errors.Add("Username", "يجب أن يكون نص ");
-            }
+            //if (string.IsNullOrWhiteSpace(Username))
+            //{
+            //    Errors.Add("Username", "يجب أن يكون نص ");
+            //}
             if (String.IsNullOrWhiteSpace(Userpassword))
             
             {
                 Errors.Add("Userpassword", "يجب أن لايكون فارغ ");
             }
-            throw new NotImplementedException();
+            
         }
     }
 }

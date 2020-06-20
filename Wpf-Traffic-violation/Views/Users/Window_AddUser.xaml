@@ -8,9 +8,7 @@
         xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
         mc:Ignorable="d"
         Title="Window_AddUser" Height="244" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <Window.DataContext>
-        <ViewModel:User_ViewModel/>
-    </Window.DataContext>
+
     <Window.Resources>
         <x:Array x:Key="Usertype_combobox" Type="ViewModel:ComboBoxes">
             <ViewModel:ComboBoxes Combo_usertype="النظام"/>
@@ -24,8 +22,8 @@
 
                 <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="2 0"></materialDesign:PackIcon>
                 <TextBlock Text="بيانات مستخدم" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="665,0,0,0" >
-                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand,UpdateSourceTrigger=PropertyChanged}" Padding="0" Margin="665,0,0,0">
+                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"     />
                 </Button>
             </StackPanel>
         </materialDesign:ColorZone>
@@ -40,7 +38,7 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="Tajawal"/>
                     <Setter Property="FontWeight" Value="Bold"/>
-                    
+
                     <Setter Property="FontSize" Value="16"/>
                     <Setter Property="Foreground" Value="#022551"/>
                 </Style>
@@ -49,44 +47,51 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-               
+
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="رقم المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="111.429" Text="{Binding Save_User.Userid,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        materialDesign:HintAssist.Hint="رقم المستخدم..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBox  IsReadOnly="True"  x:Name="textBox_id"   Height="40" Width="111.429" Text="{Binding Currunt_User.Userid,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                        
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFECECEC" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
+               
 
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="أسم المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox       Height="40" Width="240" Text="{Binding Save_User.Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                        materialDesign:HintAssist.Hint="أسم المستخدم..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <ComboBox       Height="40" Width="240" ItemsSource="{Binding get_Trafficman}" Margin="0,9,0,9" 
+                            SelectedValuePath="Traffic_man_name" SelectedValue="{Binding Currunt_User.Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="أسم المستخدم..."  
+                         BorderThickness="1,1,1,1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14" TabIndex="1" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Traffic_man_name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
                 <TextBlock Text="كلمة المرور :" Margin="40 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240" Text="{Binding Currunt_User.Userpassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_User.Userpassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" 
                         materialDesign:HintAssist.Hint="كلمة المرور..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="16  0 9 0" FontFamily="Tajawal" FontSize="14" />
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="16  0 9 0" FontFamily="Tajawal" FontSize="14" TabIndex="2" />
 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="نوع المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox x:Name="combo" Width="240" Height="40" ItemsSource="{StaticResource Usertype_combobox}" DisplayMemberPath="Combo_usertype" materialDesign:HintAssist.Hint="النظام"
-                           SelectedValuePath="Combo_usertype" SelectedValue="{Binding Currunt_User.String_usertype}"
-                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    
-               
-                    
-
+                <ComboBox x:Name="combo" Width="240" Height="40" Text="{Binding Currunt_User.String_usertype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,FallbackValue=النظام}"
+                           
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1" SelectedIndex="0" TabIndex="3">
+                    <ComboBoxItem >النظام</ComboBoxItem>
+                    <ComboBoxItem>التطبيق</ComboBoxItem>
                 </ComboBox>
-            
-                <TextBlock Text="الحالة :" Margin="15,18,20,18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <ToggleButton x:Name="but_status" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" 
-                              ToolTip="MaterialDesignSwitchAccentToggleButton" Margin="0  0 0 0" Width="53" IsChecked="False"/>
+
+                <TextBlock Text="نشط :" Margin="15,18,20,18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <CheckBox x:Name="but_status" IsChecked="{Binding Currunt_User.Userstatus,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Margin="0  0 0 0" Width="53" TabIndex="4" />
             </StackPanel>
-        
+
 
         </Grid>
         <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->

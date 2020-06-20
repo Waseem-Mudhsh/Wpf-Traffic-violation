@@ -21,6 +21,7 @@ namespace Wpf_Traffic_violation.Models
                 if (traffic_man_id != value)
                 {
                     traffic_man_id = value;
+                    Combine();
                     RaisePropertyChanged("Traffic_man_id");
                 }
             }
@@ -38,6 +39,7 @@ namespace Wpf_Traffic_violation.Models
                 if (traffic_man_name != value)
                 {
                     traffic_man_name = value;
+                    Combine();
                     RaisePropertyChanged("Traffic_man_name");
                 }
             }
@@ -55,6 +57,7 @@ namespace Wpf_Traffic_violation.Models
                 if (user_id != value)
                 {
                     user_id = value;
+                   
                     RaisePropertyChanged("User_id");
                 }
             }
@@ -72,27 +75,34 @@ namespace Wpf_Traffic_violation.Models
                 if (traffic_man_grade != value)
                 {
                     traffic_man_grade = value;
+                    Combine();
                     RaisePropertyChanged("Traffic_man_grade");
                 }
             }
         }
-
-        int status;
-        public int Status
+        string search;
+        public string Search
         {
             get
             {
-                return status;
+                return search;
             }
             set
             {
-                if (status != value)
+                if (search != value)
                 {
-                    status = value;
-                    RaisePropertyChanged("Status");
+                    search = value;
+                    RaisePropertyChanged("Search");
                 }
             }
         }
+
+        private void Combine()
+        {
+            Search = string.Join(" ", Traffic_man_id.ToString(), Traffic_man_name,Traffic_man_grade);
+        }
+
+
 
 
 
@@ -100,7 +110,19 @@ namespace Wpf_Traffic_violation.Models
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (Traffic_man_id == 0)
+            {
+                Errors.Add("Traffic_man_id", "يجب أن لايكون فارغ ");
+            }
+            if (string.IsNullOrWhiteSpace(Traffic_man_name))
+            {
+                Errors.Add("Traffic_man_name", "يجب أن يكون نص ");
+            }
+            if (string.IsNullOrWhiteSpace(Traffic_man_grade))
+            {
+                Errors.Add("Traffic_man_grade", "يجب أن يكون نص ");
+            }
         }
     }
 }

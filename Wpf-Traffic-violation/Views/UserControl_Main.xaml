@@ -23,10 +23,13 @@
 
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right"  Orientation="Horizontal" Width="80">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_mins"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="الصفحة الشخصية" Margin="0,0,10,0" >
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_max"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="-38,0,10,0">
+                            <materialDesign:PackIcon Foreground="White" Kind="Mixer" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_mins"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,10,0" >
                             <materialDesign:PackIcon Foreground="White" Kind="Minus" Width="24" Height="24" VerticalAlignment="Bottom"    />
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,10,0" Click="But_close_Click" Padding="0" >
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_close_Click" Padding="0" >
                             <materialDesign:PackIcon Foreground="White" Kind="Power" Width="24" Height="24" VerticalAlignment="Bottom"    />
                         </Button>
                     </StackPanel>

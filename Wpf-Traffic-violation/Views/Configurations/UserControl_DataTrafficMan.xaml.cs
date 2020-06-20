@@ -10,28 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Wpf_Traffic_violation.Views
 {
     /// <summary>
-    /// Interaction logic for Window_AddCitizen.xaml
+    /// Interaction logic for UserControl_DataTrafficMan.xaml
     /// </summary>
-    public partial class Window_AddCitizen : Window
+    public partial class UserControl_DataTrafficMan : UserControl
     {
-        public Window_AddCitizen()
+        public UserControl_DataTrafficMan()
         {
             InitializeComponent();
-            
-            
-            
         }
 
-        private void But_close_Click(object sender, RoutedEventArgs e)
-        {
-
-            this.Close();
-        }
        
+
+        
     }
 }

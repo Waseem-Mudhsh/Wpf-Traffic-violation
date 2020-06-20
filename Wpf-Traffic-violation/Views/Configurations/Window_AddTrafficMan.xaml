@@ -6,15 +6,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
         mc:Ignorable="d"
-        Title="Window_AddTrafficMan" Height="140" Width="930"  FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
-    <DockPanel Background="WhiteSmoke" Height="140" Width="930" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        Title="Window_AddTrafficMan" Height="198" Width="830"  FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="198" Width="830" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
                 <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
-                <TextBlock Text="إضافة بيانات رجل المرور جديد" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="705,0,0,0" >
+                <TextBlock Text=" بيانات رجل المرور" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Command="{Binding Closecommand}" Padding="0" Margin="665,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -22,7 +22,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -34,26 +34,31 @@
                     <Setter Property="Foreground" Value="#022551"/>
                 </Style>
             </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
           
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="الرقم العسكري :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                <TextBox    x:Name="textBox_TrafficMan"   Height="40" Width="240" Text="{Binding Currunt_trafficman.Traffic_man_id ,UpdateSourceTrigger=PropertyChanged ,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="الرقم العسكري..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="الأســـم :" Margin="29 0 010 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <TextBox    x:Name="textBox1"   Height="40" Width="350"
-                        materialDesign:HintAssist.Hint="الأسم..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 
+               
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="الأسم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <TextBox     Height="40" Width="240" Text="{Binding Currunt_trafficman.Traffic_man_name , UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="الأسم ..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="الرتبة :" Margin="29 0 010 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_trafficman.Traffic_man_grade ,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                        materialDesign:HintAssist.Hint="الرتبة..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
             </StackPanel>
 
         </Grid>

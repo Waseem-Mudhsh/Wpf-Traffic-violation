@@ -36,7 +36,7 @@ namespace Wpf_Traffic_violation.Views
 
                 case 1:
                     {
-                        Frame_Users.Content = new UserControl_UserOperations();
+                        Frame_Users.Content = new UserControl_UserOperations ();
                         break;
                     }
                 case 2:

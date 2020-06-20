@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wpf_Traffic_violation.ViewModel
+namespace Wpf_Traffic_violation.Models
 {
-   public class ComboBoxes
+   public enum UserTypes
     {
-        public string Combo_usertype { get; set; }
-        
+        system,apps,النظام
     }
 }

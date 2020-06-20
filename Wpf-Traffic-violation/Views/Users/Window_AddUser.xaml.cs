@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Views
 {
     /// <summary>
-    /// Interaction logic for UserControl_UserOperations.xaml
+    /// Interaction logic for Window_AddUser.xaml
     /// </summary>
-    public partial class UserControl_UserOperations : UserControl
+    public partial class Window_AddUser : Window
     {
-        public UserControl_UserOperations()
+        public Window_AddUser()
         {
             InitializeComponent();
-            //this.DataContext =new ViewModel.User_ViewModel();
-
             
+           
         }
 
-       
+
     }
 }

@@ -11,63 +11,59 @@ using Wpf_Traffic_violation.Views;
 
 namespace Wpf_Traffic_violation.ViewModel
 {
-    
-    class Trafficman_ViewModel : BindableBase
+   public class Citizen_ViewModel : BindableBase
     {
-        Window_AddTrafficMan win;
-        
+
+        Window_AddCitizen win;
         #region Objects And Variables
-
+        Models.CitizenModel citizenModel = new CitizenModel();
         #endregion
         #region Proprties
-        Models.TrafficmanModel traffic_Man_Model = new TrafficmanModel();
-        ObservableCollection<TrafficMan> grid_trafficmans;
-        public ObservableCollection<TrafficMan> Grid_trafficmans //يربط مع الجرد فيو 
+        ObservableCollection<Citizen> grid_Citizen;
+        public ObservableCollection<Citizen> Grid_Citizens //يربط مع الجرد فيو 
         {
             get
             {
-                return grid_trafficmans;
+                return grid_Citizen;
             }
             set
             {
-                if (grid_trafficmans != value)
+                if (grid_Citizen != value)
                 {
-                    grid_trafficmans = value;
-                    RaisePropertyChanged("Grid_trafficmans");
+                    grid_Citizen = value;
+                    RaisePropertyChanged("Grid_Citizens");
                 }
             }
         }
-        TrafficMan currunt_trafficman; //selectedItemيربط مع 
-        public TrafficMan Currunt_trafficman
+        Citizen currunt_Citizen; //selectedItemيربط مع 
+     
+        public Citizen Currunt_Citizen
         {
             get
             {
-                return currunt_trafficman;
+                return currunt_Citizen;
             }
             set
             {
-                if (currunt_trafficman != value)
+                if (currunt_Citizen != value)
                 {
-                    currunt_trafficman = value;
-                    RaisePropertyChanged("Currunt_trafficman");
+                    currunt_Citizen = value;
+                    RaisePropertyChanged("Currunt_Citizen");
                 }
             }
         }
 
-       
-
-        #endregion
-        #region Proprties
+        
         #endregion
         #region Construcor
-        public Trafficman_ViewModel()
+        public Citizen_ViewModel()
         {
-            Grid_trafficmans = new ObservableCollection<TrafficMan>();
-            traffic_Man_Model.GetTrafficMans(Grid_trafficmans);
+            Grid_Citizens = new ObservableCollection<Citizen>();
+            citizenModel.GetCitizens(Grid_Citizens);
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
-            Savecommand = new RelayCommand(par => Save(),par=>CanSave());
+            Savecommand = new RelayCommand(par => Save(),par =>CanSave());
             Closecommand = new RelayCommand(par => close());
         }
         #endregion
@@ -77,9 +73,8 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public void Add()
         {
-            
-            Currunt_trafficman = new TrafficMan();
-            win = new Window_AddTrafficMan { DataContext = this };
+            Currunt_Citizen = new Citizen { Citizen_identitytype="شخصية", Citizen_blood_type= "+ O", String_social_status = "عازب" };
+            win = new Window_AddCitizen { DataContext = this };
             win.ShowDialog();
 
 
@@ -92,11 +87,11 @@ namespace Wpf_Traffic_violation.ViewModel
             //Personview PersonView = new Personview();
             //PersonView.textbox1.Text = CurrentPerson.Id.ToString();
             IsEditing = true;
-            win = new Window_AddTrafficMan { DataContext = this };
+            win = new Window_AddCitizen { DataContext = this };
             win.ShowDialog();
 
         }
-        bool CanEdit() => Currunt_trafficman != null;
+        bool CanEdit() => Currunt_Citizen != null;
 
 
 
@@ -111,8 +106,8 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                traffic_Man_Model.OperarionTrafficMan(Currunt_trafficman , "Delete");
-                grid_trafficmans.Remove(Currunt_trafficman);
+                CitizenModel.OperarionCitizen(Currunt_Citizen, "Delete");
+                Grid_Citizens.Remove(Currunt_Citizen);
             }
             else
             {
@@ -121,41 +116,57 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
-        bool CanDelet() => Currunt_trafficman != null;
+        bool CanDelet() => Currunt_Citizen != null;
         void Save()
-        {//ComboBoxes.Combo_usertype
+        {
+            try { 
+            Currunt_Citizen.Citizen_date_pirth = win.Datepicker_date.Text;
 
-           
-            if (IsEditing && traffic_Man_Model.Check_Exsit(Currunt_trafficman.Traffic_man_id))
+            if (win.Radiobutton_gender.IsChecked!=true)
             {
-                traffic_Man_Model.OperarionTrafficMan(Currunt_trafficman, "Update");
+                Currunt_Citizen.String_gender = "أنثى";
+            }
+            else
+            {
+                Currunt_Citizen.String_gender = "ذكر";
+            }
+            if(Currunt_Citizen.String_social_status=="عازب")
+            {
+                Currunt_Citizen.Citizen_social_status = true;
+            }
+            else
+            {
+                Currunt_Citizen.Citizen_social_status = false;
+            }
+
+
+            if (IsEditing&&citizenModel.Check_Exsit(Currunt_Citizen.Citizen_id))
+            {
+                CitizenModel.OperarionCitizen(Currunt_Citizen, "Update");
                 IsEditing = false;
-                close();
+                
                 string message = "تمت عملية التعديل بنجاح";
                 string caption = "عملية التعديل";
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
+                close();
             }
-            else if (traffic_Man_Model.Check_Exsit(Currunt_trafficman.Traffic_man_id))
+            else if (citizenModel.Check_Exsit(Currunt_Citizen.Citizen_id))
             {
                 string message = "رقم المستخدم موجود مسبقا";
                 string caption = "رسالة خطا";
                 MessageBoxImage icon = MessageBoxImage.Error;
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
-
-                win.textBox_TrafficMan.Focus();
-                win.textBox_TrafficMan.SelectionStart = 0;
-                win.textBox_TrafficMan.SelectionLength = win.textBox_TrafficMan.Text.Length;
+                win.textBox_citizenid.Focus();
+                win.textBox_citizenid.SelectionStart = 0;
+                win.textBox_citizenid.SelectionLength = win.textBox_citizenid.Text.Length;
             }
-
-
-
             else
             {
-                traffic_Man_Model.OperarionTrafficMan(Currunt_trafficman, "Insert");
-                grid_trafficmans.Add(Currunt_trafficman);
+                CitizenModel.OperarionCitizen(Currunt_Citizen, "Insert");
+                Grid_Citizens.Add(Currunt_Citizen);
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية التعديل";
@@ -165,14 +176,21 @@ namespace Wpf_Traffic_violation.ViewModel
 
             }
 
+            }// end try
+            catch (Exception e)
+            {
+                MessageBox.Show("Error reading from "+ e.Message);
 
+                close();
+
+            }
 
             //Enable_Grid = false;
         }
-        bool CanSave() => Currunt_trafficman != null && !Currunt_trafficman.HasErrors;
+        bool CanSave() => Currunt_Citizen != null &&!Currunt_Citizen.HasErrors;
         void close()
         {
-            Currunt_trafficman = null;
+            Currunt_Citizen = null;
             win.Close();
         }
 
@@ -182,12 +200,8 @@ namespace Wpf_Traffic_violation.ViewModel
         public RelayCommand Editcommand { get; private set; }
         public RelayCommand Deletecommand { get; private set; }
         public RelayCommand Savecommand { get; private set; }
-        public RelayCommand Closecommand { get; set; }
+        public RelayCommand Closecommand { get; private set; }
         #endregion
-
-
-
-
 
 
 

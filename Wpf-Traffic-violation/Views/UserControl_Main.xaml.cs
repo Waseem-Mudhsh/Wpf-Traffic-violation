@@ -21,8 +21,7 @@ namespace Wpf_Traffic_violation.Views
     /// </summary>
     public partial class UserControl_Main : UserControl
     {
-        
-        
+
         public UserControl_Main()
         {
             InitializeComponent();
@@ -75,5 +74,7 @@ namespace Wpf_Traffic_violation.Views
 
 
         }
+
+      
     }
 }

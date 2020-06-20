@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.UserControl_UserOperations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             xmlns:y="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             mc:Ignorable="d" 
+            d:DesignHeight="560" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:User_ViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <DataTemplate x:Key="AutoId">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding  Search}"/>
+               
+
+               
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
+            <StackPanel  Height="60" Background="WhiteSmoke" Orientation="Horizontal" >
+
+                <!--top-->
+
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" FlowDirection="RightToLeft" Margin="60 0 20 0">
+                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed">
+                        <materialDesign:PackIcon Kind="Search"   Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
+                    </materialDesign:Card>
+                    <!--<TextBox    x:Name="textBox"   Height="40" Width="400"
+         
+                        materialDesign:HintAssist.Hint="بحـــث..." 
+                        BorderThickness="0,0,0,1"  FlowDirection="RightToLeft"  UseLayoutRounding="False" HorizontalContentAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" FontSize="14" FontFamily="Tajawal" Padding="5,2,5,0"/>-->
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding grid_Users}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Search" 
+                                              SelectedItem="{Binding Currunt_User , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              />
+                </StackPanel>
+                <Button  
+                                   Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}"  Command="{Binding Excelcommand}">
+                    <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
+                        <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>
+                        <materialDesign:PackIcon Kind="FileExcel" Margin="8 0 0 0" Width="24" Height="24" HorizontalAlignment="Right" />
+                    </StackPanel>
+                </Button>
+                <Button  x:Name="But_Delete_User" Command="{Binding Deletecommand}"
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="230,0,0,0" Width="80" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">حذف</TextBlock>
+                        <materialDesign:PackIcon Kind="Delete" Margin="5 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>
+                <Button  x:Name="But_Edit_User" Command="{Binding Editcommand}"
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">تعديل</TextBlock>
+                        <materialDesign:PackIcon Kind="Edit" Margin="5 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>
+                <Button  x:Name="But_Add_User" Command="{Binding Addcommand}" 
+                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">إضافة</TextBlock>
+                        <materialDesign:PackIcon Kind="Add" Margin="5 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+
+        </Border>
+        <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <StackPanel DockPanel.Dock="Bottom"  Background="White" >
+
+            <DataGrid  Style="{StaticResource Style_Datagrid}" IsReadOnly="True" ItemsSource="{Binding grid_Users}"  SelectedItem="{Binding Currunt_User , UpdateSourceTrigger=PropertyChanged}" 
+                         materialDesign:DataGridAssist.ColumnHeaderPadding="0 0 0 0"
+                         RowBackground="Lavender"  Height="475"  MaxWidth="900" Margin="5,5,5,0">
+                
+                         
+               
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Binding="{Binding Userid}" 
+                                        Header="رقم المستخدم" MaxWidth="150" MinWidth="110"
+                                          
+                                         />
+                    <DataGridTextColumn Binding="{Binding Username}" 
+                                        Header="أسم المستخدم" MaxWidth="300" MinWidth="100"
+                                          
+                                         />
+                    
+                    <DataGridTextColumn Binding="{Binding String_usertype}"
+                                        Header="نوع المستخدم" MaxWidth="200" MinWidth="100"
+                                          
+                                         />
+                    <DataGridCheckBoxColumn Binding="{Binding Userstatus}"
+                                        Header="نشط" MaxWidth="80" MinWidth="60" 
+                                         
+                                         />
+
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+         
+        </StackPanel>
+    </DockPanel>
+</UserControl>

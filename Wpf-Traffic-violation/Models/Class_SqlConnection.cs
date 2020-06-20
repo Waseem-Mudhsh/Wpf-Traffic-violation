@@ -53,6 +53,49 @@ namespace Wpf_Traffic_violation.Models
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        ///////////////////////////////// start Get_row/////////////////////////////////////
+        public String Get_row(String storad, int id)
+        {
+            DataTable dt;
+
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Cant Open con");
+                }
+
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = storad,
+                    Connection = con
+
+                };
+                Command.Parameters.AddWithValue("@Id", id);
+
+                dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+
+            }
+            if (dt.Rows.Count > 0)
+            {
+
+                return dt.Rows[0][0].ToString();
+
+            }
+
+            return "غير موجود";
+        }
+        /////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////// end Get_row/////////////////////////////////////
+
     }
 
 }
