@@ -6,15 +6,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
         mc:Ignorable="d"
-        Title="Window_AddTypeOFViolations" Height="300" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <DockPanel Background="WhiteSmoke" Height="300" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        Title="Window_AddTypeOFViolations" Height="302" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="302" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
-                <TextBlock Text="إضافة بيانات نوع مخالفة جديدة" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="585,0,0,0" >
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="6 0 0 0"></materialDesign:PackIcon>
+                <TextBlock Text="بيانات نوع مخالفة" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand}"  Padding="0" Margin="650,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -22,7 +22,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -43,46 +43,39 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="رقم المخالفة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="رقم المخالفة..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBox    x:Name="textBox"   Height="40" Width="129.506" Text="{Binding Currunt_ViolationType.Violation_type_id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="رقم المخالفة..." IsReadOnly="True"
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFEEEEEE" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                
 
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="أسم المخالفة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox       Height="40" Width="640"
+                <TextBox       Height="40" Width="640" Text="{Binding Currunt_ViolationType.Violation_type_name,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="أسم المخالفة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="الحد الأدنى :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_ViolationType.Minimum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="الحد الأدنى..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="الحد الأعلى :" Margin="40 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <TextBox    Height="40" Width="240"
+
+                <TextBox    Height="40" Width="240" Text="{Binding Currunt_ViolationType.Maximum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="الحد الأعلى..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="16  0 9 0" FontFamily="Tajawal" FontSize="14" />
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="5  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <TextBlock Text="الغرامة :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_ViolationType.Penalty,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="الغرامة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="حالة الأعتراض :" Margin="40 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                              ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="False" Margin="0  0 0 0" Width="53" />
+                <CheckBox x:Name="but_status" IsChecked="{Binding Currunt_ViolationType.Interception_status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Margin="0  0 0 0" Width="53" TabIndex="4" />
             </StackPanel>
 
         </Grid>

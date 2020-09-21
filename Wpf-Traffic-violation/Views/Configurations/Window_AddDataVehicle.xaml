@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Window_AddDataVehicle" Height="358" Width="1200" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
-    <DockPanel Background="WhiteSmoke" Height="358" Width="1200" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        Title="Window_AddDataVehicle" Height="418" Width="1200" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="418" Width="1200" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="6 0 0 0"></materialDesign:PackIcon>
                 <TextBlock Text=" بيانات مركبة " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Click="But_close_Click" Padding="0" Margin="1050,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
@@ -22,7 +22,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Command="{Binding Savecommand}" Content=" حفــظ"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -40,11 +40,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="رقم الوثيقة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240"
+                <TextBlock Text="رقم الوثيقة :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox      Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_card_id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="رقم الوثيقة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="تاريخ الأصدار :"  Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -56,50 +57,33 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <DatePicker Width="240" Height="40" materialDesign:HintAssist.Hint="DD/MM/YYYY" FlowDirection="RightToLeft" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
-                <TextBlock Text="مكان الأصدار:" Margin="0 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
-                          Padding="10,10,0,0" Background="White" Margin="015 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">تعز</ComboBoxItem>
-                    <ComboBoxItem Content="تعز"/>
-                    <ComboBoxItem>صنعاء</ComboBoxItem>
-                    <ComboBoxItem>عدن</ComboBoxItem>
-                    <ComboBoxItem>اب</ComboBoxItem>
-                    <ComboBoxItem>أمانة العاصمة</ComboBoxItem>
-                    <ComboBoxItem>حضرموت</ComboBoxItem>
-                    <ComboBoxItem>الحديدة</ComboBoxItem>
-                    <ComboBoxItem>أبين</ComboBoxItem>
-                    <ComboBoxItem>البيضاء</ComboBoxItem>
-                    <ComboBoxItem>لحج</ComboBoxItem>
-                    <ComboBoxItem>مارب</ComboBoxItem>
-                    <ComboBoxItem>شبوة</ComboBoxItem>
-                    <ComboBoxItem>الجوف</ComboBoxItem>
-                    <ComboBoxItem>المهرة</ComboBoxItem>
-                    <ComboBoxItem>المحويت</ComboBoxItem>
-                    <ComboBoxItem>صعدة</ComboBoxItem>
-                    <ComboBoxItem>حجة</ComboBoxItem>
-                    <ComboBoxItem>الضالع</ComboBoxItem>
-                    <ComboBoxItem>عمران</ComboBoxItem>
-                    <ComboBoxItem>ذمار</ComboBoxItem>
-                    <ComboBoxItem>ريمة</ComboBoxItem>
-
+                <DatePicker Width="240"  Text="{Binding Current_Vehicle.Release_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="40" materialDesign:HintAssist.Hint="DD/MM/YYYY" FlowDirection="RightToLeft" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
+                <TextBlock Text="مكان الأصدار:"  Margin="0 0 44 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox Name="com" Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_Provinces}"
+                           SelectedItem="{Binding Selected_Provinc_vc,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Province_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <TextBlock Text="الحالة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                <TextBlock Text="الحالة :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox Name="com2" Text="{Binding Current_Vehicle.String_Status,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="240" Height="40"
                           Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
                     <ComboBoxItem IsSelected="True">نشطة</ComboBoxItem>
-                    <ComboBoxItem>مفقودة</ComboBoxItem>
                     <ComboBoxItem Content="منتهية"/>
+                    <ComboBoxItem>مفقودة</ComboBoxItem>
 
 
                 </ComboBox>
-                <TextBlock Text="رقم المواطن :" Margin="0 0 025 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="رقم المواطن..."
+                <TextBlock Margin="0 0 025 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"><Run FlowDirection="RightToLeft" Text="ملاحظة :"/></TextBlock>
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Noties,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="ملاحظة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="أسم المواطن :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
+                <TextBlock Text="أسم المواطن :" Margin="25 0 34 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -108,13 +92,19 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox     Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="أسم المواطن..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="10 9 0 9" FontFamily="Tajawal" FontSize="14" />
+                <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_Citizen}"
+                           SelectedItem="{Binding Selected_Citizen,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Citizen_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <TextBlock Text="رقم القعادة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
+                <TextBlock Text="رقم القعادة :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Potty_id,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="رقم القعادة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="رقم المحرك :" Margin="27 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -126,17 +116,17 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_engine_num,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="رقم المحرك..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="10 9 0 9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text=" الشركة المصنعة :" Margin="20 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Company_manu_name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="الشركة المصنعة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="8 9 0 9" FontFamily="Tajawal" FontSize="14" />
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <TextBlock Text="موديل :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
+                <TextBlock Text="موديل :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_model,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="موديل..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="شكل :" Margin="27 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -148,21 +138,17 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
-                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">شخصية</ComboBoxItem>
-                    <ComboBoxItem Content="جواز سفر"></ComboBoxItem>
-                    <ComboBoxItem>رقم جلوس</ComboBoxItem>
-                    <ComboBoxItem>أنتخابية</ComboBoxItem>
-                </ComboBox>
-                <TextBlock Text="اللون:" Margin="0 0 45 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_shape,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        materialDesign:HintAssist.Hint="موديل..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="اللون:" Margin="25 0 45 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_color,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="اللون ..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <TextBlock Text="رقم الجمرك :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
+                <TextBlock Text="رقم الجمرك :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox       Height="40" Width="240" Text="{Binding Current_Vehicle.Vehicle_customs_num,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="رقم الجمرك..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="تاريخ الجمرك :" Margin="27 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -174,12 +160,29 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <DatePicker Width="240" Height="40" materialDesign:HintAssist.Hint="DD/MM/YYYY" FlowDirection="RightToLeft" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
+                <DatePicker Width="240" Height="40"  Text="{Binding Current_Vehicle.Release_date_c,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="DD/MM/YYYY" FlowDirection="RightToLeft" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"/>
                 <TextBlock Text="مكان الجمرك:" Margin="0 0 45 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="مكان الجمرك ..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
+                <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_Provinces}"
+                           SelectedItem="{Binding Selected_Province,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Province_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                <TextBlock Text="الحالة :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <ComboBox Text="{Binding Current_Vehicle.String_Status_v,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="240" Height="40"
+                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">نشطة</ComboBoxItem>
+                    <ComboBoxItem>غير نشط</ComboBoxItem>
+                    
+                </ComboBox>
+               
+            </StackPanel>
+
 
         </Grid>
         <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->

@@ -51,7 +51,7 @@ namespace Wpf_Traffic_violation.Views
         {
 
             Color ColorforN = (Color)ColorConverter.ConvertFromString("#B29FA8DA");//color forground
-
+            Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
@@ -60,13 +60,14 @@ namespace Wpf_Traffic_violation.Views
 
             but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
-           
 
 
 
-            but.Foreground = Brushes.DarkOrange;
 
-            but.BorderBrush = Brushes.DarkOrange;
+            //but.Foreground = Brushes.DarkOrange;
+            but.Foreground = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
+            //but.BorderBrush = Brushes.DarkOrange;
+            but.BorderBrush = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
         }
     }
 }

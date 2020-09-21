@@ -2,11 +2,45 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Wpf_Traffic_violation.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ServerName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">DESKTOP-KL7JJLG\Waseem</Value>
+    <Setting Name="ServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">WASEEM-PC\SQLEXPRESS</Value>
     </Setting>
-    <Setting Name="DatabaseName" Type="System.String" Scope="Application">
+    <Setting Name="DatabaseName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Traffic_Violation_Management</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="con" Type="System.Data.SqlClient.SqlConnection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UserNameSystem" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Userid" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Traffic_Violation_ManagementConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=ENG-IPRAHIM_A_M\MSSQLSERVER17;Initial Catalog=Traffic_Violation_Management;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=ENG-IPRAHIM_A_M\MSSQLSERVER17;Initial Catalog=Traffic_Violation_Management;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="Traffic_Violation_ManagementConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=SAM_PC\SQLEXPRESS;Initial Catalog=Traffic_Violation_Management;Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=SAM_PC\SQLEXPRESS;Initial Catalog=Traffic_Violation_Management;Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="permission" Type="System.Data.DataTable" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

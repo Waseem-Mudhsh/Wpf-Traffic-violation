@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Traffic_violation.Models;
+using Wpf_Traffic_violation.Models.Users_Model;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -37,10 +39,41 @@ namespace Wpf_Traffic_violation.Views
             {
 
                
-                case 2:
+                case 1:
                     {
 
                         Frame_Setting.Content = new UserControl_DataCitizen();
+                        break;
+                    }
+                case 2:
+                    {
+                        AllPermissions AllPermissions = new AllPermissions();
+                        PermissionUser PermissionUser;
+                        UserControl_SystemMaintenance UserControl_SystemMaintenance = new UserControl_SystemMaintenance();
+
+                        PermissionUser = new PermissionUser();
+                        PermissionUser.Form_id = 34;
+                        AllPermissions.getPermission(PermissionUser);
+                        if (PermissionUser.Form == false)
+                        {
+                            UserControl_SystemMaintenance.but1.IsEnabled = false;
+                        }
+                        PermissionUser = new PermissionUser();
+                        PermissionUser.Form_id = 35;
+                        AllPermissions.getPermission(PermissionUser);
+                        if (PermissionUser.Form == false)
+                        {
+                            UserControl_SystemMaintenance.but2.IsEnabled = false;
+                        }
+                        PermissionUser = new PermissionUser();
+                        PermissionUser.Form_id = 36;
+                        AllPermissions.getPermission(PermissionUser);
+                        if (PermissionUser.Form == false)
+                        {
+                            UserControl_SystemMaintenance.but3.IsEnabled = false;
+                        }
+                        Frame_Setting.Content = UserControl_SystemMaintenance;
+
                         break;
                     }
                 case 3:
@@ -48,24 +81,9 @@ namespace Wpf_Traffic_violation.Views
                         Frame_Setting.Content = new UserControl_CancelTheDeportation();
                         break;
                     }
-                case 4:
-                    {
-                        Frame_Setting.Content = new UserControl_SystemMaintenance();
-                        break;
-                    }
-                case 5:
-                    {
-                        break;
-                    }
-                case 6:
-                    {
-                        break;
-                    }
-                case 7:
-                    {
-                        Frame_Setting.Content = new UserControl_NotificationSystem();
-                        break;
-                    }
+               
+               
+            
 
 
 
@@ -76,29 +94,26 @@ namespace Wpf_Traffic_violation.Views
         {
             
             Color ColorforN = (Color)ColorConverter.ConvertFromString("#B29FA8DA");//color forground
-            
+            Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
-            
+
+            but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but3.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but4.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but5.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but6.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but7.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+          
 
 
            
+            but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
             but3.BorderBrush = Brushes.White;
-            but4.BorderBrush = Brushes.White;
-            but5.BorderBrush = Brushes.White;
-            but6.BorderBrush = Brushes.White;
-            but7.BorderBrush = Brushes.White;
 
 
-            but.Foreground = Brushes.DarkOrange;
-            
-            but.BorderBrush = Brushes.DarkOrange;
+
+            //but.Foreground = Brushes.DarkOrange;
+            but.Foreground = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
+            //but.BorderBrush = Brushes.DarkOrange;
+            but.BorderBrush = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
         }
     }
     }

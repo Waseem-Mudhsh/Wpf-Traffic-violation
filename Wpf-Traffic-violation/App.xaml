@@ -23,10 +23,10 @@
 
                     </StackPanel>
                 </DataTemplate>
-           
+
             <Style TargetType="Button" x:Key="sub1" BasedOn="{StaticResource MaterialDesignFlatButton}">
-               <Setter Property="Foreground" Value="#BCBEC0"/>
-            <Setter Property="Background" Value="#E6E7E8"/>
+                <Setter Property="Foreground" Value="#BCBEC0"/>
+                <Setter Property="Background" Value="#E6E7E8"/>
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Width" Value="131"/>
                 <!--<Setter Property="Focusable" Value="True"/>-->
@@ -50,11 +50,28 @@
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                      <Trigger Property="IsMouseOver" Value="true" >
+                    <Trigger Property="IsMouseOver" Value="true" >
 
-                    <Setter Property="Foreground" Value="#022551"></Setter>
-                </Trigger>
-                   
+                        <Setter Property="Foreground" Value="#022551"></Setter>
+                    </Trigger>
+
+                </Style.Triggers>
+            </Style>
+            <!--////////////////////////////////////////////////////////////////////////////////////////////-->
+            <Style TargetType="Button" x:Key="Repotr_Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontFamily" Value="Tajawal "/>
+                <Setter Property="Margin" Value="10 0 10 10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true" >
+
+                        <Setter Property="Foreground" Value="#022551"></Setter>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
             <!--////////////////////////////////////////////////////////////////////////////////////////////-->
@@ -182,13 +199,13 @@
             <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
                                                             <!--style subButton-->
             <Style TargetType="Button" x:Key="subButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                <Setter Property="Foreground" Value="#B29FA8DA" />
-                <Setter Property="FontSize" Value="10"/>
-                <Setter Property="FontFamily" Value="Tajawal ExtraBold"/>
+                <Setter Property="Foreground" Value="#03719C" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontFamily" Value="Tajawal "/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Height" Value="56"/>
                 <Setter Property="Width" Value="115"/>
-                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="FontWeight" Value="Bold"/>
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true" >

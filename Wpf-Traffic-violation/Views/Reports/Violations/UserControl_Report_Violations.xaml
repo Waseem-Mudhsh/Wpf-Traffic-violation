@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.Reports.Violations.UserControl_Report_Violations"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports.Violations"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="560" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:Report_violation_ViowModel/>
+    </UserControl.DataContext>
+    <Grid Height="560">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="250"/>
+
+        </Grid.ColumnDefinitions>
+        <!--///////////////////////// Buttons////////////////////////////////////-->
+        <Grid Grid.Column="1" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Button Uid="1" Name="but1" Command="{Binding Showcommand1}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Margin="10" >
+                    <StackPanel Orientation="Horizontal"  >
+                        <TextBlock  VerticalAlignment="Center"   > كشف المخالفات</TextBlock>
+                        <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
+                    </StackPanel>
+                </Button>
+                <Button Uid="2" Name="but2" Command="{Binding Showcommand2}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" >
+                    <StackPanel Orientation="Horizontal"  >
+                        <TextBlock  VerticalAlignment="Center"   > كشف المخالفات حسب</TextBlock>
+                        <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
+                    </StackPanel>
+                </Button>
+                <Button Uid="3" Name="but3" Command="{Binding Showcommand3}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}"  >
+                    <StackPanel Orientation="Horizontal"  >
+                        <TextBlock  VerticalAlignment="Center"   > كشف السندات</TextBlock>
+                        <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!--///////////////////////// Search////////////////////////////////////-->
+        <Frame Name="Frame_Search_violations" Content="{Binding Curent_usercontrol}" Grid.Column="0" Background="White" NavigationUIVisibility="Hidden" ></Frame>
+        <!--///////////////////////// Reports////////////////////////////////////-->
+
+    </Grid>
+</UserControl>

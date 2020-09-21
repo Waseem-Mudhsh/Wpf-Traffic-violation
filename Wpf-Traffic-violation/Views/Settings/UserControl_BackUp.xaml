@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              mc:Ignorable="d" 
               d:DesignHeight="512" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:Addconnection_DB_ViewModel/>
+    </UserControl.DataContext>
     <Grid Background="White">
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -22,7 +26,7 @@
                 <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
                 <Grid DockPanel.Dock="Bottom" Height="40">
-                    <Button Content=" إتصال"  VerticalAlignment="Bottom" Margin="2 0 2 2"></Button>
+                    <Button Content=" إتصال" Command="{Binding BackupConnect}"  VerticalAlignment="Bottom" Margin="2 0 2 2"></Button>
                 </Grid>
                 <!--///////////////////////////////////////////Center///////////////////////////////////////////////-->
                 <Grid FlowDirection="RightToLeft">
@@ -40,10 +44,10 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="مسار النسخة :" Margin="15 0 35 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
-                        <TextBox    x:Name="text_OpenFolder"   Height="40" Width="195.999"
+                        <TextBox     Text="{Binding Current_DataServer.Backup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  x:Name="text_OpenFolder"   Height="40" Width="195.999"
                         materialDesign:HintAssist.Hint="مسار حفظ النسخة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                        <Button Height="40" Width="40" Margin="6 0" Padding="0" x:Name="but_OpenFolder" Click="but_OpenFolder_Click">
+                        <Button Height="40" Width="40" Margin="6 0" Padding="0" x:Name="but_OpenFolder" Command="{Binding OpenConnect}">
                             <materialDesign:PackIcon Kind="FolderOpen" Width="24" Height="24"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                     </StackPanel>

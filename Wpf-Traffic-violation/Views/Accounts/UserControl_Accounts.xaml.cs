@@ -64,19 +64,26 @@ namespace Wpf_Traffic_violation.Views
 
                         break;
                     }
+                case 6:
+                    {
+                        Frame_Accounts.Content = new UserControl_CancelTheDeportation();
+
+                        break;
+                    }
             }
         }
         private void Changed_Background(Button but)
         {
 
             Color ColorforN = (Color)ColorConverter.ConvertFromString("#B29FA8DA");//color forground
-
+            Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but3.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but4.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but5.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+            but6.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
 
 
 
@@ -85,12 +92,13 @@ namespace Wpf_Traffic_violation.Views
             but3.BorderBrush = Brushes.White;
             but4.BorderBrush = Brushes.White;
             but5.BorderBrush = Brushes.White;
+            but6.BorderBrush = Brushes.White;
 
 
-
-            but.Foreground = Brushes.DarkOrange;
-
-            but.BorderBrush = Brushes.DarkOrange;
+            //but.Foreground = Brushes.DarkOrange;
+            but.Foreground= new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
+            //but.BorderBrush = Brushes.DarkOrange;
+            but.BorderBrush= new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
         }
     }
 }

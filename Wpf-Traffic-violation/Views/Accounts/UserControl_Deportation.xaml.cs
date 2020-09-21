@@ -34,9 +34,7 @@ namespace Wpf_Traffic_violation.Views
 
         private void RadioButton_Date_Click(object sender, RoutedEventArgs e)
         {
-            panel_date.Visibility = Visibility.Visible;
-            panel_Decument.Visibility = Visibility.Hidden;
-            Panel_day.Visibility = Visibility.Hidden;
+            grid_view.Visibility = Visibility.Visible;
         }
 
         private void RadioButton_Document_Click(object sender, RoutedEventArgs e)

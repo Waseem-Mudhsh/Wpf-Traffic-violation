@@ -25,12 +25,9 @@ namespace Wpf_Traffic_violation.Views
             InitializeComponent();
         }
 
-        
-
-        private void but_PayViolation_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window_PayViolation win = new Window_PayViolation();
-            win.ShowDialog();
+            panal_query.Visibility = Visibility.Visible;
         }
     }
 }

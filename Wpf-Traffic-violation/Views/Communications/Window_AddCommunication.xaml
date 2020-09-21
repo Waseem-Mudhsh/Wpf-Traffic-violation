@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
         Title="Window_AddCommunication" Height="358" Width="1200" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled"  ResizeMode="NoResize">
     <DockPanel Background="WhiteSmoke" Height="358" Width="1200" ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -23,7 +24,8 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
+
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -50,54 +52,37 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock Text="رقم البلاغ :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                <TextBox    x:Name="textBox"   Height="40" Width="240" Text="{Binding Current_Communication.Communication_id}"
                         materialDesign:HintAssist.Hint="رقم البلاغ..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="الوقت :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <materialDesign:TimePicker SelectedTime="{x:Static sys:DateTime.Now}"     Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness=" 0 0 0 1" Padding="03,0,03,4" />
+                <TextBlock Text="تفصيل البلاغ :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox      Height="40" Width="240" Text="{Binding Current_Communication.Communication_name}"
+                        materialDesign:HintAssist.Hint="..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
                 <TextBlock Text="التاريخ:" Margin="35 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" />
+                <DatePicker Text="{Binding Current_Communication.Communication_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
-                <TextBlock Text="  رقم اللوحة :" Margin="5 0 040 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="46" Height="40"
-                          Padding="10,10,0,0" Background="White" Margin="0 0 0 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">01</ComboBoxItem>
-                    <ComboBoxItem Content="02"/>
-                    <ComboBoxItem>03</ComboBoxItem>
-                    <ComboBoxItem>04</ComboBoxItem>
-                    <ComboBoxItem>05</ComboBoxItem>
-                    <ComboBoxItem>06</ComboBoxItem>
-                    <ComboBoxItem>07</ComboBoxItem>
-                    <ComboBoxItem>08</ComboBoxItem>
-                    <ComboBoxItem>09</ComboBoxItem>
-                    <ComboBoxItem>10</ComboBoxItem>
-                    <ComboBoxItem>11</ComboBoxItem>
-                    <ComboBoxItem>12</ComboBoxItem>
-                    <ComboBoxItem>13</ComboBoxItem>
-                    <ComboBoxItem>14</ComboBoxItem>
-                    <ComboBoxItem>15</ComboBoxItem>
-                    <ComboBoxItem>16</ComboBoxItem>
-                    <ComboBoxItem>17</ComboBoxItem>
-                    <ComboBoxItem>18</ComboBoxItem>
-                    <ComboBoxItem>19</ComboBoxItem>
-                    <ComboBoxItem>20</ComboBoxItem>
-                    <ComboBoxItem>21</ComboBoxItem>
-
-
-                </ComboBox>
-                <TextBox      Height="40" Width="180.667"
-                        materialDesign:HintAssist.Hint="رقم اللوحة..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="12 9 0 9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="نوع اللوحة :" Margin="27 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBlock Text="  رقم اللوحة :" Margin="5 0 033 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <controls:AutoCompleteBox Name="a" Width="183" ItemsSource="{Binding Grid_Plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Plate_num" 
+                                              SelectedItem="{Binding Selected_Plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Selected_Plate.Plate_num}" FilterMode="Contains" Margin="5,10"
+                                             
+                                          />
+                <controls:AutoCompleteBox  Name="b" ItemsSource="{Binding Grid_Plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Province_id" 
+                                              SelectedItem="{Binding Selected_Plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Selected_Plate.Province_id}" FilterMode="Contains" Margin="5,10" RenderTransformOrigin="0.5,0.5" Width="48"
+                                             
+                                          />
+                <!--<TextBox      Height="40" Width="45.654" Text="{Binding Selected_Plate.Province_id}"
+                        
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />-->
+                <TextBlock Text="نوع اللوحة :" Margin="27 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -106,32 +91,40 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox      Height="40" Width="240"
+                <TextBox      Height="40" Width="240" Text="{Binding Selected_Plate.String_Plate_type}"
                         materialDesign:HintAssist.Hint="نوع اللوحة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="مكان البلاغ :" Margin="32 0 32 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240"
+                <TextBox      Height="40" Width="238.57" Text="{Binding Current_Communication.Communication_place}"
                         materialDesign:HintAssist.Hint="مكان البلاغ..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock Text="أسم المبلغ  :" Margin="18 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
 
-                <TextBox      Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="أسم المبلغ..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="3 9 0 9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="رقم الهوية :" Margin="25 0 24 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240"
+                <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_User}"
+                           SelectedItem="{Binding Selected_User,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Username ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                </ComboBox>
+                <TextBlock Text="رقم الهوية :" Margin="25 0 22 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox      Height="40" Width="240" Text="{Binding Current_Communication.Citizen_id}"
                         materialDesign:HintAssist.Hint="رقم الهوية..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="01 9 0 9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="الصور :" Margin="35 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <Button Width="115" Height="40" x:Name="but_SelectLogo1" Click="but_SelectLogo1_Click" Margin="0 9 0 9" Padding="0"  >
+                <Button Width="115" Height="40" x:Name="but_SelectLogo1" Command="{Binding AddPhoto1command}" Margin="0 9 0 9" Padding="0"  >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                         <TextBlock Foreground="White"  VerticalAlignment="Center"  ><Run Text="تحديد صورة1"/></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Width="115" Height="40" x:Name="but_SelectLogo2" Click="but_SelectLogo2_Click" Margin="15 9 0 9" Padding="0"  >
+                <Button Width="115" Height="40" x:Name="but_SelectLogo2" Command="{Binding AddPhoto2command}" Margin="15 9 0 9" Padding="0"  >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                         <TextBlock Foreground="White"  VerticalAlignment="Center"  ><Run Text="تحديد صورة2"/></TextBlock>
                     </StackPanel>
@@ -139,7 +132,7 @@
 
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
-                
+
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -151,9 +144,9 @@
 
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
-                <TextBlock Text="ملاحظة  :" Margin="18 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBlock Text="ملاحظة  :" Margin="18 0 22 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
 
-                <TextBox      Height="40" Width="633"
+                <TextBox      Height="40" Width="633" Text="{Binding Current_Communication.Communication_notice}"
                         materialDesign:HintAssist.Hint="الملاحظة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="3 9 0 9" FontFamily="Tajawal" FontSize="14" />
                 <!--<ComboBox  x:Name="FilledComboBox"

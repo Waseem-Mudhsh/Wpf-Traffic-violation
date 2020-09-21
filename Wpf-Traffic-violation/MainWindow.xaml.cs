@@ -31,5 +31,9 @@ namespace Wpf_Traffic_violation
 
         }
 
+        private void UserControl_Login_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

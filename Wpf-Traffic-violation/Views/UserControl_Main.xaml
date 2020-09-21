@@ -16,7 +16,7 @@
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
                         <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="10 0 0 0 "  />
-                        <TextBlock x:Name="TextBlockUserName" Text="سليمان اليوسفي" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="60,0,0,0" />
+                        <TextBlock Name="TextBlockUserName" Text="سليمان اليوسفي" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="60,0,0,0" />
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_user"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="الصفحة الشخصية" Margin="10,0,0,0" >
                             <materialDesign:PackIcon Foreground="White" Kind="User" Width="24" Height="24" VerticalAlignment="Bottom"    />
                         </Button>

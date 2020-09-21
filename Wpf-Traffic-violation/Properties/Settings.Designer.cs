@@ -23,21 +23,119 @@ namespace Wpf_Traffic_violation.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DESKTOP-KL7JJLG\\Waseem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("WASEEM-PC\\SQLEXPRESS")]
         public string ServerName {
             get {
                 return ((string)(this["ServerName"]));
             }
+            set {
+                this["ServerName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Traffic_Violation_Management")]
         public string DatabaseName {
             get {
                 return ((string)(this["DatabaseName"]));
+            }
+            set {
+                this["DatabaseName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sa")]
+        public string UserName {
+            get {
+                return ((string)(this["UserName"]));
+            }
+            set {
+                this["UserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Password {
+            get {
+                return ((string)(this["Password"]));
+            }
+            set {
+                this["Password"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Data.SqlClient.SqlConnection con {
+            get {
+                return ((global::System.Data.SqlClient.SqlConnection)(this["con"]));
+            }
+            set {
+                this["con"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserNameSystem {
+            get {
+                return ((string)(this["UserNameSystem"]));
+            }
+            set {
+                this["UserNameSystem"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Userid {
+            get {
+                return ((int)(this["Userid"]));
+            }
+            set {
+                this["Userid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ENG-IPRAHIM_A_M\\MSSQLSERVER17;Initial Catalog=Traffic_Violation_Manag" +
+            "ement;Integrated Security=True")]
+        public string Traffic_Violation_ManagementConnectionString {
+            get {
+                return ((string)(this["Traffic_Violation_ManagementConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SAM_PC\\SQLEXPRESS;Initial Catalog=Traffic_Violation_Management;Integr" +
+            "ated Security=True")]
+        public string Traffic_Violation_ManagementConnectionString1 {
+            get {
+                return ((string)(this["Traffic_Violation_ManagementConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Data.DataTable permission {
+            get {
+                return ((global::System.Data.DataTable)(this["permission"]));
+            }
+            set {
+                this["permission"] = value;
             }
         }
     }

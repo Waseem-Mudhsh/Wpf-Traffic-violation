@@ -17,9 +17,6 @@
         <DataTemplate x:Key="AutoId">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding  Search}"/>
-               
-
-               
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>

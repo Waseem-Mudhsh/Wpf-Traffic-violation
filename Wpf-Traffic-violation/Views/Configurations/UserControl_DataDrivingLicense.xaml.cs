@@ -24,11 +24,6 @@ namespace Wpf_Traffic_violation.Views
         {
             InitializeComponent();
         }
-
-        private void But_Add_DrivingLicense_Click(object sender, RoutedEventArgs e)
-        {
-            Window_AddDataDrivinglicense win = new Window_AddDataDrivinglicense();
-            win.ShowDialog();
-        }
+       
     }
 }

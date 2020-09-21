@@ -10,7 +10,13 @@
     <DockPanel Background="Gray" >
         <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="6" x:Name="but6" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Reply"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >الغاء الترحيل</TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="5" x:Name="but5" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">

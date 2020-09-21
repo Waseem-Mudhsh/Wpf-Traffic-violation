@@ -15,6 +15,22 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,11 +51,27 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="conn">
+      <HintPath>..\..\..\..\..\Documents\Visual Studio 2017\Projects\ClassLibrary1\ClassLibrary1\bin\Debug\conn.dll</HintPath>
+    </Reference>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.2.2\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="CRVsPackageLib, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\CRVsPackageLib\v4.0_13.0.4000.0__692fbea5521e1304\CRVsPackageLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.VSDesigner, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.0.0-alpha0748\lib\net452\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -51,6 +84,33 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=3.1.2.1465, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.3.1.2-ci1465\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common.resources">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Common.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization.resources">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.DataVisualization.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design.resources">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Design.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms.resources">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.WinForms.resources.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -58,12 +118,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Controls.Layout.Toolkit">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,9 +135,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFToolkit">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
     </Reference>
@@ -85,23 +149,131 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\DateTimeConverter.cs" />
-    <Compile Include="Models\Citizen.cs" />
-    <Compile Include="Models\CitizenModel.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account_Model\Account.cs" />
+    <Compile Include="Models\Account_Model\AccountModel.cs" />
+    <Compile Include="Models\Account_Model\BondOfExchange.cs" />
+    <Compile Include="Models\Account_Model\BondOfExchangeModel.cs" />
+    <Compile Include="Models\Account_Model\Bond_Exchange_detail.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\AllPermissions.cs" />
+    <Compile Include="Models\Configurations_Model\Communication.cs" />
+    <Compile Include="Models\Configurations_Model\CommunicationModel.cs" />
+    <Compile Include="Models\Configurations_Model\DrivingLicense.cs" />
+    <Compile Include="Models\Configurations_Model\DrivingLicense_Model.cs" />
+    <Compile Include="Models\Configurations_Model\CategoriesOfLicenses.cs" />
+    <Compile Include="Models\Configurations_Model\CategoriesOfLicenses_Model.cs" />
+    <Compile Include="Models\Configurations_Model\Citizen.cs" />
+    <Compile Include="Models\Configurations_Model\CitizenModel.cs" />
     <Compile Include="Models\Class_SqlConnection.cs" />
-    <Compile Include="Models\Provinces.cs" />
-    <Compile Include="Models\TrafficMan.cs" />
-    <Compile Include="Models\TrafficmanModel.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\UserTypes.cs" />
+    <Compile Include="Models\Configurations_Model\Plate.cs" />
+    <Compile Include="Models\Configurations_Model\Plate_Model.cs" />
+    <Compile Include="Models\Configurations_Model\Provinces_Model.cs" />
+    <Compile Include="Models\Configurations_Model\Directorate.cs" />
+    <Compile Include="Models\Configurations_Model\PlateOfType.cs" />
+    <Compile Include="Models\Configurations_Model\PlateOfType_Model.cs" />
+    <Compile Include="Models\Configurations_Model\Provinces.cs" />
+    <Compile Include="Models\Configurations_Model\ReasonsToObject.cs" />
+    <Compile Include="Models\Configurations_Model\ReasonsToObjection_Model.cs" />
+    <Compile Include="Models\Configurations_Model\TrafficMan.cs" />
+    <Compile Include="Models\Configurations_Model\TrafficmanModel.cs" />
+    <Compile Include="Models\Configurations_Model\Directorate_Model.cs" />
+    <Compile Include="Models\Configurations_Model\Streets.cs" />
+    <Compile Include="Models\Configurations_Model\Street_Model.cs" />
+    <Compile Include="Models\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Models\Converter\DateTimeConverter.cs" />
+    <Compile Include="Models\Converter\InversBoolToVisibilityConverter.cs" />
+    <Compile Include="Models\EntryModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Objection_Model\Opjection.cs" />
+    <Compile Include="Models\Objection_Model\OpjectionModel.cs" />
+    <Compile Include="Models\Account_Model\Receipt.cs" />
+    <Compile Include="Models\Account_Model\ReceiptModel.cs" />
+    <Compile Include="Models\StatisticCommunication_Model.cs" />
+    <Compile Include="Models\StatisticOpjection_Model.cs" />
+    <Compile Include="Models\StatisticViolation_Model.cs" />
+    <Compile Include="Models\Users_Model\DataServer.cs" />
+    <Compile Include="Models\Users_Model\DataServerModel.cs" />
+    <Compile Include="Models\Users_Model\PermissionGroup.cs" />
+    <Compile Include="Models\Users_Model\PermissionSet.cs" />
+    <Compile Include="Models\Users_Model\PermissionSet_Model.cs" />
+    <Compile Include="Models\Users_Model\PermissionGroupModel.cs" />
+    <Compile Include="Models\Users_Model\PermissionUser.cs" />
+    <Compile Include="Models\Users_Model\PermissionUserModel.cs" />
+    <Compile Include="Models\Users_Model\User.cs" />
+    <Compile Include="Models\Users_Model\UserModel.cs" />
+    <Compile Include="Models\Configurations_Model\Vehicle.cs" />
+    <Compile Include="Models\Configurations_Model\VehicleModel.cs" />
+    <Compile Include="Models\Configurations_Model\ViolationType.cs" />
+    <Compile Include="Models\Configurations_Model\ViolationTypeModel.cs" />
+    <Compile Include="Models\Violations_Model\QueryPersonalNumberModel.cs" />
+    <Compile Include="Models\Violations_Model\QureyIdNumberModel.cs" />
+    <Compile Include="Models\Violations_Model\Violation.cs" />
+    <Compile Include="Models\Violations_Model\VoilationModel.cs" />
+    <Compile Include="Models\Violations_Model\QueryReferenceNumberModel.cs" />
+    <Compile Include="Traffic_Violation_ManagementDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traffic_Violation_ManagementDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Traffic_Violation_ManagementDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traffic_Violation_ManagementDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Traffic_Violation_ManagementDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traffic_Violation_ManagementDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Traffic_Violation_ManagementDataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traffic_Violation_ManagementDataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Account_ViewModel.cs" />
+    <Compile Include="ViewModel\Addconnection_DB_ViewModel.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\BondOfExchange_ViowModel.cs" />
+    <Compile Include="ViewModel\CategoriesOfLicenses_ViewModel.cs" />
     <Compile Include="ViewModel\Citizen_ViewModel.cs" />
-    <Compile Include="ViewModel\ComboBoxes.cs" />
+    <Compile Include="ViewModel\Communication_ViewModel.cs" />
+    <Compile Include="ViewModel\Directorate_ViewModel.cs" />
+    <Compile Include="ViewModel\DrivingLicense_ViewModel.cs" />
+    <Compile Include="ViewModel\OpjectionViewModel.cs" />
+    <Compile Include="ViewModel\PermissionSet_ViewModel.cs" />
+    <Compile Include="ViewModel\PermissionUser_ViewModel.cs" />
+    <Compile Include="ViewModel\PlateOfType_ViewModel.cs" />
+    <Compile Include="ViewModel\Plate_ViewModel.cs" />
+    <Compile Include="ViewModel\QueryPersonalNumber_ViewModel.cs" />
+    <Compile Include="ViewModel\QueryReferenceNumberViewModel.cs" />
+    <Compile Include="ViewModel\QureyIdNumber_ViewModel.cs" />
+    <Compile Include="ViewModel\ReasonToobjection_ViewModel.cs" />
+    <Compile Include="ViewModel\ReportUser_ViewModel.cs" />
+    <Compile Include="ViewModel\Report_violation_ViowModel.cs" />
+    <Compile Include="ViewModel\ReprtAcountViowModel.cs" />
+    <Compile Include="ViewModel\Streets_ViewModel.cs" />
     <Compile Include="ViewModel\Trafficman_ViewModel.cs" />
     <Compile Include="ViewModel\User_ViewModel.cs" />
+    <Compile Include="ViewModel\Vehicle_ViewModel.cs" />
     <Compile Include="ViewModel\ViewModel_Home.cs" />
+    <Compile Include="ViewModel\ViolationType_ViewModel.cs" />
+    <Compile Include="ViewModel\ViolationViewModel.cs" />
+    <Compile Include="Views\Configurations\UserControl_DataPlate.xaml.cs">
+      <DependentUpon>UserControl_DataPlate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Configurations\Window_AddDataPlate.xaml.cs">
+      <DependentUpon>Window_AddDataPlate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ElementMenu.xaml.cs">
       <DependentUpon>ElementMenu.xaml</DependentUpon>
     </Compile>
@@ -110,6 +282,111 @@
     <Compile Include="ViewModel\SubItem.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Accounts\UserControl_Report_Bonds.xaml.cs">
+      <DependentUpon>UserControl_Report_Bonds.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Accounts\UserControl_Report_OneAccount.xaml.cs">
+      <DependentUpon>UserControl_Report_OneAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_allCommunications.xaml.cs">
+      <DependentUpon>UserControl_Report_allCommunications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_Communications.xaml.cs">
+      <DependentUpon>UserControl_Report_Communications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_CompareCommunication.xaml.cs">
+      <DependentUpon>UserControl_Report_CompareCommunication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_FlaseCommunications.xaml.cs">
+      <DependentUpon>UserControl_Report_FlaseCommunications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_RightCommunications.xaml.cs">
+      <DependentUpon>UserControl_Report_RightCommunications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Communications\UserControl_Report_UnchekedCommunication.xaml.cs">
+      <DependentUpon>UserControl_Report_UnchekedCommunication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_Configurations.xaml.cs">
+      <DependentUpon>UserControl_Report_Configurations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_DataCitizen.xaml.cs">
+      <DependentUpon>UserControl_Report_DataCitizen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_DataDrivingLicense.xaml.cs">
+      <DependentUpon>UserControl_Report_DataDrivingLicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_DataPlate.xaml.cs">
+      <DependentUpon>UserControl_Report_DataPlate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_DataTrafficMan.xaml.cs">
+      <DependentUpon>UserControl_Report_DataTrafficMan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_DataVehicle.xaml.cs">
+      <DependentUpon>UserControl_Report_DataVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Configurations\UserControl_Report_Streets.xaml.cs">
+      <DependentUpon>UserControl_Report_Streets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_allObjections.xaml.cs">
+      <DependentUpon>UserControl_Report_allObjections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_Compareobjection.xaml.cs">
+      <DependentUpon>UserControl_Report_Compareobjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_Falseobjection.xaml.cs">
+      <DependentUpon>UserControl_Report_Falseobjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_Objections.xaml.cs">
+      <DependentUpon>UserControl_Report_Objections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_RightObjection.xaml.cs">
+      <DependentUpon>UserControl_Report_RightObjection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Objections\UserControl_Report_Unchecked.xaml.cs">
+      <DependentUpon>UserControl_Report_Unchecked.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Show_Report.xaml.cs">
+      <DependentUpon>Show_Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\UserControl_Reports.xaml.cs">
+      <DependentUpon>UserControl_Reports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_ReportAllUsers.xaml.cs">
+      <DependentUpon>UserControl_ReportAllUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_ReportGroups.xaml.cs">
+      <DependentUpon>UserControl_ReportGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_ReportOneUser.xaml.cs">
+      <DependentUpon>UserControl_ReportOneUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_ReportPermissions.xaml.cs">
+      <DependentUpon>UserControl_ReportPermissions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Accounts\UserControl_Report_Accounts.xaml.cs">
+      <DependentUpon>UserControl_Report_Accounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Accounts\UserControl_Report_AllAccounts.xaml.cs">
+      <DependentUpon>UserControl_Report_AllAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_ReportUsertraffic.xaml.cs">
+      <DependentUpon>UserControl_ReportUsertraffic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Users\UserControl_Report_Users.xaml.cs">
+      <DependentUpon>UserControl_Report_Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Violations\UserControl_ Report_Compare.xaml.cs">
+      <DependentUpon>UserControl_ Report_Compare.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Violations\UserControl_ReportAllViolations.xaml.cs">
+      <DependentUpon>UserControl_ReportAllViolations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Violations\UserControl_Report_Statistics.xaml.cs">
+      <DependentUpon>UserControl_Report_Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Violations\UserControl_Report_Violations.xaml.cs">
+      <DependentUpon>UserControl_Report_Violations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControl1GridDataCommunications.xaml.cs">
       <DependentUpon>UserControl1GridDataCommunications.xaml</DependentUpon>
@@ -135,7 +412,7 @@
     <Compile Include="Views\Accounts\UserControl_BondOfExchange.xaml.cs">
       <DependentUpon>UserControl_BondOfExchange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings\UserControl_CancelTheDeportation.xaml.cs">
+    <Compile Include="Views\Accounts\UserControl_CancelTheDeportation.xaml.cs">
       <DependentUpon>UserControl_CancelTheDeportation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Configurations\UserControl_CategoriesOfLicenses.xaml.cs">
@@ -158,9 +435,6 @@
     </Compile>
     <Compile Include="Views\Configurations\UserControl_DataDrivingLicense.xaml.cs">
       <DependentUpon>UserControl_DataDrivingLicense.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Configurations\UserControl_DataSystem.xaml.cs">
-      <DependentUpon>UserControl_DataSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Configurations\UserControl_DataTrafficMan.xaml.cs">
       <DependentUpon>UserControl_DataTrafficMan.xaml</DependentUpon>
@@ -249,7 +523,7 @@
     <Compile Include="Views\Users\UserControl_Users.xaml.cs">
       <DependentUpon>UserControl_Users.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Users\UserControl_Violations.xaml.cs">
+    <Compile Include="Views\Violations\UserControl_Violations.xaml.cs">
       <DependentUpon>UserControl_Violations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Accounts\Window_AddAccont.xaml.cs">
@@ -321,6 +595,14 @@
     <Compile Include="Views\Configurations\Window_ِAddDirectorate.xaml.cs">
       <DependentUpon>Window_ِAddDirectorate.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Configurations\UserControl_DataPlate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Configurations\Window_AddDataPlate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ElementMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -338,6 +620,146 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Accounts\UserControl_Report_Bonds.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Accounts\UserControl_Report_OneAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_allCommunications.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_Communications.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_CompareCommunication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_FlaseCommunications.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_RightCommunications.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Communications\UserControl_Report_UnchekedCommunication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_Configurations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_DataCitizen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_DataDrivingLicense.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_DataPlate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_DataTrafficMan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_DataVehicle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Configurations\UserControl_Report_Streets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_allObjections.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_Compareobjection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_Falseobjection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_Objections.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_RightObjection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Objections\UserControl_Report_Unchecked.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Show_Report.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\UserControl_Reports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_ReportAllUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_ReportGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_ReportOneUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_ReportPermissions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Accounts\UserControl_Report_Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Accounts\UserControl_Report_AllAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_ReportUsertraffic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Users\UserControl_Report_Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Violations\UserControl_ Report_Compare.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reports\Violations\UserControl_ReportAllViolations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Violations\UserControl_Report_Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\Violations\UserControl_Report_Violations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -373,7 +795,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Settings\UserControl_CancelTheDeportation.xaml">
+    <Page Include="Views\Accounts\UserControl_CancelTheDeportation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,10 +824,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Configurations\UserControl_DataDrivingLicense.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Configurations\UserControl_DataSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -525,7 +943,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Users\UserControl_Violations.xaml">
+    <Page Include="Views\Violations\UserControl_Violations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -640,10 +1058,68 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reports\Accounts\AllAccountReport.rdlc" />
+    <EmbeddedResource Include="Views\Reports\Accounts\Report_One_Account.rdlc" />
+    <EmbeddedResource Include="Views\Reports\Violations\Report_All_Violation.rdlc" />
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet.xsc">
+      <DependentUpon>Traffic_Violation_ManagementDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Traffic_Violation_ManagementDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet.xss">
+      <DependentUpon>Traffic_Violation_ManagementDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet1.xsc">
+      <DependentUpon>Traffic_Violation_ManagementDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Traffic_Violation_ManagementDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet1.xss">
+      <DependentUpon>Traffic_Violation_ManagementDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet2.xsc">
+      <DependentUpon>Traffic_Violation_ManagementDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Traffic_Violation_ManagementDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet2.xss">
+      <DependentUpon>Traffic_Violation_ManagementDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet5.xsc">
+      <DependentUpon>Traffic_Violation_ManagementDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Traffic_Violation_ManagementDataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Traffic_Violation_ManagementDataSet5.xss">
+      <DependentUpon>Traffic_Violation_ManagementDataSet5.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -685,6 +1161,203 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Setting1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="CRQUERYENGINE">
+      <Guid>{E4B81D51-FB89-4D07-84A3-00BA9B71D76E}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalAnalysisCommLayerLib">
+      <Guid>{AAA3345B-2177-4D19-8D75-21688FE36251}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalAnalysisCommonControlsLib">
+      <Guid>{E377F909-BCFE-4E8E-B17C-8B1CBC7C7243}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalAnalysisRequestModelLib">
+      <Guid>{3FD134DF-56E0-4860-B065-BF986A086176}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalAnalysisXmlSerializeLib">
+      <Guid>{2743F9AF-ED45-4CA5-8625-2709B908D63C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalClientDocLib">
+      <Guid>{A8E20FDA-4A89-4545-8DFF-EBFA68E8C0F9}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalDocMgmtUndoManagerLib">
+      <Guid>{5DF0757C-75A4-4227-AF7B-0479FC6E7A55}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalPrintControlLib">
+      <Guid>{62862E3F-F35B-455E-9459-49EAADE80A25}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsCommonObjectModelLib">
+      <Guid>{FDB9B69E-BA79-4B13-9E96-8373AF162AEA}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsControllersLib">
+      <Guid>{FA810FF5-70DA-4F98-A5E3-387D9577EF24}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsCubeDefModelLib">
+      <Guid>{44AD71D4-4905-491D-B179-B5D91EB57374}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsDataDefModelLib">
+      <Guid>{9B2F3E7B-8D45-47E8-95D3-3A9C1B22437F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsDTSAgentLib">
+      <Guid>{3D5D05F6-E97D-43A0-90DC-5D8A6C6C6DB1}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsLocalConnectionMgrLib">
+      <Guid>{EC39F6C4-A9F2-4341-806B-1529E049A945}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsObjectFactoryLib">
+      <Guid>{A25D82D0-1501-4A89-BA92-B7E5B002EC4F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsReportDefModelLib">
+      <Guid>{BF40B97D-06EA-4AB1-91DE-18CB29A2B25A}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="PAGEOBJECTMODELLib">
+      <Guid>{237F4BEC-8AE5-41E1-AE84-B194E4670597}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="PROMPTINGLib">
+      <Guid>{8106BAD6-FB6E-49D5-8368-3F7030C9F6E7}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="SAXSERIALIZELib">
+      <Guid>{6EF0D172-0FAB-4FC3-BDBB-C6C0D9D69A10}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

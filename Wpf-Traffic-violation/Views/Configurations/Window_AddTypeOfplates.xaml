@@ -12,9 +12,9 @@
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
-                <TextBlock Text="إضافة بيانات نوع لوحة جديدة" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="705,0,0,0" >
+                <materialDesign:PackIcon Kind="Add" Margin="6 0 0 0 " Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                <TextBlock Text=" بيانات نوع لوحة " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Command="{Binding Closecommand}" Padding="0" Margin="765,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -22,7 +22,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -38,19 +38,12 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="رقم النوع :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="رقم النوع..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBox    x:Name="textBox_idPlate"   Height="40" Width="240" Text="{Binding Current_PlateOfType.Plate_type_id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:HintAssist.Hint="رقم النوع..." IsReadOnly="True"
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFEEEEEE" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="أسم النوع :" Margin="29 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <TextBox    x:Name="textBox1"   Height="40" Width="350"
+                
+                <TextBox    x:Name="textBox1"   Height="40" Width="350" Text="{Binding Current_PlateOfType.Plate_type_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="أسم النوع..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 

@@ -4,33 +4,44 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="512" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:QureyIdNumber_ViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 1" BorderBrush="OrangeRed">
-        <StackPanel   Height="50"  Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" >
-            <TextBlock Text="رقم اللوحة :" Margin="30 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
-            <TextBox       Height="40" Width="50"
-                        materialDesign:HintAssist.Hint="الفاصل"
-                         BorderThickness="1,1,1,1" Padding="2,3,0,0"  UseLayoutRounding="False" Background="#eceff1" Margin="5 0 5 0" FontFamily="Tajawal" FontSize="14" />
-            <TextBox     Height="40" Width="228"
-                        materialDesign:HintAssist.Hint="رقم اللوحة..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#eceff1" Margin="0" FontFamily="Tajawal" FontSize="14" />
+            <StackPanel   Height="50"  Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" >
+                <TextBlock Text="رقم اللوحة :" Margin="30 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
+                <controls:AutoCompleteBox Name="a" Height="40" Width="178" ItemsSource="{Binding Grid_Plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Plate_num" 
+                                              SelectedItem="{Binding Selected_Plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                             
+                                          />
+                <controls:AutoCompleteBox Height="40" ItemsSource="{Binding Grid_Plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Province_id" 
+                                              SelectedItem="{Binding Selected_Plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="5" RenderTransformOrigin="0.5,0.5" Width="11"
+                                             
+                                          />
+                <TextBlock Text="نوع اللوحة :" Margin="30 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
+                <TextBox    Name="viol_type"  Height="40" Width="240" Text="{Binding Selected_Plate.String_Plate_type}"
+                        materialDesign:HintAssist.Hint="نوع اللوحة..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="5" FontFamily="Tajawal" FontSize="14" />
 
-            <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="228" Height="40"
-                          Padding="10,10,0,0" Background="#eceff1" Margin="20 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1" TextOptions.TextHintingMode="Animated">
-                <ComboBoxItem IsSelected="True">خصوصي</ComboBoxItem>
-                <ComboBoxItem Content="نقل "/>
-                <ComboBoxItem>أجرة</ComboBoxItem>
-                <ComboBoxItem>حكومي</ComboBoxItem>
-            </ComboBox>
-            <Button Width="40" Height="40" Padding="0" Background="OrangeRed" materialDesign:ShadowAssist.ShadowDepth="Depth1" >
-                <materialDesign:PackIcon Kind="Search" Foreground="White"  Width="24" Height="24" HorizontalAlignment="Center" />
-            </Button>
-        </StackPanel>
+                <Button Width="40" Height="40" Padding="0" Command="{Binding Showcommand}" Click="Button_Click" Background="OrangeRed" materialDesign:ShadowAssist.ShadowDepth="Depth1" >
+                    <materialDesign:PackIcon Kind="Search" Foreground="White"  Width="24" Height="24" HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
         </Border>
-        <DockPanel  Background="#f5f5f5" >
+        <Grid Background="#f5f5f5">
+            <DockPanel  Background="#f5f5f5" Name="panal_query" Visibility="Hidden" >
             <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Width="340">
                 <!--////////////////////////////////////////////////////////////////////-->
                 <StackPanel Margin="10" >
@@ -39,18 +50,18 @@
                     </materialDesign:ColorZone>
                     <!--///////////////////////////////////////////////////////////////////////////////////////-->
                     <Border Height="60" BorderThickness="1 0 1 1" BorderBrush="DodgerBlue">
-                    <StackPanel  Background="White" FlowDirection="RightToLeft" >
-                        <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="عدد المخالفات الغير مدفوعة :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
-                            <TextBlock Text="10" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5"/>
-                        </StackPanel>
-                        <!--..................................................................................-->
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="أجمالي المبلغ المطلوب :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
-                            <TextBlock Text="10" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5"/>
-                        </StackPanel>
+                        <StackPanel  Background="White" FlowDirection="RightToLeft" Margin="0,0,0,-1" >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="عدد المخالفات الغير مدفوعة :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" Height="27" Width="192"/>
+                                <TextBlock Text="{Binding Count}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5"/>
+                            </StackPanel>
+                            <!--..................................................................................-->
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="أجمالي المبلغ المطلوب :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
+                                <TextBlock Text="{Binding TotalAmount}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5" Width="135"/>
+                            </StackPanel>
 
-                    </StackPanel>
+                        </StackPanel>
                     </Border>
                     <!--///////////////////////////////////////////////////////////////////////////////////////-->
                 </StackPanel>
@@ -78,16 +89,16 @@
                             <Style TargetType="TextBlock">
                                 <Setter Property="FontFamily" Value="Tajawal"/>
                                 <Setter Property="FontSize" Value="14"/>
-                               
+
                             </Style>
                         </Grid.Resources>
                         <!--////////////////////////////////////////////////////////////////////-->
                         <Border Grid.Row="0" FlowDirection="RightToLeft"  BorderThickness="1" BorderBrush="Black">
                             <StackPanel Orientation="Horizontal">
-                            <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
-                                <TextBlock  Text="أسم المالك " Foreground="Black" Margin="10 0" Width="90" HorizontalAlignment="Left"/>
-                            </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black" FontWeight="Bold"  Margin="10 0 10 0"/>
+                                <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
+                                    <TextBlock  Text="أسم المالك " Foreground="Black" Margin="10 0" Width="90" HorizontalAlignment="Left"/>
+                                </Grid>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.String_Citizen}" Foreground="Black" FontWeight="Bold"  Margin="10,2" Width="178"/>
                             </StackPanel>
 
                         </Border>
@@ -97,7 +108,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="رقم كرت السير" FontSize="14" Foreground="Black" Margin="10 0" Width="95" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_card_id}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="179"/>
                             </StackPanel>
 
                         </Border>
@@ -107,7 +118,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="تاريخ إصدار الكرت  "  Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Release_date}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="178"/>
                             </StackPanel>
 
                         </Border>
@@ -117,7 +128,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="تاريخ أنتهاء الكرت" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="175"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -126,7 +137,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="الماركة" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_model}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="173"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -135,7 +146,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="الشكل"  Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 4"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_shape}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 4" Width="176"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -144,7 +155,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="سنة الصنع" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left"/>
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="175"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -153,7 +164,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="اللون" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left" />
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_color}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="172"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -162,7 +173,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="رقم القعادة" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left" />
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Potty_id}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="173"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -171,7 +182,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="رقم المحرك" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left" />
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_engine_num}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="174"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -180,7 +191,7 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="رقم البيان الجمركي" Foreground="Black" Margin="10 0" Width="105" HorizontalAlignment="Left" />
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_customs_num}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="171"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
@@ -189,87 +200,65 @@
                                 <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                     <TextBlock  Text="تاريخ الإصدار" Foreground="Black" Margin="10 0" Width="100" HorizontalAlignment="Left" />
                                 </Grid>
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="أمجد حمود سعيد الجماعي " Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 0"/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Release_date_c}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="177"/>
                             </StackPanel>
                         </Border>
                         <!--////////////////////////////////////////////////////////////////////-->
-                        
+
                     </Grid>
                 </StackPanel>
                 <!--////////////////////////////////////////////////////////////////////-->
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Height="400">
-                <DataGrid Margin="10" Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Items3}"  
+                <DataGrid Margin="10" Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_Violation}" SelectedItem="{Binding Currunt_Violation}" 
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" 
-                          >
+                        Height="380"  >
                     <DataGrid.Resources>
 
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                        <DataGridCheckBoxColumn Binding="{Binding Isselected, UpdateSourceTrigger=PropertyChanged}" 
                                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                            <DataGridCheckBoxColumn.Header>
-                                <!--padding to allow hit test to pass thru for sorting -->
-                                <Border Background="Transparent" Padding="6 0 6 0" HorizontalAlignment="Center">
-                                    <CheckBox HorizontalAlignment="Center"
-                                               />
-                                </Border>
-                            </DataGridCheckBoxColumn.Header>
+
                         </DataGridCheckBoxColumn>
-                        <DataGridTextColumn Binding="{Binding Code}"
+                        <DataGridTextColumn Binding="{Binding Violation_id}"
                                         Header="رقم المرجعية" MinWidth="80"
                                          />
                         <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                        <materialDesign:DataGridTextColumn Binding="{Binding Name}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Plate_Num}"
                                                            Header="رقم اللوحة"  MinWidth="80"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
-                        <materialDesign:DataGridTextColumn Binding="{Binding Name}"
-                                                           Header="تاريخ المخالفة"  MinWidth="80"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Violation_date}"
+                                                           Header="تاريخ المخالفة"  MinWidth="100"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
                         <!-- set a max length to get an indicator in the editor -->
 
-                        <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة"  MinWidth="150"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                    <Setter Property="ContentTemplate">
-                                        <Setter.Value>
-                                            <DataTemplate>
-                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
-                                            </DataTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="HorizontalAlignment" Value="Right" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
+
                         </materialDesign:DataGridTextColumn>
-                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_Street}"
                                                            Header="المكان "  MinWidth="80"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Amount}"
                                                            Header="المبلغ"  MinWidth="80"
                                                            
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Violation_penalty}"
                                                            Header="الغرامة " MinWidth="80"
                                                             
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_TrafficMan}"
                                                            Header="بواسطة"  MinWidth="100"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Notise}"
                                                            Header="ملاحظة"  MinWidth="80"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
@@ -283,24 +272,24 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
-            
+
             <StackPanel DockPanel.Dock="Top">
                 <Border  BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Center"  Margin="4 1 4 0">
-                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="50" HorizontalAlignment="Center" >
-                    <TextBlock Text="إجمالي المبلغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 20 0"/>
-                    <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black" >
-                        <TextBlock Text="1200000000" FontFamily="Tajawal" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                    <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                    <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
-                        <TextBlock Text="12000" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                    <Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0"  Click="but_PayViolation_Click">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                            <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="50" HorizontalAlignment="Center" >
+                        <TextBlock Text="إجمالي المبلغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 20 0"/>
+                        <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black" >
+                            <TextBlock Text="{Binding TotalAmount}" TextAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15,5,20,5"/>
+                        </Border>
+                        <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                        <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
+                            <TextBlock Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
+                        </Border>
+                        <Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
+                            </StackPanel>
+                        </Button>
                         <Button Height="40" Width="100" Margin="10 0"  Padding="0" Background="#022551">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <materialDesign:PackIcon Kind="Printer" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
@@ -310,7 +299,8 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-           
+
         </DockPanel>
+        </Grid>
     </DockPanel>
 </UserControl>

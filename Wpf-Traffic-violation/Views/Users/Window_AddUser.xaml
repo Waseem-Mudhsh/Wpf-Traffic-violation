@@ -9,20 +9,14 @@
         mc:Ignorable="d"
         Title="Window_AddUser" Height="244" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
 
-    <Window.Resources>
-        <x:Array x:Key="Usertype_combobox" Type="ViewModel:ComboBoxes">
-            <ViewModel:ComboBoxes Combo_usertype="النظام"/>
-            <ViewModel:ComboBoxes Combo_usertype="التطبيق"/>
-        </x:Array>
-    </Window.Resources>
     <DockPanel  Background="WhiteSmoke" Height="244" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="2 0"></materialDesign:PackIcon>
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="6 0 0 0"></materialDesign:PackIcon>
                 <TextBlock Text="بيانات مستخدم" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand,UpdateSourceTrigger=PropertyChanged}" Padding="0" Margin="665,0,0,0">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand,UpdateSourceTrigger=PropertyChanged}" Padding="0" Margin="660,0,0,0">
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"     />
                 </Button>
             </StackPanel>
@@ -61,13 +55,14 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="أسم المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox       Height="40" Width="240" ItemsSource="{Binding get_Trafficman}" Margin="0,9,0,9" 
-                            SelectedValuePath="Traffic_man_name" SelectedValue="{Binding Currunt_User.Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox x:Name="Combobox_userName"      Height="40" Width="240" ItemsSource="{Binding get_Trafficman}" Margin="0,9,0,9"  
+                            SelectedItem="{Binding Selected_TrafficMan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          
                         materialDesign:HintAssist.Hint="أسم المستخدم..."  
-                         BorderThickness="1,1,1,1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14" TabIndex="1" >
+                         BorderThickness="1,1,1,1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14" TabIndex="1" SelectionChanged="Combobox_userName_SelectionChanged" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Traffic_man_name}"/>
+                            <TextBlock Text="{Binding Traffic_man_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

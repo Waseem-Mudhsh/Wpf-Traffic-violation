@@ -27,20 +27,6 @@ namespace Wpf_Traffic_violation.Views
             InitializeComponent();
         }
 
-        private void but_OpenFolder_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog choofdlog = new OpenFileDialog();
-            choofdlog.Filter = "All Files (*.*)|*.*";
-            choofdlog.FilterIndex = 1;
-            choofdlog.Multiselect = true;
-
-            if (choofdlog.ShowDialog() == true)
-            {
-                string sFileName = choofdlog.FileName;
-                text_OpenFolder.Text = sFileName;
-                //string[] arrAllFiles = choofdlog.FileNames; //used when Multiselect = true           
-            }
-
-        }
+        
     }
 }

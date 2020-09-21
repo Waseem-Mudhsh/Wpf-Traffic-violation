@@ -27,6 +27,7 @@ namespace Wpf_Traffic_violation.Views
 
         private void But_Permission_Click(object sender, RoutedEventArgs e)
         {
+            
             DockPanel_Permission.Visibility=Visibility.Visible;
         }
 
@@ -34,6 +35,11 @@ namespace Wpf_Traffic_violation.Views
         {
             Window_AddPermissionSet win = new Window_AddPermissionSet();
             win.ShowDialog();
+        }
+
+        private void ComboBox_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 }

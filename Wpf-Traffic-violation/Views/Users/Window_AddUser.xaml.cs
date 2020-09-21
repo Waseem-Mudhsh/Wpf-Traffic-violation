@@ -27,6 +27,9 @@ namespace Wpf_Traffic_violation.Views
            
         }
 
+        private void Combobox_userName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

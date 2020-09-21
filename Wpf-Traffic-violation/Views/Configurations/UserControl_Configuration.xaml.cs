@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Traffic_violation.Views.Configurations;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -87,7 +88,7 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 11:
                     {
-                        Frame_Configuration.Content = new UserControl_DataSystem();
+                        Frame_Configuration.Content = new UserControl_DataPlate();
                         break;
                     }
 
@@ -99,7 +100,7 @@ namespace Wpf_Traffic_violation.Views
         {
 
             Color ColorforN = (Color)ColorConverter.ConvertFromString("#B29FA8DA");//color forground
-
+            Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
@@ -126,11 +127,12 @@ namespace Wpf_Traffic_violation.Views
             but9.BorderBrush = Brushes.White;
             but10.BorderBrush = Brushes.White;
             but11.BorderBrush = Brushes.White;
-            
 
-            but.Foreground = Brushes.DarkOrange;
 
-            but.BorderBrush = Brushes.DarkOrange;
+            //but.Foreground = Brushes.DarkOrange;
+            but.Foreground = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
+            //but.BorderBrush = Brushes.DarkOrange;
+            but.BorderBrush = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
         }
     }
 }

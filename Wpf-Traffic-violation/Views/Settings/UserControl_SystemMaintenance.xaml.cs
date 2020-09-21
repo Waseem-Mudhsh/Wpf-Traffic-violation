@@ -20,6 +20,7 @@ namespace Wpf_Traffic_violation.Views
     /// </summary>
     public partial class UserControl_SystemMaintenance : UserControl
     {
+       
         public UserControl_SystemMaintenance()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace Wpf_Traffic_violation.Views
 
             int index = int.Parse(((RadioButton)e.Source).Uid);
 
-
+            
             //GridCursor.Margin = new Thickness(3 + (115 * index), 0, 0, 0);
 
 
@@ -59,5 +60,7 @@ namespace Wpf_Traffic_violation.Views
                 
             }
         }
+
+       
     }
 }

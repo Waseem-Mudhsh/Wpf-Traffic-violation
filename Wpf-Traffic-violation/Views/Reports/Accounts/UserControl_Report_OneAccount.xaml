@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.Reports.Accounts.UserControl_Report_OneAccount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports.Accounts"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                   xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.winForms"
+             xmlns:Conver="clr-namespace:Wpf_Traffic_violation.Models.Converter"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+            mc:Ignorable="d" 
+              d:DesignHeight="560" d:DesignWidth="1110" Background="Beige">
+    <UserControl.Resources>
+        <Conver:BoolToVisibilityConverter x:Key="Convertbool"/>
+
+    </UserControl.Resources>
+    <Grid  Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="380"/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:ColorZone CornerRadius="5"  Grid.Column="1" VerticalAlignment="Top" Margin="10" Background="#363636" Height="420">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Grid.Row="0" Height="40"  Background="DarkOrange" Margin="0 10">
+                    <TextBlock Text="كشف حساب" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                </materialDesign:ColorZone>
+                <Grid Grid.Row="1" FlowDirection="RightToLeft">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+
+
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="نوع الحساب :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+
+                            <RadioButton x:Name="RadioButton_main" GroupName="type of search" IsChecked="{Binding Parint}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="رئيسي " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_sub" GroupName="type of search" IsChecked="{Binding Child}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="فرعي "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="1"   >
+                        <StackPanel Name="Panel_usernumber" Orientation="Horizontal">
+
+                            <TextBlock Text="أسم الحساب :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_Accounts}"
+                           SelectedItem="{Binding Current_Account,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Account_name" Text="{Binding Account_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                           
+                            
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2">
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="النطاق الزمني :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+                            <!--<TextBox       Height="40" Width="200"
+                        materialDesign:HintAssist.Hint="المبلغ..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />-->
+                            <RadioButton x:Name="RadioButton_day" GroupName="time"  IsChecked="{Binding Day}"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="يوم " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_date" GroupName="time"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="فترة "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="3" Visibility="{Binding ElementName=RadioButton_day, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel Name="Panel_day" >
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Fromdate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
+
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="3" Visibility="{Binding ElementName=RadioButton_date, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel Name="Panel_date" Orientation="Horizontal" >
+                            <!--<TextBlock Text="من :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>-->
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Fromdate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
+                            <TextBlock Text="الى :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Todate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
+
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="4">
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="نوع التقرير :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+
+                            <RadioButton x:Name="RadioButton_total" GroupName="type " IsChecked="{Binding TypeReport}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="تحليلي " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_sub1" GroupName="type "  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="إجمالي "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+
+                        </StackPanel>
+                    </Border>
+
+
+                    <StackPanel  Grid.Row="5" >
+                        <Button Command="{Binding ShowOneAccountcommand}" x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                     Height="40"   Padding="0"    Width="140" >
+                            <StackPanel Orientation="Horizontal" >
+                                <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />
+                                <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">أنشاء التقرير</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </materialDesign:ColorZone>
+        <WindowsFormsHost HorizontalAlignment="Left" Height="540" Margin="10,15,0,10" VerticalAlignment="Top" Width="720">
+            <rv:ReportViewer x:Name="ReportViewerDemo"/>
+        </WindowsFormsHost>
+    </Grid>
+</UserControl>

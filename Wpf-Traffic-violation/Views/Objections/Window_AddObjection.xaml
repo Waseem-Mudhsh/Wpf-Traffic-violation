@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
         Title="Window_AddObjection" Height="358" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
     <DockPanel Background="WhiteSmoke" Height="358" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -22,7 +23,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Command="{Binding Savecommand}" Content=" حفــظ"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -44,10 +45,10 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="رقم الإعتراض :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                <TextBox    x:Name="textBox"   Height="40" Width="237.301" Text="{Binding Currunt_Opjection.Interception_id}"
                         materialDesign:HintAssist.Hint="رقم الإعتراض..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="تاريخ الإعتراض :" Margin="25 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="6,9" FontFamily="Tajawal" FontSize="14" />
+                <TextBlock Text="تاريخ الإعتراض :" Margin="25 0 9 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -56,15 +57,19 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <DatePicker  materialDesign:HintAssist.Hint="التاريخ ..."  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="14"  Margin="10 0 0 0"/>
+                <DatePicker Text="{Binding Currunt_Opjection.Interception_date,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="التاريخ ..."  Width="233" Height="40" Background="White" FontFamily="Tajawal" FontSize="14"  Margin="4,9,0,9"/>
 
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="رقم المواطن :" Margin="15 0 041 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="رقم المواطن..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="أسم المواطن :" Margin="25 0 17 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
+                <controls:AutoCompleteBox Name="citizenid" Width="238" ItemsSource="{Binding Grid_Citizen}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Citizen_id" 
+                                              SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Currunt_Citizen.Citizen_id}" FilterMode="Contains" Margin="5,10"
+                                             
+                                          />
+                <TextBlock Text="أسم المواطن :" Margin="25 0 18 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -73,43 +78,57 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox     Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="أسم المواطن..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="12 9 0 9" FontFamily="Tajawal" FontSize="14" />
+                <controls:AutoCompleteBox Name="citizenname" Width="238" ItemsSource="{Binding Grid_Citizen}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Citizen_name" 
+                                              SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Currunt_Citizen.Citizen_name}" FilterMode="Contains" Margin="5,10"
+                                              />
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="رقم المخالفة :" Margin="15 0 041 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="رقم المخالفة..."
-                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-                <TextBlock Text="نوع المخالفة :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                <controls:AutoCompleteBox Name="violatinid" Width="238" ItemsSource="{Binding Grid_Violation}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Violation_id" 
+                                              SelectedItem="{Binding Selected_Violation , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Selected_Violation.Violation_id}" FilterMode="Contains" Margin="5,10"
+                                             
+                                          />
+                <TextBlock Text="نوع المخالفة :" Margin="25 0 29 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <controls:AutoCompleteBox Name="violationname" Width="238" ItemsSource="{Binding Grid_Violation}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="String_ViolationType" 
+                                              SelectedItem="{Binding Selected_Violation , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Text="{Binding Selected_Violation.String_ViolationType}" FilterMode="Contains" Margin="5,10"
+                                             
+                                          />
+                <!--<ComboBox Text="{Binding Selected_Violation.String_ViolationType}" Width="240" Height="40"
                           Padding="10,10,0,0" Background="White" Margin="15,8,25,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
                     <ComboBoxItem IsSelected="True">A</ComboBoxItem>
                     <ComboBoxItem Content="B"/>
                     <ComboBoxItem>C</ComboBoxItem>
 
 
-                </ComboBox>
+                </ComboBox>-->
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <TextBlock Text="سبب الإعتراض :" Margin="15 0 020 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="644" Height="40"
-                          Padding="10,10,0,0" Background="White" Margin="0,8,26,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">A</ComboBoxItem>
-                    <ComboBoxItem Content="B"/>
-                    <ComboBoxItem>C</ComboBoxItem>
-
-
-                </ComboBox>
+                <controls:AutoCompleteBox Name="aa" Width="635" ItemsSource="{Binding Grid_ReasonsToObject}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Reason" 
+                                              SelectedItem="{Binding Selected_ReasonsToObject , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="4,10"
+                                             
+                                          />
+                <!--<ComboBox Name="com" Width="644" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_ReasonsToObject}"
+                           SelectedItem="{Binding Selected_ReasonsToObject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0,8,5,8" FontSize="14" FontFamily="Tajawal" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Reason ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>-->
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -120,12 +139,12 @@
                 </ComboBox>-->
 
             </StackPanel>
-            <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <!--<StackPanel Grid.Row="4" Orientation="Horizontal">
                 <TextBlock Text="سبب اَخر :" Margin="15 0 41 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="643.5"
+                <TextBox       Height="40" Width="643.5" Text="{Binding Currunt_Citizen.Reason_Interception1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         materialDesign:HintAssist.Hint="سبب اَخر..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
-            </StackPanel>
+            </StackPanel>-->
 
         </Grid>
         <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->

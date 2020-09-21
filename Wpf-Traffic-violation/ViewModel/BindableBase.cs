@@ -16,6 +16,7 @@
 
 
         public bool IsEditing { get; set; }
+        public bool IsScaning { get; set; }
         public bool IsAdding { get; set; }
         #region PropertyChanged
 

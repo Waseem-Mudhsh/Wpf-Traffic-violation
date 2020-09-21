@@ -30,5 +30,10 @@ namespace Wpf_Traffic_violation.Views
             Window_AddDataVehicle win = new Window_AddDataVehicle();
             win.ShowDialog();
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

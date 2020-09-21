@@ -5,57 +5,52 @@
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
               d:DesignHeight="560" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:Directorate_ViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
             <StackPanel  Height="60" Background="WhiteSmoke" Orientation="Horizontal" >
 
                 <!--top-->
-                <StackPanel  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0" Height="40" FlowDirection="RightToLeft">
-                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed">
-                        <materialDesign:PackIcon Kind="FilterList"   Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
-                    </materialDesign:Card>
-                    <ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="تصنيف ..."
-                          Width="170" Height="40" IsEditable="True" Padding="15,12,5,0" BorderThickness="0,0,0,1" ScrollViewer.CanContentScroll="True" FontFamily="Tajawal" FontSize="14">
-                        <ComboBoxItem Content="Item 1" />
-                        <ComboBoxItem Content="Item 2" />
-                        <ComboBoxItem Content="Item 3" />
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="5 0" FlowDirection="RightToLeft" >
+
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="60 0 20 0" FlowDirection="RightToLeft" >
                     <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"  materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                         <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </Button>
-                    <TextBox    x:Name="textBox"   Height="40" Width="400"
-         
-                        materialDesign:HintAssist.Hint="بحـــث..." 
-                        BorderThickness="0,0,0,1"  FlowDirection="RightToLeft"  UseLayoutRounding="False" HorizontalContentAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" FontSize="14" FontFamily="Tajawal" Padding="5,2,5,0"/>
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_Directorate }" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Search" 
+                                              SelectedItem="{Binding Current_Directorate , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              />
                 </StackPanel>
-                <Button  
-                                   Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="10,0,0,0" Background="#FF097221" BorderBrush="{x:Null}" >
+                <Button  Command="{Binding Excelcommand}"
+                                   Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}" >
                     <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
                         <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>
                         <materialDesign:PackIcon Kind="FileExcel" Margin="8 0 0 0" Width="24" Height="24" HorizontalAlignment="Right" />
                     </StackPanel>
                 </Button>
-                <Button  x:Name="But_Delete_Directorate" 
+                <Button  x:Name="But_Delete_Citizen" Command="{Binding Deletecommand}"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="230,0,0,0" Width="80" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">حذف</TextBlock>
                         <materialDesign:PackIcon Kind="Delete" Margin="5 0 0 0" Width="24" Height="24" />
                     </StackPanel>
                 </Button>
-                <Button  x:Name="But_Edit_Directorate" 
+                <Button  x:Name="But_Edit_Citizen" Command="{Binding Editcommand}"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">تعديل</TextBlock>
                         <materialDesign:PackIcon Kind="Edit" Margin="5 0 0 0" Width="24" Height="24" />
                     </StackPanel>
                 </Button>
-                <Button  x:Name="But_Add_Directorate" Click="But_Add_Directorate_Click"
+                <Button  x:Name="But_Add_Citizen" Command="{Binding Addcommand}"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="80" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">إضافة</TextBlock>
@@ -68,33 +63,27 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5 " ItemsSource="{Binding Items3}" 
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Width="500" HorizontalAlignment="Right"
+            <DataGrid Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_Directorate,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
+                      SelectedItem="{Binding Current_Directorate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          IsReadOnly="True"
+                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"
                           >
-                <DataGrid.Resources>
-
-                </DataGrid.Resources>
+                
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Code}"
-                                        Header="رقم المديرية" MinWidth="150"
+                    <DataGridTextColumn Binding="{Binding Directorate_id}"
+                                        Header="رقم المديرية" MinWidth="150" MaxWidth="300"
                                          />
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
-                                                           Header="أسم المديرية" MinWidth="300"
-                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                    <materialDesign:DataGridTextColumn Binding="{Binding Directorate_name}"
+                                                           Header="أسم المديرية" MinWidth="300" MaxWidth="500"
+                                                            
                                                            />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
-                                                           Header="المحافظة" MinWidth="100"
-                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                    <materialDesign:DataGridTextColumn Binding="{Binding Province_name}"
+                                                           Header="المحافظة" MinWidth="300" MaxWidth="500"
+                                                           
                                                            />
-                    <!-- set a max length to get an indicator in the editor -->
-
-
-
-
-
-                    <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                  
 
                 </DataGrid.Columns>
             </DataGrid>

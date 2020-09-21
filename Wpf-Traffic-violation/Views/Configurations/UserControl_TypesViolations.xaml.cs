@@ -27,10 +27,6 @@ namespace Wpf_Traffic_violation.Views
 
         
 
-        private void But_Add_Typeviolation_Click(object sender, RoutedEventArgs e)
-        {
-            Window_AddTypeOFViolations win = new Window_AddTypeOFViolations();
-            win.ShowDialog();
-        }
+        
     }
 }

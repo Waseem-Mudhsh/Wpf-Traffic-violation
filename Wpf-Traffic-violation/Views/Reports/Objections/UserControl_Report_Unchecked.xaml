@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="Wpf_Traffic_violation.Views.Reports.Objections.UserControl_Report_Unchecked"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports.Objections"
+             xmlns:Conver="clr-namespace:Wpf_Traffic_violation.Models.Converter"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+              d:DesignHeight="560" d:DesignWidth="1110" Background="Beige">
+    <UserControl.Resources>
+        <Conver:BoolToVisibilityConverter x:Key="Convertbool"/>
+    </UserControl.Resources>
+    <Grid  Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="380"/>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:ColorZone CornerRadius="5"  Grid.Column="1" VerticalAlignment="Top" Margin="10" Background="#363636" Height="300">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Grid.Row="0" Height="40"  Background="DarkOrange" Margin="0 10">
+                    <TextBlock Text="الأعتراضات الغير مفحوصة" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                </materialDesign:ColorZone>
+                <Grid Grid.Row="1" FlowDirection="RightToLeft">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="نوع البحث :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+
+                            <RadioButton x:Name="RadioButton_all" GroupName="type of search" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_idnumber" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="رقم الأعتراض"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="1"  Visibility="{Binding ElementName=RadioButton_idnumber, Path=IsChecked, Converter={StaticResource Convertbool}}" >
+                        <StackPanel Name="Panel_username" Orientation="Horizontal" >
+
+                            <TextBlock Text="رقم الأعتراض  :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+
+
+                            <ComboBox  x:Name="FilledComboBox"
+                          
+                          materialDesign:HintAssist.Hint="رقم الأعتراض  ..." Padding="10,10,0,0" Background="White"
+                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                                <ComboBoxItem Content="نظام"/>
+                                <ComboBoxItem Content=" تطبيق"   />
+                                />
+                            </ComboBox>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="1" Visibility="{Binding ElementName=RadioButton_all, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="النطاق الزمني :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+                            <!--<TextBox       Height="40" Width="200"
+                        materialDesign:HintAssist.Hint="المبلغ..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />-->
+                            <RadioButton x:Name="RadioButton_day" GroupName="time"   Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="يوم " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 28 0"/>
+                            <RadioButton x:Name="RadioButton_date" GroupName="time"    Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="فترة "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 24 0"/>
+                            <RadioButton x:Name="RadioButton_year" GroupName="time"   Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="سنة "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+
+                        </StackPanel>
+                    </Border>
+                    <Border Name="border_day" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_day, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel Name="Panel_day" Visibility="{Binding ElementName=RadioButton_all, Path=IsChecked, Converter={StaticResource Convertbool}}"  >
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
+
+                        </StackPanel>
+                    </Border>
+                    <Border Name="border_date" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_date, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel Name="Panel_date" Orientation="Horizontal" Visibility="{Binding ElementName=RadioButton_all, Path=IsChecked, Converter={StaticResource Convertbool}}"  >
+                            <!--<TextBlock Text="من :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>-->
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
+                            <TextBlock Text="الى :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
+
+                        </StackPanel>
+                    </Border>
+                    <Border Name="border_year" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_year, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                        <StackPanel  Visibility="{Binding ElementName=RadioButton_all, Path=IsChecked, Converter={StaticResource Convertbool}}" >
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
+
+                        </StackPanel>
+                    </Border>
+                    <StackPanel  Grid.Row="3" >
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                     Height="40"   Padding="0"    Width="140" >
+                            <StackPanel Orientation="Horizontal" >
+                                <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />
+                                <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">أنشاء التقرير</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </materialDesign:ColorZone>
+    </Grid>
+</UserControl>

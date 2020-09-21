@@ -30,7 +30,7 @@
                                               SelectedItem="{Binding Currunt_trafficman , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
-                <Button  
+                <Button  Command="{Binding Excelcommand}"
                                    Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}" >
                     <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
                         <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>
@@ -64,7 +64,7 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_trafficmans,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"  
+            <DataGrid Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_trafficmans,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
                       SelectedItem="{Binding Currunt_trafficman,UpdateSourceTrigger=PropertyChanged}"
                           IsReadOnly="True"
                        RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"

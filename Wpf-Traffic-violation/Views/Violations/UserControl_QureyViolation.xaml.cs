@@ -50,13 +50,8 @@ namespace Wpf_Traffic_violation.Views
                         GridPageFrom1.Content= new UserControl_QueryPersonalNumber();
                         break;
                     }
+                
                 case 3:
-                    {
-                        GridPageFrom1.Content = new UserControl_QueryReferenceNumber();
-
-                        break;
-                    }
-                case 4:
                     {
                         GridPageFrom1.Content = new UserControl_QueryReferenceNumber();
 

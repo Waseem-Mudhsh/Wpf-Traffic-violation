@@ -12,14 +12,14 @@
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="3 0"/>
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="6 0 0 0"/>
                 <TextBlock Text="تسديد مخالفات" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="1040,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
         </materialDesign:ColorZone>
-     
+
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft"  Background="#5B7C99" Height="174" DockPanel.Dock="Top">
 
@@ -33,18 +33,18 @@
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="793*"/>
-                
+
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-               
+
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2" >
                 <TextBlock Text="رقم الفاتورة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"  IsReadOnly="True"
+                <TextBox    x:Name="textBox" Text="{Binding Current_Receipt.Receipt_id}"  IsEnabled="False" Height="40" Width="240"  IsReadOnly="True"
                         materialDesign:HintAssist.Hint="رقم الفاتورة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
                 <TextBlock Text="التاريخ :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -56,17 +56,19 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
-                        materialDesign:HintAssist.Hint="التاريخ..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
+
+                <DatePicker Name="datep" Text="{Binding Current_Receipt.Receipt_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsEnabled="False" Width="240" Height="40"  BorderThickness="1"   Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White" >
+                    
+                </DatePicker>
+
                 <TextBlock Text="عدد المخالفات :" Margin="35 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
+                <TextBox    Text="{Binding Cuontviolation_selected}" IsEnabled="False" Height="40" Width="240" IsReadOnly="True"
                         materialDesign:HintAssist.Hint="العدد..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2" >
                 <TextBlock Text="أسم المالك :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
+                <TextBox  Text="{Binding Currunt_Vehicle.String_Citizen}" IsEnabled="False"    Height="40" Width="240" IsReadOnly="True"
                         materialDesign:HintAssist.Hint="أسم المالك..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
                 <TextBlock Text="رقم اللوحة :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -78,18 +80,18 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
+                <TextBox    Text="{Binding Selected_Plate.Plate_num}" IsEnabled="False" Height="40" Width="240" IsReadOnly="True"
                         materialDesign:HintAssist.Hint="رقم اللوحة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
                 <TextBlock Text="نوع اللوحة :" Margin="35 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
+                <TextBox   Text="{Binding Selected_Plate.String_Plate_type}" IsEnabled="False"  Height="40" Width="240" IsReadOnly="True"
                         materialDesign:HintAssist.Hint="العدد..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2" >
                 <TextBlock Text="البيان :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240" IsReadOnly="True"
-                        Text="تسديد المخالفات التي عليه"
+                <TextBox   Text="{Binding Current_Receipt.Receipt_statement}"   HorizontalAlignment="Center" VerticalAlignment="Center"  Height="40" Width="240" 
+                        
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
                 <TextBlock Text="ملاحظة :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
@@ -100,78 +102,62 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox      Height="40" Width="646" IsReadOnly="True"
-                        materialDesign:HintAssist.Hint="رقم اللوحة..."
+                <TextBox      Height="40" Width="646"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="ملاحظة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
-                
+
             </StackPanel>
-  
+
 
         </Grid>
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Top"  Background="White" FlowDirection="RightToLeft" Height="440">
-            <DataGrid Margin="10" Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Items3}"  
+            <DataGrid Margin="10" Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_Violation1}"  
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" 
                           >
                 <DataGrid.Resources>
 
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                  
-                    <DataGridTextColumn Binding="{Binding Code}"
+
+                    <DataGridTextColumn Binding="{Binding Violation_id}"
                                         Header="رقم المرجعية" MinWidth="100"
                                          />
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
+                    <DataGridTextColumn Binding="{Binding Plate_Num}"
                                                            Header="رقم اللوحة"  MinWidth="100"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Violation_date}"
                                                            Header="تاريخ المخالفة"  MinWidth="100"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
                     <!-- set a max length to get an indicator in the editor -->
 
-                    <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة"  MinWidth="250"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
+
                     </materialDesign:DataGridTextColumn>
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding String_Street}"
                                                            Header="المكان "  MinWidth="100"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Amount}"
                                                            Header="المبلغ"  MinWidth="100"
                                                            
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Violation_penalty}"
                                                            Header="الغرامة " MinWidth="100"
                                                             
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding String_TrafficMan}"
                                                            Header="بواسطة"  MinWidth="100"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Notise}"
                                                            Header="ملاحظة"  MinWidth="100"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
@@ -190,10 +176,10 @@
                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="50" HorizontalAlignment="Center" >
                     <TextBlock Text="إجمالي المبلغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 20 0"/>
                     <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black" >
-                        <TextBlock Text="1200000000" FontFamily="Tajawal" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,5" Width="110"/>
                     </Border>
-                    
-                    <Button Height="40" Width="100" Margin="40 0 10 0"  Padding="0">
+
+                    <Button Name="butn_pay" Height="40" Width="100" Margin="40 0 10 0" Command="{Binding ConfimPaycommand}"  Padding="0"> 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
                             <TextBlock Text="قبض" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>

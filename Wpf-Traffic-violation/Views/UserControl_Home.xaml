@@ -7,9 +7,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="625" d:DesignWidth="1360">
+
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="but_flipper"  >
-            
+
             <Setter Property="Foreground" Value="White"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="true" >
@@ -22,11 +23,11 @@
     </UserControl.Resources>
     <Grid Height="625" Width="1360">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
             <RowDefinition Height="525"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
 
             <!--<Border CornerRadius="20" BorderThickness="2">
             <materialDesign:ColorZone Mode="Dark" Height="100" Margin="3">
@@ -39,280 +40,280 @@
              
             </materialDesign:ColorZone>
             </Border>-->
-            <Border BorderThickness="0,1,0,1" BorderBrush="Blue" HorizontalAlignment="Center" Margin="0 5 0 5" >
+            <Border BorderThickness="0,1,0,1" BorderBrush="DarkBlue" HorizontalAlignment="Center" Margin="0 2 0 2" >
                 <Grid  Margin="0 0 " Background="White">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="228" />
-                    <ColumnDefinition Width="226"/>
-                    <ColumnDefinition Width="226"/>
-                    <ColumnDefinition Width="226"/>
-                    <ColumnDefinition Width="226"/>
-                    <ColumnDefinition Width="228"/>
-                   
-                </Grid.ColumnDefinitions>
-               
-                <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                <Grid Grid.Column="0" Height="65" Width="180" Background="#FFECEFF1" Margin="2 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="120"/>
-                    </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Background="#0591FF" Width="60" Height="65" >
-                        <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
+                        <ColumnDefinition Width="228" />
+                        <ColumnDefinition Width="226"/>
+                        <ColumnDefinition Width="226"/>
+                        <ColumnDefinition Width="226"/>
+                        <ColumnDefinition Width="226"/>
+                        <ColumnDefinition Width="228"/>
 
-                    </StackPanel>
+                    </Grid.ColumnDefinitions>
+
+                    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+                    <Grid Grid.Column="0" Height="65" Width="180" Background="#FFECEFF1" Margin="2 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Background="#0591FF" Width="60" Height="65" >
+                            <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
+
+                        </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" Background="White">
-                        <materialDesign:Flipper  Width="120" Height="65"   >
-                            <materialDesign:Flipper.FrontContent  >
+                            <materialDesign:Flipper  Width="120" Height="65"   >
+                                <materialDesign:Flipper.FrontContent  >
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
-                                    <DockPanel Width="120"  >
+                                        <DockPanel Width="120"  >
                                             <Button DockPanel.Dock="Right" Background="#0591FF"   Width="15" Height="65"  Style="{StaticResource but_flipper}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Padding="0 0 0 2">
-                                            <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
-                                            </materialDesign:PackIcon>
-                                        </Button>
+                                                <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
+                                                </materialDesign:PackIcon>
+                                            </Button>
                                             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontFamily="tajawal" FontSize="10" FontWeight="Bold" Foreground="DarkBlue"  Margin="0 10 0 1" >البلاغات الخاطئة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+                                            <TextBlock Name="commtotal1"  FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-                            <materialDesign:Flipper.BackContent>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
                                     <StackPanel Height="65" Width="120" Background="#eceff1" >
 
 
-                                    <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
-                                            <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Button>
+                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Click="Button_Click_3" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Button>
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="commfrom1" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="commto1"  DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
-                    </StackPanel>
-                </Grid>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </StackPanel>
+                    </Grid>
                     <!--/////////////////////////////////////////////////////////////////////////////////////////////////-->
-                <Grid Grid.Column="2" Height="65" Width="180" Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="120"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="2" Height="65" Width="180" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Background="#0591FF" Width="60" Height="65"  >
-                        <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
 
-                    </StackPanel>
+                        </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" >
-                        <materialDesign:Flipper  Width="120" Height="65"   >
-                            <materialDesign:Flipper.FrontContent  >
+                            <materialDesign:Flipper  Width="120" Height="65"   >
+                                <materialDesign:Flipper.FrontContent  >
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
-                                    <DockPanel Width="120"  >
+                                        <DockPanel Width="120"  >
                                             <Button DockPanel.Dock="Right"  Background="#0591FF" Width="15" Height="65"  Style="{StaticResource but_flipper}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Padding="0 0 0 2">
-                                            <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
-                                            </materialDesign:PackIcon>
-                                        </Button>
+                                                <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
+                                                </materialDesign:PackIcon>
+                                            </Button>
                                             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center"  FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >الإعتراضات المرفوضة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+                                            <TextBlock  Name="opjtotal1" FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-                            <materialDesign:Flipper.BackContent>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
                                     <StackPanel Height="65" Width="120" Background="#eceff1" >
 
 
-                                    <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
-                                            <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Button>
+                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Click="Button_Click_5"  Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Button>
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="Opjfrom1" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="Opjto1" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
-                    </StackPanel>
-                </Grid>
-                <!--///////////////////////////////////////////////////////////////////////////////////////-->
-                <Grid Grid.Column="1" Height="65" Width="180" Background="#FFECEFF1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="120"/>
-                    </Grid.ColumnDefinitions>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </StackPanel>
+                    </Grid>
+                    <!--///////////////////////////////////////////////////////////////////////////////////////-->
+                    <Grid Grid.Column="1" Height="65" Width="180" Background="#FFECEFF1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Background="#0073B7" Width="60" Height="65"  >
-                        <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" Background="White" >
-                        <materialDesign:Flipper  Width="120" Height="65"   >
-                            <materialDesign:Flipper.FrontContent  >
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" Background="White" >
+                            <materialDesign:Flipper  Width="120" Height="65"   >
+                                <materialDesign:Flipper.FrontContent  >
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
-                                    <DockPanel Width="120"  >
+                                        <DockPanel Width="120"  >
                                             <Button DockPanel.Dock="Right" Background="#0073B7"  Width="15" Height="65"  Style="{StaticResource but_flipper}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Padding="0 0 0 2">
-                                            <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
-                                            </materialDesign:PackIcon>
-                                        </Button>
+                                                <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
+                                                </materialDesign:PackIcon>
+                                            </Button>
                                             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center"  FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >البلاغات الصحيحة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+                                            <TextBlock  Name="commtotal"  FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-                            <materialDesign:Flipper.BackContent>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
 
-                                    <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0073B7" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
-                                            <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Button>
+                                            <Button DockPanel.Dock="Right" Background="#0073B7" Command="{x:Static materialDesign:Flipper.FlipCommand}" Click="Button_Click_2" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Button>
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="commfrom"  DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="commto"   DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
-                    </StackPanel>
-                </Grid>
-                <!--/////////////////////////////////////////////////////////////////////////////-->
-                <Grid Grid.Column="3" Height="65" Width="180" Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="120"/>
-                    </Grid.ColumnDefinitions>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </StackPanel>
+                    </Grid>
+                    <!--/////////////////////////////////////////////////////////////////////////////-->
+                    <Grid Grid.Column="3" Height="65" Width="180" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Background="#0073B7" Width="60" Height="65"  >
                             <materialDesign:PackIcon Kind="ChromeReaderMode" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" >
-                        <materialDesign:Flipper  Width="120" Height="65"   >
-                            <materialDesign:Flipper.FrontContent  >
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" >
+                            <materialDesign:Flipper  Width="120" Height="65"   >
+                                <materialDesign:Flipper.FrontContent  >
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
-                                    <DockPanel Width="120"  >
+                                        <DockPanel Width="120"  >
                                             <Button DockPanel.Dock="Right" Background="#0073B7"  Width="15" Height="65"  Style="{StaticResource but_flipper}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Padding="0 0 0 2">
-                                            <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
-                                            </materialDesign:PackIcon>
-                                        </Button>
-                                        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >الإعتراضات المقبولة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+                                                <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
+                                                </materialDesign:PackIcon>
+                                            </Button>
+                                            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >الإعتراضات المقبولة</TextBlock>
+                                            <TextBlock Name="Opjtotal"  FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-                            <materialDesign:Flipper.BackContent>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
                                     <StackPanel Height="65" Width="120" Background="#eceff1" >
 
 
-                                    <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0073B7" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
-                                            <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Button>
+                                            <Button DockPanel.Dock="Right" Background="#0073B7" Command="{x:Static materialDesign:Flipper.FlipCommand}" Click="Button_Click_4" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Button>
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="Opjfrom"  DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="Opjto" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
-                    </StackPanel>
-                </Grid>
-                <!--/////////////////////////////////////////////////////////////////////////////////////////////-->
-                <!--/////////////////////////////////////////////////////////////////////////////-->
-                <Grid Grid.Column="4" Height="65" Width="180" Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="120"/>
-                    </Grid.ColumnDefinitions>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </StackPanel>
+                    </Grid>
+                    <!--/////////////////////////////////////////////////////////////////////////////////////////////-->
+                    <!--/////////////////////////////////////////////////////////////////////////////-->
+                    <Grid Grid.Column="4" Height="65" Width="180" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Background="#0591FF" Width="60" Height="65"  >
-                        <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="TrafficLight" Height="52" Width="52" HorizontalAlignment="Center" Margin="2 6 " Foreground="White"></materialDesign:PackIcon>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" >
-                        <materialDesign:Flipper  Width="120" Height="65"   >
-                            <materialDesign:Flipper.FrontContent  >
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" Height="65" >
+                            <materialDesign:Flipper  Width="120" Height="65"   >
+                                <materialDesign:Flipper.FrontContent  >
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
-                                    <DockPanel Width="120"  >
+                                        <DockPanel Width="120"  >
                                             <Button DockPanel.Dock="Right" Background="#0591FF" Width="15" Height="65"  Style="{StaticResource but_flipper}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
                                 Padding="0 0 0 2">
-                                            <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
-                                            </materialDesign:PackIcon>
-                                        </Button>
+                                                <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
+                                                </materialDesign:PackIcon>
+                                            </Button>
                                             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center"  FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >المخالفات الغير مسددة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+                                            <TextBlock Name="violationPayment"  FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-                            <materialDesign:Flipper.BackContent>
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.FrontContent>
+                                <materialDesign:Flipper.BackContent>
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
 
-                                    <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                        <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
-                                            <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Button>
+                                            <Button DockPanel.Dock="Right" Background="#0591FF" Command="{x:Static materialDesign:Flipper.FlipCommand}" Click="Button_Click_1" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Button>
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="violationPayfrom" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                        <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="violationPayto" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                    </DockPanel>
-                                </StackPanel>
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
-                    </StackPanel>
-                </Grid>
-                <!--/////////////////////////////////////////////////////////////////////////////////////////////-->
+                                        </DockPanel>
+                                    </StackPanel>
+                                </materialDesign:Flipper.BackContent>
+                            </materialDesign:Flipper>
+                        </StackPanel>
+                    </Grid>
+                    <!--/////////////////////////////////////////////////////////////////////////////////////////////-->
                     <Grid Grid.Column="5" Height="65" Width="180" Background="White" Margin="0 0 2 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60" />
@@ -329,14 +330,15 @@
                                     <StackPanel Height="65" Width="120" Background="#eceff1">
 
                                         <DockPanel Width="120"  >
-                                            <Button DockPanel.Dock="Right" Background="#0073B7"  Width="15" Height="65"  Style="{StaticResource but_flipper}"
-                                Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
-                                Padding="0 0 0 2">
+                                            <Button DockPanel.Dock="Right" Background="#0073B7"  Width="15" Height="65" Style="{StaticResource but_flipper}"
+                                              Command="{x:Static materialDesign:Flipper.FlipCommand}"   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                              Padding="0 0 0 2">
                                                 <materialDesign:PackIcon Kind="ArrowRight" Width="10" Height="10" >
                                                 </materialDesign:PackIcon>
                                             </Button>
                                             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontFamily="tajawal" FontSize="10" FontWeight="DemiBold" Foreground="DarkBlue"  Margin="0 10 0 1" >المخالفات المسددة</TextBlock>
-                                            <TextBlock   FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center" >12345678</TextBlock>
+
+                                            <TextBlock Name="violationtotal"  FontFamily="tajawal" FontSize="16" FontWeight="DemiBold" Foreground="OrangeRed"  Margin="0 1 0 1"  HorizontalAlignment="Center" VerticalAlignment="Center">12345678</TextBlock>
 
                                         </DockPanel>
                                     </StackPanel>
@@ -348,14 +350,14 @@
                                         <DockPanel  HorizontalAlignment="Center" VerticalAlignment="Center" 
                          Width="120">
 
-                                            <Button DockPanel.Dock="Right" Background="#0073B7" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
+                                            <Button DockPanel.Dock="Right" Background="#0073B7" Click="Button_Click" Command="{x:Static materialDesign:Flipper.FlipCommand}" Width="15" Height="65"  Padding="0 0 0 2" Style="{StaticResource but_flipper}" >
                                                 <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Width="10" Height="10"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </Button>
 
-                                            <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker  Name="fromviolation" DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" من تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
-                                            <DatePicker  DockPanel.Dock="Top"
+                                            <DatePicker Name="toviolation"  DockPanel.Dock="Top"
                                 materialDesign:HintAssist.Hint=" الى تاريخ " FirstDayOfWeek="Saturday" FontFamily="Tajawal" HorizontalAlignment="Stretch" FlowDirection="RightToLeft" FontSize="10" Margin="3 3" Width="80" Height="25" />
 
                                         </DockPanel>
@@ -370,12 +372,12 @@
             </Border>
 
         </Grid>
-        <Grid  Grid.Row="1" Margin="0 0 0 2">
+        <Grid  Grid.Row="0"   Margin="0 0 0 2">
             <Grid.Background>
-                <ImageBrush />
+                <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/home.png" />
             </Grid.Background>
             <Grid.RowDefinitions>
-               
+
                 <RowDefinition Height="63" />
                 <RowDefinition Height="462"/>
 
@@ -384,8 +386,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <!--
             <Border BorderThickness="0 1 0 0" BorderBrush="Blue">
-            <StackPanel Background="#FFECEFF1" Grid.Row="0" Grid.Column="0">
+                
+            <StackPanel Background="#FFECEFF1" Grid.Row="0" Grid.Column="0" >
             <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 2 0 0"  >
                
                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -411,13 +415,16 @@
                 <Rectangle x:Name="Rectangle_home" Width="120" Height="2" Fill="OrangeRed"  HorizontalAlignment="Right"   />
             </StackPanel>
             </StackPanel>
+             
             </Border>
             <Frame Grid.Row="1"  Grid.Column="0" x:Name="Frame_home" DockPanel.Dock="Bottom"  BorderThickness="1" BorderBrush="#9FA8DA" NavigationUIVisibility="Hidden" >
 
             </Frame>
+               -->
             <Grid Grid.RowSpan="2" Grid.Column="1">
-               
+
             </Grid>
         </Grid>
     </Grid>
 </UserControl>
+

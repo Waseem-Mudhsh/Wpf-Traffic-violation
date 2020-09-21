@@ -12,9 +12,9 @@
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
-                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="2 0"></materialDesign:PackIcon>
+                <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="6 0 0 0"></materialDesign:PackIcon>
                 <TextBlock Text="بيانات مجموعة" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="665,0,0,0" >
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="660,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -22,7 +22,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -34,32 +34,36 @@
                     <Setter Property="Foreground" Value="#022551"/>
                 </Style>
             </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="299*"/>
+                <ColumnDefinition Width="111*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-               
+
 
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock Text="رقم المجموعة :"  Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" />
-                <TextBox    x:Name="textBox"   Height="40" Width="111.429"
+                <TextBox    x:Name="textBox"   Height="40" Width="111.429" Text="{Binding Currunt_PermissionSet.Group_id}"
                         materialDesign:HintAssist.Hint="رقم المجموعة..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
 
             </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock Text="أسم المجموعة :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_PermissionSet.Group_name}"
                         materialDesign:HintAssist.Hint="أسم المجموعة..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="الحالة  :" Margin="45 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="59"/>
-                <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                <ToggleButton Name="Radiobutton_state" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                               ToolTip="MaterialDesignSwitchAccentToggleButton" IsChecked="False" Margin="0  0 0 0" Width="53" />
 
             </StackPanel>
-        
+
 
         </Grid>
         <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->

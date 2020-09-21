@@ -13,19 +13,13 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                         >
 
-
-
-
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                          Uid="11" x:Name="but11" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                                          Uid="11" x:Name="but8" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="DesktopWindows"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >بيانات النظام</TextBlock>
+                        <materialDesign:PackIcon Kind="Report"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >أسباب الإعتراض</TextBlock>
                     </StackPanel>
                 </Button>
-
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                           Uid="10" x:Name="but10" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
@@ -33,7 +27,6 @@
                         <TextBlock    >الشوارع</TextBlock>
                     </StackPanel>
                 </Button>
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                           Uid="9" x:Name="but9" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
@@ -41,23 +34,20 @@
                         <TextBlock    >المديريات</TextBlock>
                     </StackPanel>
                 </Button>
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                          Uid="8" x:Name="but8" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                <Button  Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="8" x:Name="but5" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="Report"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >أسباب الإعتراض</TextBlock>
+                        <materialDesign:PackIcon Kind="TrafficCone"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >أنواع المخالفات</TextBlock>
                     </StackPanel>
                 </Button>
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                          Uid="7" x:Name="but7" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                                          Uid="7" x:Name="but11" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="Toc"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >فئات الرخص</TextBlock>
+                        <materialDesign:PackIcon Kind="DesktopWindows"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >بيانات اللوحة</TextBlock>
                     </StackPanel>
                 </Button>
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                           Uid="6" x:Name="but6" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
@@ -65,20 +55,18 @@
                         <TextBlock    >أنواع اللوحات</TextBlock>
                     </StackPanel>
                 </Button>
-                <!--////////////////////////////////////////////////////////////////////////////////////////////////-->
-
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                           Uid="5" x:Name="but5" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
-                    <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="TrafficCone"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >أنواع المخالفات</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                           Uid="4" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                                           Uid="5" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="DriversLicense"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    >بيانات الرخص</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                          Uid="4" x:Name="but7" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="Toc"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >فئات الرخص</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"

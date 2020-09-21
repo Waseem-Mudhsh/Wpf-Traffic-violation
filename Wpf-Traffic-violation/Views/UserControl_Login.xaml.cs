@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Traffic_violation.Models;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -20,6 +21,7 @@ namespace Wpf_Traffic_violation.Views
     /// </summary>
     public partial class UserControl_Login : UserControl
     {
+        LoginModel LoginModel;
         public UserControl_Login()
         {
             InitializeComponent();
@@ -32,9 +34,28 @@ namespace Wpf_Traffic_violation.Views
 
         private void but_Login_Click(object sender, RoutedEventArgs e)
         {
+            
+           // MessageBox.Show(password.Password.ToString());
 
-            Grid_Login.Children.Clear();
-            Grid_Login.Children.Add(new UserControl_Main());
+            LoginModel = new LoginModel();
+            if (username.Text!="" && password.Password.ToString() != "")
+            {
+                if (LoginModel.Login(username.Text, password.Password.ToString()))
+                {
+                    UserControl_Main UserControl_Main = new UserControl_Main { DataContext = this };
+                    Grid_Login.Children.Clear();
+                    UserControl_Main.TextBlockUserName.Text = username.Text;
+                    new AllPermissions().getAllPermissions();
+                    Grid_Login.Children.Add(UserControl_Main);
+
+                    
+                }
+                else
+                    MessageBox.Show("تاكد من صحة البيانات المدخلة");
+
+            }
+            else
+                MessageBox.Show("يجب إدخال اسم المستخدم وكلمة السر الخاصة بك");
         }
     }
 }

@@ -4,37 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:Communication_ViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
             <StackPanel  Height="60" Background="WhiteSmoke" Orientation="Horizontal" >
 
                 <!--top-->
-                <StackPanel  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 0 0 0" Height="40" FlowDirection="RightToLeft">
-                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed">
-                        <materialDesign:PackIcon Kind="FilterList"   Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
-                    </materialDesign:Card>
-                    <ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="تصنيف ..."
-                          Width="170" Height="40" IsEditable="True" Padding="15,12,5,0" BorderThickness="0,0,0,1" ScrollViewer.CanContentScroll="True" FontFamily="Tajawal" FontSize="14">
-                        <ComboBoxItem Content="Item 1" />
-                        <ComboBoxItem Content="Item 2" />
-                        <ComboBoxItem Content="Item 3" />
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="5 0" FlowDirection="RightToLeft" >
+
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="135 0" FlowDirection="RightToLeft" >
                     <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"  materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                         <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </Button>
-                    <TextBox    x:Name="textBox"   Height="40" Width="400"
-         
-                        materialDesign:HintAssist.Hint="بحـــث..." 
-                        BorderThickness="0,0,0,1"  FlowDirection="RightToLeft"  UseLayoutRounding="False" HorizontalContentAlignment="Left" TextAlignment="Center" TextWrapping="Wrap" FontSize="14" FontFamily="Tajawal" Padding="5,2,5,0"/>
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_Communication }" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Search" 
+                                              SelectedItem="{Binding Current_Communication , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              />
                 </StackPanel>
-                <Button   x:Name="But_Scan_Commnication" Click="But_Scan_Commnication_Click"  Margin="560,0,10,0" Background="#FF097221"
+                <Button   x:Name="But_Scan_Commnication" Command="{Binding Scancommand}" Margin="560,0,10,0" Background="#FF097221"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center"  Width="80" BorderBrush="#FF097221" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">فحص</TextBlock>
@@ -48,81 +43,50 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Items3}" 
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1300" HorizontalAlignment="Right"
-                          >
-                <DataGrid.Resources>
 
-                </DataGrid.Resources>
+            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Grid_Communication}"  SelectedItem="{Binding Current_Communication,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          MaxWidth="1300" HorizontalAlignment="Right" Height="480"
+                          >
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Code}"
+                    <DataGridTextColumn Binding="{Binding Communication_id}"
                                         Header="رقم البلاغ" MinWidth="100"
                                          />
-                    <DataGridTextColumn Binding="{Binding Code}"
+                    <DataGridTextColumn Binding="{Binding Communication_name}"
+                                                        Header="البلاغ " MinWidth="300" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding Communication_date}"
                                         Header="تاريخ البلاغ" MinWidth="100"
                                          />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                    <DataGridTextColumn Binding="{Binding PlateNum}"
                                                         Header="رقم اللوحة"  MinWidth="100"
-                                                        
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </materialDesign:DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Code}"
+                                        MaxWidth="300"/>
+
+
+                    <DataGridTextColumn Binding="{Binding Communication_place}"
                                         Header="مكان البلاغ" MinWidth="100"
                                          />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
-                                                        Header="أسم المبلغ " MinWidth="300"
-                                                        
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                        
-                    </materialDesign:DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding String_Ciziten}"
+                                                        Header="أسم المبلغ " MinWidth="300" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding String_Status}"
+                                                        Header=" الحالة" MinWidth="300" MaxWidth="150"/>
+                    <!--<DataGridTextColumn Binding="{Binding Communication_photo1}" Visibility="Hidden"
+                                                        MinWidth="300" MaxWidth="300"/>
+                    <DataGridTextColumn Binding="{Binding Communication_photo1}" Visibility="Hidden"
+                                                        MinWidth="300" MaxWidth="150"/>-->
+
+
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
 
                     <!-- set a max length to get an indicator in the editor -->
 
-                    <DataGridTextColumn Binding="{Binding Code}"
-                                        Header="الحالة" MinWidth="100"
-                                         />
+
 
 
 
 
                 </DataGrid.Columns>
             </DataGrid>
+
         </StackPanel>
     </DockPanel>
 </UserControl>
