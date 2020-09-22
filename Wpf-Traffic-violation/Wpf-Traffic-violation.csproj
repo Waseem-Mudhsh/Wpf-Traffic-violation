@@ -460,9 +460,6 @@
     <Compile Include="Views\UserControl_Main.xaml.cs">
       <DependentUpon>UserControl_Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings\UserControl_ManagmentPropertys.xaml.cs">
-      <DependentUpon>UserControl_ManagmentPropertys.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Settings\UserControl_NotificationSystem.xaml.cs">
       <DependentUpon>UserControl_NotificationSystem.xaml</DependentUpon>
     </Compile>
@@ -856,10 +853,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControl_Main.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\UserControl_ManagmentPropertys.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

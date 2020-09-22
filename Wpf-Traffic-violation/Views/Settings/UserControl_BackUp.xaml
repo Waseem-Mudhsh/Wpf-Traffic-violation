@@ -7,7 +7,7 @@
               xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              mc:Ignorable="d" 
-              d:DesignHeight="512" d:DesignWidth="1360">
+              d:DesignHeight="560" d:DesignWidth="1360">
     <UserControl.DataContext>
         <ViewModel:Addconnection_DB_ViewModel/>
     </UserControl.DataContext>

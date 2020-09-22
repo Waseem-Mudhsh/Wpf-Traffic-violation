@@ -13,29 +13,35 @@
     <DockPanel Background="Gray" >
         <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-               
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                          Uid="3" x:Name="but3" Margin="0,4,7,4" Click="but_sub_ButtonClick">
+                                          Uid="4" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" Width="130">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="FileReport"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >توقيعات التقارير</TextBlock>
+                        <TextBlock    >إستعادة نسخة احتياطية</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                          Uid="3" x:Name="but3" Margin="05,4,7,4" Click="but_sub_ButtonClick">
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:PackIcon Kind="FileReport"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    >عمل نسخة إحتياطية</TextBlock>
                     </StackPanel>
                 </Button>
 
                
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                           Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
-                    <StackPanel Orientation="Vertical">
+                                           Uid="2" x:Name="but2" Margin="05,4,7,4" Click="but_sub_ButtonClick" Width="125" >
+                    <StackPanel Orientation="Vertical" Width="125">
                         <materialDesign:PackIcon Kind="Tools"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >صيانة النظام</TextBlock>
+                        <TextBlock     >الإتصال بقاعدة البيانات</TextBlock>
                     </StackPanel>
                 </Button>
                
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
-                                           Uid="1" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
+                                           Uid="1" x:Name="but1" Margin="05,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Https"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >الأقفالات</TextBlock>
+                        <TextBlock    >بيانات النظام</TextBlock>
                     </StackPanel>
                 </Button>
 

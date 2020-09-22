@@ -39,25 +39,6 @@ namespace Wpf_Traffic_violation.Views
             }
         }
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            int index = int.Parse(((RadioButton)e.Source).Uid);
-
-            switch (index)
-            {
-
-                case 1:
-                    {
-                        Frame_Property.Content = new UserControl_ManagmentPropertys();
-                        break;
-                    }
-                case 2:
-                    {
-
-                        Frame_Property.Content = new UserControl_QureyViolation();
-                        break;
-                    }
-            }
-        }
+    
     }
 }

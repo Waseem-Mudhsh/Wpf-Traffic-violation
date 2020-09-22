@@ -236,7 +236,7 @@
                 <Setter Property="CanUserSortColumns" Value="False"/>
                 <!--<Setter Property="RowBackground" Value="Lavender"/>-->
                 <Setter Property="Background" Value="White"/>
-                <Setter Property="AlternatingRowBackground" Value="#FBFBFB"/>
+                <Setter Property="AlternatingRowBackground" Value="LightBlue"/>
                 <Setter Property="GridLinesVisibility" Value="All"/>
                 <Setter Property="ColumnHeaderHeight" Value="40"/>
                 <!--<Setter Property="Foreground" Value="Brown"/>-->
