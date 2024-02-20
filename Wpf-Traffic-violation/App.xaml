@@ -8,21 +8,20 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <!--<ResourceDictionary Source="pack://application:.,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.lightblue.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
-                <DataTemplate x:Key="AutoId">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding  Search}"/>
+
+            <DataTemplate x:Key="AutoId">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding  Search}"/>
 
 
 
-                    </StackPanel>
-                </DataTemplate>
+                </StackPanel>
+            </DataTemplate>
 
             <Style TargetType="Button" x:Key="sub1" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="Foreground" Value="#BCBEC0"/>
@@ -38,10 +37,7 @@
                               CornerRadius="5 5 1 1"
                               BorderThickness="1,1,1,0"
                               Padding="5"
-                              BorderBrush="Gray"
-                                    
-                              
-                                    >
+                              BorderBrush="Gray" >
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
 
                                 </ContentPresenter>
@@ -107,30 +103,15 @@
 
                 </Style.Triggers>
             </Style>
-            <!--////////////////////////////////////////////////////////////////////////////////////////////-->
-            <!--<Style TargetType="Button" x:Key="subt"  BasedOn="{StaticResource MaterialDesignFlatButton}">
-                <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="Background" Value="White"/>
-                
-               
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True" >
-                        
-                        
-                        <Setter Property="Background" Value="Gray"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>-->
-            <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                                    <!--style Button items home-->
+
+            <!--style Button items home-->
             <Style TargetType="Button" x:Key="btnItemHome" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="Background" Value="#fff"/>
                 <Setter Property="Foreground" Value="#9FA8DA"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="Padding" Value="5"/>
                 <Setter Property="Margin" Value="5"/>
-                
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -161,7 +142,7 @@
                 </Style.Triggers>
             </Style>
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                                                       <!--style btnItemStatistical-->
+            <!--style btnItemStatistical-->
             <Style TargetType="Button" x:Key="btnItemStatistical" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="Background" Value="#9FA8DA"/>
                 <Setter Property="Foreground" Value="White"/>
@@ -197,7 +178,7 @@
                 </Style.Triggers>
             </Style>
             <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                                                            <!--style subButton-->
+            <!--style subButton-->
             <Style TargetType="Button" x:Key="subButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="Foreground" Value="#03719C" />
                 <Setter Property="FontSize" Value="12"/>
@@ -224,11 +205,11 @@
                 <Setter Property="FontFamily" Value="Tajawal"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Padding" Value="10,0,0,0"/>
-                
+
 
 
             </Style>
-                                                            <!--style Style_Datagrid-->
+            <!--style Style_Datagrid-->
             <Style TargetType="DataGrid" x:Key="Style_Datagrid">
                 <Setter Property="materialDesign:DataGridAssist.CellPadding" Value="15 5 5 5"/>
                 <Setter Property="HeadersVisibility" Value="Column"/>
@@ -248,6 +229,7 @@
                 <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="BorderBrush" Value="DarkGray"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="IsReadOnly" Value="True"/>
                 <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
                 <!--<Setter Property="ScrollViewer.CanContentScroll" Value="True"/>-->
                 <Setter Property="FontFamily" Value="Tajawal"/>
@@ -259,32 +241,8 @@
                 <Setter Property="FlowDirection" Value="RightToLeft"/>
                 <!--<Setter Property="ColumnHeaderStyle" Value="{DynamicResource headerstyle}"/>-->
             </Style>
-            
-            <!--<Style TargetType="DataGrid" x:Key="Style_Datagrid">
-                <Setter Property="AutoGenerateColumns" Value="False"/>
-                <Setter Property="SelectionMode" Value="Single"/>
-                <Setter Property="CanUserSortColumns" Value="True"/>
-                <Setter Property="CanUserAddRows" Value="False"/>
-                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                <Setter Property="MaxColumnWidth" Value="300"/>
-                <Setter Property="AlternatingRowBackground" Value="Yellow"/>
-                <Setter Property="HeadersVisibility" Value="All"/>
-                <Setter Property="FlowDirection" Value="RightToLeft"/>
-
-                --><!--<Setter Property="BorderBrush" Value="#000"/>-->
-                <!--<Setter Property="BorderThickness" Value="1"/>--><!--
-                <Setter Property="FontFamily" Value="Tajawal"/>
-                <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="RowBackground" Value="Red"/>
 
 
-                <Setter Property="Foreground" Value="#525252"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="VerticalGridLinesBrush" Value="red"/>
-                <Setter Property="HorizontalGridLinesBrush" Value="#FFE28B8B"/>
-
-            </Style>-->
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="FontFamily" Value="Tajawal"/>
@@ -296,7 +254,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>-->
-           
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

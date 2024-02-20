@@ -50,7 +50,7 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="أسم المواطن :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox      Height="40" Width="240" Text="{Binding Currunt_Citizen.Citizen_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                <TextBox   Name="Citizen_name"   Height="40" Width="240" Text="{Binding Currunt_Citizen.Citizen_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="أسم المواطن..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="نوع الهوية :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -62,15 +62,18 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <ComboBox Width="240" Height="40" BorderThickness="1 1 1 1" Text="{Binding Currunt_Citizen.Citizen_identitytype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox Name="Citizen_identitytype" Width="240" Height="40" BorderThickness="1 1 1 1" 
+                         Text="{Binding Currunt_Citizen.Citizen_identitytype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
                           Padding="10,10,0,0" Background="White" Margin="10 0 25 0" FontSize="14" FontFamily="Tajawal" SelectedIndex="0">
-                    <ComboBoxItem >شخصية</ComboBoxItem>
+                    <ComboBoxItem  IsSelected="True">شخصية</ComboBoxItem>
                     <ComboBoxItem Content="جواز سفر"></ComboBoxItem>
                     <ComboBoxItem>رقم جلوس</ComboBoxItem>
                     <ComboBoxItem>أنتخابية</ComboBoxItem>
                 </ComboBox>
                 <TextBlock Text="رقم الهوية:" Margin="0 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox    x:Name="textBox_citizenid"   Height="40" Width="240" Text="{Binding Currunt_Citizen.Citizen_id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                <TextBox   Name="citizenid"   Height="40" Width="240" Text="{Binding Currunt_Citizen.Citizen_id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="رقم الهوية ..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" FontFamily="Tajawal" FontSize="14" />
             </StackPanel>
@@ -99,25 +102,32 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="تاريخ الميلاد :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <DatePicker x:Name="Datepicker_date" SelectedDateFormat="Short" Text="{Binding Currunt_Citizen.Citizen_date_pirth,UpdateSourceTrigger=PropertyChanged,StringFormat='{}{0:  dd/MM/yyyy}'}"
+                <DatePicker x:Name="Datepicker_date"  SelectedDate="{x:Static sys:DateTime.Now}" SelectedDateFormat="Short" Text="{Binding Currunt_Citizen.Citizen_date_pirth,UpdateSourceTrigger=PropertyChanged,StringFormat='{}{0:  dd/MM/yyyy}'}"
                              Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="1"  FirstDayOfWeek="Saturday" />
                 <TextBlock Text="فصيلة الدم :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                
-                <ComboBox  Width="240" Height="40" Text="{Binding Currunt_Citizen.Citizen_blood_type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+
+                <ComboBox  Width="240" Height="40" 
+                           Text="{Binding Currunt_Citizen.Citizen_blood_type,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
                           Padding="10,10,0,0" Background="White" Margin="10 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1" SelectedIndex="0">
-                    <ComboBoxItem>+ O</ComboBoxItem>
-                    <ComboBoxItem>- O</ComboBoxItem>
-                    <ComboBoxItem>+ A</ComboBoxItem>
-                    <ComboBoxItem>- A</ComboBoxItem>
-                    <ComboBoxItem>+ AB</ComboBoxItem>
-                    <ComboBoxItem>- AB</ComboBoxItem>
-                    <ComboBoxItem>- B</ComboBoxItem>
+                    <ComboBoxItem >O+</ComboBoxItem>
+                    <ComboBoxItem>O-</ComboBoxItem>
+                    <ComboBoxItem>A+</ComboBoxItem>
+                    <ComboBoxItem>A-</ComboBoxItem>
+                    <ComboBoxItem>AB+</ComboBoxItem>
+                    <ComboBoxItem>AB-</ComboBoxItem>
+                    <ComboBoxItem>B-</ComboBoxItem>
 
                 </ComboBox>
                 <TextBlock Text="الحالة الأجتماعية :" Margin="0,18,4,17" HorizontalAlignment="Center" VerticalAlignment="Center" Width="126"/>
-                <ComboBox Width="240" Height="40" Text="{Binding Currunt_Citizen.String_social_status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <ComboBox Width="240" Height="40" 
+                          Text="{Binding Currunt_Citizen.String_social_status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
                           Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1" SelectedIndex="0">
-                    <ComboBoxItem >عازب</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True" >عازب</ComboBoxItem>
                     <ComboBoxItem>متزوج</ComboBoxItem>
 
                 </ComboBox>

@@ -17,8 +17,9 @@ namespace Wpf_Traffic_violation.Models
 
         
 
-        public void GetCitizens(ObservableCollection<Citizen> Citizens)
+        public ObservableCollection<Citizen> GetCitizens()
         {
+            ObservableCollection<Citizen> Citizens = new ObservableCollection<Citizen>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -76,6 +77,7 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
+            return Citizens;
         }
         ///////////////////////////////// end GetCitizens/////////////////////////////////////
 
@@ -145,10 +147,11 @@ namespace Wpf_Traffic_violation.Models
                 return false;
 
             }
-
-
+           
 
             return true;
+
+
         }
         ///////////////////////////////// end Operarioncitizen/////////////////////////////////////
 
@@ -250,11 +253,11 @@ namespace Wpf_Traffic_violation.Models
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a Excel File";
-            op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
+            op.Filter = " Excel Files |*.XLSX";
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [DataCitizens$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -270,12 +273,13 @@ namespace Wpf_Traffic_violation.Models
                             Citizen_date_pirth = row[3].ToString(),
                             Citizen_religion = row[4].ToString(),
                             Citizen_blood_type = row[5].ToString(),
-                            User_id = Convert.ToInt32(row[6]),
+                            // User_id = Convert.ToInt32(row[6]),
+                            Citizen_social_status = Convert.ToBoolean(row[6]),
                             Citizen_nationality = row[7].ToString(),
                             String_gender = row[8].ToString(),
                             Citizen_identitytype = row[9].ToString(),
-                            Citizen_phone = row[10].ToString(),
-                            Citizen_social_status = Convert.ToBoolean(row[11])
+                            Citizen_phone = row[10].ToString()
+                           
                         };
                         OperarionCitizen(per, "Insert");
 

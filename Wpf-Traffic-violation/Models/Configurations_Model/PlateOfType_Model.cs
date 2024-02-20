@@ -1,66 +1,84 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models
 {
     public class PlateOfType_Model
     {
+        //SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+        CacheManager<PlateOfType> cacheManager;
+        ValidationRegex validationRegex;
+        ViolationServices violationServices;
+        SP_Query sP_Query;
+        Isphelper isphelper;
+        OpreationSql opreationSql;
+
+        public PlateOfType_Model()
+        {
+            validationRegex = new ValidationRegex();
+            sP_Query = new SP_Query();
+            violationServices = new ViolationServices();
+            isphelper = new Sphelper();
+            opreationSql = new OpreationSql();
+            cacheManager = new CacheManager<PlateOfType>("platetype");
+        }
         ///////////////////////////////// start GetPlateOfType/////////////////////////////////////
 
 
 
-        public void GetPlateOfType(ObservableCollection<PlateOfType> PlateOfTypes)
+        public ObservableCollection<PlateOfType> GetPlateOfType()
         {
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            ObservableCollection<PlateOfType> PlateOfTypes = new ObservableCollection<PlateOfType>();
+
+            try
             {
-                try
+                ObservableCollection<PlateOfType> plattypechach = new ObservableCollection<PlateOfType>();
+                ObservableCollection<PlateOfType> getplatypechach = cacheManager.GetCach as ObservableCollection<PlateOfType>;
+                if (getplatypechach != null)
                 {
-                    con.Open();
+                    PlateOfTypes = getplatypechach;
                 }
-                catch (Exception)
+                else
                 {
-
-                    MessageBox.Show("Cant Open con");
-                }
-                //SqlCommand Command = new SqlCommand("Select * from Person", con);
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetPlateOfType",
-                    Connection = con
-
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
+                    var result = isphelper.GetCollection(sP_Query.GetplateType, validationRegex.nameOfSp(sP_Query.GetplateType));
+                    if (result.Count > 0)
                     {
-                        PlateOfType per = new PlateOfType
+                        foreach (DataRow row in result)
                         {
-                            Plate_type_id = (int)row[0],
-                            Plate_type_name = row[1].ToString(),
+                            var platetype = new PlateOfType()
+                            {
+                                Plate_type_id = (int)row[0],
+                                Plate_type_name = (string)row[1],
+                            };
 
-                        };
-
-                        PlateOfTypes.Add(per); //الي بنربطه مع الجريد فيو
+                            PlateOfTypes.Add(platetype);
+                        }
                     }
+
+                    cacheManager.setkey(PlateOfTypes);
+
                 }
+
+
+
+            }
+            catch (Exception)
+            {
+
             }
 
-
+            return PlateOfTypes;
         }
 
         ///////////////////////////////// end GetPlateOfType/////////////////////////////////////
@@ -68,31 +86,45 @@ namespace Wpf_Traffic_violation.Models
 
         public bool OperarionPlateOfType(PlateOfType Plates, string operartion)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
-
-            SqlParameter[] param = new SqlParameter[3];
-            //@user_id, @user_name, @user_pass, @user_type, @user_status
-
-            param[0] = new SqlParameter("@Plate_type_id", SqlDbType.Int)
+            bool response = false;
+            try
             {
-                Value = Plates.Plate_type_id
-            };
-            param[1] = new SqlParameter("@Plate_type_name", SqlDbType.NVarChar, 15)
-            {
-                Value = Plates.Plate_type_name
-            };
+                SqlParameter[] param = new SqlParameter[3];
+                //@user_id, @user_name, @user_pass, @user_type, @user_status
 
-            param[2] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
-            {
-                Value = operartion
-            };
+                param[0] = new SqlParameter("@Plate_type_id", SqlDbType.Int)
+                {
+                    Value = Plates.Plate_type_id
+                };
+                param[1] = new SqlParameter("@Plate_type_name", SqlDbType.NVarChar, 15)
+                {
+                    Value = Plates.Plate_type_name
+                };
 
-            if (!sql.Operarion("opPlateOfType", param))
-            {
-                return false;
+                param[2] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
+                {
+                    Value = operartion
+                };
+
+                var result = isphelper.Operarion(param, opreationSql.Sp_PlateTypeOperation, validationRegex.nameOfSp(opreationSql.Sp_PlateTypeOperation));
+
+                if (!result.Data)
+                {
+                    response = false;
+
+                }
+                cacheManager.Remove();
+                response = true;
 
             }
-            return true;
+            catch (Exception)
+            {
+
+            }
+
+            return response;
+
+
         }
         ///////////////////////////////// end OperarionReasonToOblection/////////////////////////////////////
 
@@ -100,32 +132,13 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start Check_Exsit/////////////////////////////////////
         public bool Check_Exsit(int value)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
-            using (sql.con)
+            try
             {
-                try
-                {
-                    sql.con.Open();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Cant Open Conncation");
-
-                }
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "checkPlateOfType",
-                    Connection = sql.con
-
-                };
-                Command.Parameters.AddWithValue("@Plate_type_id", value);
-
-
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
+                Hashtable keys = new Hashtable();
+                keys.Add("Plate_type_id", value);
+                var param = isphelper.prpareParam(keys);
+                var result = isphelper.GetCollectionByParam(sP_Query.GetplateTypeById, validationRegex.nameOfSp(sP_Query.GetplateTypeById), param);
+                if (result.Data.Count > 0)
                 {
                     return true;
                 }
@@ -134,9 +147,13 @@ namespace Wpf_Traffic_violation.Models
                 {
                     return false;
                 }
-
+            }
+            catch (Exception)
+            {
 
             }
+            return false;
+
         }
         ///////////////////////////////// end Check_Exsit/////////////////////////////////////
         public String GetPlatetype_name(int Plate_type_id)
@@ -176,7 +193,49 @@ namespace Wpf_Traffic_violation.Models
             return "غير موجود";
         }
 
+        public PlateOfType GetPlateByName(string name)
+        {
+            cacheManager.setCacheName("platetype");
+            PlateOfType result = new PlateOfType();
+            ObservableCollection<PlateOfType> getplatypechach = cacheManager.GetCach as ObservableCollection<PlateOfType>;
+            if (getplatypechach != null)
+            {
+                foreach (var item in getplatypechach)
+                {
+                    if (item.Plate_type_name.Trim() == name.Trim())
+                    {
+                        result.Plate_type_id = item.Plate_type_id;
+                        result.Plate_type_name = item.Plate_type_name;
+                        break;
 
+                    }
+
+                }
+            }
+            else
+            {
+                Hashtable key = new Hashtable();
+                key.Add("nameType", name.Trim());
+                var parm = isphelper.prpareParam(key);
+                var platsype = isphelper.GetCollectionByParam(sP_Query.GetplatypeByName, "GetplatypeByName", parm);
+
+                if (platsype != null)
+                {
+                    foreach (DataRow row in platsype.Data)
+                    {
+                        if ((string)row[1] == name.Trim())
+                        {
+                            result.Plate_type_id = (int)row[0];
+                            result.Plate_type_name = (string)row[1];
+                            break;
+                        }
+
+                    }
+                }
+
+            }
+            return result;
+        }
 
         ///////////////////////////////// end GetDirectorate_name/////////////////////////////////////
 

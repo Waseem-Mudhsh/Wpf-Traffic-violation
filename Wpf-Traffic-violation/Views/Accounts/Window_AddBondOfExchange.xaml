@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
         mc:Ignorable="d"
         Title="Window_AddBondOfExchange" Height="679" Width="860" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
@@ -21,7 +22,7 @@
 
                 <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="5 0 0 0"></materialDesign:PackIcon>
                 <TextBlock Text=" بيانات سند صرف  " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="680,0,0,0" >
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand}" Padding="0" Margin="680,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -54,17 +55,24 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text=" رقم سند الصرف :" Margin="15 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                     <TextBox  Text="{Binding Current_BondOfExchange.Bond_Exchange_id}"  x:Name="textBox"   Height="40" Width="240"
-                       
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                       IsEnabled="False" Background="White"
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False"  Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="تاريخ السند :"  Margin="40 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                    <DatePicker Text="{Binding Current_BondOfExchange.Bond_Exchange_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="240" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" />
+                    <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_BondOfExchange.Bond_Exchange_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                
+                                Width="240" Height="40" Background="White" Foreground="Black" FontFamily="Tajawal" FontSize="16" BorderThickness="1" />
 
 
                 </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text=" من الحساب :" Margin="15 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                     <ComboBox Width="240" Height="40" ItemsSource="{Binding Grid_Account}" SelectedItem="{Binding Selected_AccountFrom}"
-                          Padding="10,10,0,0" Background="White"  Margin="0,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                          
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
+                              materialDesign:HintAssist.Hint="أسم الحساب"
+                          
+                          Padding="10,10,0,0" Background="White" Foreground="Black" Margin="0,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Account_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
@@ -74,14 +82,18 @@
                     </ComboBox>
                 <TextBlock Text="رقم الحساب :"  Margin="30 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                     <TextBox   Text="{Binding Selected_AccountFrom.Account_id}"  Height="40" Width="240" IsEnabled="False"
-                        materialDesign:HintAssist.Hint="أسم الحساب..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="10  0 9 0" FontFamily="Tajawal" FontSize="14" />
+                        materialDesign:HintAssist.Hint="رقم الحساب..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"   Background="White"  Margin="10  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text=" الى الحساب :" Margin="15 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                     <ComboBox Width="240" Height="40" ItemsSource="{Binding Grid_Account}" SelectedItem="{Binding Selected_AccountTo}"
+                         
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
+                          materialDesign:HintAssist.Hint="أسم الحساب"
                           Padding="10,10,0,0" Background="White"  Margin="0,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -92,7 +104,7 @@
                     </ComboBox>
                     <TextBlock Text="رقم الحساب :"  Margin="30 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                     <TextBox  Text="{Binding Selected_AccountTo.Account_id}"   Height="40" Width="240" IsEnabled="False"
-                        materialDesign:HintAssist.Hint="أسم الحساب..."
+                        materialDesign:HintAssist.Hint="رقم الحساب..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="10  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
 

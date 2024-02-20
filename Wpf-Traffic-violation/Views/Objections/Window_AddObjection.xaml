@@ -6,9 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
         xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Window_AddObjection" Height="358" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <DockPanel Background="WhiteSmoke" Height="358" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        Title="Window_AddObjection" Height="300" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="300" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
@@ -26,7 +27,7 @@
             <Button Command="{Binding Savecommand}" Content=" حفــظ"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
-        <Grid FlowDirection="RightToLeft" >
+        <Grid FlowDirection="RightToLeft" Height="230" >
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="Tajawal"/>
@@ -40,7 +41,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
+                
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -57,11 +58,20 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <DatePicker Text="{Binding Currunt_Opjection.Interception_date,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="التاريخ ..."  Width="233" Height="40" Background="White" FontFamily="Tajawal" FontSize="14"  Margin="4,9,0,9"/>
+                <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Currunt_Opjection.Interception_date, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,ValidatesOnDataErrors=True}"    Width="233" Height="40" Background="White" FontFamily="Tajawal" FontSize="16"  Margin="4,9,0,9"/>
 
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <TextBlock Text="رقم المواطن :" Margin="15 0 041 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBlock Text="أسم المواطن :" Margin="15 0 041 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <controls:AutoCompleteBox Name="citizenname" Width="238" ItemsSource="{Binding Grid_Citizen}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5" 
+                                              ValueMemberPath="Citizen_name" 
+                                              SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Currunt_Citizen.Citizen_name}" FilterMode="Contains" Margin="5,10"
+                                              />
+                <TextBlock Text="رقم المواطن :" Margin="25 0 18 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
+               
+                
                 <controls:AutoCompleteBox Name="citizenid" Width="238" ItemsSource="{Binding Grid_Citizen}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
@@ -69,21 +79,6 @@
                                               SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Currunt_Citizen.Citizen_id}" FilterMode="Contains" Margin="5,10"
                                              
                                           />
-                <TextBlock Text="أسم المواطن :" Margin="25 0 18 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
-                <controls:AutoCompleteBox Name="citizenname" Width="238" ItemsSource="{Binding Grid_Citizen}" 
-                                              ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14" Padding="20 8 0 5" 
-                                              ValueMemberPath="Citizen_name" 
-                                              SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Currunt_Citizen.Citizen_name}" FilterMode="Contains" Margin="5,10"
-                                              />
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="رقم المخالفة :" Margin="15 0 041 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
@@ -112,12 +107,14 @@
                 </ComboBox>-->
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <TextBlock Text="سبب الإعتراض :" Margin="15 0 020 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <controls:AutoCompleteBox Name="aa" Width="635" ItemsSource="{Binding Grid_ReasonsToObject}" 
+                <TextBlock Text="سبب الإعتراض :" Margin="15 0 024 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <controls:AutoCompleteBox Name="aa" Width="639" ItemsSource="{Binding Grid_ReasonsToObject}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Reason" 
-                                              SelectedItem="{Binding Selected_ReasonsToObject , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="4,10"
+                                              SelectedItem="{Binding Selected_ReasonsToObject , UpdateSourceTrigger=PropertyChanged}"
+                                          Text="{Binding Selected_ReasonsToObject.Reason,UpdateSourceTrigger=PropertyChanged}"
+                                          FilterMode="Contains" Margin="0 9" 
                                              
                                           />
                 <!--<ComboBox Name="com" Width="644" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_ReasonsToObject}"

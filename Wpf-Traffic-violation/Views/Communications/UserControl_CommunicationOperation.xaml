@@ -26,7 +26,7 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Current_Communication , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_Communication , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
 

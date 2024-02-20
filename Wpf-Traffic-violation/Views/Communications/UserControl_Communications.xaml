@@ -26,7 +26,7 @@
                                            Uid="1" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Add"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >إضافة بلاغ</TextBlock>
+                        <TextBlock    >عمليات البلاغ</TextBlock>
                     </StackPanel>
                 </Button>
 

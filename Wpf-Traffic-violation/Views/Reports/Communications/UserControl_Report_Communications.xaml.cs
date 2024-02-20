@@ -25,51 +25,7 @@ namespace Wpf_Traffic_violation.Views.Reports.Communications
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ReportUser_ViewModel View_ReportUser = new ReportUser_ViewModel();
-            Button but = ((Button)sender);
-
-            int index = int.Parse(((Button)e.Source).Uid);
-
-            switch (index)
-            {
-
-                case 1:
-                    {
-
-                        Frame_Search_communications.Content = new UserControl_Report_allCommunications { DataContext = View_ReportUser };
-                        break;
-                    }
-
-                case 2:
-                    {
-
-                     Frame_Search_communications.Content = new  UserControl_Report_RightCommunications { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 3:
-                    {
-
-                        Frame_Search_communications.Content = new UserControl_Report_FlaseCommunications { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 4:
-                    {
-
-                       Frame_Search_communications.Content = new UserControl_Report_UnchekedCommunication { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 5:
-                    {
-
-                        Frame_Search_communications.Content = new UserControl_Report_CompareCommunication { DataContext = View_ReportUser };
-                        break;
-                    }
-            }
-
-
-        }
+        
 
     }
 }

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Wpf_Traffic_violation.Services;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -21,7 +21,6 @@ namespace Wpf_Traffic_violation.Views
     /// </summary>
     public partial class UserControl_Main : UserControl
     {
-
         public UserControl_Main()
         {
             InitializeComponent();
@@ -50,13 +49,14 @@ namespace Wpf_Traffic_violation.Views
         private void But_Home_Click(object sender, RoutedEventArgs e)
         {
 
-
+            
             Frame_main.Content = new UserControlForm1();
 
         }
 
         private void But_Logout_Click(object sender, RoutedEventArgs e)
         {
+
             string message = "هل تريد تسجيل الخروج ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -75,6 +75,9 @@ namespace Wpf_Traffic_violation.Views
 
         }
 
-      
+        private void But_mins_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
     }
 }

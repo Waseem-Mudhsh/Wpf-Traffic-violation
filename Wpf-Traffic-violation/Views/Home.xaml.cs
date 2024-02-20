@@ -25,7 +25,7 @@ namespace Wpf_Traffic_violation.Views
         public Home()
         {
             InitializeComponent();
-            Frame_home.Content = new UserControl1GridDataCommunications();
+           
         }
 
         private void but_setting_Click(object sender, RoutedEventArgs e)

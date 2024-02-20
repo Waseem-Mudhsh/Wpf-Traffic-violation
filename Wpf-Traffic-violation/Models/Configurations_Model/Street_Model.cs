@@ -1,68 +1,77 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.MagrationDB;
+using Wpf_Traffic_violation.Models.Configurations_Model;
+using Wpf_Traffic_violation.Services;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models
 {
     public class Street_Model
     {
+        CacheManager<Streets> cacheManager;
+        ValidationRegex validationRegex;
+        ViolationServices violationServices;
+        Provinces_Model provinces_Model;
+        SP_Query sP_Query;
+        Isphelper isphelper;
+        OpreationSql opreationSql;
+        public Street_Model()
+        {
+            validationRegex = new ValidationRegex();
+            sP_Query = new SP_Query();
+            violationServices = new ViolationServices();
+            isphelper = new configuration();
+            opreationSql = new OpreationSql();
+            provinces_Model = new Provinces_Model();
+            cacheManager = new CacheManager<Streets>("Street");
+        }
+
         ///////////////////////////////// start GetStreets/////////////////////////////////////
         Directorate_Model directorate_Model = new Directorate_Model();
-        public void GetStreets(ObservableCollection<Streets> Streets)
+        public ObservableCollection<Streets> GetStreets()
         {
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            ObservableCollection<Streets> Streets = new ObservableCollection<Models.Streets>();
+            ObservableCollection<Streets> getStreetFromchach = cacheManager.GetCach as ObservableCollection<Streets>;
+
+            if (getStreetFromchach != null)
             {
-                try
+                Streets = getStreetFromchach;
+            }
+            else
+            {
+                var result = isphelper.GetCollection(sP_Query.GetSteetCollection, "GetStreets");
+                if (result.Count > 0)
                 {
-                    con.Open();
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Cant Open con");
-                }
-
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetStreets",
-                    Connection = con
-
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
+                    foreach (DataRow row in result)
                     {
                         Streets per = new Streets
                         {
                             Street_id = (int)row[0],
                             Street_name = row[1].ToString(),
                             Directerate_id = (int)row[2]
-
-
-
                         };
                         per.Directerate_name = directorate_Model.GetDirectorate_name(per.Directerate_id);
-                        per.Province_name = "تعز";
-                        Streets.Add(per); //الي بنربطه مع الجريد فيو
+                        per.Province_name = provinces_Model.GetProvinces_nameBydirecterateId(per.Directerate_id);
+                        Streets.Add(per);
                     }
                 }
+                cacheManager.setkey(Streets);
+
             }
 
 
+
+            return Streets;
         }
         ///////////////////////////////// end GetStreets/////////////////////////////////////
         ///////////////////////////////// start OperarionDirectorate/////////////////////////////////////
@@ -82,7 +91,7 @@ namespace Wpf_Traffic_violation.Models
             {
                 Value = Street.Street_name
             };
-            param[2] = new SqlParameter("@Directerate_id", SqlDbType.NVarChar, 50)
+            param[2] = new SqlParameter("@Directerate_id", SqlDbType.Int)
             {
                 Value = Street.Directerate_id
             };
@@ -92,11 +101,13 @@ namespace Wpf_Traffic_violation.Models
                 Value = operartion
             };
 
-            if (!sql.Operarion("opStreets", param))
+
+            if (!isphelper.Operarion(param, opreationSql.opStreets, "opStreets").Data)
             {
                 return false;
 
             }
+            cacheManager.Remove();
             return true;
         }
         ///////////////////////////////// end opTrafficMan/////////////////////////////////////
@@ -104,43 +115,22 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start Check_Exsit/////////////////////////////////////
         public bool Check_Exsit(int value)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
-            using (sql.con)
+            Hashtable key = new Hashtable();
+            key.Add("Operation", "GetStreet_name");
+            key.Add("Id", value);
+            var param = isphelper.prpareParam(key);
+            var dt = isphelper.GetCollectionByParam(sP_Query.GetNamerow, "GetNamerow", param);
+
+            if (dt.Data.Count > 0)
             {
-                try
-                {
-                    sql.con.Open();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Cant Open Conncation");
-
-                }
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "checkStreets",
-                    Connection = sql.con
-
-                };
-                Command.Parameters.AddWithValue("@Street_id", value);
-
-
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    return true;
-                }
-
-                else
-                {
-                    return false;
-                }
-
-
+                return true;
             }
+
+            else
+            {
+                return false;
+            }
+
         }
         ///////////////////////////////// end Check_Exsit/////////////////////////////////////
         /////////////////////////////////start GetExcel/////////////////////////////////////
@@ -156,11 +146,11 @@ namespace Wpf_Traffic_violation.Models
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a Excel File";
-            op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
+            op.Filter = " Excel Files |*.XLSX";
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [Street$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -189,6 +179,58 @@ namespace Wpf_Traffic_violation.Models
             }
 
 
+        }
+
+        public Street GetStreetByName(string name)
+        {
+            var result = new Street();
+            try
+            {
+                //cacheManager.setCacheName("Street");
+                ObservableCollection<Streets> getstreet = cacheManager.GetCach as ObservableCollection<Streets>;
+                if (getstreet != null)
+                {
+                    foreach (Streets str in getstreet)
+                    {
+                        if (Convert.ToString(str.Street_name) == name)
+                        {
+                            result.Street_id = str.Street_id;
+                            result.Street_name = str.Street_name;
+                            result.Directerate_id = str.Directerate_id;
+                            break;
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    Hashtable key = new Hashtable();
+                    key.Add("name", name.Trim());
+                    var param = isphelper.prpareParam(key);
+                    var streets = isphelper.GetCollectionByParam(sP_Query.GetStreetbyName, "GetStreetbyId", param);
+
+                    foreach (DataRow str in streets.Data)
+                    {
+                        if (Convert.ToString(str[1]) == name.Trim())
+                        {
+                            result.Street_id = (int)str[0];
+                            result.Street_name = (string)str[1];
+                            result.Directerate_id = (int)str[2];
+                            break;
+                        }
+
+                    }
+
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            return result;
         }
 
         /////////////////////////////////end GetExcel/////////////////////////////////////

@@ -236,7 +236,25 @@ namespace Wpf_Traffic_violation.Models
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (Account_id == 0)
+            {
+                Errors.Add("Account_id", "يجب أن لايكون فارغ أو يحمل القيمة صفر");
+            }
+            //if (string.IsNullOrEmpty(Username))
+            //{
+            //    Errors.Add("Username", "يجب أن يكون نص ");
+            //}
+            if (String.IsNullOrWhiteSpace(Account_name))
+
+            {
+                Errors.Add("Account_name", "يجب أن لايكون فارغ ");
+            }
+            if (Account_order == 0&&Account_order<=Properties.Settings.Default.Account_Order)
+            {
+                Errors.Add("Account_order", "   "+ Properties.Settings.Default.Account_Order + "  يجب أن لايكون فارغ واصغر من");
+            }
+
         }
 
       

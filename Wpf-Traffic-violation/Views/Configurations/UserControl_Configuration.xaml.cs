@@ -53,12 +53,12 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 4:
                     {
-                        Frame_Configuration.Content = new UserControl_DataDrivingLicense();
+                        Frame_Configuration.Content = new UserControl_CategoriesOfLicenses();
                         break;
                     }
                 case 5:
                     {
-                        Frame_Configuration.Content = new UserControl_TypesViolations();
+                        Frame_Configuration.Content = new UserControl_DataDrivingLicense();
                         break;
                     }
                 case 6:
@@ -68,27 +68,44 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 7:
                     {
-                        Frame_Configuration.Content = new UserControl_CategoriesOfLicenses();
+                        Frame_Configuration.Content = new UserControl_DataPlate();
                         break;
                     }
                 case 8:
                     {
-                        Frame_Configuration.Content = new UserControl_ReasonsToObject();
+                        UserControl_TypesViolations userControl_TypesViolations = new UserControl_TypesViolations();
+                        userControl_TypesViolations.but1.IsEnabled = true;
+                        userControl_TypesViolations.    But_Add_TypeViolation.IsEnabled = true;
+                        userControl_TypesViolations.    But_Edit_TypeViolation.IsEnabled = true;
+                        userControl_TypesViolations.    But_Delete_TypeViolation.IsEnabled = true;
+                        Frame_Configuration.Content = new UserControl_TypesViolations();
+
+
                         break;
                     }
                 case 9:
                     {
-                        Frame_Configuration.Content = new UserControl_Directorate();
+                        UserControl_Directorate userControl_Directorate = new UserControl_Directorate();
+                        userControl_Directorate.But_Add_Citizen.IsEnabled = true;
+                        userControl_Directorate.But_Delete_Citizen.IsEnabled = true;
+                        userControl_Directorate.But_Edit_Citizen.IsEnabled = true;
+                        Frame_Configuration.Content = userControl_Directorate;
+
                         break;
                     }
                 case 10:
                     {
+                        UserControl_Streets userControl_Streets = new UserControl_Streets();
+                        userControl_Streets.But_Add_Citizen.IsEnabled = true;
+                        userControl_Streets.But_Delete_Citizen.IsEnabled = true;
+                        userControl_Streets.But_Edit_Citizen.IsEnabled = true;
                         Frame_Configuration.Content = new UserControl_Streets();
+
                         break;
                     }
                 case 11:
                     {
-                        Frame_Configuration.Content = new UserControl_DataPlate();
+                        Frame_Configuration.Content = new UserControl_ReasonsToObject();
                         break;
                     }
 

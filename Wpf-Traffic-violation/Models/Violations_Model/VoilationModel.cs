@@ -1,163 +1,292 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Services;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models.Violations_Model
 {
     public class VoilationModel
     {
 
+        ViolationServices violationServices;
+        ExcelReader _excelReader = new ExcelReader();
+        helper _helper = new helper();
+        Isphelper sphelper;
+        SP_Query sP_Query;
+        ValidationRegex validationRegex;
+        public VoilationModel()
+        {
+            validationRegex = new ValidationRegex();
+            sphelper = new Directorates();
+            sP_Query = new SP_Query();
+            violationServices = new ViolationServices();
+
+
+
+        }
+
         ///////////////////////////////// start GetViolation/////////////////////////////////////
 
 
 
-        public void GetViolation(ObservableCollection<Violation> Violations)
+        public ObservableCollection<Violation> GetViolation()
         {
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+            var response = sphelper.GetCollection(sP_Query.getViolation, "getViolation");
+            if (response.Count > 0)
             {
-                try
+                foreach (DataRow row in response)
                 {
-                    con.Open();
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Cant Open con");
-                }
-                //SqlCommand Command = new SqlCommand("Select * from Person", con);
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "getViolation",
-                    Connection = con
-
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
+                    Violation per = new Violation
                     {
-                        Violation per = new Violation
-                        {
-                            Violation_id = (int)row[0]
-                         ,
-                            Violation_date = row[1].ToString()
-                         ,
-                            Violation_photo1 = row[2].ToString()
-                         ,
-                            Violation_photo2 = row[3].ToString()
-                         ,
-                            Plate_id = (int)row[4]
-                         ,
-                            Street_id = (int)row[5]
-                         ,
-                            Teaffic_man_id = (int)row[6]
-                         ,
-                            Violation_type_id = (int)row[7]
-                         ,
-                            Notise = row[8].ToString()
-                         ,
-                            Violation_penalty = (int)row[9]
-                         ,
-                            Payment_status = (int)row[10]
-                        };
-                        per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
-                        per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
-                        per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
-                        per.String_TrafficMan = new Class_SqlConnection().Get_row("GetTrafficMan_name", per.Teaffic_man_id);
-                        per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
-                        per.Amount = new Class_SqlConnection().Get_number("GetViolationTypeMount", per.Violation_type_id) + per.Violation_penalty;
-                        per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
-                        Violations.Add(per); //الي بنربطه مع الجريد فيو
-                    }
+                        Violation_id = (int)row[0]
+                     ,
+                        Violation_date = row[1].ToString()
+                     ,
+                        Plate_id = (int)row[2]
+                     ,
+                        Street_id = (int)row[3]
+                     ,
+                        Teaffic_man_id = (int)row[4]
+                     ,
+                        Violation_type_id = (int)row[5]
+                     ,
+                        Notise = row[6].ToString()
+                     ,
+                        Violation_penalty = (int)row[7]
+                     ,
+                        Payment_status = (int)row[8]
+                     ,
+                        Plate_Num = (string)row[9]
+                     ,
+                        VounchrNum = (int)row[10]
+                      ,
+                        Provinceid = (int)row[11]
+                     ,
+                        Plate_Type = (string)row[12]
+                        ,
+                        String_ViolationType = (string)row[13]
+                        ,
+                        String_TrafficMan = (string)row[14]
+                        ,
+                        String_Street = (string)row[15]
+                        ,
+                        Amount = (int)row[16]
+                      ,
+                        String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
+
+                    };
+                    //per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
+                    //per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
+                    //per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
+                    //per.String_TrafficMan = new Class_SqlConnection().Get_row("GetTrafficMan_name", per.Teaffic_man_id);
+                    //per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
+                    //per.Amount =  per.Violation_penalty;
+                    //per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
+                    Violations.Add(per); //الي بنربطه مع الجريد فيو
                 }
             }
 
+            return Violations;
 
         }
 
         ///////////////////////////////// end GetPlateOfType/////////////////////////////////////
+        //public ObservableCollection<Violation> GetViolation()//تجرية المزامنة
+        //{
+        //    ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+        //    SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+        //    //Class_SqlConnection sql = new Class_SqlConnection();
+        //    using (con)
+        //    {
+        //        try
+        //        {
+        //            con.Open();
+        //        }
+        //        catch (Exception)
+        //        {
 
-        ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////
+        //            MessageBox.Show("Cant Open con");
+        //        }
+        //        //SqlCommand Command = new SqlCommand("Select * from Person", con);
+        //        SqlCommand Command = new SqlCommand
+        //        {
+        //            CommandType = CommandType.StoredProcedure,
+        //            CommandText = "getViolation",
+        //            Connection = con
 
-        public bool OperarionViolation(Violation Violation, string operartion)
+        //        };
+        //        DataTable dt = new DataTable();
+        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+        //        dataAdapter.Fill(dt);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                Violation per = new Violation
+        //                {
+        //                    Violation_id = (int)row[0]
+        //                 ,
+        //                    Violation_date = row[1].ToString()
+        //                 ,
+        //                    Violation_photo1 = Convert.ToByte(row[2].ToString())
+        //                 ,
+        //                    Violation_photo2 = Convert.ToByte(row[3].ToString())
+        //                 ,
+        //                    Plate_id = (int)row[4]
+        //                 ,
+        //                    Street_id = (int)row[5]
+        //                 ,
+        //                    Teaffic_man_id = (int)row[6]
+        //                 ,
+        //                    Violation_type_id = (int)row[7]
+        //                 ,
+        //                    Notise = row[8].ToString()
+        //                 ,
+        //                    Violation_penalty = (int)row[9]
+        //                 ,
+        //                    Payment_status = (int)row[10]
+        //                };
+        //                per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
+        //                per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
+        //                per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
+        //                per.String_TrafficMan = new Class_SqlConnection().Get_row("GetTrafficMan_name", per.Teaffic_man_id);
+        //                per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
+        //                per.Amount = new Class_SqlConnection().Get_number("GetViolationTypeMount", per.Violation_type_id) + per.Violation_penalty;
+        //                per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
+        //                Violations.Add(per); //الي بنربطه مع الجريد فيو
+        //            }
+        //        }
+        //    }
+
+        //    return Violations;
+        //}
+        ///////////////////////////////// end GetPlateOfType/////////////////////////////////////
+        //public  ObservableCollection<Violation> GetViolation()//تجرية المزامنة
+        //{
+        //    ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+        //   Violations = violationServices.GetAllViolation();
+
+        //    return Violations;
+
+        //}
+        public ObservableCollection<Violation> GetAllViolationReport(string typrviolation, string from_date, string to_date)//تجرية المزامنة
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
+            to_date = (to_date == null) ? from_date : to_date;
 
-            SqlParameter[] param = new SqlParameter[12];
-            //@user_id, @user_name, @user_pass, @user_type, @user_status
+            var From = Convert.ToDateTime(from_date);
+            var To = Convert.ToDateTime(to_date);
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+            Violations = violationServices.GetAllViolationReport(typrviolation, From, To);
 
-            param[0] = new SqlParameter("@Violation_id", SqlDbType.Int)
-            {
-                Value = Violation.Violation_id
-            };
-            param[1] = new SqlParameter("@Violation_date", SqlDbType.NVarChar, 50)
-            {
-                Value = Violation.Violation_date
-            };
-            param[2] = new SqlParameter("@Violation_photo1", SqlDbType.NVarChar, 50)
-            {
-                Value = Violation.Violation_photo1
-            };
-            param[3] = new SqlParameter("@Violation_photo2", SqlDbType.NVarChar, 50)
-            {
-                Value = Violation.Violation_photo2
-            };
-            param[4] = new SqlParameter("@Plate_id", SqlDbType.Int)
-            {
-                Value = Violation.Plate_id
-            };
-            param[5] = new SqlParameter("@Street_id", SqlDbType.Int)
-            {
-                Value = Violation.Street_id
-            };
-            param[6] = new SqlParameter("@Teaffic_man_id", SqlDbType.Int)
-            {
-                Value = Violation.Teaffic_man_id
-            };
-            param[7] = new SqlParameter("@Violation_type_id", SqlDbType.Int)
-            {
-                Value = Violation.Violation_type_id
-            };
-            param[8] = new SqlParameter("@Notise", SqlDbType.NVarChar, 50)
-            {
-                Value = Violation.Notise
-            };
-            param[9] = new SqlParameter("@Violation_penalty", SqlDbType.Int)
-            {
-                Value = Violation.Violation_penalty
-            };
-            param[10] = new SqlParameter("@Payment_status", SqlDbType.Int)
-            {
-                Value = Violation.Payment_status
-            };
-            param[11] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
-            {
-                Value = operartion
-            };
+            return Violations;
 
-            if (!sql.Operarion("opViolation", param))
+        }
+        public ObservableCollection<ReceiptReportModel> GetViolationByReceiptDetailes(string typrviolation, string from_date, string to_date)
+        {
+            ObservableCollection<ReceiptReportModel> result = new ObservableCollection<ReceiptReportModel>();
+            try
             {
-                return false;
+
+                to_date = (to_date == "") ? from_date : to_date;
+                var From = Convert.ToDateTime(from_date);
+                var To = Convert.ToDateTime(to_date);
+                Hashtable key = new Hashtable();
+                key.Add("fromData", from_date);
+                key.Add("toData", to_date);
+                var param = sphelper.prpareParam(key);
+                var violations = sphelper.GetCollectionByParam(sP_Query.Rep_VilationbyRecipt, "Rep_VilationbyRecipt", param);
+                if (violations.Code == 3) return result = null;
+                foreach (DataRow item in violations.Data)
+                {
+                    var model = new ReceiptReportModel
+                    {
+                        ReceiptId = (int)item[0],
+                        VehicleId = (string)item[1],
+                        ViolationPenalty = (int)item[2],
+                        PaymentStatus = (int)item[3],
+                        NameOfPaid = (string)item[4],
+                        PlateType = (string)item[5],
+                        Provinceid = (int)item[6],
+                        ReasonOfPaid = ((string)item[7] == null) ? " " : (string)item[7],
+                        ViolationTypcount = (int)item[8],
+
+                    };
+
+                    result.Add(model);
+                }
+
+                //return violationServices.GetAllViolationByReceiptDetailes(typrviolation, From, To);
 
             }
+            catch (Exception e)
+            {
+                MessageBox.Show("Have Exception " + e);
+
+            }
+            return result;
+
+
+        }
+        ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////
+        public bool updateVilation(int violationID)
+        {
+
+            bool result = violationServices.updateVilation(violationID);
+            return result;
+        }
+        public bool OperarionViolation(Violation Violation, string operartion)
+        {
+            //var excuteOperation= violationServices.Oper
+
             return true;
         }
+
+        public bool ExcutOperarionViolationBulk(Violation Violation, int operationType, int rowCount, int cont)
+        {
+            bool excute = false;
+            var violationData = _helper.CreateViolation(Violation);
+            if (operationType == 1)
+            {
+                excute = violationServices.Insertbulk(violationData, rowCount, cont);
+            }
+
+            return excute;
+        }
+        public bool ExcutOperarionViolation(Violation Violation, int operationType)
+        {
+            bool excute;
+            var violationData = _helper.CreateViolation(Violation);
+
+
+            if (operationType == 1)
+            {
+                excute = violationServices.Insert(violationData);
+            }
+            else if (operationType == 2)
+            {
+                excute = violationServices.Edite(violationData);
+            }
+            else if (operationType == 3)
+            {
+                excute = violationServices.Delete(violationData);
+            }
+            else
+            {
+                return false;
+            }
+
+
+            return excute;
+        }
         ///////////////////////////////// end OperarionReasonToOblection/////////////////////////////////////
-
-
         ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////
 
 
@@ -205,76 +334,182 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
             }
         }
-        ///////////////////////////////// end Check_Exsit/////////////////////////////////////
-
-
-        /////////////////////////////////start GetExcel/////////////////////////////////////
-
-
-
-        public void GetExcel(ObservableCollection<Violation> Violations)
+        public bool GetExcel(ObservableCollection<Violation> Violations)
         {
-
-            OleDbConnection con;
-            OleDbDataAdapter da;
-            DataTable dt;
             OpenFileDialog op = new OpenFileDialog();
+
 
             op.Title = "Select a Excel File";
             op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
             if (op.ShowDialog() == true)
             {
-                con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
-                dt = new DataTable();
-                da.Fill(dt);
+                var data = _excelReader.ReadExcelFile(op.FileName);
+                if (data)
+                {
+                    return true;
+                }
+
+
+            }
+
+
+
+            return false;
+
+        }
+
+
+        //Install-Package EPPlus
+
+        /////////////////////////////////end GetExcel/////////////////////////////////////
+
+
+        public ObservableCollection<Violation> GetViolation_not_payment(int id)//تجرية المزامنة
+        {
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            //Class_SqlConnection sql = new Class_SqlConnection();
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Cant Open con");
+                }
+                //SqlCommand Command = new SqlCommand("Select * from Person", con);
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "getViolation_not_payment",
+                    Connection = con
+
+                };
+                Command.Parameters.AddWithValue("@citizen_id", id);
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-
                         Violation per = new Violation
                         {
-                            Violation_id = Convert.ToInt32(row[0])
+                            Violation_id = (int)row[0]
                          ,
                             Violation_date = row[1].ToString()
                          ,
-                            Violation_photo1 = row[2].ToString()
+                            Violation_photo1 = Convert.ToByte(row[2].ToString())
                          ,
-                            Violation_photo2 = row[3].ToString()
+                            Violation_photo2 = Convert.ToByte(row[3].ToString())
                          ,
-                            Plate_id = Convert.ToInt32(row[4])
+                            Plate_id = (int)row[4]
                          ,
-                            Street_id = Convert.ToInt32(row[5])
+                            Street_id = (int)row[5]
                          ,
-                            Teaffic_man_id = Convert.ToInt32(row[6])
+                            Teaffic_man_id = (int)row[6]
                          ,
-                            Violation_type_id = Convert.ToInt32(row[7])
+                            Violation_type_id = (int)row[7]
                          ,
                             Notise = row[8].ToString()
                          ,
-                            Violation_penalty = Convert.ToInt32(row[9])
+                            Violation_penalty = (int)row[9]
                          ,
-                            Payment_status = Convert.ToInt32(row[10])
+                            Payment_status = (int)row[10]
                         };
-                        OperarionViolation(per, "Insert");
-
-
-
+                        per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
+                        per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
+                        per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
+                        per.String_TrafficMan = new Class_SqlConnection().Get_row("GetTrafficMan_name", per.Teaffic_man_id);
+                        per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
+                        per.Amount = new Class_SqlConnection().Get_number("GetViolationTypeMount", per.Violation_type_id) + per.Violation_penalty;
+                        per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
                         Violations.Add(per); //الي بنربطه مع الجريد فيو
                     }
-                    string message = "عدد السجلات المستوردة = " + dt.Rows.Count;
-                    string caption = "عملية الاستيراد";
-                    MessageBoxImage icon = MessageBoxImage.Information;
-                    MessageBoxButton buttons = MessageBoxButton.OK;
-                    MessageBox.Show(message, caption, buttons, icon);
                 }
             }
+
+            return Violations;
+        }
+
+        public Violation GetViolationForEdit(int violation_id)
+        {
+            Violation current_Violation = new Violation();
+
+
+            Hashtable keys = new Hashtable();
+            keys.Add("violationId", violation_id);
+            var getparam = sphelper.prpareParam(keys);
+
+            var response = sphelper.GetCollectionByParam(sP_Query.getviolationFoEdit, "getviolationFoEdit", getparam);
+            if (response.Data.Count > 0)
+            {
+                {
+                    foreach (DataRow row in response.Data)
+                    {
+                        current_Violation = new Violation
+                        {
+                            Violation_id = (int)row[0]
+                         ,
+                            Violation_date = row[1].ToString()
+                         ,
+                            Plate_id = (int)row[2]
+                         ,
+                            Street_id = (int)row[3]
+                         ,
+                            Teaffic_man_id = (int)row[4]
+                         ,
+                            Violation_type_id = (int)row[5]
+                         ,
+                            Notise = row[6].ToString()
+                         ,
+                            Violation_penalty = (int)row[7]
+                         ,
+                            Payment_status = (int)row[8]
+                         ,
+                            Plate_Num = (string)row[9]
+                         ,
+                            VounchrNum = (int)row[10]
+                          ,
+                            Provinceid = (int)row[11]
+                         ,
+                            Plate_Type = (string)row[12]
+                            ,
+                            String_ViolationType = (string)row[13]
+                            ,
+                            String_TrafficMan = (string)row[14]
+                            ,
+                            String_Street = (string)row[15]
+                            ,
+                            Amount = (int)row[16]
+                          ,
+                            String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
+
+                        };
+
+
+                    }
+
+
+                }
+            }
+            else
+            {
+                current_Violation = null;
+            }
+
+            return current_Violation;
+
 
 
         }
 
-        /////////////////////////////////end GetExcel/////////////////////////////////////
+
+
+        ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////
 
     }
 }

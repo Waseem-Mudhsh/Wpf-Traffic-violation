@@ -6,12 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
+using Wpf_Traffic_violation.Services;
 
 namespace Wpf_Traffic_violation.Models
 {
     class Class_SqlConnection
     {
         public SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+        ValidationRegex validationRegex;
+        ViolationServices violationServices;
+        SP_Query sP_Query;
+        Isphelper isphelper;
+        public Class_SqlConnection()
+        {
+            validationRegex = new ValidationRegex();
+            sP_Query = new SP_Query();
+            violationServices = new ViolationServices();
+            isphelper = new Sphelper();
+        }
         public bool Operarion(String Stored_Procedure,SqlParameter[] Param)
         {
             
@@ -39,6 +53,7 @@ namespace Wpf_Traffic_violation.Models
                     
                 }
 
+
                 try { 
                 if (Command.ExecuteNonQuery() == 0)
                 {
@@ -63,38 +78,14 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start Get_row/////////////////////////////////////
         public String Get_row(String storad, int id)
         {
-            DataTable dt;
+            var result = isphelper.GetNameOfRow(sP_Query.GetNamerow, storad, "GetNamerow", id);
+           
 
-            using (con)
-            {
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
 
-                    MessageBox.Show("Cant Open con");
-                }
-
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = storad,
-                    Connection = con
-
-                };
-                Command.Parameters.AddWithValue("@Id", id);
-
-                dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-
-            }
-            if (dt.Rows.Count > 0)
+            if (result.Count > 0)
             {
 
-                return dt.Rows[0][0].ToString();
+                return result[0][0].ToString();
 
             }
 
@@ -107,40 +98,40 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start Get_row/////////////////////////////////////
         public int Get_number(String storad, int id)
         {
-            DataTable dt;
+           //var response= isphelper(sP_Query.GetNamerow, storad, "GetNamerow", id);
 
-            using (con)
-            {
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
+           // using (con)
+           // {
+           //     try
+           //     {
+           //         con.Open();
+           //     }
+           //     catch (Exception)
+           //     {
 
-                    MessageBox.Show("Cant Open con");
-                }
+           //         MessageBox.Show("Cant Open con");
+           //     }
 
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = storad,
-                    Connection = con
+           //     SqlCommand Command = new SqlCommand
+           //     {
+           //         CommandType = CommandType.StoredProcedure,
+           //         CommandText = storad,
+           //         Connection = con
 
-                };
-                Command.Parameters.AddWithValue("@Id", id);
+           //     };
+           //     Command.Parameters.AddWithValue("@Id", id);
 
-                dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
+           //     dt = new DataTable();
+           //     SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+           //     dataAdapter.Fill(dt);
 
-            }
-            if (dt.Rows.Count > 0)
-            {
+           // }
+           // if (dt.Rows.Count > 0)
+           // {
 
-                return (int)dt.Rows[0][0];
+           //     return (int)dt.Rows[0][0];
 
-            }
+           // }
 
             return 0;
         }
@@ -150,46 +141,25 @@ namespace Wpf_Traffic_violation.Models
 
 
         ///////////////////////////////// start Get_Max/////////////////////////////////////
-        public int Get_Max(string tableName)
+        public int Get_Max(string tableName,string colmnName=null)
         {
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-
-            DataTable dt;
-
-            using (con)
+           
+            try
             {
-                try
+                var result = isphelper.GetMax(sP_Query.getMaxId, validationRegex.nameOfSp(sP_Query.getMaxId), tableName, colmnName);
+                if (result.Count > 0)
                 {
-                    con.Open();
-                }
-                catch (Exception)
-                {
+                  
+                    return Convert.ToInt32(result[0][0]); ;
 
-                    MessageBox.Show("Cant Open con");
                 }
 
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "getMaxId",
-                    Connection = con
-
-                };
-                Command.Parameters.AddWithValue("@TableName",tableName);
-             
-                dt = new DataTable();
-
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-
             }
-            
-            if (dt.Rows.Count > 0)
+            catch (Exception ex)
             {
-              
-                    return (int)dt.Rows[0][0];
 
             }
+           
 
             return 0;
         }

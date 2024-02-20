@@ -90,10 +90,10 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2" >
                 <TextBlock Text="البيان :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox   Text="{Binding Current_Receipt.Receipt_statement}"   HorizontalAlignment="Center" VerticalAlignment="Center"  Height="40" Width="240" 
-                        
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
-                <TextBlock Text="ملاحظة :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBox   Text="{Binding ResonOfPaid}"   HorizontalAlignment="Center" VerticalAlignment="Center"  Height="40" Width="240" 
+                         materialDesign:HintAssist.Hint="يجب ادخال البيان..."
+                         BorderThickness="1,1,1,1" BorderBrush="DarkOrange" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="Black" />
+                <TextBlock Text="اسم الددافع :" Margin="25 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <!--<ComboBox  x:Name="FilledComboBox"
                           IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
                           materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
@@ -102,9 +102,9 @@
                     <ComboBoxItem Content="Item 2"   />
                     <ComboBoxItem Content="Item 3"   />
                 </ComboBox>-->
-                <TextBox      Height="40" Width="646"  HorizontalAlignment="Center" VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="ملاحظة..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#5B7C99" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="White" BorderBrush="White"/>
+                <TextBox      Height="40" Width="640"  HorizontalAlignment="Center" VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="الدافع..." Text="{Binding NameOfPaid}"
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" Foreground="Black" BorderBrush="DarkOrange"/>
 
             </StackPanel>
 
@@ -172,7 +172,7 @@
             </DataGrid>
         </Grid>
         <StackPanel DockPanel.Dock="Bottom" Margin="0 5">
-            <Border  BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Center"  Margin="4 1 4 0">
+            <Border  BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Center"  Margin="4 8 4 0">
                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="50" HorizontalAlignment="Center" >
                     <TextBlock Text="إجمالي المبلغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 20 0"/>
                     <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black" >
@@ -185,12 +185,13 @@
                             <TextBlock Text="قبض" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="40" Width="100" Margin="10 0"  Padding="0" Background="#022551">
+                    <Button Name="butn_Query" Height="40" Width="100" Margin="40 0 10 0" Command="{Binding ShowDetaileForViolation}"  Padding="0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <materialDesign:PackIcon Kind="Printer" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                            <TextBlock Text="طباعة" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
+                            <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                            <TextBlock Text="استعلام" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
                         </StackPanel>
                     </Button>
+
                 </StackPanel>
             </Border>
         </StackPanel>

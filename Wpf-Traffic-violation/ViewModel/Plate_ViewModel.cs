@@ -22,6 +22,7 @@ namespace Wpf_Traffic_violation.ViewModel
         PlateOfType_Model plateOfType_Model = new PlateOfType_Model();
         Provinces_Model Provinces_Model = new Provinces_Model();
         Plate_Model Plate_Model = new Plate_Model();
+        VehicleModel Vehicle_Model = new VehicleModel();
         Window_AddDataPlate win;
         PermissionUser PermissionUser;
         ActivityModel ActivityModel = new ActivityModel();
@@ -140,47 +141,102 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-
+        ObservableCollection<Vehicle> grid_Vehicle;
+        public ObservableCollection<Vehicle> Grid_Vehicle
+        {
+            get
+            {
+                return grid_Vehicle;
+            }
+            set
+            {
+                if (grid_Vehicle != value)
+                {
+                    grid_Vehicle = value;
+                    RaisePropertyChanged("Grid_Vehicle");
+                }
+            }
+        }
+        Vehicle selected_Vehicle;
+        public Vehicle Selected_Vehicle
+        {
+            get
+            {
+                return selected_Vehicle;
+            }
+            set
+            {
+                if (selected_Vehicle != value)
+                {
+                    selected_Vehicle = value;
+                    RaisePropertyChanged("Selected_Vehicle");
+                }
+            }
+        }
+        
 
 
         #endregion
         #region Construcor
         public Plate_ViewModel()
         {
-            Grid_PlateType = new ObservableCollection<PlateOfType>();
-            plateOfType_Model.GetPlateOfType(Grid_PlateType);
             Grid_Provinces = new ObservableCollection<Provinces>();
-            Provinces_Model.GetProvinces(Grid_Provinces);
-            Grid_Plate = new ObservableCollection<Plate>();
-            Plate_Model.GetPlates(Grid_Plate);
-            Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
-            Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
-            Savecommand = new RelayCommand(par => Save(), par => CanSave());
+            Grid_PlateType = new ObservableCollection<PlateOfType>();
+           
+            Grid_Vehicle = new ObservableCollection<Models.Vehicle>();
+
+            asyncPlate();
+            
+            Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
+            Editcommand = new RelayCommand(par => Edit());
+            Deletecommand = new RelayCommand(par => Delet());
+            Savecommand = new RelayCommand(par => Save());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 24;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        async Task asyncPlate()
+        {
+            Grid_Plate = new ObservableCollection<Plate>();
+            Grid_Plate = await Task.Run(() => Plate_Model.GetPlates());
+            
+        }
+        async Task asyncلGrid()
+        {
+           
+           
+            Grid_Provinces = await Task.Run(() => Provinces_Model.GetProvinces());
+            
+           
+            Grid_PlateType = await Task.Run(() => plateOfType_Model.GetPlateOfType());
+            
+            Grid_Vehicle = await Task.Run(() => Vehicle_Model.GetVehicles());
+        }
 
 
 
         public void Add()
         {
+            //asyncلGrid();
+            Grid_Provinces = Provinces_Model.GetProvinces();
+            Grid_PlateType = plateOfType_Model.GetPlateOfType();
+
+            Grid_Vehicle = Vehicle_Model.GetVehicles();
             Selected_PlateType = new PlateOfType();
             Selected_Provinces = new Provinces();
+            Selected_Vehicle = new Vehicle();
             int maxid = new Class_SqlConnection().Get_Max("Plate");
+            
 
-
-            Current_Plate = new Plate { Plate_id = maxid, Province_name = "تعز", String_Status = "نشطه" };
-            //Selected_PlateType = new PlateOfType();
-            //Selected_Provinces = new Provinces();
+            Current_Plate = new Plate { Plate_id = maxid };
+           
             win = new Window_AddDataPlate { DataContext = this };
             win.ShowDialog();
 
@@ -191,25 +247,35 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
+            Grid_Provinces =  Provinces_Model.GetProvinces();
+
+
+            Grid_PlateType =  plateOfType_Model.GetPlateOfType();
+
+            Grid_Vehicle =  Vehicle_Model.GetVehicles();
             Selected_PlateType = new PlateOfType();
             Selected_Provinces = new Provinces();
-            //  Current_Plate.String_Plate_type = "aaa";
-
-            //Personview PersonView = new Personview();
-            //PersonView.textbox1.Text = CurrentPerson.Id.ToString();
-            IsEditing = true;
-
-
-            //Selected_Provinces = new Provinces {
-            //    Province_name = Current_Plate.Province_name,
-            //     Province_id = Current_Plate.Province_id
-            // };
-            //Selected_PlateType = new PlateOfType {
-            //   Plate_type_name = Current_Plate.String_Plate_type,
-            //   Plate_type_id = Current_Plate.Plate_type
-            //};
+            Selected_Vehicle = new Vehicle();
+            foreach (Provinces a in Grid_Provinces)
+            {
+                if (a.Province_id == Current_Plate.Province_id)
+                    Selected_Provinces = a;
+            }
+            foreach (PlateOfType a in Grid_PlateType)
+            {
+                if (a.Plate_type_id == Current_Plate.Plate_type)
+                    Selected_PlateType = a;
+            }
+            foreach (Vehicle a in Grid_Vehicle)
+            {
+                if (a.Potty_id == Current_Plate.Vehicle_id)
+                    Selected_Vehicle = a;
+            }
+            //Current_Plate.Vehicle_id = Selected_Vehicle.Potty_id;
             win = new Window_AddDataPlate { DataContext = this };
-            Selected_PlateType.Plate_type_name = "aaaa";
+            win.vehicle_id.SelectedItem = Selected_Vehicle;
+            win.vehicle_id.Text = Selected_Vehicle.Potty_id.ToString();
+            win.vehicle_id.IsEnabled = false;
             IsEditing = true;
             win.ShowDialog();
 
@@ -225,10 +291,6 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-
-                Plate_Model.OperarionPlate(Current_Plate, "Delete");
-                Grid_Plate.Remove(Current_Plate);
-
                 //////////////////////////////////////////////////////////////
 
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
@@ -243,6 +305,32 @@ namespace Wpf_Traffic_violation.ViewModel
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
 
+                if(Plate_Model.OperarionPlate(Current_Plate, "Delete"))
+                {
+                    Grid_Plate.Remove(Current_Plate);
+                    asyncPlate();
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا الرقم";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
+
+
+
             }
             else
             {
@@ -255,7 +343,7 @@ namespace Wpf_Traffic_violation.ViewModel
         void Save()
         {//////////////////////////////////////////////////////////////
 
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+            //Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
             Current_Activity.Form_id = 24;
@@ -266,6 +354,7 @@ namespace Wpf_Traffic_violation.ViewModel
             //Current_Plate.Province_name = "تعز";
             Current_Plate.Plate_type = Selected_PlateType.Plate_type_id;
             Current_Plate.Province_id = Selected_Provinces.Province_id;
+            Current_Plate.Vehicle_id = Selected_Vehicle.Potty_id;
             if (Current_Plate.String_Status == "نشطة")
             {
                 Current_Plate.Status = 1;
@@ -290,7 +379,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Plate_Model.OperarionPlate(Current_Plate, "Update");
                 IsEditing = false;
                 Grid_Plate = new ObservableCollection<Plate>();
-                Plate_Model.GetPlates(Grid_Plate);
+                Grid_Plate= Plate_Model.GetPlates();
                 close();
                 string message = "تمت عملية التعديل بنجاح";
                 string caption = "عملية التعديل";
@@ -316,7 +405,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Plate_Model.OperarionPlate(Current_Plate, "Insert");
                 //Current_Plate.Province_name = Selected_Provinces.Province_name;
                 Grid_Plate = new ObservableCollection<Plate>();
-                Plate_Model.GetPlates(Grid_Plate);
+                Grid_Plate= Plate_Model.GetPlates();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية اضافة";
@@ -341,7 +430,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Plate_Model.GetExcel(grid_Plate);
             Grid_Plate = new ObservableCollection<Plate>();
-            Plate_Model.GetPlates(Grid_Plate);
+            Grid_Plate= Plate_Model.GetPlates();
         }
         #endregion
         #region Commands

@@ -55,7 +55,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (grid_Account != value)
                 {
                     grid_Account = value;
-                    RaisePropertyChanged("Grid_Account");
+                    RaisePropertyChanged("Grid_Accounts");
                 }
             }
         }
@@ -110,6 +110,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 {
                     selected_Parent = value;
                     Currunt_Account.Account_parent = Selected_Parent.Account_id;
+                    Currunt_Account.Account_id= AccountModel.GetCreate_Account(Selected_Parent.Account_id);
+                    Currunt_Account.String_AccParent = Selected_Parent.Account_name;
                     RaisePropertyChanged("Selected_Parent");
                 }
             }
@@ -118,12 +120,12 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Account_ViewModel()
         {
+            
+            asyncAccounts();
+           
+            
 
-            Grid_Accounts = new ObservableCollection<Account>();
-            AccountModel.GetAccounts(Grid_Accounts);
-
-            Grid_AccountParent = new ObservableCollection<Account>();
-            AccountModel.GetAccountParent(Grid_AccountParent);
+           
 
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -133,19 +135,29 @@ namespace Wpf_Traffic_violation.ViewModel
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
-            PermissionUser.Form_id = 12;
-            new AllPermissions().getPermission(PermissionUser);
+            
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        private async Task asyncAccounts()
+        {
+            Grid_Accounts = new ObservableCollection<Account>();
+            Grid_Accounts = await Task.Run(()=> AccountModel.GetAccounts());
+
+            Grid_AccountParent = new ObservableCollection<Account>();
+            Grid_AccountParent= await Task.Run(() => AccountModel.GetAccountParent());
+        }
         public void Add()
         {
 
+            Grid_AccountParent = new ObservableCollection<Account>();
+            Grid_AccountParent = AccountModel.GetAccountParent();
 
-            Random rand = new Random();
             Currunt_Account = new Account();
+            Selected_Parent = new Account();
 
             win = new Window_AddAccont { DataContext = this };
             win.ShowDialog();
@@ -154,11 +166,15 @@ namespace Wpf_Traffic_violation.ViewModel
         void Edit()
         {
 
-
+            Grid_AccountParent = new ObservableCollection<Account>();
+            Grid_AccountParent = AccountModel.GetAccountParent();
             IsEditing = true;
             win = new Window_AddAccont { DataContext = this };
-            win.acc_parent.Text = Currunt_Account.Account_parent.ToString();
-            win.acc_parentName.Text = Currunt_Account.String_AccParent;
+            win.acc_id.IsEnabled = false;
+            win.acc_order.IsEnabled = false;
+            win.acc_typ.IsEnabled = false;
+            //win.acc_parent.Text = Currunt_Account.Account_parent.ToString();
+            //win.acc_parentName.Text = Currunt_Account.String_AccParent;
             if (Currunt_Account.Account_type == 1)
                 win.co1.IsSelected = true;
             else if (Currunt_Account.Account_type == 2)
@@ -176,27 +192,54 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                AccountModel.OperarionAccount(Currunt_Account, "Delete");
-
-                string message1 = "تمت عملية الحذف بنجاح";
-                string caption1 = "عملية الحذف";
-                MessageBoxImage icon1 = MessageBoxImage.Information;
-                MessageBoxButton buttons1 = MessageBoxButton.OK;
-                MessageBox.Show(message1, caption1, buttons1, icon1);
-
                 //////////////////////////////////////////////////////////////
+                if (!AccountModel.Check_Parint(Currunt_Account.Account_parent))
+                {
+                    Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+                    Current_Activity.Activity_date = DateTime.Now.Date.ToString();
+                    Current_Activity.User_id = Properties.Settings.Default.Userid;
+                    Current_Activity.Form_id = 11;
+                    Current_Activity.Activity_record_num = Currunt_Account.Account_id;
 
-                Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
-                Current_Activity.Activity_date = DateTime.Now.Date.ToString();
-                Current_Activity.User_id = Properties.Settings.Default.Userid;
-                Current_Activity.Form_id = 11;
-                Current_Activity.Activity_record_num = Currunt_Account.Account_id;
+                    //////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////
+                    Current_Activity.Activity_operation_num = 3;
+                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    ////////////////////////////////////////////////////////////
+                    if (AccountModel.OperarionAccount(Currunt_Account, "Delete"))
+                    {
+                        Grid_Accounts.Remove(Currunt_Account);
+                        asyncAccounts();
+                        string message1 = "تمت عملية الحذف بنجاح";
+                        string caption1 = "عملية الحذف";
+                        MessageBoxImage icon1 = MessageBoxImage.Information;
+                        MessageBoxButton buttons1 = MessageBoxButton.OK;
+                        MessageBox.Show(message1, caption1, buttons1, icon1);
+                    }
+                    else
+                    {
+                        string message1 = "يوجد سجلات مرتبطة بهذا الحساب";
+                        string caption1 = "تأكيد";
+                        MessageBoxButton buttons1 = MessageBoxButton.OK;
 
-                //////////////////////////////////////////////////////////
-                ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 3;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
-                ////////////////////////////////////////////////////////////
+                        MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                        MessageBox.Show(message1, caption1, buttons1, icon1);
+                    }
+                }
+                else
+                {
+                    string message1 = "يوجد حسابات مرتبطة بهذا الحساب";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -247,6 +290,8 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else if (AccountModel.Check_Exsit(Currunt_Account.Account_id))
             {
+                
+                Currunt_Account.Account_status = true;
                 string message = "رقم المستخدم موجود مسبقا";
                 string caption = "رسالة خطا";
                 MessageBoxImage icon = MessageBoxImage.Error;
@@ -258,6 +303,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             else
             {
+                Currunt_Account.Account_date = DateTime.Now.Date.ToShortDateString();
                 AccountModel.OperarionAccount(Currunt_Account, "Insert");
                 Grid_Accounts.Add(Currunt_Account);
                 close();
@@ -274,8 +320,8 @@ namespace Wpf_Traffic_violation.ViewModel
 
             }
 
-            Grid_Accounts.Clear();
-            AccountModel.GetAccounts(Grid_Accounts);
+            
+            Grid_Accounts= AccountModel.GetAccounts();
 
 
             //Enable_Grid = false;
@@ -291,7 +337,7 @@ namespace Wpf_Traffic_violation.ViewModel
             // Currunt_Account = new Account();
             AccountModel.GetExcel(Grid_Accounts);
             Grid_Accounts = new ObservableCollection<Account>();
-            AccountModel.GetAccounts(Grid_Accounts);
+            Grid_Accounts= AccountModel.GetAccounts();
 
         }
 

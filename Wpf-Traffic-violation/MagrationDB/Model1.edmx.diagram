@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a209a7ca17b340c7a152b062cbeeea3d" Name="Diagram1">
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Account" Width="1.5" PointX="1.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Activity" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Bank_account" Width="1.5" PointX="4.5" PointY="40.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Bond_Exchange" Width="1.5" PointX="3.75" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Bond_Exchange_detail" Width="1.5" PointX="6" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Citizen" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Class_licence" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Communication" Width="1.5" PointX="6" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Company" Width="1.5" PointX="11" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Country" Width="1.5" PointX="3.75" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Currency" Width="1.5" PointX="8.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Directorate" Width="1.5" PointX="3" PointY="46.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Driving_license" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Entry" Width="1.5" PointX="1.5" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Form" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Group" Width="1.5" PointX="6.75" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Interception" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Menu" Width="1.5" PointX="1.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Plate" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Plate_type" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.PlateDetaile" Width="1.5" PointX="3" PointY="49.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Province" Width="1.5" PointX="0.75" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Reason_interception" Width="1.5" PointX="11.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Receipt" Width="1.5" PointX="5.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Receipt_detail" Width="1.5" PointX="7.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Street" Width="1.5" PointX="5.25" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Supply" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.sysdiagram" Width="1.5" PointX="11.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Traffic_man" Width="1.5" PointX="3" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.User" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Vehicle" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Vehicle_card" Width="1.5" PointX="8.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Violation" Width="1.5" PointX="5.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Violation_type" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Entry_detail" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Plate_global" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Plate_local" Width="1.5" PointX="9" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Privilege_group" Width="1.5" PointX="9" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Traffic_Violation_ManagementModel.Privilege_user" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Bond_Exchange_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Entry_detail_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Receipt_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Supply_Account1" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Activity_Form" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Activity_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Supply_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Bond_Exchange_detail_Bond_Exchange" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Citizen_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Driving_license_Citizen" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Interception_Citizen" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Vehicle_card_Citizen" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Class_licence_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Driving_license_Class_licence" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Communication_Plate" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Communication_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Company_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_global_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Directorate_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Street_Directorate" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Entry_detail_Entry" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Form_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Privilege_group_Form" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Privilege_user_Form" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Privilege_group_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_global_Plate" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_local_Plate" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_local_Plate_type" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Plate_local_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Vehicle_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Receipt_detail_Receipt" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Receipt_detail_Violation" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Traffic_man_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Violation_Traffic_man" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Privilege_user_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Vehicle_card_Vehicle" ManuallyRouted="false" />
+        <AssociationConnector Association="Traffic_Violation_ManagementModel.FK_Violation_Violation_type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

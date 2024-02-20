@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
         mc:Ignorable="d"
-        Title="Window_AddReceipt" Height="361" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <DockPanel Background="WhiteSmoke" Height="361" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        Title="Window_AddReceipt" Height="301" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
+    <DockPanel Background="WhiteSmoke" Height="301" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
 
                 <materialDesign:PackIcon Kind="Add" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
-                <TextBlock Text="إضافة بيانات سند قبض  جديد" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="590,0,0,0" >
+                <TextBlock Text=" سند قبض  جديد" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="660,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
             </StackPanel>
@@ -22,7 +24,7 @@
         <!--///////////////////////////////////////////Bottom///////////////////////////////////////////////-->
 
         <Grid DockPanel.Dock="Bottom" Height="40">
-            <Button Content=" حفــظ"></Button>
+            <Button Content=" حفــظ" Command="{Binding Savecommand}"></Button>
         </Grid>
         <!--/////////////////////////////////////////////Center/////////////////////////////////////////////-->
         <Grid FlowDirection="RightToLeft" >
@@ -39,58 +41,41 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
+                
 
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text=" رقم سند القبض  :" Margin="15 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130"/>
-                <TextBox    x:Name="textBox"   Height="40" Width="240"
+                <TextBox  Text="{Binding Current_Receipt.Receipt_id}"  x:Name="textBox"   Height="40" Width="240"
                         materialDesign:HintAssist.Hint="رقم السند..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="تاريخ السند :"  Margin="30 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox      Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="تاريخ السند..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="0  0 9 0" FontFamily="Tajawal" FontSize="14" />
+
+                <DatePicker  SelectedDate="{x:Static sys:DateTime.Now}"  Text="{Binding Current_Receipt.Receipt_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="240" Height="40" Background="White" Foreground="Black" FontFamily="Tajawal" FontSize="16" BorderThickness="1" />
 
 
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text=" من الحساب :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
+                <ComboBox ItemsSource="{Binding Grid_Account}" SelectedItem="{Binding Selected_Account}" Width="240" Height="40"
+                           materialDesign:HintAssist.Hint="أسم الحساب..."
                           Padding="10,10,0,0" Background="White"  Margin="0,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">تعز</ComboBoxItem>
-                    
-                    <ComboBoxItem>صنعاء</ComboBoxItem>
-                    <ComboBoxItem>عدن</ComboBoxItem>
-                    <ComboBoxItem>اب</ComboBoxItem>
-                    <ComboBoxItem>أمانة العاصمة</ComboBoxItem>
-                    <ComboBoxItem>حضرموت</ComboBoxItem>
-                    <ComboBoxItem>الحديدة</ComboBoxItem>
-                    <ComboBoxItem>أبين</ComboBoxItem>
-                    <ComboBoxItem>البيضاء</ComboBoxItem>
-                    <ComboBoxItem>لحج</ComboBoxItem>
-                    <ComboBoxItem>مارب</ComboBoxItem>
-                    <ComboBoxItem>شبوة</ComboBoxItem>
-                    <ComboBoxItem>الجوف</ComboBoxItem>
-                    <ComboBoxItem>المهرة</ComboBoxItem>
-                    <ComboBoxItem>المحويت</ComboBoxItem>
-                    <ComboBoxItem>صعدة</ComboBoxItem>
-                    <ComboBoxItem>حجة</ComboBoxItem>
-                    <ComboBoxItem>الضالع</ComboBoxItem>
-                    <ComboBoxItem>عمران</ComboBoxItem>
-                    <ComboBoxItem>ذمار</ComboBoxItem>
-                    <ComboBoxItem>ريمة</ComboBoxItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Account_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
 
                 </ComboBox>
                 <TextBlock Text="رقم الحساب :"  Margin="30 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <TextBox     Height="40" Width="240"
-                        materialDesign:HintAssist.Hint="أسم الحساب..."
+                <TextBox   Text="{Binding Selected_Account.Account_id}"  Height="40" Width="240"
+                        materialDesign:HintAssist.Hint="رقم الحساب..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="0  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
 
             </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <!--<StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text=" الى الحساب :" Margin="15 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <ComboBox materialDesign:ComboBoxAssist.ClassicMode="{Binding ElementName=ClassicModeCheckBox, Path=IsChecked}" Width="240" Height="40"
                           Padding="10,10,0,0" Background="White"  Margin="0,9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
@@ -124,10 +109,10 @@
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="10  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
 
-            </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
+            </StackPanel>-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="المبلغ :" Margin="18 0 043 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="240"
+                <TextBox   Text="{Binding Current_Receipt.Receipt_amount}"    Height="40" Width="240"
                         materialDesign:HintAssist.Hint="المبلغ..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <!--<ComboBox  x:Name="FilledComboBox"
@@ -140,25 +125,17 @@
                 </ComboBox>-->
 
             </StackPanel>
-            <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <TextBlock Text="البيان :" Margin="18 0 043 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                <TextBox       Height="40" Width="648"
+                <TextBox    Text="{Binding Current_Receipt.Receipt_statement}"   Height="40" Width="648"
                         materialDesign:HintAssist.Hint="البيان..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9.5" FontFamily="Tajawal" FontSize="14" />
-                <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+             
 
             </StackPanel>
 
 
         </Grid>
-        <!--نستحدم الفريم هذا أذا كنا نشتي نستخدم يوزركنترول-->
-        <!--<Frame x:Name="Frame_Window" NavigationUIVisibility="Hidden" Width="1300" Height="270"></Frame>-->
+      
     </DockPanel>
 </Window>

@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -22,11 +10,25 @@ namespace Wpf_Traffic_violation.Views
     {
         public UserControl_TypesViolations()
         {
+
             InitializeComponent();
+            //But_Delete_TypeViolation.IsEnabled = true;
+            //But_Add_TypeViolation.IsEnabled = true;
+            //But_Edit_TypeViolation.IsEnabled = true;
+
         }
 
-        
 
-        
+        private void DataGridCell_Selected(object sender, RoutedEventArgs e)
+        {
+            // Your custom logic here
+            DataGridCell cell = sender as DataGridCell;
+            if (cell != null)
+            {
+
+            }
+        }
+
+
     }
 }

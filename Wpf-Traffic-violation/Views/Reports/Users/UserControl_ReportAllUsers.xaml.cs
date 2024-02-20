@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Traffic_violation.Views.Reports.Users
+namespace Wpf_Traffic_violation.Views.Reports
 {
     /// <summary>
     /// Interaction logic for UserControl_ReportAllUsers.xaml

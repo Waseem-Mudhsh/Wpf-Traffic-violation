@@ -6,8 +6,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              mc:Ignorable="d" 
               d:DesignHeight="560" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:ReceiptViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
             <StackPanel  Height="60" Background="WhiteSmoke" Orientation="Horizontal" >
@@ -15,15 +19,15 @@
                 <!--top-->
 
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" FlowDirection="RightToLeft" Margin="60 0 355 0">
-                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed">
+                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed" Margin="2 0">
                         <materialDesign:PackIcon Kind="Search"   Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </materialDesign:Card>
 
-                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding grid_Users}" 
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_Receipt}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_User , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Currunt_User , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
 
@@ -54,7 +58,7 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Items3}" 
+            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Grid_Receipt}" SelectedItem="{Binding Current_Receipt}"
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1300" HorizontalAlignment="Right"
                         Height="480"  >
                 <DataGrid.Resources>
@@ -62,55 +66,32 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Code}"
+                    <DataGridTextColumn Binding="{Binding Receipt_id}"
                                         Header="رقم السند القبض" MinWidth="120"
                                          />
-                    <DataGridTextColumn Binding="{Binding Code}"
+                    <DataGridTextColumn Binding="{Binding Receipt_date}"
                                         Header="تاريخ السند" MinWidth="110"
                                          />
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
-                                                           Header="من حساب"  MinWidth="100"
+                    <materialDesign:DataGridTextColumn Binding="{Binding String_Account}"
+                                                           Header="أسم حساب"  MinWidth="100"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
                     <!-- set a max length to get an indicator in the editor -->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Account_id}"
                                                            Header="رقم الحساب"
                                                        MinWidth="100"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
-                                                           Header="الى حساب"  MinWidth="100"
-                                                          
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
-                                                           Header="رقم الحساب " MinWidth="100"
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Receipt_amount}"
                                                            Header="المبلغ " MinWidth="100"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Numeric}"
+                    <materialDesign:DataGridTextColumn Binding="{Binding Receipt_statement}"
                                                         Header="البيان"  MinWidth="200"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                                <Setter Property="ContentTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right"/>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Right" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
+                        
                     </materialDesign:DataGridTextColumn>
 
 

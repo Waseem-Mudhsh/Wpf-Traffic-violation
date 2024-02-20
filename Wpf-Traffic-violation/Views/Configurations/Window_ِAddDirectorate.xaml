@@ -41,7 +41,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="المحافظة :" Margin="15 0 30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <TextBox       Height="40" Width="240" Text="{Binding Current_Directorate.Province_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                       IsReadOnly="True"
+                     
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFECECEC" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <!--بنحتاج هذا الكمبوبكس لما يكون النظام يشمل كل المحافظات-->
                 <!--<ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_Provinces,UpdateSourceTrigger=PropertyChanged}"
@@ -57,14 +57,14 @@
                 </ComboBox>-->
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="رقم المديرية :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
+                <TextBlock Text="رقم القاطع/ :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <TextBox    x:Name="textBox"   Height="40" Width="240" Text="{Binding Current_Directorate.Directorate_id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        materialDesign:HintAssist.Hint="رقم المديرية..." IsReadOnly="True"
+                        materialDesign:HintAssist.Hint="رقم المديرية..." 
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFECECEC" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="أسم المديرية :" Margin="29 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
 
                 <TextBox    x:Name="textBox1"   Height="40" Width="240" Text="{Binding Current_Directorate.Directorate_name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                        materialDesign:HintAssist.Hint="أسم المديرية..."
+                        materialDesign:HintAssist.Hint="اسم الفاصل..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
             </StackPanel>

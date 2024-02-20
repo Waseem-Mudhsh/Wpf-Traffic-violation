@@ -118,8 +118,5 @@
                 </Grid>
             </Grid>
         </materialDesign:ColorZone>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="540" Margin="10,15,0,10" VerticalAlignment="Top" Width="720">
-            <rv:ReportViewer x:Name="ReportViewerDemo"/>
-        </WindowsFormsHost>
     </Grid>
 </UserControl>

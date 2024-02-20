@@ -27,7 +27,7 @@
                         <TextBlock    >منج الصلاحيات</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" Visibility="Collapsed"
                                            Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" UseLayoutRounding="False" >
                     <StackPanel Orientation="Vertical" Width="110" HorizontalAlignment="Center" >
                         <materialDesign:PackIcon Kind="PeopleGroup"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />

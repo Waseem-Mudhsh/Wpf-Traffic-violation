@@ -135,11 +135,7 @@ namespace Wpf_Traffic_violation.Views.Reports
                         AllPermissions.getPermission(PermissionUser);
                         if (PermissionUser.Form == false)
                             UserControl_Report_Users.but3.IsEnabled = false;
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 58;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                            UserControl_Report_Users.but4.IsEnabled = false;
+                        
                         PermissionUser = new PermissionUser();
                         PermissionUser.Form_id = 59;
                         AllPermissions.getPermission(PermissionUser);
@@ -222,12 +218,7 @@ namespace Wpf_Traffic_violation.Views.Reports
                         AllPermissions.getPermission(PermissionUser);
                         if (PermissionUser.Form == false)
                             UserControl_Report_Objections.but4.IsEnabled = false;
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 67;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                            UserControl_Report_Objections.but5.IsEnabled = false;
-
+                       
 
 
                         Frame_Report.Content = UserControl_Report_Objections;
@@ -236,21 +227,25 @@ namespace Wpf_Traffic_violation.Views.Reports
                 case 6:
                     {
                         UserControl_Report_Violations UserControl_Report_Violations = new UserControl_Report_Violations();
-                           PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 68;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                            UserControl_Report_Violations.but1.IsEnabled = false;
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 69;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                            UserControl_Report_Violations.but2.IsEnabled = false;
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 70;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                            UserControl_Report_Violations.but3.IsEnabled = false;
+                        UserControl_Report_Violations.but1.IsEnabled = true;
+                        UserControl_Report_Violations.but3.IsEnabled = true;
+                        UserControl_Report_Violations.but2.IsEnabled = true;
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 68;
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false
+                        //    )
+                        //    UserControl_Report_Violations.but1.IsEnabled = false;
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 69;
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false)
+                        //    UserControl_Report_Violations.but2.IsEnabled = false;
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 70;
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false)
+                        //    UserControl_Report_Violations.but3.IsEnabled = false;
                         Frame_Report.Content = UserControl_Report_Violations;
                         break;
                     }

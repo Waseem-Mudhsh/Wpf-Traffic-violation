@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal" Height="30" >
 
                 <materialDesign:PackIcon Kind="Add" Width="24" Margin="6 0 0 0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
-                <TextBlock Text=" بيانات مديرية " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
+                <TextBlock Text=" بيانات الشارع " HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" FontFamily="Tajawal" FontWeight="Bold" Foreground="White"/>
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Closecommand}" Padding="0" Margin="655,0,0,0" >
                     <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
                 </Button>
@@ -46,7 +46,8 @@
                 <TextBlock Text="المديرية :"  Margin="29 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <ComboBox x:Name="Combobox_userName"      Height="40" Width="240" ItemsSource="{Binding Grid_Ditectorate}" Margin="0,9,0,9"  
                             SelectedItem="{Binding Selected_Dirctorate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                          
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
                         materialDesign:HintAssist.Hint="أسم المديرية..."  
                          BorderThickness="1,1,1,1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14" TabIndex="1" >
                     <ComboBox.ItemTemplate>
@@ -64,7 +65,7 @@
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="#FFECECEC" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="أسم الشارع :" Margin="29 0 25 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
 
-                <TextBox    x:Name="textBox1"   Height="40" Width="240"  Text="{Binding Current_Street.Street_name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                <TextBox    x:Name="textBox1"   Height="40" Width="240"  Text="{Binding Current_Street.Street_name,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="أسم الشارع..."
                          BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 

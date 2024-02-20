@@ -394,7 +394,31 @@ namespace Wpf_Traffic_violation.Models
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (Potty_id<=0)
+            {
+                Errors.Add("Potty_id", "يجب ادخال قيمة عددية");
+            }
+            if (Vehicle_card_id == 0)
+            {
+                Errors.Add("Vehicle_card_id", "يجب ادخال قيمة عددية");
+            }
+            if (Vehicle_customs_num == 0)
+            {
+                Errors.Add("Vehicle_customs_num", "يجب ادخال قيمة عددية");
+            }
+            if (Vehicle_engine_num == 0)
+            {
+                Errors.Add("Vehicle_engine_num", "يجب ادخال قيمة عددية");
+            }
+            if (string.IsNullOrWhiteSpace(Release_date) )
+            {
+                Errors.Add("Release_date", "يجب تحديد التاريخ");
+            }
+            if (string.IsNullOrWhiteSpace(Release_date_c))
+            {
+                Errors.Add("Release_date_c", "يجب تحديد التاريخ");
+            }
         }
     }
 }

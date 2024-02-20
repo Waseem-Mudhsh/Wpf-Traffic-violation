@@ -122,7 +122,7 @@
             </Border>
             <StackPanel DockPanel.Dock="Top" Background="White"  >
 
-                <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_PermissionGroup}" SelectedItem="{Binding Currunt_PermissionGroup}" 
+                <DataGrid  Style="{StaticResource Style_Datagrid}" IsReadOnly="False" Margin="5,5,0,0" ItemsSource="{Binding Grid_PermissionGroup}" SelectedItem="{Binding Currunt_PermissionGroup}" 
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="900" HorizontalAlignment="Left"
                        Height="480"   >
                     <DataGrid.Resources>

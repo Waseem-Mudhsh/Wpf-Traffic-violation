@@ -35,12 +35,14 @@
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
-                <Button Uid="3" Name="but3" Command="{Binding Showcommand3}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}"  >
+
+                <Button Uid="3" Name="but3"  HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand3}"  >
                     <StackPanel Orientation="Horizontal"  >
                         <TextBlock  VerticalAlignment="Center"   > كشف السندات</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
+
             </StackPanel>
         </Grid>
         <!--///////////////////////// Search////////////////////////////////////-->

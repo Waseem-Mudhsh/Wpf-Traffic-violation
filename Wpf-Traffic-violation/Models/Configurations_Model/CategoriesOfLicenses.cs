@@ -103,7 +103,19 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            //if (Class_licence_ID == 0)
+            //{
+            //    Errors.Add("Class_licence_ID", "يجب أن لايكون فارغ ");
+            //}
+            if (string.IsNullOrWhiteSpace(Class_licence_name))
+            {
+                Errors.Add("Class_licence_name", "يجب أن يكون نص ");
+            }
+            //if (string.IsNullOrWhiteSpace(Province_name))
+            //{
+            //    Errors.Add("Province_name", "يجب أن يكون نص ");
+            //}
         }
     }
 }

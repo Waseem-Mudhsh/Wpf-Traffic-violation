@@ -15,8 +15,9 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
     public class CommunicationModel
     {
 
-        public void GetCommunication(ObservableCollection<Communication> Communications)
+        public ObservableCollection<Communication> GetCommunication()
         {
+            ObservableCollection<Communication> Communications = new ObservableCollection<Communication>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -57,7 +58,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                             Communication_notice = row[7].ToString(),
                             Communication_status = (int)row[8],
                             Communication_place = row[9].ToString(),
-                            Citizen_id = (int)row[10]
+                            
                         };
                         if (per.Communication_status == 1)
                         {
@@ -79,7 +80,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                     }
                 }
             }
-
+            return Communications;
 
 
         }

@@ -10,15 +10,16 @@ namespace Wpf_Traffic_violation.Models
 {
     public class StatisticCommunication_Model
     {
+        CommunicationModel C = new CommunicationModel();
         public int GetStatisticCommunication(string from, string to, int typ)
         {
           //  int total = 0;
             int count = 0;
 
-            CommunicationModel C = new CommunicationModel();
+            
 
             ObservableCollection<Communication> Communications = new ObservableCollection<Communication>();
-            C.GetCommunication(Communications);
+            //Communications= C.GetCommunication();
             if (from == "" && to == "")
             {
                 if (typ == 1)

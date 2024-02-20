@@ -31,7 +31,7 @@
                                               />
                         </StackPanel>
                    
-                    <Button   Command="{Binding Excelcommand}"
+                    <Button  Visibility="Hidden"  Command="{Binding Excelcommand}"
                                    Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}" >
                         <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
                             <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>

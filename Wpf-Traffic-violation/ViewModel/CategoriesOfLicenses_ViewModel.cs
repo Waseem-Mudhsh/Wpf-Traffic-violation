@@ -111,8 +111,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public CategoriesOfLicenses_ViewModel()
         {
-            Grid_CategoriesOfLicenses = new ObservableCollection<CategoriesOfLicenses>();
-            categoriesOfLicenses_Model.GetCategoriesOfLicenses(Grid_CategoriesOfLicenses);
+            asyncCategoriesOfLicenses();
+           
             //Grid_Provinces = new ObservableCollection<Provinces>();//بنحتاجه لما نتعامل مع اكثر من محافظة
             //provinces_Model.GetProvinces(Grid_Provinces);
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
@@ -124,7 +124,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 21;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
 
@@ -132,7 +132,11 @@ namespace Wpf_Traffic_violation.ViewModel
         #endregion
         #region Methodes And Events
 
-
+        private async Task asyncCategoriesOfLicenses()
+        {
+            Grid_CategoriesOfLicenses = new ObservableCollection<CategoriesOfLicenses>();
+            Grid_CategoriesOfLicenses = await Task.Run(() => categoriesOfLicenses_Model.GetCategoriesOfLicenses());
+        }
 
         public void Add()
         {
@@ -176,18 +180,36 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.User_id = Properties.Settings.Default.Userid;
                 Current_Activity.Form_id = 21;
                 Current_Activity.Activity_record_num = Current_CategoriesOfLicenses.Class_licence_ID;
-                categoriesOfLicenses_Model.OperarionCategoriesOfLicenses(Current_CategoriesOfLicenses, "Delete");
-                Grid_CategoriesOfLicenses.Remove(Current_CategoriesOfLicenses);
-
+          
                 //////////////////////////////////////////////////////////////
-
-
 
                 //////////////////////////////////////////////////////////
                 ////////////////////////////////////////////////////////////
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+              if( categoriesOfLicenses_Model.OperarionCategoriesOfLicenses(Current_CategoriesOfLicenses, "Delete"))
+                {
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                    Grid_CategoriesOfLicenses.Remove(Current_CategoriesOfLicenses);
+                    asyncCategoriesOfLicenses();
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذي الفئة";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -245,10 +267,10 @@ namespace Wpf_Traffic_violation.ViewModel
                 categoriesOfLicenses_Model.OperarionCategoriesOfLicenses(Current_CategoriesOfLicenses, "Insert");
                 Current_CategoriesOfLicenses.Province_name = Selected_Provinces.Province_name;
                 Grid_CategoriesOfLicenses = new ObservableCollection<CategoriesOfLicenses>();
-                categoriesOfLicenses_Model.GetCategoriesOfLicenses(Grid_CategoriesOfLicenses);
+                Grid_CategoriesOfLicenses= categoriesOfLicenses_Model.GetCategoriesOfLicenses();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
-                string caption = "عملية التعديل";
+                string caption = "عملية الإضافة";
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
@@ -274,7 +296,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             categoriesOfLicenses_Model.GetExcel(Grid_CategoriesOfLicenses);
             Grid_CategoriesOfLicenses = new ObservableCollection<CategoriesOfLicenses>();
-            categoriesOfLicenses_Model.GetCategoriesOfLicenses(Grid_CategoriesOfLicenses);
+            Grid_CategoriesOfLicenses= categoriesOfLicenses_Model.GetCategoriesOfLicenses();
         }
 
         #endregion

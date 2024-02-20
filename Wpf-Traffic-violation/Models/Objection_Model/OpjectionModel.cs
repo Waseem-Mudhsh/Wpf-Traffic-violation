@@ -71,7 +71,63 @@ namespace Wpf_Traffic_violation.Models
 
         }
         ///////////////////////////////// end GetOpjection/////////////////////////////////////
+        public ObservableCollection<Opjection> GetOpjectionasync()//تجربة التزامن
+        {
+            ObservableCollection<Opjection> Opjections = new ObservableCollection<Opjection>();
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            //Class_SqlConnection sql = new Class_SqlConnection();
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
 
+                    MessageBox.Show("Cant Open con");
+                }
+
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "GetOpjection",
+                    Connection = con
+
+                };
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        Opjection per = new Opjection
+                        {
+                            Interception_id = (int)row[0],
+                            Reason_Interception = row[1].ToString(),
+                            Violation_id = (int)row[2],
+                            Identity_id = (int)row[3],
+                            Status = (int)row[4],
+                            Interception_date = row[5].ToString(),
+
+                        };
+                        per.String_Ciziten = new Class_SqlConnection().Get_row("getCitizenName", per.Identity_id);
+                        if (per.Status == 0)
+                            per.String_Status = "لم يتم الفحص";
+                        else if (per.Status == 1)
+                            per.String_Status = "مقبول";
+                        else
+                            per.String_Status = "غير مقبول";
+
+                        Opjections.Add(per); //الي بنربطه مع الجريد فيو
+                    }
+                }
+            }
+
+            return Opjections;
+
+        }
 
         ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////
 

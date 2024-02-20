@@ -8,13 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using Wpf_Traffic_violation.Models.Users_Model;
+using Wpf_Traffic_violation.Models;
+
 namespace Wpf_Traffic_violation.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.0.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+        private static AllPermissions allPermissions = new AllPermissions();
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
@@ -25,7 +29,7 @@ namespace Wpf_Traffic_violation.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("WASEEM-PC\\SQLEXPRESS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("(localdb)\\MSSQLLocalDB")]
         public string ServerName {
             get {
                 return ((string)(this["ServerName"]));
@@ -49,7 +53,7 @@ namespace Wpf_Traffic_violation.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UserName {
             get {
                 return ((string)(this["UserName"]));
@@ -109,8 +113,8 @@ namespace Wpf_Traffic_violation.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ENG-IPRAHIM_A_M\\MSSQLSERVER17;Initial Catalog=Traffic_Violation_Manag" +
-            "ement;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
+            "Integrated Security=True")]
         public string Traffic_Violation_ManagementConnectionString {
             get {
                 return ((string)(this["Traffic_Violation_ManagementConnectionString"]));
@@ -120,8 +124,8 @@ namespace Wpf_Traffic_violation.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SAM_PC\\SQLEXPRESS;Initial Catalog=Traffic_Violation_Management;Integr" +
-            "ated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
+            "Integrated Security=True")]
         public string Traffic_Violation_ManagementConnectionString1 {
             get {
                 return ((string)(this["Traffic_Violation_ManagementConnectionString1"]));
@@ -136,6 +140,40 @@ namespace Wpf_Traffic_violation.Properties {
             }
             set {
                 this["permission"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Deportationtype {
+            get {
+                return ((int)(this["Deportationtype"]));
+            }
+            set {
+                this["Deportationtype"] = value;
+            }
+        }
+        public List<PermissionUser> Userpermission
+        {
+            get
+            {
+                return allPermissions.getPermissionForUser();
+            }
+            set
+            {
+                this["Userpermission"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Account_Order {
+            get {
+                return ((int)(this["Account_Order"]));
+            }
+            set {
+                this["Account_Order"] = value;
             }
         }
     }

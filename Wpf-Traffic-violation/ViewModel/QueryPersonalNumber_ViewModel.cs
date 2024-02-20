@@ -8,6 +8,7 @@ using System.Windows;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
+using Wpf_Traffic_violation.Models.Users_Model;
 using Wpf_Traffic_violation.Models.Violations_Model;
 using Wpf_Traffic_violation.Views;
 
@@ -18,14 +19,32 @@ namespace Wpf_Traffic_violation.ViewModel
 
         #region Objects And Variables
         QueryPersonalNumberModel QueryPersonalNumberModel = new QueryPersonalNumberModel();
+        ActivityModel ActivityModel = new ActivityModel();
         Plate_Model Plate_Model = new Plate_Model();
         CitizenModel CitizenModel = new CitizenModel();
         Window_PayViolation win;
         ReceiptModel ReceiptModel;
         VoilationModel VoilationModel;
         EntryModel EntryModel = new EntryModel();
+        PermissionUser PermissionUser = new PermissionUser();
         #endregion
         #region Proprties
+        Activity current_Activity; //selectedItemيربط مع 
+        public Activity Current_Activity
+        {
+            get
+            {
+                return current_Activity;
+            }
+            set
+            {
+                if (current_Activity != value)
+                {
+                    current_Activity = value;
+                    RaisePropertyChanged("Current_Activity");
+                }
+            }
+        }
         ObservableCollection<Violation> grid_Violation1;
         public ObservableCollection<Violation> Grid_Violation1 //يربط مع الجرد فيو 
         {
@@ -229,10 +248,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public QueryPersonalNumber_ViewModel()
         {
-            Grid_Plate = new ObservableCollection<Plate>();
-            Plate_Model.GetPlates(Grid_Plate);
-            Grid_Citizen = new ObservableCollection<Citizen>();
-            CitizenModel.GetCitizens(Grid_Citizen);
+            asyncQueryPersonalNumber();
+            TotalAmount = 0;
             Showcommand = new RelayCommand(Par => Show(), Par => CanShow());
             Paycommand = new RelayCommand(Par => Pay(), Par => CanPay());
             ConfimPaycommand = new RelayCommand(Par => Confimpay(), Par => CanConfimpay());
@@ -243,17 +260,30 @@ namespace Wpf_Traffic_violation.ViewModel
             //Savecommand = new RelayCommand(par => Save(), par => CanSave());
             //Closecommand = new RelayCommand(par => close());
             //Excelcommand = new RelayCommand(par => GetExcel());
+           
+            //PermissionUser = new PermissionUser();
+            //PermissionUser.Form_id = 6;
+            //new AllPermissions().getPermission(PermissionUser);
+
+            Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
-        void Show()
+        async Task asyncQueryPersonalNumber()
+        {
+            Grid_Plate = new ObservableCollection<Plate>();
+            Grid_Plate = await Task.Run(() => Plate_Model.GetPlates());
+            Grid_Citizen = new ObservableCollection<Citizen>();
+            Grid_Citizen = await Task.Run(() => CitizenModel.GetCitizens());
+        }
+        async Task Show()
         {
             TotalAmount = 0;
 
-            Currunt_DrivingLicense = new DrivingLicense();
-            QueryPersonalNumberModel.GetDriving(Currunt_DrivingLicense, Selected_Citizen.Citizen_id);
+             Currunt_DrivingLicense = new DrivingLicense();
+            Currunt_DrivingLicense= await Task.Run(() => QueryPersonalNumberModel.GetDriving( Selected_Citizen.Citizen_id));
             Grid_Violation = new ObservableCollection<Violation>();
-            QueryPersonalNumberModel.GetViolation(Grid_Violation, Selected_Citizen.Citizen_id);
+            Grid_Violation= await Task.Run(() => QueryPersonalNumberModel.GetViolation( Selected_Citizen.Citizen_id));
             Count = Grid_Violation.Count;
             foreach (Violation a in Grid_Violation)
             {
@@ -302,7 +332,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 win.ShowDialog();
 
         }
-        bool CanPay() => Currunt_Violation != null;
+        bool CanPay() => Currunt_Violation != null&& PermissionUser.Add_opretion==true;
 
         public void Confimpay()
         {
@@ -322,12 +352,31 @@ namespace Wpf_Traffic_violation.ViewModel
                     if (aa.Plate_id == v.Plate_id)
                     {
                         Current_Receipt.Receipt_id = new Class_SqlConnection().Get_Max("Receipt");
+
+                        //////////////////////////////////////////////////////////////
+
+                        Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+                        Current_Activity.Activity_date = DateTime.Now.Date.ToString();
+                        Current_Activity.User_id = Properties.Settings.Default.Userid;
+                        Current_Activity.Form_id = 6;
+                        Current_Activity.Activity_record_num = new Class_SqlConnection().Get_Max("Receipt");
+
+                        //////////////////////////////////////////////////////////
+                       
+
                         Current_Receipt.Account_id = aa.Account_id;
                         Current_Receipt.Receipt_amount = amount;
-                        ReceiptModel.OperarionReceipt(Current_Receipt, "Insert");
-                        ReceiptModel.OperarionReceiptdetail(new Class_SqlConnection().Get_Max("Receipt_detail"), Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount, "Insert");
+                        if (ReceiptModel.OperarionReceipt(Current_Receipt, "Insert"))
+                        {
+                            //ReceiptModel.OperarionReceiptdetail(new Class_SqlConnection().Get_Max("Receipt_detail"), Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount, "Insert");
 
-                        EntryModel.AddEntry(new Class_SqlConnection().Get_Max("Entry"), Current_Receipt.Receipt_statement, Current_Receipt.Receipt_date, 111101, aa.Account_id, v.Amount + v.Violation_penalty);
+                            ////////////////////////////////////////////////////////////
+                            Current_Activity.Activity_operation_num = 1;
+                            ActivityModel.OperarionActivity(current_Activity, "Insert");
+                            ////////////////////////////////////////////////////////////
+
+                        }
+                        // EntryModel.AddEntry(new Class_SqlConnection().Get_Max("Entry"), Current_Receipt.Receipt_statement, Current_Receipt.Receipt_date, 111101, aa.Account_id, v.Amount + v.Violation_penalty);
                     }
                 }
 
@@ -339,7 +388,7 @@ namespace Wpf_Traffic_violation.ViewModel
             win.Close();
 
             Grid_Violation.Clear();
-            QueryPersonalNumberModel.GetViolation(Grid_Violation, Selected_Citizen.Citizen_id);
+            Grid_Violation= QueryPersonalNumberModel.GetViolation( Selected_Citizen.Citizen_id);
         }
         bool CanConfimpay() => Current_Receipt != null;
 

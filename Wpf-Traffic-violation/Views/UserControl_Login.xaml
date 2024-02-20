@@ -26,17 +26,17 @@
 
             </LinearGradientBrush>
         </Grid.Background>
-     
+
         <StackPanel  HorizontalAlignment="Left">
             <TextBlock FontFamily="Adobe Devanagari" FontWeight="Regular" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="0,100,0,0"
                 >TRAFFIC VIOLATIONS MANAGEMENT SYSTEM</TextBlock>
             <TextBlock Margin="45 0 0 20" FontFamily="Adobe Devanagari" FontWeight="Regular" FontSize="30" Foreground="#00D9FF">TAIZ GOVERNORATE</TextBlock>
-            <Image  Source="C:\Users\ٍٍSAM\Desktop\المشروع\المشروع\Wpf-Traffic-violation\Wpf-Traffic-violation\Assets\Screenshot_20200119_210524_com.facebook.katana copy.png" Width="350" VerticalAlignment="Center" Height="350" Margin="140 30 140 10" />
+            <Image  Source="..\Assets\Screenshot_20200119_210524_com.facebook.katana copy.png" Width="350" VerticalAlignment="Center" Height="350" Margin="140 30 140 10" />
         </StackPanel>
         <StackPanel   HorizontalAlignment="Right">
-            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="610 10 0 0" Click="But_close_Click" Padding="0" >
+            <!--<Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="610 10 0 0" Click="But_close_Click" Padding="0" >
                 <materialDesign:PackIcon Foreground="White" Kind="Power" Width="24" Height="24" VerticalAlignment="Bottom"    />
-            </Button>
+            </Button>-->
             <TextBlock FontFamily="Tajawal" FontWeight="Regular" FontSize="30" Margin="0 55 45 0" Foreground="White" HorizontalAlignment="Right" 
                 ><Run Text="نظام إدارة المخالفات المرورية"/></TextBlock>
             <TextBlock  FontFamily="Tajawal" FontWeight="Regular" FontSize="30" Foreground="#00D9FF" Margin="0 0 45 20" HorizontalAlignment="Right"><Run Text="محافظة تعز"/></TextBlock>
@@ -53,8 +53,8 @@
                                 <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/Group 59.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBox Name="username" Width="254" HorizontalAlignment="Left" TabIndex="0"
-                             materialDesign:HintAssist.Hint="أسم المستخدم" FontFamily="Tajawal" FontSize="22" Padding="10 " Foreground="#00D9FF" Opacity="40"
+                        <TextBox Name="username" Width="254" HorizontalAlignment="Left" TabIndex="1" 
+                             materialDesign:HintAssist.Hint="أسم المستخدم" FontFamily="Tajawal" FontSize="22" Padding="10 " Foreground="#00D9FF" Opacity="40" 
                              />
                     </StackPanel>
                 </Border>
@@ -65,7 +65,7 @@
                                 <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/Group 60.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <PasswordBox Name="password"  Width="254" HorizontalAlignment="Left" TabIndex="1"
+                        <PasswordBox Name="password"  Width="254" HorizontalAlignment="Left" TabIndex="2"
                              materialDesign:HintAssist.Hint="كلمة السر" FontFamily="Tajawal" FontSize="22" Padding="10 " Foreground="#00D9FF" Opacity="40" 
                              />
                     </StackPanel>

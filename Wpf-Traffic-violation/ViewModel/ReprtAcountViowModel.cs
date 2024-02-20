@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using Wpf_Traffic_violation.Models;
 using System.Windows;
 using System.Collections.ObjectModel;
+using Wpf_Traffic_violation.Views.Reports;
 
 namespace Wpf_Traffic_violation.ViewModel
 {
@@ -23,6 +24,7 @@ namespace Wpf_Traffic_violation.ViewModel
         UserControl_Report_OneAccount UserControl_Report_OneAccount;
         UserControl_Report_AllAccounts UserControl_Report_AllAccounts;
         AccountModel AccountModel = new AccountModel();
+        Show_Report Show_Report;
         // UserControl_Report_AllAccounts UserControl_Report_AllAccounts;
         #endregion
         #region Proprties
@@ -79,7 +81,7 @@ namespace Wpf_Traffic_violation.ViewModel
                     {
                        // parint = true;
                         Grid_Accounts.Clear();
-                      new  AccountModel().GetAccountParent(Grid_Accounts);
+                        Grid_Accounts= new  AccountModel().GetAccountParent();
                     }
                 }
             }
@@ -100,7 +102,7 @@ namespace Wpf_Traffic_violation.ViewModel
                     if (child == true)
                     {
                         Grid_Accounts.Clear();
-                        new AccountModel().GetAccountChild(Grid_Accounts);
+                        Grid_Accounts= new AccountModel().GetAccountChild();
                     }
                 }
             }
@@ -201,7 +203,7 @@ namespace Wpf_Traffic_violation.ViewModel
             ShowAllAccountcommand = new RelayCommand(Par => ShowAccount());
             ShowOneAccountcommand = new RelayCommand(Par => ShowOneAccount());
             Grid_Accounts = new ObservableCollection<Account>();
-            new AccountModel().GetAccountParent(Grid_Accounts);
+            Grid_Accounts=new AccountModel().GetAccountParent();
 
 
         }
@@ -299,66 +301,42 @@ namespace Wpf_Traffic_violation.ViewModel
                 Value = UserControl_Report_AllAccounts.to.Text.ToString()
             };
 
-
-            UserControl_Report_AllAccounts.ReportViewerDemo.Reset();
+            Show_Report = new Show_Report();
+            Show_Report.ReportViewerDemo.Reset();
             dt = new Class_SqlConnection().GetData("Report_Account", par);
             ds = new ReportDataSource("DataSet1", dt);
-            UserControl_Report_AllAccounts.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-            UserControl_Report_AllAccounts.ReportViewerDemo.RefreshReport();
+            Show_Report.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+            Show_Report.ReportViewerDemo.RefreshReport();
            
-
-
-
-
+            
             dt = new Class_SqlConnection().GetData("GetCompanys", null);
             ds = new ReportDataSource("DataSet2", dt);
-            UserControl_Report_AllAccounts.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-            UserControl_Report_AllAccounts.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Accounts.AllAccountReport.rdlc";
-           
-            UserControl_Report_AllAccounts.ReportViewerDemo.RefreshReport();
-            //MessageBox.Show(UserControl_Report_AllAccounts.date.Text);
-            //MessageBox.Show(par[0].Value.ToString());
-            //MessageBox.Show(par[1].Value.ToString());
-            //MessageBox.Show(par[2].Value.ToString());
-            //MessageBox.Show(par[3].Value.ToString());
-            //MessageBox.Show(par[4].Value.ToString());
-            Curent_usercontrol = UserControl_Report_AllAccounts;
-            
+            Show_Report.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+            Show_Report.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Accounts.AllAccountReport.rdlc";
+
+            Show_Report.ReportViewerDemo.RefreshReport();
+
+            Show_Report.Show();
+
+
         }
         public void ShowOneAccount()   
         {
-            UserControl_Report_OneAccount.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Accounts.Report_One_Account.rdlc";
+            Show_Report = new Show_Report();
+
+               dt = new Class_SqlConnection().GetData("GetCompanys", null);
+            ds = new ReportDataSource("DataSet2", dt);
+            Show_Report.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+            Show_Report.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Accounts.Report_One_Account.rdlc";
 
             ReportParameter[] r = new ReportParameter[] {new ReportParameter("Acc_id",Current_Account.Account_id.ToString()),
-                new ReportParameter("Acc_parint",Current_Account.Account_parent.ToString()), new ReportParameter("Acc_name",Current_Account.Account_name.ToString()), new ReportParameter("Acc_date",Current_Account.Account_date.ToString()),new ReportParameter("Acc_order",Current_Account.Account_order.ToString()),new ReportParameter("Acc_type",Current_Account.Account_type.ToString()),new ReportParameter("Acc_debtor",Current_Account.Account_debtor.ToString()),new ReportParameter("Acc_creditor",Current_Account.Account_creditor.ToString())}; 
-            UserControl_Report_OneAccount.ReportViewerDemo.LocalReport.SetParameters(r);
-           UserControl_Report_OneAccount.ReportViewerDemo.RefreshReport();
-            // SqlParameter[] par = new SqlParameter[5];
+                new ReportParameter("Acc_parint",Current_Account.Account_parent.ToString()), new ReportParameter("Acc_name",Current_Account.Account_name.ToString()), new ReportParameter("Acc_date",Current_Account.Account_date.ToString()),new ReportParameter("Acc_order",Current_Account.Account_order.ToString()),new ReportParameter("Acc_type",Current_Account.Account_type.ToString()),new ReportParameter("Acc_debtor",Current_Account.Account_debtor.ToString()),new ReportParameter("Acc_creditor",Current_Account.Account_creditor.ToString())};
+            Show_Report.ReportViewerDemo.LocalReport.SetParameters(r);
+            Show_Report.ReportViewerDemo.RefreshReport();
 
+            Show_Report.Show();
 
-            //if (Day== true)
-            // {
-            //     par[0] = new SqlParameter("@day", SqlDbType.NVarChar, 50)
-            //     {
-            //         Value = "day"
-            //     };
-
-            // }else
-            // {
-
-            // }
-
-            // if (UserControl_Report_AllAccounts.RadioButton_date.IsChecked == true)
-            // {
-            //     par[1] = new SqlParameter("@date", SqlDbType.NVarChar, 50)
-            //     {
-            //         Value = "fromto"
-            //     };
-            //     par[3] = new SqlParameter("@fromdate", SqlDbType.NVarChar, 50)
-            //     {
-            //         Value = UserControl_Report_AllAccounts.from.Text.ToString()
-            //     };
-
+            
 
         }
         #endregion

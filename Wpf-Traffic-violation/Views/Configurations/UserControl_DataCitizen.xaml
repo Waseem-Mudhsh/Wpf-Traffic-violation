@@ -40,7 +40,7 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_Citizen , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Currunt_Citizen , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
                 <Button  Command="{Binding Excelcommand}"
@@ -78,7 +78,7 @@
         <StackPanel  Background="White" >
 
             <DataGrid Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_Citizens}"  SelectedItem="{Binding Currunt_Citizen, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"
+                         Height="475"  Width="1355" Margin="5,5,5,0"
                           >
                 <DataGrid.Resources>
 
@@ -86,53 +86,53 @@
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Citizen_name}"
-                                        Header="أسم المواطن" MinWidth="200" MaxWidth="250"
+                                        Header="أسم المواطن"  Width="220"
                                          />
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_identitytype}"
-                                                           Header="نوع الهوية"  MinWidth="130" MaxWidth="150"
+                                                           Header="نوع الهوية" Width="110"
                                                             
                                                            />
                     <!-- set a max length to get an indicator in the editor -->
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_id}"
                                                            Header="رقم الهوية"
-                                                       MinWidth="100"
-                                                           MaxWidth="200"
+                                                       
+                                                           Width="110"
                                                             />
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_nationality}"
-                                                        Header="الجنسية" MaxWidth="120" MinWidth="100"
+                                                        Header="الجنسية" Width="110" 
                                                         
                                                        >
                       
                     </materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn Binding="{Binding String_gender}"
-                                                           Header="الجنس"  MinWidth="100" MaxWidth="120"
+                                                           Header="الجنس"   Width="110"
                                                           
                                                             />
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_religion}"
-                                                           Header="الديانة"  MinWidth="80" MaxWidth="100"
+                                                           Header="الديانة"  Width="110"
                                                            
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_date_pirth}"
-                                                           Header="تاريخ الميلاد"  MinWidth="100" MaxWidth="120"
+                                                           Header="تاريخ الميلاد"  Width="110"
                                                             
                                                           />
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_blood_type}"
-                                                           Header="فصيلة الدم"  MinWidth="80" MaxWidth="100"
+                                                           Header="فصيلة الدم"   Width="110"
                                                           
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding String_social_status}"
-                                                           Header="الحالة الإجتماعية"  MinWidth="100" MaxWidth="140"
+                                                           Header="الحالة الإجتماعية"   Width="130"
                                                            
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_address}"
-                                                           Header="العنوان"  MinWidth="150" MaxWidth="230"
+                                                           Header="العنوان"   Width="120"
                                                           
                                                            />
 
                     <materialDesign:DataGridTextColumn Binding="{Binding Citizen_phone}"
                                                            Header="رقم التلفون"  
-                                                            MinWidth="100" MaxWidth="120"  />
+                                                             Width="110"  />
                 
 
                     <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->

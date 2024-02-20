@@ -53,30 +53,38 @@
 
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text=" رقم حساب الأب :" Margin="10 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                        <controls:AutoCompleteBox Name="acc_parent" Width="240" ItemsSource="{Binding Grid_AccountParent}" 
+                        <TextBlock Text=" رقم حساب الأب :" Margin="10 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                        <!--<controls:AutoCompleteBox Name="acc_parent" IsEnabled="False" Width="240" ItemsSource="{Binding Grid_AccountParent}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Account_id" 
                                               SelectedItem="{Binding Selected_Parent , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="5,10"
                                              
-                                          />
-                        <TextBlock Text="أسم حساب الأب :"  Margin="20 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125"/>
-                        <controls:AutoCompleteBox Name="acc_parentName" Width="240" ItemsSource="{Binding Grid_AccountParent}" 
+                                          />-->
+                        <TextBox  IsEnabled="False"   Height="40" Width="240" Text="{Binding Currunt_Account.Account_parent}"
+                        materialDesign:HintAssist.Hint="رقم الحساب..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                        <TextBlock Text="أسم حساب الأب :"  Margin="20 0 14 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125"/>
+                        <!--<controls:AutoCompleteBox Name="acc_parentName"  IsEnabled="False" Width="240" ItemsSource="{Binding Grid_AccountParent}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Account_name" 
-                                              SelectedItem="{Binding Selected_Parent , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="5,10"
-                                              />
+                                              SelectedItem="{Binding Selected_Parent , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 
+                                                  FilterMode="Contains" Margin="5,10"
+                                              />-->
+                        <TextBox IsEnabled="False"    Height="40" Width="240" Text="{Binding Currunt_Account.String_AccParent}"
+                        materialDesign:HintAssist.Hint="أسم حساب ..."
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <TextBlock Text=" رقم الحساب :" Margin="10 0 20 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                        <TextBox     Height="40" Width="240" Text="{Binding Currunt_Account.Account_id}"
+                        <TextBox  Name="acc_id"   Height="40" Width="240" Text="{Binding Currunt_Account.Account_id,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="رقم الحساب..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                         <TextBlock Text="أسم الحساب :"  Margin="25 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                        <TextBox     Height="40" Width="240" Text="{Binding Currunt_Account.Account_name}"
+                        <TextBox     Height="40" Width="240" Text="{Binding Currunt_Account.Account_name,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="أسم الحساب..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="10  0 9 0" FontFamily="Tajawal" FontSize="14" />
 
@@ -84,26 +92,22 @@
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <TextBlock Text="رتبة الحساب :" Margin="14 0 38 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                        <TextBox       Height="40" Width="112" Text="{Binding Currunt_Account.Account_order}"
+                        <TextBox    Name="acc_order"   Height="40" Width="112" Text="{Binding Currunt_Account.Account_order,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="الرتبة..."
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"   Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                         <TextBlock Text="نوع الحساب :" Margin="152 0 36 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
-                        <ComboBox Name="comb" SelectedItem="{Binding Currunt_Account.Account_type}" Width="240" Height="40"
-                          Padding="10,10,0,0" Background="White" Margin="0 9" FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-                            <ComboBoxItem Name="co1">رئيسي</ComboBoxItem>
-                            <ComboBoxItem Name="co2" Content="فرعي"/>
 
-
-
+                        <ComboBox  Name="acc_typ" Width="240" Height="40" 
+                          materialDesign:ComboBoxAssist.ShowSelectedItem="{Binding Currunt_Account.Account_type}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
+                          Padding="10,10,0,0" Background="White" Foreground="Black" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14"   >
+                            <ComboBoxItem Name="co1"  IsSelected="True">رئيسي</ComboBoxItem>
+                            <ComboBoxItem Name="co2">فرعي</ComboBoxItem>
                         </ComboBox>
-                        <!--<ComboBox  x:Name="FilledComboBox"
-                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledComboBoxEnabledComboBox}"
-                          materialDesign:HintAssist.Hint="نوع الهوية ..." Padding="10,10,0,0" Background="White"
-                          Width="256"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                    <ComboBoxItem Content="Item 1"/>
-                    <ComboBoxItem Content="Item 2"   />
-                    <ComboBoxItem Content="Item 3"   />
-                </ComboBox>-->
+                        
+
+                      
 
                     </StackPanel>
 

@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Wpf_Traffic_violation.Models.Violations_Model;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -22,12 +12,91 @@ namespace Wpf_Traffic_violation.Views
     {
         public UserControl_QureyIdNumber()
         {
+
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             panal_query.Visibility = Visibility.Visible;
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            int value = 0;
+            // Handle the Checked event here
+            // You can access the DataContext of the CheckBox to get the corresponding item in your ItemsSource
+            // For example:
+            var checkBox = sender as DataGridCell;
+
+            if (checkBox != null)
+            {
+                Violation model = checkBox.DataContext as Violation;
+
+                if (model.Isselected == true)
+                {
+                    value = Convert.ToInt32(SelectedAmount.Text);
+                    value += model.Violation_penalty;
+                    SelectedAmount.Text = value.ToString();
+                }
+            }
+        }
+        private void CheckBox_UNChecked(object sender, RoutedEventArgs e)
+        {
+            int value = 0;
+            // Handle the Checked event here
+            // You can access the DataContext of the CheckBox to get the corresponding item in your ItemsSource
+            // For example:
+            var checkBox = sender as DataGridCell;
+
+            if (checkBox != null)
+            {
+                Violation model = checkBox.DataContext as Violation;
+
+                if (model.Isselected == false)
+                {
+                    value = Convert.ToInt32(SelectedAmount.Text);
+                    value -= model.Violation_penalty;
+                    SelectedAmount.Text = value.ToString();
+                }
+            }
+        }
+
+        private void DataGridCell_Selected(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                var item = checkBox.DataContext; // This gives you the item bound to the row
+                                                 // Do something with the item...
+            }
+            //DataGridCell cell = sender as DataGridCell;
+            //if (cell != null)
+            //{
+            //    Violation model = cell.DataContext as Violation;
+            //    if (model.Isselected == true)
+            //    {
+            //        value = Convert.ToInt32(SelectedAmount.Text);
+            //        value += model.Violation_penalty;
+            //        SelectedAmount.Text = value.ToString();
+
+
+            //    }
+
+
+
+
+            //}
         }
     }
 }

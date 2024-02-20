@@ -161,9 +161,9 @@ namespace Wpf_Traffic_violation.ViewModel
             Comb.Add("الإعدادات");
             Comb.Add("التقارير");
 
-            
+           
             Grid_PermissionSets = new ObservableCollection<PermissionSet>();
-            PermissionSet_Model.GetPermissionSet(Grid_PermissionSets);
+            Grid_PermissionSets =PermissionSet_Model.GetPermissionSet();
 
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -177,12 +177,13 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 30;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        
         public void Add()
         {
 
@@ -328,14 +329,14 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionSet_Model.GetExcel(Grid_PermissionSets);
             Grid_PermissionSets = new ObservableCollection<PermissionSet>();
-            PermissionSet_Model.GetPermissionSet(Grid_PermissionSets);
+            Grid_PermissionSets= PermissionSet_Model.GetPermissionSet();
         }
 
         void SetPermission()
         {
 
             Grid_PermissionGroup = new ObservableCollection<PermissionGroup>();
-            PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "setting", Currunt_PermissionSet.Group_id);
+            Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "setting", Currunt_PermissionSet.Group_id);
 
         }
         bool CanSetPermission() => Currunt_PermissionSet != null;
@@ -358,41 +359,41 @@ namespace Wpf_Traffic_violation.ViewModel
             if (selected_value == "الإعدادات")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "setting", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "setting", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "المستخدمين")
             {
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "user", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "user", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "المخالفات")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "violation", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "violation", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "الإعتراضات")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "interception", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "interception", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "البلاغات")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "communication", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "communication", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "الحسابات")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "account", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "account", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "التهيئة")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "format", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup("format", Currunt_PermissionSet.Group_id);
             }
             else if (selected_value == "التقارير")
             {
 
-                PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "report", Currunt_PermissionSet.Group_id);
+                Grid_PermissionGroup= PermissionGroupModel.GetPermisstionGroup( "report", Currunt_PermissionSet.Group_id);
             }
 
 

@@ -26,50 +26,5 @@ namespace Wpf_Traffic_violation.Views.Reports.Objections
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ReportUser_ViewModel View_ReportUser = new ReportUser_ViewModel();
-            Button but = ((Button)sender);
-
-            int index = int.Parse(((Button)e.Source).Uid);
-
-            switch (index)
-            {
-
-                case 1:
-                    {
-
-                      Frame_Search_objections.Content = new UserControl_Report_allObjections { DataContext = View_ReportUser };
-                        break;
-                    }
-               
-                case 2:
-                    {
-
-                          Frame_Search_objections.Content = new UserControl_Report_RightObjection { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 3:
-                    {
-
-                        Frame_Search_objections.Content = new UserControl_Report_Falseobjection { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 4:
-                    {
-
-                    Frame_Search_objections.Content = new UserControl_Report_Unchecked { DataContext = View_ReportUser };
-                        break;
-                    }
-                case 5:
-                    {
-
-                       Frame_Search_objections.Content = new UserControl_Report_Compareobjection { DataContext = View_ReportUser };
-                        break;
-                    }
-            }
-
-
-        }
     }
 }

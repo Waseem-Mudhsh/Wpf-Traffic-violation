@@ -26,7 +26,7 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5"
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_Opjection , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="4,1,4,0"
+                                              SelectedItem="{Binding Currunt_Opjection , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="0,1"
                                              
                                           />
                 </StackPanel>

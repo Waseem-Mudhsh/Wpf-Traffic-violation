@@ -18,8 +18,9 @@ namespace Wpf_Traffic_violation.Models
 
 
 
-        public void GetReasonToObjection(ObservableCollection<ReasonsToObject> ReasonToobjections)
+        public ObservableCollection<ReasonsToObject> GetReasonToObjection()
         {
+            ObservableCollection<ReasonsToObject> ReasonToobjections = new ObservableCollection<ReasonsToObject>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -60,7 +61,7 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
 
-
+            return ReasonToobjections;
         }
 
         ///////////////////////////////// end GetReasonToObjection/////////////////////////////////////

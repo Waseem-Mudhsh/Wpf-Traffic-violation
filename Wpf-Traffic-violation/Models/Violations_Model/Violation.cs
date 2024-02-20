@@ -42,8 +42,24 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
-        string violation_photo1;
-        public string Violation_photo1
+        int vounchrNum;
+        public int VounchrNum
+        {
+            get
+            {
+                return vounchrNum;
+            }
+            set
+            {
+                if (vounchrNum != value)
+                {
+                    vounchrNum = value;
+                    RaisePropertyChanged("VounchrNum");
+                }
+            }
+        }
+        byte violation_photo1;
+        public byte Violation_photo1
         {
             get
             {
@@ -58,8 +74,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
-        string violation_photo2;
-        public string Violation_photo2
+        byte violation_photo2;
+        public byte Violation_photo2
         {
             get
             {
@@ -218,6 +234,23 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
+        int plate_TypeId;
+        public  int Plate_TypeId
+
+        {
+            get
+            {
+                return plate_TypeId;
+            }
+            set
+            {
+                if (plate_TypeId != value)
+                {
+                    plate_TypeId = value;
+                    RaisePropertyChanged("plate_TypeId");
+                }
+            }
+        }
         string string_ViolationType;
         public string String_ViolationType
         {
@@ -232,6 +265,23 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                     string_ViolationType = value;
                     Combine1();
                     RaisePropertyChanged("String_ViolationType");
+                }
+            }
+        }
+        string string_plateDetail;
+        public string String_PlateDetail
+        {
+            get
+            {
+                return string_plateDetail;
+            }
+            set
+            {
+                if (string_plateDetail != value)
+                {
+                    string_plateDetail = value;
+                    Combine1();
+                    RaisePropertyChanged("string_plateDetail");
                 }
             }
         }
@@ -286,7 +336,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
-
+     
         int amount;
         public int Amount
         {
@@ -352,10 +402,116 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
+        private bool _selectAll;
+
+        public bool SelectAll
+        {
+            get { return _selectAll; }
+            set
+            {
+                if (_selectAll != value)
+                {
+                    _selectAll = value;
+                    RaisePropertyChanged(nameof(SelectAll));
+
+                    // Set the IsSelected property for all items in your collection
+                    //foreach (Violation item in Grid_Violation)
+                    //{
+                    //    item.Isselected = value;
+                    //}
+                }
+            }
+        }
+        string createdOn;
+        public string CreatedOn
+        {
+            get
+            {
+                return createdOn;
+            }
+            set
+            {
+                if (createdOn != value)
+                {
+                    createdOn = value;
+                    Combine1();
+                    RaisePropertyChanged("createdOn");
+                }
+            }
+        }
+        int createdBy;
+        public int CreatedBy
+        {
+            get
+            {
+                return createdBy;
+            }
+            set
+            {
+                if (createdBy != value)
+                {
+                    createdBy = value;
+                    Combine1();
+                    RaisePropertyChanged("createdBy");
+                }
+            }
+        }
+
+        string updateOn;
+        public string UpdateOn
+        {
+            get
+            {
+                return updateOn;
+            }
+            set
+            {
+                if (updateOn != value)
+                {
+                    updateOn = value;
+                    Combine1();
+                    RaisePropertyChanged("updateOn");
+                }
+            }
+        }
+        int updateBy;
+        public int UpdateBy
+        {
+            get
+            {
+                return updateBy;
+            }
+            set
+            {
+                if (updateBy != value)
+                {
+                    updateBy = value;
+                    Combine1();
+                    RaisePropertyChanged("updateBy");
+                }
+            }
+        }
+        int provinceid;
+        public int Provinceid
+        {
+            get
+            {
+                return provinceid;
+            }
+            set
+            {
+                if (provinceid != value)
+                {
+                    provinceid = value;
+                    Combine1();
+                    RaisePropertyChanged("provinceid");
+                }
+            }
+        }
 
         private void Combine1()
         {
-            Search = String.Join(" || ", Violation_id, String_ViolationType, String_TrafficMan,String_Status);
+            Search = String.Join(" || ", Violation_id, String_ViolationType, String_TrafficMan,String_Status, String_PlateDetail);
         }
 
 
@@ -366,7 +522,15 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (string.IsNullOrWhiteSpace(Violation_date))
+            {
+                Errors.Add("Violation_date", "يجب تحدبد التاريخ");
+            }
+          
+
         }
+
+      
     }
 }

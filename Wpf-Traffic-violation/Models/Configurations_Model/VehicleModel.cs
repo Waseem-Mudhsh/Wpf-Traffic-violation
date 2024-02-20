@@ -14,8 +14,9 @@ namespace Wpf_Traffic_violation.Models
 {
     public class VehicleModel
     {
-        public void GetVehicles(ObservableCollection<Vehicle> Vehicles)
+        public ObservableCollection<Vehicle> GetVehicles()
         {
+            ObservableCollection<Vehicle> Vehicles = new ObservableCollection<Vehicle>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -71,15 +72,24 @@ namespace Wpf_Traffic_violation.Models
                                 per.Citizen_id = (int)row1[3];
                                 per.Noties = row1[4].ToString();
                                 per.Status = (int)row1[5];
+                                per.String_Provinces_vc = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_plase);
+                                per.String_Citizen = new Class_SqlConnection().Get_row("getCitizenName", per.Citizen_id);
                             }
                         }
                         per.String_Provinces = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_palc_c);
-                        per.String_Provinces_vc = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_plase);
-                        per.String_Citizen = new Class_SqlConnection().Get_row("getCitizenName", per.Citizen_id);
+                        
                         if (per.Status == 1)
                             per.String_Status = "نشطة";
-                        else
-                            per.String_Status = "غير نشطة";
+                        else if (per.Status == 2)
+                            per.String_Status = "منتهية";
+                        else if (per.Status == 3)
+                            per.String_Status = "مفقودة";
+
+                        if (per.Status_v == 1)
+                            per.String_Status_v = "نشطة";
+                        else if(per.Status_v == 2)
+                            per.String_Status_v = "غير نشط";
+
                         dt1 = null;
 
                         Vehicles.Add(per); //الي بنربطه مع الجريد فيو
@@ -87,6 +97,7 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
+            return Vehicles;
         }
 
 
@@ -269,7 +280,7 @@ namespace Wpf_Traffic_violation.Models
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [Vehicle$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)

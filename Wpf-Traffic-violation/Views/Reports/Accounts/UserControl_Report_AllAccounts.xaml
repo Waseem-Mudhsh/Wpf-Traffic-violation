@@ -96,10 +96,6 @@
                 </Grid>
             </Grid>
         </materialDesign:ColorZone>
-        <Grid  Grid.Column="0" >
-            <WindowsFormsHost Margin="10,15,0,10" ChildChanged="WindowsFormsHost_ChildChanged" >
-                <rv:ReportViewer x:Name="ReportViewerDemo"/>
-            </WindowsFormsHost>
-        </Grid>
+        <Grid  Grid.Column="0" />
     </Grid>
 </UserControl>

@@ -25,7 +25,7 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Current_Plate , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_Plate , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
                 <Button  
@@ -65,7 +65,7 @@
             <DataGrid Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_Plate,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
                       SelectedItem="{Binding Current_Plate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0" SelectionChanged="DataGrid_SelectionChanged_1" 
+                         Height="475"  MaxWidth="1350" Margin="5,5,5,0" SelectionChanged="DataGrid_SelectionChanged_1" 
                           >
               
                 <DataGrid.Columns>

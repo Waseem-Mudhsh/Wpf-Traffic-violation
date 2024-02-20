@@ -42,8 +42,8 @@
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock Text="حسب :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
-                            <RadioButton x:Name="RadioButton_all"  GroupName="type of search" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="16 0 72 0"/>
-                            <RadioButton x:Name="RadioButton_namecitizen" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المواطن "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_all"  GroupName="type of search" IsChecked="{Binding All}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="16 0 72 0"/>
+                            <RadioButton x:Name="RadioButton_namecitizen" GroupName="type of search" IsChecked="{Binding Citi}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المواطن "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
                         </StackPanel>
                     </Border>
@@ -62,12 +62,14 @@
                             <TextBlock Text="أسم المواطن :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  x:Name="FilledComboBox1"
-                          
-                          materialDesign:HintAssist.Hint="أسم المواطن ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
+                            <ComboBox  Name="com" Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_citi}"
+                           SelectedItem="{Binding Selected_citiz,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Province_id" Text="{Binding     Citizen_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
 
                             </ComboBox>
                         </StackPanel>
@@ -78,20 +80,24 @@
                             <TextBlock Text="رقم الأعتراض :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  
-                          
-                          materialDesign:HintAssist.Hint="رقم الأعتراض ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
+            
+                            <ComboBox  Name="om" Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_objection}"
+                           SelectedItem="{Binding Selected_objection,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Province_id" Text="{Binding Interception_id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+
                             </ComboBox>
+
                         </StackPanel>
                     </Border>
 
                     <Border Name="border_datemade" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_datemade, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel  >
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="215" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="128 10 16 10" />
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding  Selected_objection.Interception_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="215" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="128 10 16 10" />
 
                         </StackPanel>
                     </Border>
@@ -99,7 +105,7 @@
 
 
                     <StackPanel  Grid.Row="3" >
-                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding Show_report_allobjection}"
                      Height="40"   Padding="0"    Width="140" >
                             <StackPanel Orientation="Horizontal" >
                                 <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />

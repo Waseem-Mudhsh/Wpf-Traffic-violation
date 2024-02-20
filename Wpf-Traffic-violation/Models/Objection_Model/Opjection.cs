@@ -199,7 +199,11 @@ namespace Wpf_Traffic_violation.Models
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (String.IsNullOrWhiteSpace(Interception_date))
+            {
+                Errors.Add("Interception_date", "يجب تحديد التاريخ");
+            }
         }
     }
 }

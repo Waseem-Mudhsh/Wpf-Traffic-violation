@@ -27,7 +27,7 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_trafficman , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Currunt_trafficman , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
                 <Button  Command="{Binding Excelcommand}"
@@ -67,7 +67,7 @@
             <DataGrid Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Grid_trafficmans,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
                       SelectedItem="{Binding Currunt_trafficman,UpdateSourceTrigger=PropertyChanged}"
                           IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"
+                         Height="475"  MaxWidth="1350" Margin="5,5,5,0"
                           >
                 <DataGrid.Resources>
 

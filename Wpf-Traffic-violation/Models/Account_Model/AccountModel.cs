@@ -17,9 +17,9 @@ namespace Wpf_Traffic_violation.Models
 
         ///////////////////////////////// start GetAccounts/////////////////////////////////////
 
-        public void GetAccounts(ObservableCollection<Account> Accounts)
+        public ObservableCollection<Account> GetAccounts()
         {
-
+            ObservableCollection<Account> Accounts = new ObservableCollection<Account>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             // Properties.Settings.Default.con = con;
             //Properties.Settings.Default.Save();
@@ -61,7 +61,7 @@ namespace Wpf_Traffic_violation.Models
                             Account_debtor = (int)row[5],
                             Account_creditor = (int)row[6],
                             Account_date = row[7].ToString(),
-                            Account_status = Convert.ToBoolean(row[8])
+                            Account_status = (bool)row[8]
 
                         };
                         per.String_Acc = new Class_SqlConnection().Get_row("GetAccountName", per.Account_id);
@@ -76,14 +76,15 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
+            return Accounts;
         }
         ///////////////////////////////// end GetAccounts/////////////////////////////////////
 
         ///////////////////////////////// start GetAccounts/////////////////////////////////////
 
-        public void GetAccountParent(ObservableCollection<Account> AccountParent)
+        public ObservableCollection<Account> GetAccountParent()
         {
-
+            ObservableCollection<Account> AccountParent = new ObservableCollection<Account>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -140,6 +141,7 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
+            return AccountParent;
         }
         ///////////////////////////////// end GetAccounts/////////////////////////////////////
      
@@ -149,7 +151,7 @@ namespace Wpf_Traffic_violation.Models
         {
             Class_SqlConnection sql = new Class_SqlConnection();
 
-            SqlParameter[] param = new SqlParameter[8];
+            SqlParameter[] param = new SqlParameter[10];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
 
             param[0] = new SqlParameter("@Account_id", SqlDbType.Int)
@@ -180,7 +182,15 @@ namespace Wpf_Traffic_violation.Models
             {
                 Value = Account.Account_creditor
             };
-            param[7] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
+            param[7] = new SqlParameter("@Account_date", SqlDbType.NVarChar,50)
+            {
+                Value = Account.Account_date
+            };
+            param[8] = new SqlParameter("@Account_status", SqlDbType.Bit)
+            {
+                Value = Account.Account_status
+            };
+            param[9] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
             {
                 Value = operartion
             };
@@ -245,6 +255,7 @@ namespace Wpf_Traffic_violation.Models
 
 
 
+
         /////////////////////////////////start GetExcel/////////////////////////////////////
 
 
@@ -271,13 +282,15 @@ namespace Wpf_Traffic_violation.Models
                     {
                         Account per = new Account
                         {
-                            Account_id = (int)row[0],
-                            Account_parent = (int)row[1],
+                            Account_id = Convert.ToInt32( row[0]),
+                            Account_parent = Convert.ToInt32(row[1]),
                             Account_name = row[2].ToString(),
-                            Account_type = (int)row[3],
-                            Account_order = (int)row[4],
-                            Account_debtor = (int)row[5],
-                            Account_creditor = (int)row[6],
+                            Account_type = Convert.ToInt32(row[3]),
+                            Account_order = Convert.ToInt32(row[4]),
+                            Account_debtor = Convert.ToInt32(row[5]),
+                            Account_creditor = Convert.ToInt32(row[6]),
+                            Account_date = row[7].ToString(),
+                            Account_status= Convert.ToBoolean(row[8]),
 
                         };
                         OperarionAccount(per, "Insert");
@@ -300,9 +313,9 @@ namespace Wpf_Traffic_violation.Models
 
         ///////////////////////////////// start GetAccountChild/////////////////////////////////////
 
-        public void GetAccountChild(ObservableCollection<Account> AccountParent)
+        public ObservableCollection<Account> GetAccountChild()
         {
-
+            ObservableCollection<Account> AccountParent = new ObservableCollection<Account>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -359,9 +372,100 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
+            return AccountParent;
         }
         ///////////////////////////////// end GetAccountChild/////////////////////////////////////
 
+        ///////////////////////////////// start GetCreate_Account/////////////////////////////////////
+
+        public int GetCreate_Account(int account_parint)
+        {
+            int account_id = 0;
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Cant Open con");
+                }
+                //SqlCommand Command = new SqlCommand("Select * from Person", con);
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "Create_Account",
+                    Connection = con
+
+                };
+                Command.Parameters.AddWithValue("@acc_pr", account_parint);
+
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+
+                        account_id = (int)row[0];
+
+                    }
+                }
+
+            }
+            return account_id;
+        }
+        ///////////////////////////////// end GetCreate_Account/////////////////////////////////////
+
+
+        public bool Check_Parint(int value)
+        {
+            Class_SqlConnection sql = new Class_SqlConnection();
+            using (sql.con)
+            {
+                try
+                {
+                    sql.con.Open();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Cant Open Conncation");
+
+                }
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "Chick_Account_Isparent",
+                    Connection = sql.con
+
+                };
+                Command.Parameters.AddWithValue("@Account_parent", value);
+
+
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+
+
+            }
+        }
+
+
+        /////////////////////////////////end Check_Exsit/////////////////////////////////////
 
     }
 }

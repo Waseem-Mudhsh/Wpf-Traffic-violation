@@ -1,0 +1,98 @@
+﻿<Window x:Class="Wpf_Traffic_violation.Views.ReceiptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ReceiptWindow" Height="731" Width="434.96">
+    <Grid FlowDirection="RightToLeft" >
+      
+        <Grid.RowDefinitions>
+            <RowDefinition Height="539*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+          
+            <StackPanel Margin="10" Grid.RowSpan="2">
+                <TextBlock Text="سند مخالفات" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <StackPanel Margin="0,10">
+                    <TextBlock Text="استملت من :" Margin="10,3,12,2"  FontFamily="Tajawal"/>
+                    <TextBlock x:Name="nameOdPaid"/>
+                </StackPanel>
+                <StackPanel Margin="0,10">
+                    <TextBlock Text="رقم المركبة:"/>
+                    <TextBlock x:Name="txtCustomerName"/>
+                </StackPanel>
+                <StackPanel Margin="0,10">
+                    <TextBlock Text="تاريخ السداد"/>
+                    <TextBlock x:Name="txtTransactionDate"/>
+                </StackPanel>
+                <StackPanel Margin="0,10">
+                    <TextBlock Text="المبلغ"/>
+                    <TextBlock x:Name="txtAmount"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="انوع المخالفات"/>
+                    <ListBox ItemsSource="{Binding violationsTypeSelected}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Key}" />
+                                    <TextBlock Text="{Binding Value}" />
+                                    <!-- Add more TextBlocks or other controls as needed -->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/Screenshot_20200119_210524_com.facebook.katana copy.png" Stretch="Fill" />
+            </Grid.Background>
+            <StackPanel>
+                <StackPanel>
+                <TextBlock Text="------------------------------------------------------------" FontSize="20" FontWeight="Bold" Margin="0,40" />
+            <TextBlock Text="سند مخالفات" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+            <StackPanel Margin="0,10">
+                <TextBlock Text="استملت من :"/>
+                <TextBlock x:Name="nameOdPaid1"/>
+            </StackPanel>
+            <StackPanel Margin="0,10">
+                <TextBlock Text="رقم المركبة:"/>
+                <TextBlock x:Name="txtCustomerName1"/>
+            </StackPanel>
+            <StackPanel Margin="0,10">
+                <TextBlock Text="تاريخ السداد"/>
+                <TextBlock x:Name="txtTransactionDate1"/>
+            </StackPanel>
+            <StackPanel Margin="0,10">
+                <TextBlock Text="المبلغ"/>
+                <TextBlock x:Name="txtAmount1"/>
+            </StackPanel>
+            <TextBlock Text="انوع المخالفات"/>
+            <ListBox ItemsSource="{Binding violationsTypeSelected}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Key}" />
+                            <TextBlock Text="{Binding Value}" />
+                            <!-- Add more TextBlocks or other controls as needed -->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            </StackPanel>
+            </StackPanel>
+    
+        </Grid>
+    </Grid>
+
+
+
+</Window>

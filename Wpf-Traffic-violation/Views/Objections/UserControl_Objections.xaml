@@ -19,14 +19,14 @@
                                            Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical" Width="100" HorizontalAlignment="Center" >
                         <materialDesign:PackIcon Kind="Verified"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    HorizontalAlignment="Center">فحص إعتراض</TextBlock>
+                        <TextBlock    HorizontalAlignment="Center">فحص الاعتراض</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="1" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="CardAccountDetailsStarOutline"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >إضافة إعتراض</TextBlock>
+                        <TextBlock    >عمليات  الاعتراض</TextBlock>
                     </StackPanel>
                 </Button>
 

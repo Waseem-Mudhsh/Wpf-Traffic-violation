@@ -252,7 +252,16 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (string.IsNullOrWhiteSpace(Release_date))
+            {
+                Errors.Add("Release_date", "يجب أدخال التاريخ ");
+            }
+            if (string.IsNullOrWhiteSpace(Plate_num))
+            {
+                Errors.Add("Plate_num", "يجب أدخال قيمة ");
+            }
+            
         }
     }
 }

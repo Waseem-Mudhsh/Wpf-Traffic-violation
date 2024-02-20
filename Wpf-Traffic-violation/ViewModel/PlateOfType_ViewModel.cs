@@ -79,29 +79,34 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public PlateOfType_ViewModel()
         {
-
-            Grid_PlateOftype = new ObservableCollection<PlateOfType>();
-            Plates_Model.GetPlateOfType(Grid_PlateOftype);
-            Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
-            Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
-            Savecommand = new RelayCommand(par => Save(), par => CanSave());
+            asyncPlateOfType();
+           
+            Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
+            Editcommand = new RelayCommand(par => Edit());
+            Deletecommand = new RelayCommand(par => Delet());
+            Savecommand = new RelayCommand(par => Save());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 23;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
-       
+        async Task asyncPlateOfType()
+        {
+            Grid_PlateOftype = new ObservableCollection<PlateOfType>();
+            Grid_PlateOftype = await Task.Run(() => Plates_Model.GetPlateOfType());
+        }
+
+
         public void Add()
         {
-            int maxid = new Class_SqlConnection().Get_Max("Plate_type");
-            Current_PlateOfType = new PlateOfType { Plate_type_id = maxid };
+            int maxid = new Class_SqlConnection().Get_Max("Plate_type", "Plate_type_id");
+            Current_PlateOfType = new PlateOfType { Plate_type_id = maxid+1};
             win = new Window_AddTypeOfplates { DataContext = this };
             win.ShowDialog();
 
@@ -112,10 +117,9 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-            //Personview PersonView = new Personview();
-            //PersonView.textbox1.Text = CurrentPerson.Id.ToString();
+        
             IsEditing = true;
-
+           
             win = new Window_AddTypeOfplates { DataContext = this };
 
             win.ShowDialog();
@@ -136,8 +140,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.User_id = Properties.Settings.Default.Userid;
                 Current_Activity.Form_id = 23;
                 Current_Activity.Activity_record_num = Current_PlateOfType.Plate_type_id;
-                Plates_Model.OperarionPlateOfType(Current_PlateOfType, "Delete");
-                Grid_PlateOftype.Remove(Current_PlateOfType);
+                
+             
                 //////////////////////////////////////////////////////////////
 
                 
@@ -147,6 +151,28 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+
+                if (Plates_Model.OperarionPlateOfType(Current_PlateOfType, "Delete"))
+                {
+                    Grid_PlateOftype.Remove(Current_PlateOfType);
+                    asyncPlateOfType();
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا النوع";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
 
             }
             else
@@ -161,7 +187,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {//ComboBoxes.Combo_usertype
          //////////////////////////////////////////////////////////////
 
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+            //Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
             Current_Activity.Form_id = 23;
@@ -204,7 +230,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 Plates_Model.OperarionPlateOfType(Current_PlateOfType, "Insert");
                 Grid_PlateOftype = new ObservableCollection<PlateOfType>();
-                Plates_Model.GetPlateOfType(Grid_PlateOftype);
+                Grid_PlateOftype= Plates_Model.GetPlateOfType();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية الأضافة";
@@ -234,7 +260,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Plates_Model.GetExcel(Grid_PlateOftype);
             Grid_PlateOftype = new ObservableCollection<PlateOfType>();
-            Plates_Model.GetPlateOfType(Grid_PlateOftype);
+            Grid_PlateOftype= Plates_Model.GetPlateOfType();
         }
 
         #endregion

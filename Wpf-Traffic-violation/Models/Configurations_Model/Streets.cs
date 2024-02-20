@@ -115,7 +115,12 @@ namespace Wpf_Traffic_violation.Models
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (string.IsNullOrWhiteSpace(Street_name))
+            {
+                Errors.Add("Street_name", "يجب ان يكون نص   ");
+            }
+           
         }
     }
 }

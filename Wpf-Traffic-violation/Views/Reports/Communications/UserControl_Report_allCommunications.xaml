@@ -7,7 +7,8 @@
               xmlns:Conver="clr-namespace:Wpf_Traffic_violation.Models.Converter"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-            mc:Ignorable="d" 
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             mc:Ignorable="d" 
               d:DesignHeight="560" d:DesignWidth="1110" Background="Beige">
     <UserControl.Resources>
         <Conver:BoolToVisibilityConverter x:Key="Convertbool"/>
@@ -42,22 +43,22 @@
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock Text="حسب :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
-                            <RadioButton x:Name="RadioButton_all"  GroupName="type of search" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="16 0 72 0"/>
-                            <RadioButton x:Name="RadioButton_namecitizen" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المُبلغ "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_all"  GroupName="type of search" IsChecked="{Binding All}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="16 0 72 0"/>
+                            <RadioButton x:Name="RadioButton_namecitizen" GroupName="type of search" IsChecked="{Binding Name_comm}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المُبلغ "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
                         </StackPanel>
                     </Border>
                     <Border BorderThickness="0 0 0 0" BorderBrush="LightGray" Opacity="50" Grid.Row="1">
                         <StackPanel Orientation="Horizontal"  >
-                            <RadioButton x:Name="RadioButton_id" GroupName="type of search" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="رقم البلاغ" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="110 0 44 0"/>
-                            <RadioButton x:Name="RadioButton_datemade" GroupName="type of search"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="تاريخ البلاغ"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_id" IsChecked="{Binding Numb_comm}" GroupName="type of search" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="رقم البلاغ" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="110 0 44 0"/>
+                            <RadioButton x:Name="RadioButton_datemade" IsChecked="{Binding Date_comm}" GroupName="type of search"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="تاريخ البلاغ"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
                         </StackPanel>
                     </Border>
                     <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2">
                         <StackPanel Orientation="Horizontal"  >
-                            <RadioButton x:Name="RadioButton_numberplate" GroupName="type of search" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="رقم اللوحة" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="110 0 39 0"/>
-                            <RadioButton x:Name="RadioButton_place" GroupName="type of search"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="مكان البلاغ " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_numberplate" IsChecked="{Binding Num_plat}" GroupName="type of search" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="رقم اللوحة" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="110 0 39 0"/>
+                            <RadioButton x:Name="RadioButton_place" IsChecked="{Binding Spac_comm}" GroupName="type of search"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="مكان البلاغ " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
                         </StackPanel>
                     </Border>
@@ -69,13 +70,14 @@
                             <TextBlock Text="أسم المُبلغ :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  x:Name="FilledComboBox1"
-                          
-                          materialDesign:HintAssist.Hint="أسم المُبلغ ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_user}"
+                           SelectedItem="{Binding Selected_users,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Username ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Border>
@@ -85,20 +87,21 @@
                             <TextBlock Text="رقم البلاغ :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  
-                          
-                          materialDesign:HintAssist.Hint="رقم البلاغ ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_communiction}"
+                           SelectedItem="{Binding Selected_communiction,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Communication_id ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Border>
 
                     <Border Name="border_datemade" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="3" Visibility="{Binding ElementName=RadioButton_datemade, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel  >
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="215" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="128 10 16 10" />
+                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Selected_communiction.Communication_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="215" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="128 10 16 10" />
 
                         </StackPanel>
                     </Border>
@@ -108,8 +111,21 @@
                             <TextBlock Text="رقم اللوحة :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <TextBlock Width="50" Height="40" Padding="10,10,0,0"  Margin="10,10,10,9" Background="White"></TextBlock>
-                            <TextBlock Width="150" Height="40" Padding="10,10,0,0"  Margin="5,10,10,9" Background="White"></TextBlock>
+                            <controls:AutoCompleteBox Name="a"  Width="150" ItemsSource="{Binding Grid_plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5"
+                                              ValueMemberPath="Plate_num" 
+                                              SelectedItem="{Binding  Selected_plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding  Selected_plate.Plate_num}" FilterMode="Contains" Margin="0 9 12 9"
+                                             
+                                          />
+                            <controls:AutoCompleteBox Name="B"  Width="64" ItemsSource="{Binding Grid_plate}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5"
+                                              ValueMemberPath="Province_id" 
+                                              SelectedItem="{Binding  Selected_plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Selected_plate.Province_id}" FilterMode="Contains" Margin="0 9 12 9"
+                                             
+                                          />
+
                         </StackPanel>
                     </Border>
                     <Border Name="border_place" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="3"  Visibility="{Binding ElementName=RadioButton_place, Path=IsChecked, Converter={StaticResource Convertbool}}" >
@@ -118,13 +134,14 @@
                             <TextBlock Text="مكان البلاغ :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  
-                          
-                          materialDesign:HintAssist.Hint="مكان البلاغ ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_communiction}"
+                           SelectedItem="{Binding Selected_communiction,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="ComboBox_Provinces" Text="{Binding Communication_place ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Border>
@@ -132,7 +149,7 @@
 
 
                     <StackPanel  Grid.Row="4" >
-                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding ShowREPORT_allcommuniction}"
                      Height="40"   Padding="0"    Width="140" >
                             <StackPanel Orientation="Horizontal" >
                                 <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />

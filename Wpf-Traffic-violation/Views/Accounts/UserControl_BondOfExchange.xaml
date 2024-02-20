@@ -22,12 +22,12 @@
                     <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0" Foreground="#FFE5E8F5"   Height="40" Width="40" Padding="0" Background="OrangeRed">
                         <materialDesign:PackIcon Kind="Search"   Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </materialDesign:Card>
-                  
-                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding grid_Users}" 
+
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_BondOfExchange}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_User , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_BondOfExchange , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
             
@@ -58,7 +58,7 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Grid_BondOfExchange}" 
+            <DataGrid Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Grid_BondOfExchange}" SelectedItem="{Binding Current_BondOfExchange}"
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1300" HorizontalAlignment="Right"
                         Height="480"  >
                 <DataGrid.Resources>

@@ -82,8 +82,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Trafficman_ViewModel()
         {
-            Grid_trafficmans = new ObservableCollection<TrafficMan>();
-            traffic_Man_Model.GetTrafficMans(Grid_trafficmans);
+            asyncTrafficman();
+           
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -93,12 +93,16 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id =18;
-            new AllPermissions().getPermission(PermissionUser);
+           
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
-
+        private async Task asyncTrafficman()
+        {
+            Grid_trafficmans = new ObservableCollection<TrafficMan>();
+            Grid_trafficmans = await Task.Run(()=> traffic_Man_Model.GetTrafficMans());
+        }
         public void Add()
         {
             int maxid = new Class_SqlConnection().Get_Max("Traffic_man");
@@ -240,7 +244,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             traffic_Man_Model.GetExcel(Grid_trafficmans);
             Grid_trafficmans = new ObservableCollection<TrafficMan>();
-            traffic_Man_Model.GetTrafficMans(Grid_trafficmans);
+            Grid_trafficmans=traffic_Man_Model.GetTrafficMans();
         }
 
         #endregion

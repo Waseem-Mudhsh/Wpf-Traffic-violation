@@ -24,9 +24,6 @@ namespace Wpf_Traffic_violation.Views
             InitializeComponent();
         }
 
-        private void But_close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
     }
 }

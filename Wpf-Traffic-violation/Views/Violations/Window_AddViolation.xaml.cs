@@ -55,5 +55,6 @@ namespace Wpf_Traffic_violation.Views
                 logo2.Source = new BitmapImage(new Uri(op.FileName));
             }
         }
+
     }
 }

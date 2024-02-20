@@ -40,7 +40,10 @@ namespace Wpf_Traffic_violation.Views
 
                 case 1:
                     {
-                        GridPageFrom1.Content = new UserControl_QureyIdNumber();
+                        UserControl_QureyIdNumber userControl_QureyIdNumber = new UserControl_QureyIdNumber();
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        GridPageFrom1.Content = userControl_QureyIdNumber;
                         
                         break;
                     }

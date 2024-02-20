@@ -25,23 +25,6 @@ namespace Wpf_Traffic_violation.Views
             InitializeComponent();
         }
 
-        private void RadioButton_day_Click(object sender, RoutedEventArgs e)
-        {
-            Panel_day.Visibility = Visibility.Visible;
-            panel_date.Visibility = Visibility.Hidden;
-            panel_Decument.Visibility = Visibility.Hidden;
-        }
-
-        private void RadioButton_Date_Click(object sender, RoutedEventArgs e)
-        {
-            grid_view.Visibility = Visibility.Visible;
-        }
-
-        private void RadioButton_Document_Click(object sender, RoutedEventArgs e)
-        {
-            panel_Decument.Visibility = Visibility.Visible;
-            panel_date.Visibility = Visibility.Hidden;  
-            Panel_day.Visibility = Visibility.Hidden;
-        }
+      
     }
 }

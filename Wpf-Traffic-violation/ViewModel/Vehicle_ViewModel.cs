@@ -159,12 +159,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Vehicle_ViewModel()
         {
-            Grid_Citizen = new ObservableCollection<Citizen>();
-            CitizenModel.GetCitizens(Grid_Citizen);
-            Grid_Provinces = new ObservableCollection<Provinces>();
-            provinces_Model.GetProvinces(Grid_Provinces);
-            Grid_Vehicle = new ObservableCollection<Vehicle>();
-            vehicle_Model.GetVehicles(Grid_Vehicle);
+            asyncVehicle();
+            
 
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -175,21 +171,36 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 20;
-            new AllPermissions().getPermission(PermissionUser);
+           
             ActivityModel ActivityModel;
+            Current_Activity = new Activity();
         }
 
         #endregion
         #region Methodes And Events
+        async Task asyncVehicle()
+        {
+            Grid_Vehicle = new ObservableCollection<Vehicle>();
+            Grid_Vehicle = await Task.Run(() => vehicle_Model.GetVehicles());
+        }
+        async Task asyncGrid()
+        {
+            Grid_Citizen = new ObservableCollection<Citizen>();
+            Grid_Citizen = await Task.Run(() => CitizenModel.GetCitizens());
+            Grid_Provinces = new ObservableCollection<Provinces>();
+            Grid_Provinces = await Task.Run(() => provinces_Model.GetProvinces());
+          
+        }
         public void Add()
         {
+            asyncGrid();
             Selected_Citizen = new Citizen();
             Selected_Provinc_vc = new Provinces();
             Selected_Province = new Provinces();
-            int maxid = new Class_SqlConnection().Get_Max("Vehicle");
+            //int maxid = new Class_SqlConnection().Get_Max("Vehicle");
 
 
-            Current_Vehicle = new Vehicle { Vehicle_card_id = maxid };
+            Current_Vehicle = new Vehicle ();
 
             win = new Window_AddDataVehicle { DataContext = this };
             win.ShowDialog();
@@ -201,16 +212,51 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
+            Grid_Citizen = new ObservableCollection<Citizen>();
+            Grid_Citizen = CitizenModel.GetCitizens();
+            Grid_Provinces = new ObservableCollection<Provinces>();
+            Grid_Provinces = provinces_Model.GetProvinces();
+           
             Selected_Citizen = new Citizen();
             Selected_Provinc_vc = new Provinces();
             Selected_Province = new Provinces();
+            foreach (Citizen a in Grid_Citizen)
+            {
+                if (a.Citizen_id == Current_Vehicle.Citizen_id)
+                    Selected_Citizen = a;
+            }
+            foreach (Provinces a in Grid_Provinces)
+            {
+                if (a.Province_id == Current_Vehicle.Release_plase)
+                    Selected_Provinc_vc = a;
+            }
+            foreach (Provinces a in Grid_Provinces)
+            {
+                if (a.Province_id == Current_Vehicle.Release_palc_c)
+                    Selected_Province = a;
+            }
+            if (Current_Vehicle.Status == 1)
+                Current_Vehicle.String_Status = "نشطة";
+            else if (Current_Vehicle.Status == 2)
+                Current_Vehicle.String_Status = "مفقودة";
+            else if (Current_Vehicle.Status == 3)
+                Current_Vehicle.String_Status = "منتهية";
 
-            IsEditing = true;
-
-
+            if (Current_Vehicle.Status_v == 1)
+                Current_Vehicle.String_Status_v = "نشطة";
+            else if (Current_Vehicle.Status_v == 2)
+                Current_Vehicle.String_Status_v = "غير نشط";
             win = new Window_AddDataVehicle { DataContext = this };
-
+            win.id_Vlical.Text = Current_Vehicle.Vehicle_card_id.ToString();
+            win.id_Vlical.IsEnabled = false;
+            win.Potty_id.IsEnabled = false;
+            win.Vehicle_customs_num.IsEnabled = false;
+            
             IsEditing = true;
+            win.id_Vlical.IsEnabled = false;
+            
+          
+            
             win.ShowDialog();
 
 
@@ -218,6 +264,7 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanEdit() => Current_Vehicle != null && PermissionUser.Update_opretion == true;
         void Delet()
         {
+            
             string message = "هل تريد الحذف ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -225,8 +272,6 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                vehicle_Model.OperarionVehicle(Current_Vehicle, "Delete");
-                Grid_Vehicle.Remove(Current_Vehicle);
                 //////////////////////////////////////////////////////////////
 
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
@@ -236,10 +281,33 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_record_num = Current_Vehicle.Potty_id;
 
                 //////////////////////////////////////////////////////////
-                ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 3;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
-                ////////////////////////////////////////////////////////////
+              
+               if( vehicle_Model.OperarionVehicle(Current_Vehicle, "Delete"))
+                {
+                    Grid_Vehicle.Remove(Current_Vehicle);
+                    asyncVehicle();
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                    ////////////////////////////////////////////////////////////
+                    Current_Activity.Activity_operation_num = 3;
+                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    ////////////////////////////////////////////////////////////
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذي المركبة";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -254,6 +322,10 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Vehicle.Citizen_id = Selected_Citizen.Citizen_id;
             Current_Vehicle.Release_palc_c = Selected_Province.Province_id;
             Current_Vehicle.Release_plase = Selected_Provinc_vc.Province_id;
+            if (string.IsNullOrWhiteSpace(Current_Vehicle.Noties))
+            {
+                Current_Vehicle.Noties = "لا شي";
+            }
             if (Current_Vehicle.String_Status == "نشطة")
             {
                 Current_Vehicle.Status = 1;
@@ -285,7 +357,7 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
             //////////////////////////////////////////////////////////////
-
+            Current_Activity = new Activity();
             Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
@@ -301,7 +373,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 vehicle_Model.OperarionVehicle(Current_Vehicle, "Update");
                 IsEditing = false;
                 Grid_Vehicle = new ObservableCollection<Vehicle>();
-                vehicle_Model.GetVehicles(Grid_Vehicle);
+                Grid_Vehicle=vehicle_Model.GetVehicles();
                 close();
                 string message = "تمت عملية التعديل بنجاح";
                 string caption = "عملية التعديل";
@@ -327,7 +399,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 vehicle_Model.OperarionVehicle(Current_Vehicle, "Insert");
                 //Current_Plate.Province_name = Selected_Provinces.Province_name;
                 Grid_Vehicle = new ObservableCollection<Vehicle>();
-                vehicle_Model.GetVehicles(Grid_Vehicle);
+                Grid_Vehicle= vehicle_Model.GetVehicles();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية اضافة";
@@ -352,7 +424,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             vehicle_Model.GetExcel(Grid_Vehicle);
             Grid_Vehicle = new ObservableCollection<Vehicle>();
-            vehicle_Model.GetVehicles(grid_Vehicle);
+            Grid_Vehicle=vehicle_Model.GetVehicles();
         }
         #endregion
         #region Commands

@@ -81,8 +81,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Citizen_ViewModel()
         {
-            Grid_Citizens = new ObservableCollection<Citizen>();
-            citizenModel.GetCitizens(Grid_Citizens);
+            asyncCitizen();
+            
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -92,19 +92,23 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 19;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
-
+        private async Task asyncCitizen()
+        {
+            Grid_Citizens = new ObservableCollection<Citizen>();
+            Grid_Citizens = await Task.Run(() => citizenModel.GetCitizens());
+        }
 
 
         public void Add()
         {
-            Currunt_Citizen = new Citizen { Citizen_identitytype = "شخصية", Citizen_blood_type = "+ O", String_social_status = "عازب" };
+            Currunt_Citizen = new Citizen ();
             win = new Window_AddCitizen { DataContext = this };
             win.ShowDialog();
 
@@ -115,10 +119,12 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-            //Personview PersonView = new Personview();
-            //PersonView.textbox1.Text = CurrentPerson.Id.ToString();
+            
             IsEditing = true;
             win = new Window_AddCitizen { DataContext = this };
+            win.Citizen_identitytype.IsEnabled = false;
+            win.citizenid.IsEnabled = false;
+            win.Citizen_name.IsEnabled = false;
             win.ShowDialog();
 
         }
@@ -140,15 +146,37 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_record_num = Currunt_Citizen.Citizen_id;
 
                 //////////////////////////////////////////////////////////
+
                
-                ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 3;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
-                ////////////////////////////////////////////////////////////
+                
+                
+                if (CitizenModel.OperarionCitizen(Currunt_Citizen, "Delete"))
+                {
+                    ////////////////////////////////////////////////////////////
+                    Current_Activity.Activity_operation_num = 3;
+                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    ////////////////////////////////////////////////////////////
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                    Grid_Citizens.Remove(Currunt_Citizen);
+                    asyncCitizen();
+                }
+                
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا المواطن";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
 
 
-                CitizenModel.OperarionCitizen(Currunt_Citizen, "Delete");
-                Grid_Citizens.Remove(Currunt_Citizen);
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+                
 
                
 
@@ -217,9 +245,9 @@ namespace Wpf_Traffic_violation.ViewModel
                     MessageBoxImage icon = MessageBoxImage.Error;
                     MessageBoxButton buttons = MessageBoxButton.OK;
                     MessageBox.Show(message, caption, buttons, icon);
-                    win.textBox_citizenid.Focus();
-                    win.textBox_citizenid.SelectionStart = 0;
-                    win.textBox_citizenid.SelectionLength = win.textBox_citizenid.Text.Length;
+                    //win.textBox_citizenid.Focus();
+                    //win.textBox_citizenid.SelectionStart = 0;
+                    //win.textBox_citizenid.SelectionLength = win.textBox_citizenid.Text.Length;
                 }
                 else
                 {
@@ -261,7 +289,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             citizenModel.GetExcel(Grid_Citizens);
             Grid_Citizens = new ObservableCollection<Citizen>();
-            citizenModel.GetCitizens(Grid_Citizens);
+            Grid_Citizens= citizenModel.GetCitizens();
         }
 
         #endregion

@@ -9,20 +9,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Services;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models.Configurations_Model
 {
     public class Plate_Model
     {
-
+        ValidationRegex validationRegex;
+        ViolationServices violationServices;
+        SP_Query sP_Query;
+        Isphelper isphelper;
         PlateOfType_Model PlateOfType_Model = new PlateOfType_Model();
         Provinces_Model Provinces_Model = new Provinces_Model();
+        public Plate_Model()
+        {
+            validationRegex= new ValidationRegex(); 
+            sP_Query = new SP_Query();   
+            violationServices = new ViolationServices();
+            isphelper = new Sphelper();
+        }
 
         ///////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////// start GetPlates/////////////////////////////////////
 
-        public void GetPlates(ObservableCollection<Plate> Plates)
+        public ObservableCollection<Plate> GetPlates()
         {
+            ObservableCollection<Plate> Plates = new ObservableCollection<Plate>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -63,27 +77,31 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                             Province_id = (int)row[7]
                         };
                         per.String_Plate_type = PlateOfType_Model.GetPlatetype_name(per.Plate_type);// يعطينا  نص نوع المخالفة 
-
                         per.Province_name = Provinces_Model.GetProvinces_name(per.Province_id);// يعطينا  نص مكان الإصدار 
                         if (per.Status == 1)
-                        {
-                            per.String_Status = "نشطه";
-                        }
+                            per.String_Status = "نشطة";
                         else if (per.Status == 2)
-                        {
-                            per.String_Status = "مفقودة";
-                        }
-                        else
-                        {
                             per.String_Status = "منتهية";
-                        }
+                        else if (per.Status == 3)
+                            per.String_Status = "مفقودة";
                         Plates.Add(per); //الي بنربطه مع الجريد فيو
                     }
                 }
             }
-
+            return Plates;
 
         }
+        public ObservableCollection<PlateDetails> GetPlatesDetails()
+        {
+            ObservableCollection<PlateDetails> Plates = new ObservableCollection<PlateDetails>();
+            Plates = violationServices.GetPlate();
+         
+            return Plates;
+
+        }
+
+
+
         ///////////////////////////////// end GetPlates/////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////
@@ -198,7 +216,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [Plates$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)
@@ -231,6 +249,37 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
             }
 
 
+        }
+
+        internal ObservableCollection<PlateOfType> GetplatType()
+        {
+            ObservableCollection<PlateOfType> plateOfTypes = new ObservableCollection<PlateOfType>();
+            try
+            {
+                var result = isphelper.GetCollection(sP_Query.GetplateType, validationRegex.nameOfSp(sP_Query.GetplateType));
+                if (result.Count>0)
+                {
+                    foreach (DataRow row in result)
+                    {
+                        var platetype = new PlateOfType() {
+                            Plate_type_id = (int)row[0],
+                            Plate_type_name= (string)row[1],
+                        };
+
+                        plateOfTypes.Add(platetype);
+                    }
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+
+            return plateOfTypes;
         }
         /////////////////////////////////end GetExcel/////////////////////////////////////
     }

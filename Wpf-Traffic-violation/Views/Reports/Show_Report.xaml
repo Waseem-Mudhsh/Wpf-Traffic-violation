@@ -6,28 +6,29 @@
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+     
         mc:Ignorable="d"
-        Title="Show_Report"  Height="679" Width="1110" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <Grid Background="White">
-        <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
-            <Grid Height="30" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-          
-
-                    <TextBlock  Grid.Column="1" Text=" بيانات سند صرف  " HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontWeight="Bold" Foreground="White" />
-                <Button Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="0,0,6,0" >
-                    <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                </Button>
-        
-            </Grid>
-        </materialDesign:ColorZone>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="649" VerticalAlignment="Bottom" Width="1110">
-            <rv:ReportViewer x:Name="ReportViewerDemo"/>
+        Title="Show_Report"  Height="900" Width="900" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
+    <Grid Background="White"  HorizontalAlignment="Center" >
+        <WindowsFormsHost   Height="900" Width="900" >
+            <rv:ReportViewer x:Name="ReportViewerDemo"  Dock="Fill"   >
+            </rv:ReportViewer>
         </WindowsFormsHost>
+        <!--<materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">-->
+        <!--<Grid Height="30"  >-->
+        <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,0" Grid.Row="0">
+                    <Button Grid.Row="1" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Right" x:Name="But_close"  Width="30" Height="30" Foreground="Wheat" Background="{x:Null}" BorderBrush="{x:Null}"  Click="But_close_Click" Padding="0" Margin="0,0,6,0" >
+                        <materialDesign:PackIcon  Kind="Close" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                    </Button>
+                </StackPanel>-->
+
+
+        <!--</Grid>-->
+        <!--</materialDesign:ColorZone>-->
 
     </Grid>
 </Window>

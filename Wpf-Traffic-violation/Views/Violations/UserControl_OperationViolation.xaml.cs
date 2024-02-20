@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Wpf_Traffic_violation.Views
 {
     /// <summary>
@@ -30,5 +31,10 @@ namespace Wpf_Traffic_violation.Views
             Window_AddViolation win = new Window_AddViolation();
             win.ShowDialog();
         }
+
+        private void filterSearchbycode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+         }
     }
 }

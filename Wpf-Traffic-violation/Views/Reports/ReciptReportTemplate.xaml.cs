@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Traffic_violation.Views
+namespace Wpf_Traffic_violation.Views.Reports
 {
     /// <summary>
-    /// Interaction logic for UserControl1GridDataCommunications.xaml
+    /// Interaction logic for ReciptReportTemplate.xaml
     /// </summary>
-    public partial class UserControl1GridDataCommunications : UserControl
+    public partial class ReciptReportTemplate : Window
     {
-        public UserControl1GridDataCommunications()
+        public ReciptReportTemplate()
         {
             InitializeComponent();
         }

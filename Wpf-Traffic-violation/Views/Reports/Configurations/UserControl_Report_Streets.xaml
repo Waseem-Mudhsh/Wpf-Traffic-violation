@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports.Configurations"
               xmlns:Conver="clr-namespace:Wpf_Traffic_violation.Models.Converter"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
               d:DesignHeight="560" d:DesignWidth="1110" Background="Beige">
     <UserControl.Resources>
@@ -37,8 +38,8 @@
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock Text="نوع البحث :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
-                            <RadioButton x:Name="RadioButton_all" GroupName="type of search" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
-                            <RadioButton x:Name="RadioButton_idnumber" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المديرية"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_all" GroupName="type of search" IsChecked="{Binding All}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_idnumber" GroupName="type of search" IsChecked="{Binding Directore}" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="أسم المديرية"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
                         </StackPanel>
                     </Border>
@@ -48,18 +49,17 @@
                             <TextBlock Text="أسم المديرية  :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  x:Name="FilledComboBox"
-                          
-                          materialDesign:HintAssist.Hint="أسم المديرية ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
-                            </ComboBox>
+                            <controls:AutoCompleteBox Name="a"  Width="185" ItemsSource="{Binding grid_directore}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14" Padding="20 8 0 5"
+                                              ValueMemberPath="Directorate_name" 
+                                              SelectedItem="{Binding  Selected_directo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Text="{Binding   Selected_directo.Directorate_name}" FilterMode="Contains" Margin="0 9 12 9"
+                                             
+                                          />
                         </StackPanel>
                     </Border>
                     <StackPanel  Grid.Row="2" >
-                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding Repory_streets}"
                      Height="40"   Padding="0"    Width="140" >
                             <StackPanel Orientation="Horizontal" >
                                 <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />

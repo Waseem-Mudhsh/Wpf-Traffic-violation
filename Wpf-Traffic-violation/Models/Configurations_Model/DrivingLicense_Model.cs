@@ -20,8 +20,9 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         ///////////////////////////////// start GetPlates/////////////////////////////////////
 
-        public void GetDrivingLicenses(ObservableCollection<DrivingLicense> DrivingLicenses)
+        public ObservableCollection<DrivingLicense> GetDrivingLicenses()
         {
+            ObservableCollection<DrivingLicense> DrivingLicenses = new ObservableCollection<DrivingLicense>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -69,7 +70,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                     }
                 }
             }
-
+            return DrivingLicenses;
 
         }
         ///////////////////////////////// end GetPlates/////////////////////////////////////
@@ -77,10 +78,14 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         public bool OperarionDrivingLicense(DrivingLicense DrivingLicenses, string operartion)
         {
+            if (string.IsNullOrWhiteSpace(DrivingLicenses.Driving_license_notice))
+            {
+                DrivingLicenses.Driving_license_notice = "لا شي";
+            }
             Class_SqlConnection sql = new Class_SqlConnection();
 
             SqlParameter[] param = new SqlParameter[8];
-            //@user_id, @user_name, @user_pass, @user_type, @user_status
+            
 
             param[0] = new SqlParameter("@Driving_license_id", SqlDbType.Int)
             {
@@ -102,11 +107,11 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
             {
                 Value = DrivingLicenses.Date_frist_license
             };
-            param[5] = new SqlParameter("@Driving_license_notice", SqlDbType.NVarChar, 50)
+            param[5] = new SqlParameter("@Driving_license_notice", SqlDbType.NVarChar,50)
             {
                 Value = DrivingLicenses.Driving_license_notice
             };
-            param[6] = new SqlParameter("@Status", SqlDbType.NVarChar, 50)
+            param[6] = new SqlParameter("@Status", SqlDbType.NVarChar, 10)
             {
                 Value = DrivingLicenses.Status
             };
@@ -185,7 +190,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [DrivingLicenses$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)

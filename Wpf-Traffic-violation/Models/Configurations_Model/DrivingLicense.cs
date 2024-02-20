@@ -188,7 +188,19 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         public override void CollectErrors()
         {
-            throw new NotImplementedException();
+            Errors.Clear();
+            if (Driving_license_id == 0)
+            {
+                Errors.Add("Driving_license_id", "يجب أن لايكون فارغ ");
+            }
+            if (string.IsNullOrWhiteSpace(Release_date))
+            {
+                Errors.Add("Release_date", "يجب أدخال التاريخ ");
+            }
+            if (string.IsNullOrWhiteSpace(Date_frist_license))
+            {
+                Errors.Add("Date_frist_license", "يجب أدخال التاريخ ");
+            }
         }
     }
 }

@@ -8,9 +8,9 @@
              xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="1360">
-    <!--<UserControl.DataContext>
+    <UserControl.DataContext>
         <ViewModel:ReportUser_ViewModel/>
-    </UserControl.DataContext>-->
+    </UserControl.DataContext>
     <Grid Height="560">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,31 +24,25 @@
                 
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1">
-                <Button Uid="1" Name="but1" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Click="Button_Click" Margin="10" >
+                <Button Uid="1" Name="but1" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand1}" Margin="10" >
                     <StackPanel Orientation="Horizontal"  >
                         <TextBlock  VerticalAlignment="Center"   > كشف المستخدمين</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
-                <Button Uid="2" Name="but2" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Click="Button_Click" >
+                <Button Uid="2" Name="but2" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand4}">
                     <StackPanel Orientation="Horizontal"  >
                         <TextBlock  VerticalAlignment="Center"   > كشف المجموعات</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
-                <Button Uid="3" Name="but3" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
+                <Button Uid="3" Name="but3" HorizontalAlignment="Right" Command="{Binding Showcommand2}" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
                     <StackPanel Orientation="Horizontal"  >
                         <TextBlock  VerticalAlignment="Center"   > كشف مستخدم</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
-                <Button Uid="4" Name="but4" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
-                    <StackPanel Orientation="Horizontal"  >
-                        <TextBlock  VerticalAlignment="Center"   > كشف الصلاحيات</TextBlock>
-                        <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
-                    </StackPanel>
-                </Button>
-                <Button Uid="5" Name="but5" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
+                <Button Uid="5" Name="but5" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}"  Command="{Binding Showcommand3}"  >
                     <StackPanel Orientation="Horizontal"  >
                         <TextBlock  VerticalAlignment="Center"   > كشف حركة المستخدمين</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
@@ -60,7 +54,7 @@
             
         </Grid>
         <!--///////////////////////// Search////////////////////////////////////-->
-        <Frame Name="Frame_Search_users" Grid.Column="0" Background="White" NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="Frame_Search_users" Grid.Column="0" Content="{Binding Curent_usercontrol}" Background="White" NavigationUIVisibility="Hidden" ></Frame>
         <!--///////////////////////// Reports////////////////////////////////////-->
 
     </Grid>

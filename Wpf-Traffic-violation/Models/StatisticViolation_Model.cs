@@ -10,7 +10,7 @@ namespace Wpf_Traffic_violation.Models
 {
     public class StatisticViolation_Model
     {
-        public int GetStatisticViolation(string from,string to ,int typ)
+        public string GetStatisticViolation(string from,string to ,int typ)
         {
            // int total = 0;
            int count = 0;
@@ -18,7 +18,7 @@ namespace Wpf_Traffic_violation.Models
             VoilationModel V = new VoilationModel();
 
             ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
-            V.GetViolation(Violations);
+           Violations= V.GetViolation();
             if (from == "" && to == "")
             {
                 if (typ == 1)
@@ -68,10 +68,10 @@ namespace Wpf_Traffic_violation.Models
                 {
                     foreach (Violation a in Violations)
                     {
-                        if (a.Payment_status == 0 && (a.Violation_date == from || a.Violation_date == to))
+                        if (a.Payment_status == 0 &&  (DateTime.Parse(a.Violation_date) >= DateTime.Parse(from) && DateTime.Parse(a.Violation_date) <= DateTime.Parse(to)))
                         {
                             count += 1;
-                            //total = total + a.Amount + a.Violation_penalty;
+                         
 
                         }
 
@@ -79,7 +79,7 @@ namespace Wpf_Traffic_violation.Models
                 }
 
             }
-            return count;
+            return count.ToString();
 
         }
 

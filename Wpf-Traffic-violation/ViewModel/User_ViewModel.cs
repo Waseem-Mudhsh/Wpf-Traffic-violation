@@ -25,7 +25,7 @@ namespace Wpf_Traffic_violation.ViewModel
         Models.TrafficmanModel trafficMan = new TrafficmanModel();
         PermissionUser PermissionUser;
         ActivityModel ActivityModel = new ActivityModel();
-
+        
         #endregion
         #region Proprties
 
@@ -45,9 +45,57 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+        ObservableCollection<User> grid_Users;
+        public ObservableCollection<User> Grid_Users
+        {
+            get
+            {
+                return grid_Users;
+            }
+            set
+            {
+                if (grid_Users != value)
+                {
+                    grid_Users = value;
+                    RaisePropertyChanged("Grid_Users");
+                }
+            }
+        }
 
-        public ObservableCollection<User> grid_Users { get; set; }
-        public ObservableCollection<TrafficMan> get_Trafficman { get; set; }
+
+        ObservableCollection<TrafficMan> grid_Trafficman;
+        public ObservableCollection<TrafficMan> Grid_Trafficman
+        {
+            get
+            {
+                return grid_Trafficman;
+            }
+            set
+            {
+                if (grid_Trafficman != value)
+                {
+                    grid_Trafficman = value;
+                    RaisePropertyChanged("Grid_Trafficman");
+                }
+            }
+        }
+        ObservableCollection<TrafficMan> grid_CombboxTraffic;
+        public ObservableCollection<TrafficMan> Grid_CombboxTraffic
+        {
+            get
+            {
+                return grid_CombboxTraffic;
+            }
+            set
+            {
+                if (grid_CombboxTraffic != value)
+                {
+                    grid_CombboxTraffic = value;
+                    RaisePropertyChanged("Grid_CombboxTraffic");
+                }
+            }
+        }
+
         User currunt_User; //selectedItemيربط مع 
         public User Currunt_User
         {
@@ -84,17 +132,25 @@ namespace Wpf_Traffic_violation.ViewModel
         }
 
 
-
+       
 
 
         #endregion
         #region Construcor
         public User_ViewModel()
         {
-            grid_Users = new ObservableCollection<User>();
-            grid_Users = userModel.GetUsers();
-            get_Trafficman = new ObservableCollection<TrafficMan>();
-            trafficMan.GetTrafficMans(get_Trafficman);
+            Grid_CombboxTraffic = new ObservableCollection<TrafficMan>();
+          
+            Grid_Trafficman = new ObservableCollection<TrafficMan>();
+            Grid_Trafficman = trafficMan.Get_trafficmanNametoUser();
+           
+            //Grid_Trafficman = trafficMan.Get_trafficmanNametoUser();
+            //var watch = System.Diagnostics.Stopwatch.StartNew();
+            Grid_Users = new ObservableCollection<User>();
+            Grid_Users =  userModel.GetUsers();
+            //watch.Stop();
+            //var elapsedMs = watch.ElapsedMilliseconds;
+            //MessageBox.Show($"Total execution time1:{ elapsedMs}");
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -104,16 +160,26 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 29;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
+           
         }
         #endregion
         #region Methodes And Events
+        private async Task asyncUser()
+        {
+            Grid_Users = new ObservableCollection<User>();
+            Grid_Users =  await Task.Run(()=> userModel.GetUsers());
+
+            //Grid_Trafficman = await Task.Run(()=> trafficMan.Get_trafficmanNametoUser());
+        }
         public void Add()
         {
+            Grid_CombboxTraffic = trafficMan.Get_trafficmanNametoUser_Combbox();
             int maxid = new Class_SqlConnection().Get_Max("User");
-
+          
+           
             Currunt_User = new User { Userid = maxid, String_usertype = "النظام" };
             Selected_TrafficMan = new TrafficMan();
             win = new Window_AddUser { DataContext = this };
@@ -126,35 +192,39 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-
+            Grid_Trafficman = trafficMan.Get_trafficmanNametoUser();
             IsEditing = true;
+            Selected_TrafficMan = new TrafficMan();
             win = new Window_AddUser { DataContext = this };
-            win.Combobox_userName.IsEnabled = false;
+            foreach (TrafficMan a in Grid_Trafficman)
+            {
+                if (a.User_id == Currunt_User.Userid)
+                    Selected_TrafficMan = a;
+            }
+        
+            win.trafficman.SelectedItem = Selected_TrafficMan;
+            win.trafficman.IsEnabled = false;
             win.ShowDialog();
 
         }
         bool CanEdit() => Currunt_User != null && PermissionUser.Update_opretion == true;
         void Delet()
         {
-            selected_TrafficMan = new TrafficMan();
+            Selected_TrafficMan = new TrafficMan();
+            foreach (TrafficMan a in Grid_Trafficman)
+            {
+                if (a.User_id == Currunt_User.Userid)
+                    Selected_TrafficMan = a;
+            }
             string message = "هل تريد الحذف ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
-            selected_TrafficMan.Traffic_man_id = Currunt_User.Userid;
-            Selected_TrafficMan.User_id = Currunt_User.Userid;
-
+            //Selected_TrafficMan.Traffic_man_id = Currunt_User.Userid;
+            //Selected_TrafficMan.User_id = Currunt_User.Userid;
+            asyncUser();
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                UserModel.OperarionUser(Currunt_User, "Delete");
-                trafficMan.Update_Uesrid(Selected_TrafficMan, "Delete_User");
-                grid_Users.Remove(Currunt_User);
-                string message1 = "تمت عملية الحذف بنجاح";
-                string caption1 = "عملية التعديل";
-                MessageBoxImage icon1 = MessageBoxImage.Information;
-                MessageBoxButton buttons1 = MessageBoxButton.OK;
-                MessageBox.Show(message1, caption1, buttons1, icon1);
-
                 //////////////////////////////////////////////////////////////
 
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
@@ -163,11 +233,24 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Form_id = 29;
                 Current_Activity.Activity_record_num = Currunt_User.Userid;
 
+                
+
+                trafficMan.Update_Uesrid(Selected_TrafficMan, "Delete_User");
+                UserModel.OperarionUser(Currunt_User, "Delete");
+                Grid_Users.Remove(Currunt_User);
+                
+                string message1 = "تمت عملية الحذف بنجاح";
+                string caption1 = "عملية التعديل";
+                MessageBoxImage icon1 = MessageBoxImage.Information;
+                MessageBoxButton buttons1 = MessageBoxButton.OK;
+                MessageBox.Show(message1, caption1, buttons1, icon1);
                 //////////////////////////////////////////////////////////
                 ////////////////////////////////////////////////////////////
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+
+
             }
             else
             {
@@ -208,6 +291,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
 
                 UserModel.OperarionUser(Currunt_User, "Update");
+                
                 IsEditing = false;
                 close();
                 string message = "تمت عملية التعديل بنجاح";
@@ -238,9 +322,10 @@ namespace Wpf_Traffic_violation.ViewModel
             {
 
 
-                trafficMan.Update_Uesrid(Selected_TrafficMan, "Updete_User");
                 UserModel.OperarionUser(Currunt_User, "Insert");
-                grid_Users.Add(Currunt_User);
+                trafficMan.Update_Uesrid(Selected_TrafficMan, "Updete_User");
+
+                Grid_Users.Add(Currunt_User);
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية الإضافة";

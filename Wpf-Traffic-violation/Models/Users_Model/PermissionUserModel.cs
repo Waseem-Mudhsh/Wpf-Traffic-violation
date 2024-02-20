@@ -14,8 +14,9 @@ namespace Wpf_Traffic_violation.Models.Users_Model
     {
         ///////////////////////////////// start GetPermissionUser/////////////////////////////////////
 
-        public void GetPermissionUser(ObservableCollection<PermissionUser> PermissionUsers, string menu, int user_Id)
+        public ObservableCollection<PermissionUser> GetPermissionUser( string menu, int user_Id)
         {
+            ObservableCollection<PermissionUser> PermissionUsers = new ObservableCollection<PermissionUser>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -64,7 +65,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                     }
                 }
             }
-
+            return PermissionUsers;
 
         }
         ///////////////////////////////// end GetPermissionGroup/////////////////////////////////////

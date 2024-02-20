@@ -212,10 +212,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public QueryReferenceNumberViewModel()
         {
-            Grid_Plate = new ObservableCollection<Plate>();
-            Plate_Model.GetPlates(Grid_Plate);
-            Query_Violation = new ObservableCollection<Violation>();
-            ViolationModel.GetViolation(Query_Violation);
+            asyncQueryReferenceNumber();
+            
             Showcommand = new RelayCommand(Par => Show(), Par => CanShow());
             Paycommand = new RelayCommand(Par => Pay(), Par => CanPay());
             ConfimPaycommand = new RelayCommand(Par => Confimpay(), Par => CanConfimpay());
@@ -229,12 +227,19 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         #endregion
         #region Methodes And Events
-        void Show()
+        async Task asyncQueryReferenceNumber()
+        {
+            Grid_Plate = new ObservableCollection<Plate>();
+            Grid_Plate = await Task.Run(() => Plate_Model.GetPlates());
+            Query_Violation = new ObservableCollection<Violation>();
+            Query_Violation = await Task.Run(() => ViolationModel.GetViolation());//بدلنه
+        }
+        async Task Show()
         {
             TotalAmount = 0;
 
             Grid_Violation = new ObservableCollection<Violation>();
-            QueryReferenceNumberModel.GetViolation(Grid_Violation, Selected_Violation.Violation_id);
+            Grid_Violation= await Task.Run(() => QueryReferenceNumberModel.GetViolation( Selected_Violation.Violation_id));
             Count = Grid_Violation.Count;
            
             TotalAmount = Selected_Violation.Amount + Selected_Violation.Violation_penalty;
@@ -291,7 +296,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 foreach (Violation v in Grid_Violation1)
                 {
                     amount = v.Amount + v.Violation_penalty;
-                    ReceiptModel.OperarionReceiptdetail(x, Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount,"Insert");
+                    //ReceiptModel.OperarionReceiptdetail(x, Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount,"Insert");
 
                     v.Payment_status = 1;
                     VoilationModel.OperarionViolation(v, "Update");
@@ -303,7 +308,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         Current_Receipt.Account_id = aa.Account_id;
                         Current_Receipt.Receipt_amount = amount;
                         ReceiptModel.OperarionReceipt(Current_Receipt, "Insert");
-                        ReceiptModel.OperarionReceiptdetail(new Class_SqlConnection().Get_Max("Receipt_detail"), Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount, "Insert");
+                        //ReceiptModel.OperarionReceiptdetail(new Class_SqlConnection().Get_Max("Receipt_detail"), Current_Receipt.Receipt_id, v.String_ViolationType, v.Violation_id, amount, "Insert");
 
                         EntryModel.AddEntry(new Class_SqlConnection().Get_Max("Entry"), Current_Receipt.Receipt_statement, Current_Receipt.Receipt_date, 111101, aa.Account_id, v.Amount + v.Violation_penalty);
                         }
@@ -316,7 +321,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 MessageBox.Show("تمت عملية السداد بنجاح");
             win.Close();
             Grid_Violation.Clear();
-            QueryReferenceNumberModel.GetViolation(Grid_Violation, Selected_Violation.Violation_id);
+            Grid_Violation= QueryReferenceNumberModel.GetViolation( Selected_Violation.Violation_id);
 
 
         }

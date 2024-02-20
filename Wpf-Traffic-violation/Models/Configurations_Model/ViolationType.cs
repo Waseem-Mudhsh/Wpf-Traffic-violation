@@ -152,6 +152,14 @@ namespace Wpf_Traffic_violation.Models
             {
                 Errors.Add("Violation_type_name", "يجب أن يكون نص ");
             }
-    }
+            if (Minimum_price == 0)
+            {
+                Errors.Add("Minimum_price", "يجب أدخال قيمة  ");
+            }
+            if (Maximum_price == 0)
+            {
+                Errors.Add("Maximum_price", "يجب أدخال قيمة  ");
+            }
+        }
     }
 }

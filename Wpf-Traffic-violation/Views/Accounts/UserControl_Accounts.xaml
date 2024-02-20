@@ -39,18 +39,18 @@
                         <TextBlock    >سند صرف</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <!--<Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical" Width="100" HorizontalAlignment="Center" >
                         <materialDesign:PackIcon Kind="Https"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    HorizontalAlignment="Center">حافظة توريد</TextBlock>
                     </StackPanel>
-                </Button>
+                </Button>-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="1" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Add"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >إضافة حساب</TextBlock>
+                        <TextBlock    >عمليات الحساب</TextBlock>
                     </StackPanel>
                 </Button>
 

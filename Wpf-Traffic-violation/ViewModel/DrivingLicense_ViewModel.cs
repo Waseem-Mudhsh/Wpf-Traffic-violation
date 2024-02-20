@@ -143,17 +143,11 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public DrivingLicense_ViewModel()
         {
-            Grid_DrivingLicense = new ObservableCollection<DrivingLicense>();
-            drivingModel.GetDrivingLicenses(Grid_DrivingLicense);
-
-            Grid_Citizen = new ObservableCollection<Citizen>();
-            CitizenModel.GetCitizens(Grid_Citizen);
-
-            Grid_Class_license = new ObservableCollection<CategoriesOfLicenses>();
-            CategoriesOfLicenses_Model.GetCategoriesOfLicenses(Grid_Class_license);
+            asyncDrivingLicense();
+            asyncGrid();
 
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
+            Editcommand = new RelayCommand(par => Edit( Grid_Class_license), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
             Savecommand = new RelayCommand(par => Save(), par => CanSave());
             Closecommand = new RelayCommand(par => close());
@@ -161,21 +155,39 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 22;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        private async Task asyncDrivingLicense()
+        {
+            Grid_DrivingLicense = new ObservableCollection<DrivingLicense>();
+            Grid_DrivingLicense = await Task.Run(() => drivingModel.GetDrivingLicenses());
+
+           
+        }
+        private async Task asyncGrid()
+        {
+           
+
+            Grid_Citizen = new ObservableCollection<Citizen>();
+            Grid_Citizen = await Task.Run(() => CitizenModel.GetCitizens());
+
+            Grid_Class_license = new ObservableCollection<CategoriesOfLicenses>();
+            Grid_Class_license = await Task.Run(() => CategoriesOfLicenses_Model.GetCategoriesOfLicenses());
+        }
         public void Add()
         {
+            asyncGrid();
             Selected_Citizen = new Citizen();
             Selected_Class_license = new CategoriesOfLicenses();
 
-            int maxid = new Class_SqlConnection().Get_Max("Driving_license");
+            //int maxid = new Class_SqlConnection().Get_Max("Driving_license");
 
 
-            Current_DrivingLicense = new DrivingLicense { Driving_license_id = maxid, Status = "نشطه" };
+            Current_DrivingLicense = new DrivingLicense ();
 
             win = new Window_AddDataDrivinglicense { DataContext = this };
             win.ShowDialog();
@@ -185,17 +197,31 @@ namespace Wpf_Traffic_violation.ViewModel
 
         }
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
-        void Edit()
+        void Edit(ObservableCollection<CategoriesOfLicenses> grid_Class_license)
         {
+            ObservableCollection<Citizen> Grid_Citizen = new ObservableCollection<Citizen>();
+            Grid_Citizen = grid_Citizen;
+            ObservableCollection<CategoriesOfLicenses> Grid_Class_license = new ObservableCollection<CategoriesOfLicenses>();
+            Grid_Class_license = grid_Class_license;
             Selected_Citizen = new Citizen();
             Selected_Class_license = new CategoriesOfLicenses();
 
             IsEditing = true;
+            foreach (Citizen a in Grid_Citizen)
+            {
+                if (a.Citizen_id == Current_DrivingLicense.Citizen_id)
+                    Selected_Citizen = a;
+            }
 
-
+            foreach (CategoriesOfLicenses a in Grid_Class_license)
+            {
+                if (a.Class_licence_ID == Current_DrivingLicense.Class_license_id)
+                    Selected_Class_license = a;
+            }
             win = new Window_AddDataDrivinglicense { DataContext = this };
-
-            IsEditing = true;
+            win.nembercitizen.IsEnabled = false;
+          
+           
             win.ShowDialog();
 
 
@@ -211,8 +237,7 @@ namespace Wpf_Traffic_violation.ViewModel
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
 
-                drivingModel.OperarionDrivingLicense(Current_DrivingLicense, "Delete");
-                Grid_DrivingLicense.Remove(Current_DrivingLicense);
+               
 
                 //////////////////////////////////////////////////////////////
 
@@ -227,6 +252,30 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+
+               if( drivingModel.OperarionDrivingLicense(Current_DrivingLicense, "Delete"))
+                {
+                    Grid_DrivingLicense.Remove(Current_DrivingLicense);
+                    asyncDrivingLicense();
+
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذي الرخصة";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -260,7 +309,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 drivingModel.OperarionDrivingLicense(Current_DrivingLicense, "Update");
                 IsEditing = false;
                 Grid_DrivingLicense = new ObservableCollection<DrivingLicense>();
-                drivingModel.GetDrivingLicenses(Grid_DrivingLicense);
+                Grid_DrivingLicense=drivingModel.GetDrivingLicenses();
                 close();
                 string message = "تمت عملية التعديل بنجاح";
                 string caption = "عملية التعديل";
@@ -284,13 +333,17 @@ namespace Wpf_Traffic_violation.ViewModel
 
             else
             {
+               //if(string.IsNullOrWhiteSpace(Current_DrivingLicense.Driving_license_notice))
+               // {
+               //     Current_DrivingLicense.Driving_license_notice = "لا شي";
+               // }
                 drivingModel.OperarionDrivingLicense(Current_DrivingLicense, "Insert");
                 //Current_Plate.Province_name = Selected_Provinces.Province_name;
                 Grid_DrivingLicense = new ObservableCollection<DrivingLicense>();
-                drivingModel.GetDrivingLicenses(Grid_DrivingLicense);
+                Grid_DrivingLicense= drivingModel.GetDrivingLicenses();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
-                string caption = "عملية اضافة";
+                string caption = "عملية الإضافة";
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
@@ -313,7 +366,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             drivingModel.GetExcel(Grid_DrivingLicense);
             Grid_DrivingLicense = new ObservableCollection<DrivingLicense>();
-            drivingModel.GetDrivingLicenses(Grid_DrivingLicense);
+            Grid_DrivingLicense= drivingModel.GetDrivingLicenses();
         }
         #endregion
 

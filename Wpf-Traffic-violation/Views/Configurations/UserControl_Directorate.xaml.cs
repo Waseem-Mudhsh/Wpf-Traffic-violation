@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -29,6 +17,30 @@ namespace Wpf_Traffic_violation.Views
         {
             Window_ِAddDirectorate win = new Window_ِAddDirectorate();
             win.ShowDialog();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void DataGridCell_Selected(object sender, RoutedEventArgs e)
+        {
+            // Your custom logic here
+            DataGridCell cell = sender as DataGridCell;
+            if (cell != null)
+            {
+                // Get the row and column indices of the selected cell
+                //int rowIndex = cell.GetIndex();
+                //int columnIndex = cell.Column.DisplayIndex;
+
+                //// Get the DataGrid that contains the selected cell
+                //DataGrid dataGrid = FindParent<DataGrid>(cell);
+
+                //// Get the item that is bound to the selected cell's row
+                //var item = dataGrid.Items[rowIndex];
+
+                // Perform your custom actions here
+            }
         }
     }
 }

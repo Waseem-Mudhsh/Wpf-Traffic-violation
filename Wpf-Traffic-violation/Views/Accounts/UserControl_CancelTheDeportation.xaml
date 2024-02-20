@@ -5,29 +5,40 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+             xmlns:Conver="clr-namespace:Wpf_Traffic_violation.Models.Converter"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
               d:DesignHeight="462" d:DesignWidth="1360" Background="White">
+    <UserControl.DataContext>
+        <ViewModel:DeportationViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Conver:BoolToVisibilityConverter x:Key="Convertbool"/>
+
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="110"/>
             <RowDefinition Height="352" />
 
         </Grid.RowDefinitions>
-        <Border BorderThickness="0 0 0 1" BorderBrush="Blue">
+        <Border BorderThickness="0 0 0 1" BorderBrush="DarkBlue">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="1100"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Width="190" Margin="0 0" Grid.Column="0">
-                    <Button  x:Name="But_Delete_Citizen" Click="RadioButton_Date_Click"
+                    <Button  x:Name="But_Delete_Citizen" Command="{Binding Showcommand}"
                      Height="40" Uid="7"   Padding="0" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10" Width="120" >
                         <StackPanel Orientation="Horizontal" Width="86">
                             <materialDesign:PackIcon Kind="Search" Margin="5 0 8 0" Width="24" Height="24" />
                             <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">عرض</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button  
+                    <Button  Command="{Binding CancelDeportationcommand}"
                      Height="40" Uid="7"   Padding="0" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Width="120" >
                         <StackPanel Orientation="Horizontal" Width="120">
                             <materialDesign:PackIcon Kind="Cancel" Margin="5 0 8 0" Width="24" Height="24" />
@@ -35,104 +46,149 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-                
-                    <StackPanel Grid.Column="1" Orientation="Vertical" FlowDirection="RightToLeft" Width="1100"   >
-                        <!--top-->
-                        <StackPanel Orientation="Horizontal" >
-                           
-                            <TextBlock Text="نوع السند :" Margin="15,14,0 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="94" FontSize="16" />
-                            <RadioButton  Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="صرف  "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="30 0 0 0"/>
-                            <RadioButton  Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="قبض "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold"/>
-                        </StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="344*"/>
-                                <ColumnDefinition Width="756*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="نوع الترحيل :" Margin="15,14,1,14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="94" FontSize="16" />
-                                    <RadioButton x:Name="RadioButton_day"  Style="{StaticResource MaterialDesignAccentRadioButton}" Content="يوم  " Click="RadioButton_day_Click"  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="30 0 10 0"/>
-                                    <RadioButton x:Name="RadioButton_Date" Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="فترة " Click="RadioButton_Date_Click" FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="0 0 10 0"/>
-                                    <RadioButton x:Name="RadioButton_Document" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="مستند " Click="RadioButton_Document_Click"  FontFamily="Tajawal" FontSize="16" FontWeight="Bold"/>
-                                </StackPanel>
 
-                            </StackPanel>
-                            <Border x:Name="Panel_day"  Visibility="Hidden" Grid.Column="1" Width="352" BorderThickness="1" BorderBrush="OrangeRed" Margin="1 1 401 1">
-                                <StackPanel  Orientation="Horizontal"  Background="White">
-                                    <TextBlock Text="التاريخ :" Margin="40,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
-                                    <DatePicker  materialDesign:HintAssist.Hint="التاريخ ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="2"/>
-                                </StackPanel>
-                            </Border>
-                            <Border x:Name="panel_date"  Visibility="Hidden" Grid.Column="1" Width="660" BorderThickness="1" BorderBrush="OrangeRed" Margin="1 1 93 1">
-                                <StackPanel  Orientation="Horizontal"  Grid.Column="1" Background="White">
-                                    <TextBlock Text="من تاريخ  :" Margin="40,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
-                                    <DatePicker  materialDesign:HintAssist.Hint="من ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="2"/>
-                                    <TextBlock Text="من تاريخ  :" Margin="46,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
-                                    <DatePicker  materialDesign:HintAssist.Hint="من ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="14" BorderThickness="2"/>
-                                </StackPanel>
-                            </Border>
-                            <StackPanel x:Name="panel_Decument" Visibility="Hidden" Grid.Column="1" Background="White"></StackPanel>
-                        </Grid>
+                <StackPanel Grid.Column="1" Orientation="Vertical" FlowDirection="RightToLeft" Width="1100"   >
+                    <!--top-->
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="نوع السند :" Margin="26,14,0 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="94" FontSize="16" />
+                        <RadioButton  Name="Radio_BondOfExchange" Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="True"   Content="صرف  "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="20 0"/>
+                        <RadioButton Name="Radio_Receipts"  Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="{Binding Is_Receipt}"  Content="قبض "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold"/>
                     </StackPanel>
-                
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="344*"/>
+                            <ColumnDefinition Width="756*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="نوع الترحيل :" Margin="25,14,1,14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="94" FontSize="16" />
+                                <RadioButton x:Name="RadioButton_day"  Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="{Binding Is_day}" Content="يوم  "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="20 0 10 0"/>
+                                <RadioButton x:Name="RadioButton_Date" Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="{Binding Is_date}"  Content="فترة "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="0 0 10 0"/>
+                                <RadioButton x:Name="RadioButton_Document" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="السند "   FontFamily="Tajawal" FontSize="16" FontWeight="Bold"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <Border x:Name="Panel_day"   Grid.Column="1" Width="352" BorderThickness="1" BorderBrush="OrangeRed" Margin="1 1 401 1"  Visibility="{Binding ElementName=RadioButton_day, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                            <StackPanel  Orientation="Horizontal"  Background="White">
+                                <TextBlock Text="التاريخ :" Margin="40,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
+                                <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Date_day,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="التاريخ ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="2"/>
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="panel_date"  Grid.Column="1" Width="660" BorderThickness="1" BorderBrush="OrangeRed" Margin="1 1 93 1"  Visibility="{Binding ElementName=RadioButton_Date, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                            <StackPanel  Orientation="Horizontal"  Grid.Column="1" Background="White">
+                                <TextBlock Text="من تاريخ  :" Margin="40,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
+                                <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding FromDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="من ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="2"/>
+                                <TextBlock Text="الى تاريخ  :" Margin="46,14,20 14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16" />
+                                <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding ToDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" materialDesign:HintAssist.Hint="الى ..." Width="160" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="2"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Width="352" BorderThickness="1" BorderBrush="OrangeRed" Margin="1 1 401 1" Visibility="{Binding ElementName=RadioButton_Document, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                            <StackPanel  x:Name="panel_Decument" Orientation="Horizontal"  Background="White">
+                                <TextBlock Text=" رقم السند :" Margin="34 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" FontSize="16"></TextBlock>
+                                <TextBox Width="150" Text="{Binding Id}" Height="40" FontSize="14" Padding="10 2" Margin="20 5 10 5" BorderThickness="1" HorizontalAlignment="Left"></TextBox>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+
             </Grid>
         </Border>
 
         <StackPanel Grid.Row="1" Background="White" Orientation="Horizontal"  FlowDirection="RightToLeft">
 
-            <DataGrid Name="grid_view" Visibility="Hidden" Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Items3}" 
+            <Grid>
+                <DataGrid Name="grid_Receipt" Style="{StaticResource Style_Datagrid}" Margin="10 5 5 5" ItemsSource="{Binding Grid_Receipt}"  Visibility="{Binding ElementName=Radio_Receipts, Path=IsChecked, Converter={StaticResource Convertbool}}"
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1200" HorizontalAlignment="Left" VerticalAlignment="Top"
                       Height="340"    >
 
-                <DataGrid.Columns>
+                    <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Code}"
+                        <DataGridTextColumn Binding="{Binding Receipt_id}"
                                         Header="رقم السند" MinWidth="100"
                                          />
-                    <DataGridTextColumn Binding="{Binding Code}"
+                        <DataGridTextColumn Binding="{Binding Receipt_date}"
                                         Header="تاريخ السند" MinWidth="110"
                                          />
-                    <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}"
-                                                           Header="من حساب"  MinWidth="80"
+                        <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_Account}"
+                                                           Header="اسم حساب"  MinWidth="180"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
-                    <!-- set a max length to get an indicator in the editor -->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <!-- set a max length to get an indicator in the editor -->
+                        <materialDesign:DataGridTextColumn Binding="{Binding Account_id}"
                                                            Header="رقم الحساب"
                                                        MinWidth="80"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Receipt_amount}"
+                                                           Header="المبلغ " MinWidth="80"
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+                        <materialDesign:DataGridTextColumn   Binding="{Binding Receipt_statement}"
+                                                 Header="البيان"  MinWidth="250" >
+
+                        </materialDesign:DataGridTextColumn>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                MinWidth="60" MaxWidth="100" Header="إالغاء ترحيل">
+
+                        </DataGridCheckBoxColumn>
+
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid Name="grid_BondOfExchange" Style="{StaticResource Style_Datagrid}" IsReadOnly="False" Margin="10 5 5 5" ItemsSource="{Binding Grid_BondOfExchange}"  
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1200" HorizontalAlignment="Left" VerticalAlignment="Top"  Visibility="{Binding ElementName=Radio_BondOfExchange, Path=IsChecked, Converter={StaticResource Convertbool}}"
+                      Height="340"    >
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Binding="{Binding Bond_Exchange_id}"
+                                        Header="رقم السند" MinWidth="100"
+                                         />
+                        <DataGridTextColumn Binding="{Binding Bond_Exchange_date}"
+                                        Header="تاريخ السند" MinWidth="110"
+                                         />
+                        <DataGridTextColumn Binding="{Binding String_Accountfrom}"
+                                                           Header="من حساب"  MinWidth="80"
+                                                           />
+                        <materialDesign:DataGridTextColumn Binding="{Binding Account_from_id}"
+                                                           Header="رقم الحساب"
+                                                       MinWidth="80"
+                                                           MaxLength="255" 
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_Accountto}"
                                                            Header="الى حساب"  MinWidth="80"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Account_to_id}"
                                                            Header="رقم الحساب " MinWidth="80"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
+                        <materialDesign:DataGridTextColumn Binding="{Binding Bond_Exchange_amount}"
                                                            Header="المبلغ " MinWidth="80"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
-                                                             Header="البيان"  MinWidth="250"
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+                        <materialDesign:DataGridTextColumn Binding="{Binding String_Accountto}"
+                                                 Header="البيان"  MinWidth="250" >
 
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}"
-                                                           Header="تاريخ الترحيل " MinWidth="100"
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
+                        </materialDesign:DataGridTextColumn>
+
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" 
                                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                                MinWidth="100" MaxWidth="100" Header="الغاء الترحيل">
+                                                MinWidth="60" MaxWidth="100" Header="إالغاء ترحيل">
 
-                    </DataGridCheckBoxColumn>
+                        </DataGridCheckBoxColumn>
 
-                    <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 
-                </DataGrid.Columns>
-            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
 
         </StackPanel>
     </Grid>

@@ -74,11 +74,11 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public ViolationType_ViewModel()
         {
-            Grid_ViolationTypes = new ObservableCollection<ViolationType>();
-            violationTypeModel.GetViolationTypes(Grid_ViolationTypes);
-            Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
-            Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
+            asyncViolationType();
+           
+            Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
+            Editcommand = new RelayCommand(par => Edit());
+            Deletecommand = new RelayCommand(par => Delet());
             Savecommand = new RelayCommand(par => Save(), par => CanSave());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
@@ -86,19 +86,23 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id =25;
-            new AllPermissions().getPermission(PermissionUser);
+           
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
 
-
+        async Task asyncViolationType()
+        {
+            Grid_ViolationTypes = new ObservableCollection<ViolationType>();
+            Grid_ViolationTypes = violationTypeModel.GetViolationType();
+        }
 
         public void Add()
         {
 
             Currunt_ViolationType = new ViolationType();
-            Currunt_ViolationType.Violation_type_id = new Class_SqlConnection().Get_Max("Violation_type");
+            Currunt_ViolationType.Violation_type_id = new Class_SqlConnection().Get_Max("Violation_type", "Violation_type_id")+1;
             win = new Window_AddTypeOFViolations { DataContext = this };
             win.ShowDialog();
 
@@ -131,8 +135,6 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                violationTypeModel.OperarionViolationType(Currunt_ViolationType, "Delete");
-                Grid_ViolationTypes.Remove(Currunt_ViolationType);
                 //////////////////////////////////////////////////////////////
 
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
@@ -142,10 +144,32 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_record_num = Currunt_ViolationType.Violation_type_id;
 
                 //////////////////////////////////////////////////////////
-                ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 3;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
-                ////////////////////////////////////////////////////////////
+
+               if(  violationTypeModel.OperarionViolationType(Currunt_ViolationType, "Delete"))
+                {
+                    Grid_ViolationTypes.Remove(Currunt_ViolationType);
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                    ////////////////////////////////////////////////////////////
+                    Current_Activity.Activity_operation_num = 3;
+                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    ////////////////////////////////////////////////////////////
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا النوع";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -160,7 +184,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             //////////////////////////////////////////////////////////////
 
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+            //Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
             Current_Activity.Form_id = 25;
@@ -189,13 +213,13 @@ namespace Wpf_Traffic_violation.ViewModel
                 Grid_ViolationTypes.Add(Currunt_ViolationType);
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
-                string caption = "عملية التعديل";
+                string caption = "عملية الإضافة";
                 MessageBoxImage icon = MessageBoxImage.Information;
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
                 ////////////////////////////////////////////////////////////
                 Current_Activity.Activity_operation_num = 1;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                //ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
             }
 
@@ -215,7 +239,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             violationTypeModel.GetExcel(Grid_ViolationTypes);
             Grid_ViolationTypes = new ObservableCollection<ViolationType>();
-            violationTypeModel.GetViolationTypes(Grid_ViolationTypes);
+            Grid_ViolationTypes=violationTypeModel.GetViolationTypes();
         }
 
         #endregion

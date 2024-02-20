@@ -20,8 +20,9 @@ namespace Wpf_Traffic_violation.Models
 
 
 
-        public void GetTrafficMans(ObservableCollection<TrafficMan> TrafficMans)
+        public ObservableCollection<TrafficMan> GetTrafficMans()
         {
+            ObservableCollection<TrafficMan> TrafficMans = new ObservableCollection<TrafficMan>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -65,10 +66,113 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
 
-
+            return TrafficMans;
         }
 
         ///////////////////////////////// end GetTrafficMans/////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////// start getUserTrafficman/////////////////////////////////////
+        public ObservableCollection<TrafficMan> Get_trafficmanNametoUser()
+        {
+            ObservableCollection<TrafficMan> TrafficMans = new ObservableCollection<TrafficMan>();
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            //Class_SqlConnection sql = new Class_SqlConnection();
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Cant Open con");
+                }
+                //SqlCommand Command = new SqlCommand("Select * from Person", con);
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "Get_trafficmanNametoUser",
+                    Connection = con
+
+                };
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TrafficMan per = new TrafficMan
+                        {
+                            Traffic_man_id = (int)row[0],
+                            Traffic_man_name = row[1].ToString(),
+                            User_id = (int)row[2],
+                            Traffic_man_grade = row[3].ToString(),
+
+
+                        };
+
+                        TrafficMans.Add(per); //الي بنربطه مع الجريد فيو
+                    }
+                }
+            }
+
+            return TrafficMans;
+        }
+        ///////////////////////////////// end getUserTrafficman/////////////////////////////////////
+
+        ///////////////////////////////// start getUserTrafficman/////////////////////////////////////
+        public ObservableCollection<TrafficMan> Get_trafficmanNametoUser_Combbox()
+        {
+            ObservableCollection<TrafficMan> TrafficMans = new ObservableCollection<TrafficMan>();
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            //Class_SqlConnection sql = new Class_SqlConnection();
+            using (con)
+            {
+                try
+                {
+                    con.Open();
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Cant Open con");
+                }
+                //SqlCommand Command = new SqlCommand("Select * from Person", con);
+                SqlCommand Command = new SqlCommand
+                {
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "Get_trafficmanNametoUser_Combbox",
+                    Connection = con
+
+                };
+                DataTable dt = new DataTable();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+                dataAdapter.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TrafficMan per = new TrafficMan
+                        {
+                            Traffic_man_id = (int)row[0],
+                            Traffic_man_name = row[1].ToString(),
+                            User_id = (int)row[2],
+                            Traffic_man_grade = row[3].ToString(),
+
+
+                        };
+
+                        TrafficMans.Add(per); //الي بنربطه مع الجريد فيو
+                    }
+                }
+            }
+
+            return TrafficMans;
+        }
+        ///////////////////////////////// end getUserTrafficman/////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////// start opTrafficMan/////////////////////////////////////
@@ -208,11 +312,11 @@ namespace Wpf_Traffic_violation.Models
             OpenFileDialog op = new OpenFileDialog();
 
             op.Title = "Select a Excel File";
-            op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
+            op.Filter = "Excel Files |*.XLSX";
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [Trafficman$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)

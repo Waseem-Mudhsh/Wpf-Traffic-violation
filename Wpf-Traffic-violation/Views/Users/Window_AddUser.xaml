@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Window_AddUser" Height="244" Width="820" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
 
-    <DockPanel  Background="WhiteSmoke" Height="244" Width="820" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <DockPanel  Background="WhiteSmoke" Height="244" Width="820" >
         <!--/////////////////////////////////////////Top/////////////////////////////////////////////////-->
         <materialDesign:ColorZone DockPanel.Dock="Top" Background="OrangeRed">
             <StackPanel Orientation="Horizontal" Height="30" >
@@ -55,14 +55,38 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="أسم المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox x:Name="Combobox_userName"      Height="40" Width="240" ItemsSource="{Binding get_Trafficman}" Margin="0,9,0,9"  
+                <!--<ComboBox Name="trafficman"      Height="40" Width="240" ItemsSource="{Binding Get_Trafficman}" Margin="0,9,0,9"  
                             SelectedItem="{Binding Selected_TrafficMan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           
                         materialDesign:HintAssist.Hint="أسم المستخدم..."  
-                         BorderThickness="1,1,1,1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14" TabIndex="1" SelectionChanged="Combobox_userName_SelectionChanged" >
+                         BorderThickness="1" Padding="5,9,0,0"   Background="White"  FontFamily="Tajawal" FontSize="14"  >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Traffic_man_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Traffic_man_name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>-->
+                <!--<ComboBox Name="trafficman" Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Get_Trafficman}"
+                           SelectedItem="{Binding Selected_TrafficMan,UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 0 5 0" FontSize="14" FontFamily="Tajawal" 
+                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                           materialDesign:ColorZoneAssist.Mode="Standard"
+                           materialDesign:HintAssist.Hint="أسم المستخدم ..."
+                           >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Selected_TrafficMan.Traffic_man_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>-->
+                <ComboBox Name="trafficman" Width="240" Height="40" BorderThickness="1 1 1 1"
+                          ItemsSource="{Binding Grid_CombboxTraffic}"
+                          SelectedItem="{Binding Selected_TrafficMan ,UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0 9" FontSize="14" FontFamily="Tajawal"  Foreground="Black"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Traffic_man_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -75,10 +99,13 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="نوع المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
-                <ComboBox x:Name="combo" Width="240" Height="40" Text="{Binding Currunt_User.String_usertype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,FallbackValue=النظام}"
-                           
-                          Padding="10,10,0,0" Background="White" Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1" SelectedIndex="0" TabIndex="3">
-                    <ComboBoxItem >النظام</ComboBoxItem>
+                <ComboBox  Width="240" Height="40" 
+                            Text="{Binding Currunt_User.String_usertype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         SelectedIndex="0" 
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
+                          materialDesign:ColorZoneAssist.Mode="Standard"
+                          Padding="10,10,0,0" Background="White" Foreground="Black"  Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"  TabIndex="3">
+                    <ComboBoxItem IsSelected="True" >النظام</ComboBoxItem>
                     <ComboBoxItem>التطبيق</ComboBoxItem>
                 </ComboBox>
 

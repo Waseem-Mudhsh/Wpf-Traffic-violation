@@ -10,6 +10,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
             mc:Ignorable="d" 
               d:DesignHeight="560" d:DesignWidth="1110" Background="Beige">
+   
     <UserControl.Resources>
         <Conver:BoolToVisibilityConverter x:Key="Convertbool"/>
 
@@ -42,7 +43,7 @@
                         <StackPanel Orientation="Horizontal"  >
                             <TextBlock Text="نوع التقرير :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
-                            <RadioButton x:Name="RadioButton_main" GroupName="type of search" IsChecked="True" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
+                            <RadioButton x:Name="RadioButton_main" GroupName="type of search" IsChecked="True"  Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White" Content="الكل " FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="15 0 10 0"/>
                             <RadioButton x:Name="RadioButton_sub" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="مسددة "  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
                             <RadioButton x:Name="RadioButton_all" GroupName="type of search" IsChecked="False" Style="{StaticResource MaterialDesignAccentRadioButton}" Foreground="White"  Content="غير مسددة"  FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Margin="0 0 10 0"/>
 
@@ -61,25 +62,25 @@
                     </Border>
                     <Border Name="border_day" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_day, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel Name="Panel_day" >
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
+                            <DatePicker x:Name="date" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
 
                         </StackPanel>
                     </Border>
                     <Border Name="border_date" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_date, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel Name="Panel_date" Orientation="Horizontal" >
                             <!--<TextBlock Text="من :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>-->
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
+                            <DatePicker x:Name="from" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
                             <TextBlock Text="الى :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
+                            <DatePicker x:Name="to" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding To_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
 
                         </StackPanel>
                     </Border>
-                    <Border Name="border_year" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_year, Path=IsChecked, Converter={StaticResource Convertbool}}">
+                    <!--<Border Name="border_year" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_year, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel  >
                             <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
 
                         </StackPanel>
-                    </Border>
+                    </Border>-->
 
 
                     <Border BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="3">
@@ -91,7 +92,7 @@
                         </StackPanel>
                     </Border>
                     <StackPanel  Grid.Row="4" >
-                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding }"
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding ShowAllViolationcommand}"
                      Height="40"   Padding="0"    Width="140" >
                             <StackPanel Orientation="Horizontal" >
                                 <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />
@@ -103,6 +104,7 @@
                 </Grid>
             </Grid>
         </materialDesign:ColorZone>
+       
         <WindowsFormsHost HorizontalAlignment="Left" Height="540" Margin="10,15,0,10" VerticalAlignment="Top" Width="720" >
             <rv:ReportViewer x:Name="ReportViewerDemo"/>
         </WindowsFormsHost>

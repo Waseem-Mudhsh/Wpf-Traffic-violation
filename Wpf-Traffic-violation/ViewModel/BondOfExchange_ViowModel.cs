@@ -22,6 +22,8 @@ namespace Wpf_Traffic_violation.ViewModel
         AccountModel AccountModel= new AccountModel();
         ActivityModel ActivityModel = new ActivityModel();
         PermissionUser PermissionUser;
+        Bond_Exchange_detail Bond_detail = new Bond_Exchange_detail();
+        int maxId;
         #endregion
         #region Proprties
 
@@ -167,11 +169,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public BondOfExchange_ViowModel()
         {
-            Grid_BondOfExchange = new ObservableCollection<BondOfExchange>();
-            BondOfExchangeModel.GetBondOfExchanges(Grid_BondOfExchange);
-
-            Grid_Account = new ObservableCollection<Account>();
-            AccountModel.GetAccounts(Grid_Account);
+            asyncBondOfExchange();
+           
 
            
             // Current_BondOfExchange.String_Accountfrom
@@ -187,22 +186,31 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 14;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        private async Task asyncBondOfExchange()
+        {
+            Grid_BondOfExchange = new ObservableCollection<BondOfExchange>();
+            Grid_BondOfExchange =await Task.Run(()=> BondOfExchangeModel.GetBondOfExchanges());
 
+            Grid_Account = new ObservableCollection<Account>();
+            Grid_Account = await Task.Run(() => AccountModel.GetAccounts());
+        }
         public void Add()
         {
-            
-               Grid_Bond_Exchange_detail = new ObservableCollection<Bond_Exchange_detail>();
+            maxId = new Class_SqlConnection().Get_Max("Bond_Exchange_detail");
+
+            Grid_Bond_Exchange_detail = new ObservableCollection<Bond_Exchange_detail>();
            Current_Bond_Exchange_detail = new Bond_Exchange_detail();
             
             int maxid = new Class_SqlConnection().Get_Max("BondOfExchange");
 
-            Current_BondOfExchange = new BondOfExchange {Bond_Exchange_id=maxid };
+            Current_BondOfExchange = new BondOfExchange ();
+            Current_BondOfExchange.Bond_Exchange_id = maxid;
             Current_BondOfExchange.Bond_Exchange_amount = 0;
             win = new Window_AddBondOfExchange { DataContext = this };
             win.ShowDialog();
@@ -214,7 +222,20 @@ namespace Wpf_Traffic_violation.ViewModel
             IsEditing = true;
 
             Grid_Bond_Exchange_detail = new ObservableCollection<Bond_Exchange_detail>();
-            BondOfExchangeModel.GetBond_Exchange_details(Grid_Bond_Exchange_detail, Current_BondOfExchange.Bond_Exchange_id);
+            Grid_Bond_Exchange_detail= BondOfExchangeModel.GetBond_Exchange_details( Current_BondOfExchange.Bond_Exchange_id);
+            
+
+            foreach(Account a in Grid_Account)
+            {
+                if(a.Account_id == Current_BondOfExchange.Account_from_id)
+                    Selected_AccountFrom = a;
+                if(a.Account_id == Current_BondOfExchange.Account_to_id)
+                    Selected_AccountTo = a;
+            }
+
+
+            maxId = new Class_SqlConnection().Get_Max("Bond_Exchange_detail");
+            Current_Bond_Exchange_detail = new Bond_Exchange_detail();
 
 
             win = new Window_AddBondOfExchange { DataContext = this };
@@ -230,13 +251,8 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                BondOfExchangeModel.OperarionBondOfExchange(Current_BondOfExchange,Grid_Bond_Exchange_detail, "Delete");
-
-                string message1 = "تمت عملية الحذف بنجاح";
-                string caption1 = "عملية الحذف";
-                MessageBoxImage icon1 = MessageBoxImage.Information;
-                MessageBoxButton buttons1 = MessageBoxButton.OK;
-                MessageBox.Show(message1, caption1, buttons1, icon1);
+                Grid_Bond_Exchange_detail = new ObservableCollection<Bond_Exchange_detail>();
+                Grid_Bond_Exchange_detail= BondOfExchangeModel.GetBond_Exchange_details( Current_BondOfExchange.Bond_Exchange_id);
 
                 //////////////////////////////////////////////////////////////
 
@@ -251,6 +267,19 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+
+                BondOfExchangeModel.OperarionBondOfExchange(Current_BondOfExchange,Grid_Bond_Exchange_detail, "Delete");
+
+                Grid_BondOfExchange.Clear();
+                Grid_BondOfExchange=BondOfExchangeModel.GetBondOfExchanges();
+
+                string message1 = "تمت عملية الحذف بنجاح";
+                string caption1 = "عملية الحذف";
+                MessageBoxImage icon1 = MessageBoxImage.Information;
+                MessageBoxButton buttons1 = MessageBoxButton.OK;
+                MessageBox.Show(message1, caption1, buttons1, icon1);
+
+               
             }
             else
             {
@@ -269,8 +298,18 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Current_Activity.Form_id = 14;
             Current_Activity.Activity_record_num = Current_BondOfExchange.Bond_Exchange_id;
-            MessageBox.Show(Current_BondOfExchange.Bond_Exchange_statement);
+            // MessageBox.Show(Current_BondOfExchange.Bond_Exchange_statement);
             //////////////////////////////////////////////////////////
+            if (Current_BondOfExchange.Bond_Exchange_statement == null)
+            {
+                Current_BondOfExchange.Bond_Exchange_statement = "";
+            }
+            if (Current_BondOfExchange.Reference_number==0)
+            {
+                Current_BondOfExchange.Reference_number = 0;
+            }
+
+
             Current_BondOfExchange.Account_from_id = Selected_AccountFrom.Account_id;
             Current_BondOfExchange.Account_to_id = Selected_AccountTo.Account_id;
             Current_BondOfExchange.Bond_Exchange_status = false;
@@ -323,7 +362,7 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
             Grid_BondOfExchange.Clear();
-            BondOfExchangeModel.GetBondOfExchanges(Grid_BondOfExchange);
+            Grid_BondOfExchange= BondOfExchangeModel.GetBondOfExchanges();
 
 
             //Enable_Grid = false;
@@ -342,8 +381,35 @@ namespace Wpf_Traffic_violation.ViewModel
         //bool CanDeletDetaile() => Current_Bond_Exchange_detail != null;
         void AddDetaile()
         {
-           int maxid= new Class_SqlConnection().Get_Max("Bond_Exchange_detail");
-            Current_Bond_Exchange_detail.Bond_Exchange_detail_id = maxid;
+            int x = 0;
+            int amount = 0;
+         foreach(Bond_Exchange_detail a in Grid_Bond_Exchange_detail)
+            {
+                if (a.Bond_Exchange_detail_id == Current_Bond_Exchange_detail.Bond_Exchange_detail_id)
+                {
+                    x = Current_Bond_Exchange_detail.Bond_Exchange_detail_id;
+                    Bond_detail = a;
+                }
+                else
+                    amount += a.Bond_Exchange_detail_amount;
+            }
+            if(x==0)
+            {
+                
+                Current_Bond_Exchange_detail.Bond_Exchange_detail_id = maxId;
+                maxId++;
+            }
+            else
+            {
+                Current_BondOfExchange.Bond_Exchange_amount =amount;
+              
+                Bond_detail = Current_Bond_Exchange_detail;
+                
+                Grid_Bond_Exchange_detail.Remove(Current_Bond_Exchange_detail);
+                Current_Bond_Exchange_detail = Bond_detail;
+            }
+            
+           // MessageBox.Show(Current_Bond_Exchange_detail.Bond_Exchange_detail_id.ToString());
             Current_Bond_Exchange_detail.Bond_Exchange_id = Current_BondOfExchange.Bond_Exchange_id;
             Current_BondOfExchange.Bond_Exchange_amount += Current_Bond_Exchange_detail.Bond_Exchange_detail_amount;
             Grid_Bond_Exchange_detail.Add(Current_Bond_Exchange_detail);
@@ -354,6 +420,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         void close()
         {
+            IsEditing = false;
             Current_BondOfExchange = null;
             Current_Bond_Exchange_detail = null;
             win.Close();

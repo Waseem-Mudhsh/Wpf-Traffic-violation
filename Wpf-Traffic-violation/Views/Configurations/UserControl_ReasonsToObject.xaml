@@ -26,10 +26,10 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Current_ReasonToobjection , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_ReasonToobjection , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
-                <Button  Command="{Binding Excelcommand}"
+                <Button  Command="{Binding Excelcommand}" Visibility="Hidden"
                                    Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}" >
                     <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
                         <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>
@@ -65,7 +65,7 @@
 
             <DataGrid Style="{StaticResource Style_Datagrid}"  ItemsSource="{Binding Gird_ReasonToObjecrion}" SelectedItem="{Binding Current_ReasonToobjection,UpdateSourceTrigger=PropertyChanged}"
                             IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="900" Margin="5,5,5,0"    >
+                        Height="475"  MaxWidth="900" Margin="5,5,5,0"    >
                 
                 <DataGrid.Columns>
 

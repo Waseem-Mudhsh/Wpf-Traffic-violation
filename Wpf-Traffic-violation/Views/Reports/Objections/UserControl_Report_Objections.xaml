@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports.Objections"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-              mc:Ignorable="d" 
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
+             mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="1360">
-    <!--<UserControl.DataContext>
-        <ViewModel:ReportUser_ViewModel/>
-    </UserControl.DataContext>-->
+    <UserControl.DataContext>
+        <ViewModel:Report_objection_viewmodel/>
+    </UserControl.DataContext>
     <Grid Height="560">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -24,31 +25,31 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1">
 
-                <Button Uid="1" Name="but1" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Click="Button_Click" Margin="10" >
+                <Button Uid="1" Name="but1" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand1}" Margin="10" >
                     <StackPanel Orientation="Vertical"  >
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 0" />
                         <TextBlock  VerticalAlignment="Center"   > كشف الأعتراضات</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Uid="2" Name="but2" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Click="Button_Click" >
+                <Button Uid="2" Name="but2" Command="{Binding Showcommand4}" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}"  >
                     <StackPanel Orientation="Vertical"  >
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 0" />
                         <TextBlock  VerticalAlignment="Center"   >  الأعتراضات المقبولة</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Uid="3" Name="but3" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
+                <Button Uid="3" Name="but3" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}"  Command="{Binding Showcommand2}"  >
                     <StackPanel Orientation="Vertical"  >
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 0" />
                         <TextBlock  VerticalAlignment="Center"   > الأعتراضات الغير مقبولة</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Uid="4" Name="but4" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
+                <Button Uid="4" Name="but4" HorizontalAlignment="Center" Command="{Binding Showcommand3}" Style="{StaticResource Repotr_Button}"   >
                     <StackPanel Orientation="Vertical"  >
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 0" />
                         <TextBlock  VerticalAlignment="Center"   > الأعتراضات الغير مفحوصة</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Uid="5" Name="but5" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Click="Button_Click"  >
+                <Button Uid="5" Name="but5" HorizontalAlignment="Center" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand5}"   >
                     <StackPanel Orientation="Vertical"  >
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 0" />
                         <TextBlock  VerticalAlignment="Center"   > مقارنة الأعتراضات حسب</TextBlock>
@@ -59,7 +60,7 @@
            
         </Grid>
         <!--///////////////////////// Search////////////////////////////////////-->
-        <Frame Name="Frame_Search_objections" Grid.Column="0" Background="White" NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="Frame_Search_objections" Content="{Binding Curent_usercontrol}" Grid.Column="0" Background="White" NavigationUIVisibility="Hidden" ></Frame>
         <!--///////////////////////// Reports////////////////////////////////////-->
 
     </Grid>

@@ -14,9 +14,9 @@ namespace Wpf_Traffic_violation.Models.Account_Model
     {
         ///////////////////////////////// start GetBondOfExchanges/////////////////////////////////////
 
-        public void GetBondOfExchanges(ObservableCollection<BondOfExchange> BondOfExchanges)
+        public ObservableCollection<BondOfExchange> GetBondOfExchanges()
         {
-
+            ObservableCollection<BondOfExchange> BondOfExchanges = new ObservableCollection<BondOfExchange>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             // Properties.Settings.Default.con = con;
             //Properties.Settings.Default.Save();
@@ -70,15 +70,16 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 }
 
             }
+            return BondOfExchanges;
         }
         ///////////////////////////////// end GetBondOfExchanges/////////////////////////////////////
 
 
         ///////////////////////////////// start GetBond_Exchange_details/////////////////////////////////////
 
-        public void GetBond_Exchange_details(ObservableCollection<Bond_Exchange_detail> Bond_Exchange_details,int Bond_Exchange_id)
+        public ObservableCollection<Bond_Exchange_detail> GetBond_Exchange_details(int Bond_Exchange_id)
         {
-
+            ObservableCollection<Bond_Exchange_detail> Bond_Exchange_details = new ObservableCollection<Bond_Exchange_detail>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             // Properties.Settings.Default.con = con;
             //Properties.Settings.Default.Save();
@@ -124,6 +125,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 }
 
             }
+            return Bond_Exchange_details;
         }
         ///////////////////////////////// end GetBond_Exchange_details/////////////////////////////////////
 
@@ -134,7 +136,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
             Class_SqlConnection sql = new Class_SqlConnection();
           
             //--------------------------------------------
-            if (operartion=="Delete")
+            if (operartion=="Delete" && Grid_Bond_Exchange_detail!=null)
             {
                 OperarionBond_Exchange_detail(Grid_Bond_Exchange_detail,"Delete");
             }
@@ -188,7 +190,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
             {
                 return false;
             }
-            else if(operartion == "Insert"|| operartion == "Update")
+            else if((operartion == "Insert"|| operartion == "Update") && Grid_Bond_Exchange_detail != null)
                OperarionBond_Exchange_detail(Grid_Bond_Exchange_detail, operartion);
 
             return true;
@@ -197,7 +199,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
 
         public static bool OperarionBond_Exchange_detail(ObservableCollection<Bond_Exchange_detail> Grid_Bond_Exchange_detail, string operartion)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
+            
 
             foreach (Bond_Exchange_detail a in Grid_Bond_Exchange_detail)
             {
@@ -206,7 +208,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
 
                 param[0] = new SqlParameter("@Bond_Exchange_detail_id", SqlDbType.Int)
                 {
-                    Value = sql.Get_Max("Bond_Exchange_detail")
+                    Value =a.Bond_Exchange_detail_id 
                 };
                 param[1] = new SqlParameter("@Bond_Exchange_id", SqlDbType.Int)
                 {
@@ -224,7 +226,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 {
                     Value = operartion
                 };
-                sql.Operarion("opBond_Exchange_detail", param);
+                new Class_SqlConnection().Operarion("opBond_Exchange_detail", param);
 
                 }
             

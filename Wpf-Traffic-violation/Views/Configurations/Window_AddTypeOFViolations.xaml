@@ -58,12 +58,12 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="الحد الأدنى :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
-                <TextBox       Height="40" Width="240" Text="{Binding Currunt_ViolationType.Minimum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_ViolationType.Minimum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="الحد الأدنى..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="الحد الأعلى :" Margin="40 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110"/>
 
-                <TextBox    Height="40" Width="240" Text="{Binding Currunt_ViolationType.Maximum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                <TextBox    Height="40" Width="240" Text="{Binding Currunt_ViolationType.Maximum_price,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,ValidatesOnDataErrors=True}"
                         materialDesign:HintAssist.Hint="الحد الأعلى..."
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="5  0 9 0" FontFamily="Tajawal" FontSize="14" />
 

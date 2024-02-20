@@ -22,11 +22,11 @@
                     <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"  materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                         <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </Button>
-                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_Ditectorate }" 
+                    <controls:AutoCompleteBox Width="400" ItemsSource="{Binding Grid_Streets }" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Current_Street , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_Street , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
                 <Button  Command="{Binding Excelcommand}"
@@ -63,11 +63,16 @@
         </Border>
         <StackPanel  Background="White" >
 
-            <DataGrid Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_Streets,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
-                      SelectedItem="{Binding Current_Street,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            <DataGrid Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_Streets}" HorizontalAlignment="Right"  
+                      SelectedItem="{Binding Current_Street,UpdateSourceTrigger=PropertyChanged}"
                           IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"
+                         Height="475"  MaxWidth="1350" Margin="5,5,5,0"
                           >
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <EventSetter Event="Selected" Handler="DataGridCell_Selected"/>
+                    </Style>
+                </DataGrid.CellStyle>
                 <DataGrid.Resources>
 
                 </DataGrid.Resources>
@@ -83,11 +88,11 @@
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding Province_name}"
                                                            Header="المحافظة" MinWidth="100" MaxWidth="200"
-                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                                                           
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding Directerate_name}"
                                                            Header="المديرية" MinWidth="100" MaxWidth="200"
-                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
+                                                            
                                                            />
                     <!-- set a max length to get an indicator in the editor -->
 

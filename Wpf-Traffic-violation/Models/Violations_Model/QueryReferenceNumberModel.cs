@@ -12,8 +12,9 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 {
     public class QueryReferenceNumberModel
     {
-        public void GetViolation(ObservableCollection<Violation> Violations,int Id)
+        public ObservableCollection<Violation> GetViolation(int Id)
         {
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -51,9 +52,9 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                          ,
                             Violation_date = row[1].ToString()
                          ,
-                            Violation_photo1 = row[2].ToString()
+                            Violation_photo1 = Convert.ToByte(row[2].ToString())
                          ,
-                            Violation_photo2 = row[3].ToString()
+                            Violation_photo2 = Convert.ToByte(row[3].ToString())
                          ,
                             Plate_id = (int)row[4]
                          ,
@@ -84,7 +85,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
 
-
+            return Violations;
         }
 
         ///////////////////////////////// end GetPlateOfType/////////////////////////////////////

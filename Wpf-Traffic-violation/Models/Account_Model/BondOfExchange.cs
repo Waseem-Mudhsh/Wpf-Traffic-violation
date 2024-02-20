@@ -21,6 +21,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 if (Bond_exchange_id != value)
                 {
                     Bond_exchange_id = value;
+                    Combine();
                     RaisePropertyChanged("Bond_Exchange_id");
                 }
             }
@@ -88,6 +89,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 if (bond_Exchange_statement != value)
                 {
                     bond_Exchange_statement = value;
+                    Combine();
                     RaisePropertyChanged("Bond_Exchange_statement");
                 }
             }
@@ -153,6 +155,7 @@ namespace Wpf_Traffic_violation.Models.Account_Model
                 if (reference_number != value)
                 {
                     reference_number = value;
+                    Combine();
                     RaisePropertyChanged("Reference_number");
                 }
             }
@@ -190,7 +193,42 @@ namespace Wpf_Traffic_violation.Models.Account_Model
             }
         }
 
-
+        bool isSelected;
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                if (isSelected != value)
+                {
+                    isSelected = value;
+                    RaisePropertyChanged("IsSelected");
+                }
+            }
+        }
+        string search;
+        public string Search
+        {
+            get
+            {
+                return search;
+            }
+            set
+            {
+                if (search != value)
+                {
+                    search = value;
+                    RaisePropertyChanged("Search");
+                }
+            }
+        }
+        void Combine()
+        {
+            Search = string.Join(" || ", Bond_Exchange_id.ToString(), Bond_Exchange_statement, Reference_number.ToString());
+        }
 
 
 

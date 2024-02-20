@@ -18,19 +18,19 @@
 
                 <!--top-->
 
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="300 1 1 0" FlowDirection="RightToLeft" >
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="150 0" FlowDirection="RightToLeft" >
                     <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"  materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                         <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </Button>
                     <controls:AutoCompleteBox Name="aa" Width="338" ItemsSource="{Binding Grid_Opjection}" 
                                               ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14" Padding="20 8 0 5" 
-                                              Height="40"
+                                              FontSize="14" Padding="20 8 0 5"
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Currunt_Opjection , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="4,4,4,4"
+                                              SelectedItem="{Binding Currunt_Opjection , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains" Margin="4,1,4,0"
                                              
                                           />
                 </StackPanel>
+
                 <Button   x:Name="But_Scan_Objection" Command="{Binding Scancommand}"  Margin="560,0,10,0" Background="#FF097221"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center"  Width="80" BorderBrush="#FF097221" >
                     <StackPanel Orientation="Horizontal">

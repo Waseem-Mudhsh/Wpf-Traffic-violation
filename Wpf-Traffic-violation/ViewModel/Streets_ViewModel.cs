@@ -20,6 +20,7 @@ namespace Wpf_Traffic_violation.ViewModel
         Street_Model Streets_Model = new Street_Model();
         PermissionUser PermissionUser;
         ActivityModel ActivityModel = new ActivityModel();
+       
 
         #endregion
         #region Proprties
@@ -104,37 +105,41 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-
-
+      
         #endregion
         #region Construcor
         public Streets_ViewModel()
         {
-            Grid_Streets = new ObservableCollection<Streets>();
-            Streets_Model.GetStreets(Grid_Streets);
-            Grid_Ditectorate = new ObservableCollection<Directorate>();
-            Directorate_Model.GetDirectorate(Grid_Ditectorate);
+            asyncStreets();
+            
 
-            Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
-            Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
-            Savecommand = new RelayCommand(par => Save(), par => CanSave());
+            Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
+            Editcommand = new RelayCommand(par => Edit());
+            Deletecommand = new RelayCommand(par => Delet());
+            Savecommand = new RelayCommand(par => Save());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 27;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        async Task asyncStreets()
+        {
+            Grid_Streets = new ObservableCollection<Streets>();
+            Grid_Streets = await Task.Run(() => Streets_Model.GetStreets());
+            Grid_Ditectorate = new ObservableCollection<Directorate>();
+            Grid_Ditectorate = await Task.Run(() => Directorate_Model.GetDirectorate());
+        }
         public void Add()
         {
-            int maxid = new Class_SqlConnection().Get_Max("Street");
+            int maxid = new Class_SqlConnection().Get_Max("Street", "Street_id");
 
-            Current_Street = new Streets { Street_id = maxid, Province_name = "تعز" };
+            Current_Street = new Streets { Street_id = maxid+1, Province_name = "" };
             Selected_Dirctorate = new Directorate();
             win = new Window_AddStreet { DataContext = this };
             win.ShowDialog();
@@ -146,8 +151,13 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-            //Personview PersonView = new Personview();
-            //PersonView.textbox1.Text = CurrentPerson.Id.ToString();
+           foreach(Directorate a in Grid_Ditectorate)
+            {
+                if (a.Directorate_id == Current_Street.Directerate_id)
+                    Selected_Dirctorate = a;
+
+                    
+            }
             IsEditing = true;
 
             win = new Window_AddStreet { DataContext = this };
@@ -160,6 +170,7 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanEdit() => Current_Street != null && PermissionUser.Update_opretion == true;
         void Delet()
         {
+            
             string message = "هل تريد الحذف ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -167,12 +178,8 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-
-                Streets_Model.OperarionStreets(Current_Street, "Delete");
-                Grid_Streets.Remove(Current_Street);
-
                 //////////////////////////////////////////////////////////////
-
+                Current_Activity = new Activity();
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
                 Current_Activity.Activity_date = DateTime.Now.Date.ToString();
                 Current_Activity.User_id = Properties.Settings.Default.Userid;
@@ -184,6 +191,29 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+               if( Streets_Model.OperarionStreets(Current_Street, "Delete"))
+                {
+                    Grid_Streets.Remove(Current_Street);
+                    asyncStreets();
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا الشارع";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
+
             }
             else
             {
@@ -197,7 +227,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             //////////////////////////////////////////////////////////////
 
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+            //Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
             Current_Activity.Form_id = 27;
@@ -238,7 +268,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Streets_Model.OperarionStreets(Current_Street, "Insert");
                 //Current_Street.Province_name = Selected_Provinces.Province_name;
                 Grid_Streets = new ObservableCollection<Streets>();
-                Streets_Model.GetStreets(Grid_Streets);
+                Grid_Streets=Streets_Model.GetStreets();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية التعديل";
@@ -264,7 +294,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Streets_Model.GetExcel(Grid_Streets);
             Grid_Streets = new ObservableCollection<Streets>();
-            Streets_Model.GetStreets(Grid_Streets);
+            Grid_Streets= Streets_Model.GetStreets();
         }
         #endregion
         #region Commands

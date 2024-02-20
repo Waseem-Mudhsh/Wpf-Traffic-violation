@@ -26,10 +26,10 @@
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Search" 
-                                              SelectedItem="{Binding Current_CategoriesOfLicenses , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
+                                              SelectedItem="{Binding Current_CategoriesOfLicenses , Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FilterMode="Contains"
                                               />
                 </StackPanel>
-                <Button  Command="{Binding Excelcommand}"
+                <Button Visibility="Hidden" Command="{Binding Excelcommand}"
                                    Height="40"          Uid="7"  x:Name="but1" Padding="0" Margin="0,0,175,0" Background="#FF097221" BorderBrush="{x:Null}" >
                     <StackPanel Orientation="Horizontal" Margin="12 0 12 0" HorizontalAlignment="Center">
                         <TextBlock  VerticalAlignment="Center">إستيراد من أكسل</TextBlock>
@@ -66,7 +66,7 @@
             <DataGrid Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_CategoriesOfLicenses,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  
                       SelectedItem="{Binding Current_CategoriesOfLicenses,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           IsReadOnly="True"
-                       RowBackground="Lavender"  Height="475"  MaxWidth="1350" Margin="5,5,5,0"
+                        Height="475"  MaxWidth="1350" Margin="5,5,5,0"
                           >
                 <DataGrid.Resources>
 
@@ -74,15 +74,15 @@
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Class_licence_ID}"
-                                        Header="رقم الفئة" MinWidth="150" MaxWidth="200" 
+                                        Header="رقم الفئة" MinWidth="80" MaxWidth="200" 
                                          />
                     <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
                     <materialDesign:DataGridTextColumn Binding="{Binding Class_licence_name}"
-                                                           Header="أسم نوع الفئة" MinWidth="300" MaxWidth="500"
+                                                           Header="أسم نوع الفئة" MinWidth="100" MaxWidth="300"
                                                          
                                                            />
                     <materialDesign:DataGridTextColumn Binding="{Binding Province_name}"
-                                                           Header="المحافظة" MinWidth="300" MaxWidth="500"
+                                                           Header="المحافظة" MinWidth="100" MaxWidth="300"
                                                          
                                                            />
                     <!-- set a max length to get an indicator in the editor -->

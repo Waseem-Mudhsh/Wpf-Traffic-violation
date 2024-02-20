@@ -80,8 +80,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public ReasonToobjection_ViewModel()
         {
-            Gird_ReasonToObjecrion = new ObservableCollection<ReasonsToObject>();
-            Reason_Model.GetReasonToObjection(Gird_ReasonToObjecrion);
+            asyncReasonToobjection();
+           
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -91,12 +91,17 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 28;
-            new AllPermissions().getPermission(PermissionUser);
+           
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
+        async Task asyncReasonToobjection()
+        {
+            Gird_ReasonToObjecrion = new ObservableCollection<ReasonsToObject>();
+            Gird_ReasonToObjecrion = await Task.Run(() => Reason_Model.GetReasonToObjection());
+        }
 
         public void Add()
         {
@@ -132,8 +137,7 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                Reason_Model.OperarionReasonToOblection(Current_ReasonToobjection, "Delete");
-                Gird_ReasonToObjecrion.Remove(Current_ReasonToobjection);
+               
 
                 //////////////////////////////////////////////////////////////
 
@@ -148,6 +152,28 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
+                if(Reason_Model.OperarionReasonToOblection(Current_ReasonToobjection, "Delete"))
+                {
+                    Gird_ReasonToObjecrion.Remove(Current_ReasonToobjection);
+                    asyncReasonToobjection();
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذا السبب";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
             }
             else
             {
@@ -206,7 +232,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 Reason_Model.OperarionReasonToOblection(Current_ReasonToobjection, "Insert");
                 Gird_ReasonToObjecrion = new ObservableCollection<ReasonsToObject>();
-                Reason_Model.GetReasonToObjection(Gird_ReasonToObjecrion);
+                Gird_ReasonToObjecrion= Reason_Model.GetReasonToObjection();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية التعديل";
@@ -237,7 +263,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Reason_Model.GetExcel(Gird_ReasonToObjecrion);
             Gird_ReasonToObjecrion = new ObservableCollection<ReasonsToObject>();
-            Reason_Model.GetReasonToObjection(Gird_ReasonToObjecrion);
+            Gird_ReasonToObjecrion= Reason_Model.GetReasonToObjection();
         }
 
         #endregion

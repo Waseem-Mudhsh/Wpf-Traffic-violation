@@ -39,7 +39,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                  SqlCommand Command = new SqlCommand
                 {
                     CommandType = CommandType.Text,
-                    CommandText = "BACKUP DATABASE Traffic_Violation_Management TO DISK='" + filename + ".BAK'",
+                    CommandText = "BACKUP DATABASE Traffic_Violation_Management TO DISK='" + filename + ".bak'",
                     Connection = con
 
                 };

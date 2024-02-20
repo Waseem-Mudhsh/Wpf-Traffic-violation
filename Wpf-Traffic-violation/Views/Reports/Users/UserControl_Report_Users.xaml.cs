@@ -37,36 +37,20 @@ namespace Wpf_Traffic_violation.Views.Reports.Users
             switch (index)
             {
 
-                case 1:
-                    {
-
-                        Frame_Search_users.Content = new UserControl_ReportAllUsers { DataContext = View_ReportUser };
-                        break;
-                    }
                 case 2:
                     {
 
                         Frame_Search_users.Content = new UserControl_ReportGroups { DataContext = View_ReportUser };
                         break;
                     }
-                case 3:
-                    {
-
-                        Frame_Search_users.Content = new UserControl_ReportOneUser { DataContext = View_ReportUser };
-                        break;
-                    }
+                
                 case 4:
                     {
 
                         Frame_Search_users.Content = new UserControl_ReportPermissions { DataContext = View_ReportUser };
                         break;
                     }
-                case 5:
-                    {
-
-                        Frame_Search_users.Content = new UserControl_ReportUsertraffic { DataContext = View_ReportUser };
-                        break;
-                    }
+                
             }
 
 

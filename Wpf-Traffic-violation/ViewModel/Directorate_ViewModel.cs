@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -114,33 +111,37 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Directorate_ViewModel()
         {
-            Grid_Directorate = new ObservableCollection<Directorate>();
-            Directorate_Model.GetDirectorate(Grid_Directorate);
-            Grid_Provinces = new ObservableCollection<Provinces>();
-            provinces_Model.GetProvinces(Grid_Provinces);
-            Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
-            Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
-            Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
-            Savecommand = new RelayCommand(par => Save(), par => CanSave());
+            asyncDirectorate();
+
+            Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
+            Editcommand = new RelayCommand(par => Edit());
+            Deletecommand = new RelayCommand(par => Delet());
+            Savecommand = new RelayCommand(par => Save());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 26;
-            new AllPermissions().getPermission(PermissionUser);
+
 
             Current_Activity = new Activity();
         }
         #endregion
         #region Methodes And Events
-
+        private async Task asyncDirectorate()
+        {
+            Grid_Directorate = new ObservableCollection<Directorate>();
+            Grid_Directorate = await Task.Run(() => Directorate_Model.GetDirectorate());
+            Grid_Provinces = new ObservableCollection<Provinces>();
+            Grid_Provinces = await Task.Run(() => provinces_Model.GetProvinces());
+        }
 
 
         public void Add()
         {
-            int maxid = new Class_SqlConnection().Get_Max("Directorate");
+            int maxid = new Class_SqlConnection().Get_Max("Directorate", "directorate_id");
 
-            Current_Directorate = new Directorate { Directorate_id = maxid, Province_name = "تعز" };
+            Current_Directorate = new Directorate() { Province_id = maxid + 1, Directorate_name = "" };
             Selected_Provinces = new Provinces();
             win = new Window_ِAddDirectorate { DataContext = this };
             win.ShowDialog();
@@ -173,10 +174,6 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-
-                Directorate_Model.OperarionDirectorate(Current_Directorate, "Delete");
-                Grid_Directorate.Remove(Current_Directorate);
-
                 //////////////////////////////////////////////////////////////
 
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
@@ -192,6 +189,32 @@ namespace Wpf_Traffic_violation.ViewModel
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
 
+                if (Directorate_Model.OperarionDirectorate(Current_Directorate, "Delete"))
+                {
+                    Grid_Directorate.Remove(Current_Directorate);
+
+                    string message1 = "تمت عملية الحذف بنجاح";
+                    string caption1 = "عملية الحذف";
+                    MessageBoxImage icon1 = MessageBoxImage.Information;
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                    asyncDirectorate();
+                }
+                else
+                {
+                    string message1 = "يوجد سجلات مرتبطة بهذي المديرية";
+                    string caption1 = "تأكيد";
+                    MessageBoxButton buttons1 = MessageBoxButton.OK;
+
+                    MessageBoxImage icon1 = MessageBoxImage.Error;
+
+
+                    MessageBox.Show(message1, caption1, buttons1, icon1);
+                }
+
+
+
+
             }
             else
             {
@@ -203,24 +226,15 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanDelet() => Current_Directorate != null && PermissionUser.Delete_opretion == true;
         void Save()
         {
-            Current_Directorate.Province_id = 4;
+            prepareData();
 
-            //////////////////////////////////////////////////////////////
-
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
-            Current_Activity.Activity_date = DateTime.Now.Date.ToString();
-            Current_Activity.User_id = Properties.Settings.Default.Userid;
-            Current_Activity.Form_id = 26;
-
-            Current_Activity.Activity_record_num = Current_Directorate.Directorate_id;
-
-            //////////////////////////////////////////////////////////
-            
             if (IsEditing && Directorate_Model.Check_Exsit(Current_Directorate.Directorate_id))
             {
                 Directorate_Model.OperarionDirectorate(Current_Directorate, "Update");
                 IsEditing = false;
                 close();
+
+
                 string message = "تمت عملية التعديل بنجاح";
                 string caption = "عملية التعديل";
                 MessageBoxImage icon = MessageBoxImage.Information;
@@ -250,7 +264,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Directorate_Model.OperarionDirectorate(Current_Directorate, "Insert");
                 //Current_Directorate.Province_name = Selected_Provinces.Province_name;
                 Grid_Directorate = new ObservableCollection<Directorate>();
-                Directorate_Model.GetDirectorate(Grid_Directorate);
+                Grid_Directorate = Directorate_Model.GetDirectorate();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية التعديل";
@@ -269,6 +283,16 @@ namespace Wpf_Traffic_violation.ViewModel
 
             //Enable_Grid = false;
         }
+
+        private void prepareData()
+        {
+            Current_Activity.Activity_date = DateTime.Now.Date.ToString();
+            Current_Activity.User_id = Properties.Settings.Default.Userid;
+            Current_Activity.Form_id = 26;
+
+            Current_Activity.Activity_record_num = Current_Directorate.Directorate_id;
+        }
+
         bool CanSave() => Current_Directorate != null && !Current_Directorate.HasErrors;
         void close()
         {
@@ -281,7 +305,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Directorate_Model.GetExcel(Grid_Directorate);
             Grid_Directorate = new ObservableCollection<Directorate>();
-            Directorate_Model.GetDirectorate(Grid_Directorate);
+            Grid_Directorate = Directorate_Model.GetDirectorate();
         }
 
         #endregion

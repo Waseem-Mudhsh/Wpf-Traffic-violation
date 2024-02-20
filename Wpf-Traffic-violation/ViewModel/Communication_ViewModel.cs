@@ -176,16 +176,9 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Communication_ViewModel()
         {
-
-            Grid_Communication = new ObservableCollection<Communication>();
-            CommunicationModel.GetCommunication(Grid_Communication);
+            asyncCommunication();
+          
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());
-
-            Grid_User = new ObservableCollection<User>();
-            Grid_User = UserModel.GetUsers();
-            Grid_Plate = new ObservableCollection<Plate>();
-            Plate_Model.GetPlates(Grid_Plate);
-
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Scancommand = new RelayCommand(par => Scan(), par => CanScan());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -197,7 +190,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 10;
-            new AllPermissions().getPermission(PermissionUser);
+           
             PermissionUser1 = new PermissionUser();
             PermissionUser1.Form_id = 11;
             new AllPermissions().getPermission(PermissionUser1);
@@ -207,7 +200,17 @@ namespace Wpf_Traffic_violation.ViewModel
         #endregion
         #region Methodes And Events
 
+        private async Task asyncCommunication()
+        {
+            Grid_Communication = new ObservableCollection<Communication>();
+            Grid_Communication=await Task.Run(()=>CommunicationModel.GetCommunication());
 
+
+            Grid_User = new ObservableCollection<User>();
+           await Task.Run(()=> Grid_User = UserModel.GetUsers());
+            Grid_Plate = new ObservableCollection<Plate>();
+            Grid_Plate = await Task.Run(() => Plate_Model.GetPlates());
+        }
         public void Add()
         {
             Selected_User = new User();
@@ -226,10 +229,7 @@ namespace Wpf_Traffic_violation.ViewModel
         void Edit()
         {
 
-            // Selected_User = new User();
-            // Selected_Plate = new Plate {Plate_id=Current_Communication.Plate_id,Plate_num=Current_Communication.PlateNumr };
-
-            // MessageBox.Show(Selected_Plate.Plate_num);
+           
             IsEditing = true;
             string filename1 = "aa/" + Current_Communication.Communication_photo1 + ".jpg";
             string filename2 = "aa/" + Current_Communication.Communication_photo2 + ".jpg";
@@ -336,13 +336,13 @@ namespace Wpf_Traffic_violation.ViewModel
                 win2 = new Window_AddViolation { DataContext = ViolationViewModel1 };
                 string filename1 = "aa/" + Current_Communication.Communication_photo1 + ".jpg";
                 string filename2 = "aa/" + Current_Communication.Communication_photo2 + ".jpg";
-                ViolationViewModel1.Current_Violation.Violation_photo1 = Current_Communication.Communication_photo1;
-                ViolationViewModel1.Current_Violation.Violation_photo1 = Current_Communication.Communication_photo1;
+                ViolationViewModel1.Current_Violation.Violation_photo1 = Convert.ToByte(Current_Communication.Communication_photo1);
+                ViolationViewModel1.Current_Violation.Violation_photo1 = Convert.ToByte(Current_Communication.Communication_photo1);
 
 
                 win2.buttnsave.IsEnabled = true;
-                win2.a.SelectedItem = Selected_Plate;
-                win2.b.SelectedItem = Selected_Plate;
+                //win2.a.SelectedItem = Selected_Plate;
+                //win2.b.SelectedItem = Selected_Plate;
 
                 BitmapImage image1 = new BitmapImage();
                 image1.BeginInit();
@@ -363,8 +363,8 @@ namespace Wpf_Traffic_violation.ViewModel
                     File.Copy("aa/" + Current_Communication.Communication_photo2 + ".jpg", "Violation/photo2" + ViolationViewModel1.Current_Violation.Violation_id + ".jpg");
                 }
                 catch (Exception e) { }
-                ViolationViewModel1.Current_Violation.Violation_photo1 = "photo1" + ViolationViewModel1.Current_Violation.Violation_id;
-                ViolationViewModel1.Current_Violation.Violation_photo2 = "photo2" + ViolationViewModel1.Current_Violation.Violation_id;
+                ViolationViewModel1.Current_Violation.Violation_photo1 = Convert.ToByte("photo1" + ViolationViewModel1.Current_Violation.Violation_id);
+                ViolationViewModel1.Current_Violation.Violation_photo2 = Convert.ToByte("photo2" + ViolationViewModel1.Current_Violation.Violation_id);
 
 
 
@@ -385,15 +385,8 @@ namespace Wpf_Traffic_violation.ViewModel
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                string filename1 = "aa/" + Current_Communication.Communication_photo1 + ".jpg";
-                string filename2 = "aa/" + Current_Communication.Communication_photo2 + ".jpg";
-                File.Delete(filename1);
-                File.Delete(filename2);
-                CommunicationModel.OperarionCommunication(Current_Communication, "Delete");
-                Grid_Communication.Remove(Current_Communication);
-
                 //////////////////////////////////////////////////////////////
-
+                Current_Activity = new Activity();
                 Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
                 Current_Activity.Activity_date = DateTime.Now.Date.ToString();
                 Current_Activity.User_id = Properties.Settings.Default.Userid;
@@ -401,6 +394,14 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_record_num = Current_Communication.Communication_id;
 
                 //////////////////////////////////////////////////////////
+                string filename1 = "aa/" + Current_Communication.Communication_photo1 + ".jpg";
+                string filename2 = "aa/" + Current_Communication.Communication_photo2 + ".jpg";
+                File.Delete(filename1);
+                File.Delete(filename2);
+                CommunicationModel.OperarionCommunication(Current_Communication, "Delete");
+                Grid_Communication.Remove(Current_Communication);
+
+               
                 ////////////////////////////////////////////////////////////
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
@@ -495,7 +496,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 CommunicationModel.OperarionCommunication(Current_Communication, "Insert");
                 Grid_Communication = new ObservableCollection<Communication>();
-                CommunicationModel.GetCommunication(Grid_Communication);
+                Grid_Communication=CommunicationModel.GetCommunication();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية الأضافة";

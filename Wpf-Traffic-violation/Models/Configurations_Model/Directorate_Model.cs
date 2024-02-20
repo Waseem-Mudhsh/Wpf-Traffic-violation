@@ -1,15 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Models.Configurations_Model;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models
 {
@@ -17,54 +17,49 @@ namespace Wpf_Traffic_violation.Models
     {
         Provinces_Model provinces_model = new Provinces_Model();
         ///////////////////////////////// start GetDirectorate/////////////////////////////////////
-
-        public void GetDirectorate(ObservableCollection<Directorate> Directorates)
+        Isphelper sphelper;
+        OpreationSql opreationSql;
+        SP_Query sP_Query;
+        ValidationRegex validationRegex;
+        CacheManager<Directorate> cacheManager;
+        public Directorate_Model()
         {
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            opreationSql = new OpreationSql();
+            validationRegex = new ValidationRegex();
+            sphelper = new Directorates();
+            sP_Query = new SP_Query();
+            cacheManager = new CacheManager<Directorate>("Directorate");
+
+
+        }
+        public ObservableCollection<Directorate> GetDirectorate()
+        {
+            ObservableCollection<Directorate> Directorates = new ObservableCollection<Directorate>();
+            ObservableCollection<Directorate> getfromCach = cacheManager.GetCach as ObservableCollection<Directorate>;
+            if (getfromCach != null)
             {
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Cant Open con");
-                }
-
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetDirectorate",
-                    Connection = con
-
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        Directorate per = new Directorate
-                        {
-                            Directorate_id = (int)row[0],
-                            Directorate_name = row[1].ToString(),
-                            Province_id = (int)row[2]
-
-
-
-                        };
-                        per.Province_name = provinces_model.GetProvinces_name(per.Province_id);
-
-                        Directorates.Add(per); //الي بنربطه مع الجريد فيو
-                    }
-                }
+                Directorates = getfromCach;
             }
+            else
+            {
+                var result = sphelper.GetCollection(sP_Query.SP_GetDirectorate, validationRegex.nameOfSp(sP_Query.SP_GetDirectorate));
+                foreach (DataRow row in result)
+                {
+                    Directorate per = new Directorate
+                    {
+                        Directorate_id = (int)row[0],
+                        Directorate_name = row[1].ToString(),
+                        Province_id = (int)row[2]
 
+                    };
+                    per.Province_name = provinces_model.GetProvincesById(per.Province_id).Province_name;
 
+                    Directorates.Add(per); //الي بنربطه مع الجريد فيو
+                }
+                cacheManager.setkey(Directorates);
+
+            }
+            return Directorates;
         }
         ///////////////////////////////// end GetDirectorate/////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +67,7 @@ namespace Wpf_Traffic_violation.Models
 
         public bool OperarionDirectorate(Directorate directorate, string operartion)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
+            //Class_SqlConnection sql = new Class_SqlConnection();
 
             SqlParameter[] param = new SqlParameter[4];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
@@ -85,21 +80,21 @@ namespace Wpf_Traffic_violation.Models
             {
                 Value = directorate.Directorate_name
             };
-            param[2] = new SqlParameter("@Province_id", SqlDbType.NVarChar, 50)
+            param[2] = new SqlParameter("@Province_name", SqlDbType.NVarChar, 50)
             {
-                Value = directorate.Province_id
+                Value = directorate.Province_name
             };
 
             param[3] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
             {
                 Value = operartion
             };
-
-            if (!sql.Operarion("opDirectorate", param))
+            var response = sphelper.Operarion(param, opreationSql.SP_Director_Opreation, validationRegex.nameOfSp(opreationSql.SP_Director_Opreation));
+            if (response.Data == false)
             {
                 return false;
-
             }
+            cacheManager.Remove();
             return true;
         }
         ///////////////////////////////// end opTrafficMan/////////////////////////////////////
@@ -107,43 +102,45 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start Check_Exsit/////////////////////////////////////
         public bool Check_Exsit(int value)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
-            using (sql.con)
-            {
-                try
-                {
-                    sql.con.Open();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Cant Open Conncation");
+            //Class_SqlConnection sql = new Class_SqlConnection();
+            //using (sql.con)
+            //{
+            //    try
+            //    {
+            //        sql.con.Open();
+            //    }
+            //    catch (Exception)
+            //    {
+            //        MessageBox.Show("Cant Open Conncation");
 
-                }
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "checkDirectorate",
-                    Connection = sql.con
+            //    }
+            //    SqlCommand Command = new SqlCommand
+            //    {
+            //        CommandType = CommandType.StoredProcedure,
+            //        CommandText = "checkDirectorate",
+            //        Connection = sql.con
 
-                };
-                Command.Parameters.AddWithValue("@Directorate_id", value);
-
-
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    return true;
-                }
-
-                else
-                {
-                    return false;
-                }
+            //    };
+            //    Command.Parameters.AddWithValue("@Directorate_id", value);
 
 
-            }
+            //    DataTable dt = new DataTable();
+            //    SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+            //    dataAdapter.Fill(dt);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        return true;
+            //    }
+
+            //    else
+            //    {
+            //        return false;
+            //    }
+
+
+            //}
+
+            return false;
         }
         ///////////////////////////////// end Check_Exsit/////////////////////////////////////
 
@@ -168,8 +165,8 @@ namespace Wpf_Traffic_violation.Models
 
                 SqlCommand Command = new SqlCommand
                 {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetDirectorate_name",
+                    CommandType = CommandType.Text,
+                    CommandText = "SELECT [Directorate_name]FROM [dbo].[Directorate]  where Directorate_id= @Directorate_id",
                     Connection = con
 
                 };
@@ -186,7 +183,6 @@ namespace Wpf_Traffic_violation.Models
             }
             return "غير موجود";
         }
-
 
 
         ///////////////////////////////// end GetDirectorate_name/////////////////////////////////////
@@ -211,7 +207,7 @@ namespace Wpf_Traffic_violation.Models
             if (op.ShowDialog() == true)
             {
                 con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + op.FileName + "; Extended Properties=Excel 12.0");
-                da = new OleDbDataAdapter("select * from [page$]", con);
+                da = new OleDbDataAdapter("select * from [Directorate$]", con);
                 dt = new DataTable();
                 da.Fill(dt);
                 if (dt.Rows.Count > 0)

@@ -21,7 +21,9 @@ namespace Wpf_Traffic_violation.Views.Reports
     {
         public Show_Report()
         {
+       
             InitializeComponent();
+        
         }
 
         private void But_close_Click(object sender, RoutedEventArgs e)

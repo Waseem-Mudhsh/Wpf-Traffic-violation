@@ -17,8 +17,9 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
         Provinces_Model provinces_model = new Provinces_Model();
         ///////////////////////////////// start GetCategoriesOfLicenses/////////////////////////////////////
 
-        public void GetCategoriesOfLicenses(ObservableCollection<CategoriesOfLicenses> CategoriesOfLicenses)
+        public ObservableCollection<CategoriesOfLicenses> GetCategoriesOfLicenses()
         {
+            ObservableCollection<CategoriesOfLicenses> CategoriesOfLicenses = new ObservableCollection<Configurations_Model.CategoriesOfLicenses>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
             using (con)
@@ -63,7 +64,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                 }
             }
 
-
+            return CategoriesOfLicenses;
         }
         ///////////////////////////////// end GetProvinces/////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////

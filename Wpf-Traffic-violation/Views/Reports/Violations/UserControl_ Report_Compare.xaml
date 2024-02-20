@@ -43,9 +43,9 @@
                     <Border Name="border_date" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="0" >
                         <StackPanel Name="Panel_date" Orientation="Horizontal" >
                             <TextBlock Text=" التاريخ :" Margin="10 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="24 10 0 10" />
+                            <DatePicker x:Name="from" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="24 10 0 10" />
                             <TextBlock Text="بين :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
-                            <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
+                            <DatePicker x:Name="to" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Current_Violation.Violation_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
 
                         </StackPanel>
                     </Border>
@@ -80,13 +80,14 @@
                             <TextBlock Text="نوع المخالفة :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  x:Name="FilledComboBox1"
-                          
-                          materialDesign:HintAssist.Hint="نوع المخالفة ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_violation_typ}"
+                           SelectedItem="{Binding Selectes_ViolationType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0,10,5,9" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Violation_type_name" Text="{Binding Violation_type_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Border>
@@ -96,13 +97,14 @@
                             <TextBlock Text="أسم الشارع :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  
-                          
-                          materialDesign:HintAssist.Hint="أسم الشارع ..." Padding="10,10,0,0" Background="White"
-                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
-                                />
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_street}"
+                           SelectedItem="{Binding Selected_Streets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0,10,5,9" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Street_name" Text="{Binding Street_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                     </Border>
@@ -113,12 +115,16 @@
                             <TextBlock Text="نوع اللوحة :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <ComboBox  
+                            <ComboBox  ItemsSource="{Binding Grid_plate_typ}"
+                           SelectedItem="{Binding Selected_typ_plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           
                           materialDesign:HintAssist.Hint="نوع اللوحة ..." Padding="10,10,0,0" Background="White"
                           Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
-                                <ComboBoxItem Content="نظام"/>
-                                <ComboBoxItem Content=" تطبيق"   />
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Street_name" Text="{Binding Plate_type_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
 
                             </ComboBox>
                         </StackPanel>
@@ -129,7 +135,18 @@
                             <TextBlock Text="الرقم الوطني:" materialDesign:HintAssist.Hint="الرقم الوطني..." Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <TextBlock Width="215" Height="40" Padding="10,10,0,0"  Margin="10 0 10 0" Background="White"></TextBlock>
+                            <ComboBox  ItemsSource="{Binding Grid_citizn}"
+                           SelectedItem="{Binding Selected_citizen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          
+                          materialDesign:HintAssist.Hint="الرقم الوطني ..." Padding="10,10,0,0" Background="White"
+                          Width="215"  Height="40" IsEditable="True" Margin="10 0 10 0" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Street_name" Text="{Binding Citizen_id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+
+                            </ComboBox>
                         </StackPanel>
                     </Border>
                     <Border Name="border_numberplate" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="4"  Visibility="{Binding ElementName=RadioButton_numberplate, Path=IsChecked, Converter={StaticResource Convertbool}}" >
@@ -138,8 +155,15 @@
                             <TextBlock Text="رقم اللوحة :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <TextBlock Width="50" Height="40" Padding="10,10,0,0"  Margin="10,10,10,9" Background="White"></TextBlock>
-                            <TextBlock Width="150" Height="40" Padding="10,10,0,0"  Margin="5,10,10,9" Background="White"></TextBlock>
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_plate}"
+                           SelectedItem="{Binding selected_Plate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0,10,5,9" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Plate_num" Text="{Binding Plate_num, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </StackPanel>
                     </Border>
                     <Border Name="border_separator" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="4"  Visibility="{Binding ElementName=RadioButton_separator, Path=IsChecked, Converter={StaticResource Convertbool}}" >
@@ -148,7 +172,15 @@
                             <TextBlock Text="الفاصل :" Margin="10 0 10 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
 
 
-                            <TextBlock Width="50" Height="40" Padding="10,10,0,0"  Margin="10,10,10,9" Background="White"></TextBlock>
+                            <ComboBox  Width="240" Height="40" BorderThickness="1 1 1 1" ItemsSource="{Binding Grid_province}"
+                           SelectedItem="{Binding Selected_Provinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          Padding="10,10,0,0" Background="White" Margin="0,10,5,9" FontSize="14" FontFamily="Tajawal" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="Province_id" Text="{Binding Province_id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
                         </StackPanel>
                     </Border>
@@ -157,7 +189,7 @@
 
 
                     <StackPanel  Grid.Row="5" >
-                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10"
+                        <Button  x:Name="But_Delete_Citizen" HorizontalAlignment="Center" Margin="0 10" Command="{Binding Show_compare_violatio}"
                      Height="40"   Padding="0"    Width="140" >
                             <StackPanel Orientation="Horizontal" >
                                 <materialDesign:PackIcon Kind="FileDocument" Margin="5 0 4 0" Width="24" Height="24" />

@@ -154,6 +154,39 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                 }
             }
         }
+        string Form_name;
+        public string Nameform {
+            get
+            {
+                return Form_name;
+            }
+            set
+            {
+                if (Form_name != value)
+                {
+                    Form_name = value;
+                    RaisePropertyChanged("Form_name");
+                }
+            }
+           }
+        string Code;
+        public string Codeform
+        {
+            get
+            {
+                return Code;
+            }
+            set
+            {
+                if (Code != value)
+                {
+                    Code = value;
+                    RaisePropertyChanged("Code");
+                }
+            }
+        }
+
+
         public override void CollectErrors()
         {
             throw new NotImplementedException();

@@ -1,17 +1,14 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
 using Wpf_Traffic_violation.Models.Violations_Model;
+using Wpf_Traffic_violation.Views.Reports;
 using Wpf_Traffic_violation.Views.Reports.Violations;
 
 namespace Wpf_Traffic_violation.ViewModel
@@ -23,13 +20,17 @@ namespace Wpf_Traffic_violation.ViewModel
         DataTable dt;
         ReportDataSource ds;
         UserControl_Report_Statistics UserControl_Report_Statistics;
-        UserControl_Report_Violations UserControl_Report_Violations;
+        UserControlviolationReceipt userControlviolationReceipt;
+        //UserControl_Report_Violations UserControl_Report_Violations;
+        UserControlviolationReceipt userControlviolationReceipt1;
         UserControl_ReportAllViolations UserControl_ReportAllViolations;
         VoilationModel VoilationModel;
+        VoilationModel ViolationModel = new VoilationModel();
         ViolationTypeModel ViolationTypeModel;
         Street_Model Street_Model;
         Plate_Model Plate_Model;
         Provinces_Model Provinces_Model;
+        Show_Report ShowReport = new Show_Report();
 
 
         #endregion
@@ -50,7 +51,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-      
+
         ObservableCollection<ViolationType> grid_violation_typ;
         public ObservableCollection<ViolationType> Grid_violation_typ
         {
@@ -67,6 +68,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         ObservableCollection<Streets> grid_streets;
         public ObservableCollection<Streets> Grid_street
         {
@@ -83,8 +85,9 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-        ObservableCollection<Plate> grid_plate;
-        public ObservableCollection<Plate> Grid_plate
+
+        ObservableCollection<PlateDetails> grid_plate;
+        public ObservableCollection<PlateDetails> Grid_plate
         {
             get
             {
@@ -99,6 +102,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         ObservableCollection<Provinces> grid_provinces;
         public ObservableCollection<Provinces> Grid_province
         {
@@ -115,10 +119,6 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-       
-
-
-
 
         ViolationType selected_ViolationType;
         public ViolationType Selectes_ViolationType
@@ -136,6 +136,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         Streets selected_Streets;
         public Streets Selected_Streets
         {
@@ -152,6 +153,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         Plate selected_Plate;
         public Plate Selected_Plate
         {
@@ -168,6 +170,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         Provinces selected_Provinces;
         public Provinces Selected_Provinces
         {
@@ -184,7 +187,9 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         bool violation_type;
+
         public bool Violation_type
         {
             get
@@ -200,6 +205,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         bool streets;
         public bool Streets
         {
@@ -216,6 +222,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         bool plate;
         public bool Plate
         {
@@ -232,10 +239,11 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         bool provinces;
         public bool Provinces
         {
-            get 
+            get
             {
                 return provinces;
             }
@@ -248,7 +256,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-       
+
         bool date;
         public bool Date
         {
@@ -265,6 +273,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         string from_date;
         public string From_date
         {
@@ -281,6 +290,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+
         string to_date;
         public string To_date
         {
@@ -299,38 +309,71 @@ namespace Wpf_Traffic_violation.ViewModel
         }
 
 
+        Violation current_Violation;
 
+        public Violation Current_Violation
+        {
+            get
+            {
+                return current_Violation;
+            }
+            set
+            {
+                if (current_Violation != value)
+                {
+                    current_Violation = value;
+                    RaisePropertyChanged("Current_Violation");
+                }
+            }
+        }
 
+        UserControl viewreport;
 
-
-
+        public UserControl Viewreport
+        {
+            get
+            {
+                return viewreport;
+            }
+            set
+            {
+                if (viewreport != value)
+                {
+                    viewreport = value;
+                    RaisePropertyChanged("viewreport");
+                }
+            }
+        }
 
 
         #endregion
         #region Construcor
-       public Report_violation_ViowModel()
+        public Report_violation_ViowModel()
         {
             Violation_type = true;
-               Showcommand1 = new RelayCommand(Par => ShowReport1());
+            Showcommand1 = new RelayCommand(Par => ShowReport1());
             Showcommand2 = new RelayCommand(Par => ShowReport2());
             Showcommand3 = new RelayCommand(Par => ShowReport3());
-            ShowAllViolationcommand_by = new RelayCommand(Par => Show_allviolation());
-
-            Grid_plate = new ObservableCollection<Plate>();
+            ShowAllViolationcommand = new RelayCommand(Par => Show_allviolation());
+            ShowAllViolationcommand_by = new RelayCommand(Par => show_violationByReceiptDetailes());
+            userControlviolationReceipt = new UserControlviolationReceipt();
+            Grid_plate = new ObservableCollection<PlateDetails>();
             Plate_Model = new Plate_Model();
-            Plate_Model.GetPlates(Grid_plate);
-            
-            Grid_province = new ObservableCollection<Provinces>();
-            Provinces_Model = new Provinces_Model();
-            Provinces_Model.GetProvinces(Grid_province);
-         
-            Grid_street = new ObservableCollection<Streets>();
-            Street_Model = new Street_Model();
-            Street_Model.GetStreets(Grid_street);
-            
+            //Grid_plate = Plate_Model.GetPlates(); 
+            Grid_plate = Plate_Model.GetPlatesDetails();
+
+            //Grid_province = new ObservableCollection<Provinces>();
+            //Provinces_Model = new Provinces_Model();
+            //Grid_province=Provinces_Model.GetProvinces();
+
+            //Grid_street = new ObservableCollection<Streets>();
+            //Street_Model = new Street_Model();
+            //Grid_street=Street_Model.GetStreets();
+
             Grid_violation_typ = new ObservableCollection<ViolationType>();
             ViolationTypeModel = new ViolationTypeModel();
-            ViolationTypeModel.GetViolationTypes(Grid_violation_typ);
+            //= new UserControlviolationReceipt();
+            Grid_violation_typ = ViolationTypeModel.GetViolationTypes();
 
         }
 
@@ -350,108 +393,104 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void ShowReport3()
         {
-            UserControl_ReportAllViolations = new UserControl_ReportAllViolations { DataContext = this };
-            Curent_usercontrol = UserControl_ReportAllViolations;
+            userControlviolationReceipt1 = new UserControlviolationReceipt { DataContext = this };
+            Curent_usercontrol = userControlviolationReceipt1;
         }
         public void Show_allviolation()
         {
-            SqlParameter[] par = new SqlParameter[5];
-            if (Violation_type == true)
-            {
-                par[0] = new SqlParameter("@by", SqlDbType.NVarChar, 50)
-                {
-                    Value = "violationtype"
-                };
-                par[1] = new SqlParameter("@Id", SqlDbType.Int)
-                {
-                    Value = Selectes_ViolationType.Violation_type_id
-                };
-            }
-            if (Streets == true)
-            {
-                par[0] = new SqlParameter("@by", SqlDbType.NVarChar, 50)
-                {
-                    Value = "street"
-                };
-                par[1] = new SqlParameter("@Id", SqlDbType.Int)
-                {
-                    Value = Selected_Streets.Street_id
-                };
-            }
-            if (Plate == true)
-            {
-                par[0] = new SqlParameter("@by", SqlDbType.NVarChar, 50)
-                {
-                    Value = "plat"
-                };
-                par[1] = new SqlParameter("@Id", SqlDbType.Int)
-                {
-                    Value = Selected_Plate.Plate_id
-                };
-            }
-            if (Provinces == true)
-            {
-                par[0] = new SqlParameter("@by", SqlDbType.NVarChar, 50)
-                {
-                    Value = "provinces"
-                };
-                par[1] = new SqlParameter("@Id", SqlDbType.Int)
-                {
-                    Value = Selected_Provinces.Province_id
-                };
-            }
-            if (Date == true)
-            {
-                par[2] = new SqlParameter("@date", SqlDbType.NVarChar, 50)
-                {
-                    Value = "fromto"
-                };
-                par[3] = new SqlParameter("@fromdate", SqlDbType.NVarChar, 50)
-                {
-                    Value = From_date
-                };
-                par[4] = new SqlParameter("@todate", SqlDbType.NVarChar, 50)
-                {
-                    Value = To_date
-                };
-            } 
-            else if (Date == false)
-            {
-                par[2] = new SqlParameter("@date", SqlDbType.NVarChar, 50)
-                {
-                    Value = "day"
-                };
-                par[3] = new SqlParameter("@fromdate", SqlDbType.NVarChar, 50)
-                {
-                    Value = From_date
-                };
-                par[4] = new SqlParameter("@todate", SqlDbType.NVarChar, 50)
-                {
-                    Value = From_date
-                };
-            }
+            var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
+            var ExtraDetel = new ExtraDetailReportModel();
+            var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
 
-
-            UserControl_Report_Statistics.ReportViewerDemo.Reset();
-            dt = new Class_SqlConnection().GetData("Report_Violation", par);
-            ds = new ReportDataSource("DataSet1", dt);
-            UserControl_Report_Statistics.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-        
-
-            dt = new Class_SqlConnection().GetData("GetCompanys", null);
-            ds = new ReportDataSource("DataSet2", dt);
-            UserControl_Report_Statistics.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-            UserControl_Report_Statistics.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Report_All_Violation.rdlc";
-            UserControl_Report_Statistics.ReportViewerDemo.RefreshReport();
-            Curent_usercontrol = UserControl_Report_Statistics;
+            ShowReport = new Show_Report();
+            var validationDate = ValidationData(typrviolation, From_date, To_date);
+            if (validationDate)
+            {
+                ExtraDetel.From_date = String.Format("{0:dd-MM-yyyy}", From_date);
+                ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date);
+                extraDetailReportModels.Add(ExtraDetel);
+                var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
+                ShowReport.ReportViewerDemo.Reset();
+                //dt = new Class_SqlConnection().GetData("Report_Violation", par);
+                ds = new ReportDataSource("DataSet1", data);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                ds = new ReportDataSource("DataSet2", extraDetailReportModels);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Report_All_Violation.rdlc";
+                ShowReport.ReportViewerDemo.RefreshReport();
+                ShowReport.Show();
+            }
+            else
+            {
+                MessageBox.Show("Some Data Need To Fill");
+            }
 
         }
+        public void show_violationByReceiptDetailes()
+        {
+            int sumamount = 0;
+            int sumviolationType = 0;
+
+            var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
+            var ExtraDetel = new ExtraDetailReportModel();
+
+            var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
+            ShowReport = new Show_Report();
+            var validationDate = ValidationData(typrviolation, From_date, To_date);
+            if (validationDate)
+            {
+                var violations = ViolationModel.GetViolationByReceiptDetailes(typrviolation, From_date, To_date);
+                foreach (var item in violations)
+                {
+                    sumamount += item.ViolationPenalty;
+                    sumviolationType += item.ViolationTypcount;
+                }
+                ExtraDetel.SumViolationTypcount = sumviolationType;
+                ExtraDetel.SumViolationPenaltyCount = sumamount;
+                ExtraDetel.From_date = //DateTime.ParseExact(DateTime.Now.ToString(),)
+                    String.Format("{0:dd-MM-yyyy}", From_date); ;
+                ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date); ; ;
+                extraDetailReportModels.Add(ExtraDetel);
+                userControlviolationReceipt.ReportViewerDemo.Reset();
+                ShowReport.ReportViewerDemo.Reset();
+                //Create New Dataset That Content ExtraDetaile for report
+                ds = new ReportDataSource("DataSet1", violations);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                ds = new ReportDataSource("DataSet2", extraDetailReportModels);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.Landscape = true;
+                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
+                ShowReport.ReportViewerDemo.RefreshReport();
+                userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
+
+                ShowReport.Show();
+            }
+            else
+            {
+                MessageBox.Show("Some Data Need To Fill");
+            }
+        }
+
+        public bool ValidationData(string typrviolation, string from_date, string to_date)
+        {
+            if (typrviolation != null && (from_date != null || from_date != ""))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //  public void show_Allviolation
         #endregion
-            #region Commands
+        #region Commands
         public RelayCommand Showcommand1 { get; private set; }
         public RelayCommand Showcommand2 { get; private set; }
         public RelayCommand Showcommand3 { get; private set; }
         public RelayCommand ShowAllViolationcommand_by { get; private set; }
+        public RelayCommand ShowAllViolationcommand { get; private set; }
         #endregion
 
 

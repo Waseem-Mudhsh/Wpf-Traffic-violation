@@ -32,43 +32,46 @@ namespace Wpf_Traffic_violation.Views
             Button but = ((Button)sender);
             Changed_Background(but);
             int index = int.Parse(((Button)e.Source).Uid);
-
+            var permation = Properties.Settings.Default.Userpermission;
             switch (index)
             {
 
                 case 1:
                     {
+
+
                         Frame_Violation.Content = new UserControl_OperationViolation();
                         break;
                     }
                 case 2:
                     {
                         UserControl_QureyViolation UserControl_QureyViolation = new UserControl_QureyViolation();
-
-                        AllPermissions AllPermissions = new AllPermissions();
-                        PermissionUser PermissionUser;
-
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 3;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_QureyViolation.butn1.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 4;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_QureyViolation.butn2.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 5;
-                        AllPermissions.getPermission(PermissionUser);
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_QureyViolation.butn3.IsEnabled = false;
-                        }
+                        UserControl_QureyViolation.butn1.IsEnabled = true;
+                        UserControl_QureyViolation.butn2.IsEnabled = true;
+                        UserControl_QureyViolation.butn3.IsEnabled = true;
+                      
+                        //AllPermissions AllPermissions = new AllPermissions();
+                        //PermissionUser PermissionUser;
+                        //PermissionUser = new PermissionUser();
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_QureyViolation.butn1.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 4;
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_QureyViolation.butn2.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 5;
+                        //AllPermissions.getPermission(PermissionUser);
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_QureyViolation.butn3.IsEnabled = false;
+                        //}
 
                         Frame_Violation.Content = UserControl_QureyViolation;
                         break;
@@ -83,13 +86,13 @@ namespace Wpf_Traffic_violation.Views
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but3.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+           
           
 
 
             but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
-            but3.BorderBrush = Brushes.White;
+          
 
 
 
