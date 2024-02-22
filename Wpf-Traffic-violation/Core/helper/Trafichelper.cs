@@ -1,30 +1,30 @@
 ﻿
 using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.IO;
+using System.Globalization;
+using System.Windows.Data;
 using Wpf_Traffic_violation.MagrationDB;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
 using Receipt = Wpf_Traffic_violation.Models.Receipt;
 
-public class helper
+public class helper : IValueConverter
 {
     public Wpf_Traffic_violation.MagrationDB.Violation CreateViolation(Wpf_Traffic_violation.Models.Violations_Model.Violation Violation)
     {
         byte[] img = null;
-      
+
         var data = new Wpf_Traffic_violation.MagrationDB.Violation
         {
             Teaffic_man_id = 1,
-            Violation_date = Convert.ToDateTime(Violation.Violation_date),
+            Violation_date = System.Convert.ToDateTime(Violation.Violation_date),
             vehicle_id = Violation.Plate_Num,
             Violation_photo1 = img,
             Violation_photo2 = img,
             Violation_type_id = Violation.Violation_type_id,
-            Violation_penalty= Violation.Violation_penalty,
+            Violation_penalty = Violation.Violation_penalty,
             VounchrNum = Violation.VounchrNum,
             Createdby = Violation.CreatedBy,
             CreatedOn = Violation.CreatedOn,
@@ -42,7 +42,7 @@ public class helper
 
     }
 
-    public Wpf_Traffic_violation.MagrationDB.Receipt CreateReceiptModel(Receipt current_Receipt,int count)
+    public Wpf_Traffic_violation.MagrationDB.Receipt CreateReceiptModel(Receipt current_Receipt, int count)
     {
         Wpf_Traffic_violation.MagrationDB.Receipt receipt = new Wpf_Traffic_violation.MagrationDB.Receipt();
         try
@@ -50,9 +50,9 @@ public class helper
             receipt = new Wpf_Traffic_violation.MagrationDB.Receipt
             {
                 Receipt_amount = current_Receipt.Receipt_amount,
-                Post_date = Convert.ToDateTime(current_Receipt.Receipt_date),
-                Receipt_date= Convert.ToDateTime(current_Receipt.Receipt_date),
-                Account_id =1,
+                Post_date = System.Convert.ToDateTime(current_Receipt.Receipt_date),
+                Receipt_date = System.Convert.ToDateTime(current_Receipt.Receipt_date),
+                Account_id = 1,
                 //Post_date = Convert.ToDateTime(current_Receipt.Post_date),
                 Receipt_status = current_Receipt.Receipt_status,
                 Receipt_statement = $"مقابل عدد + {count} مخالفات ",
@@ -60,11 +60,12 @@ public class helper
 
 
             };
-        }catch(Exception e)
+        }
+        catch (Exception)
         {
 
         }
-        
+
         return receipt;
 
 
@@ -81,16 +82,16 @@ public class helper
                 ResonOfPaid = resonOfPaid,
                 Violation_id = violation_id,
                 Receipt_detail_amount = receipt_detail_amount,
-                NameOfPaid=nameOfPaid,
-                Receipt_amountwithdiscont=receipt_amountwithdiscont
+                NameOfPaid = nameOfPaid,
+                Receipt_amountwithdiscont = receipt_amountwithdiscont
 
 
 
             };
-      
+
 
         }
-        catch(Exception e)
+        catch (Exception)
         {
 
         }
@@ -134,15 +135,15 @@ public class helper
         //int count=0;
         //for (int row = 2; row <= rowCount; row++) // Assuming the first row is the header
         //{
-            if ((worksheet.Cells[row, 4].Text == null || worksheet.Cells[row, 4].Text == "")
-              || (worksheet.Cells[row, 1].Text == null || worksheet.Cells[row, 1].Text == "")
-              || (worksheet.Cells[row, 2].Text == null || worksheet.Cells[row, 2].Text == "")
-              || (worksheet.Cells[row, 3].Text == null || worksheet.Cells[row, 3].Text == ""))
-            {
-                return false;
-            }
+        if ((worksheet.Cells[row, 4].Text == null || worksheet.Cells[row, 4].Text == "")
+          || (worksheet.Cells[row, 1].Text == null || worksheet.Cells[row, 1].Text == "")
+          || (worksheet.Cells[row, 2].Text == null || worksheet.Cells[row, 2].Text == "")
+          || (worksheet.Cells[row, 3].Text == null || worksheet.Cells[row, 3].Text == ""))
+        {
+            return false;
+        }
 
-            //count = row;
+        //count = row;
 
         //}
         return true;
@@ -155,18 +156,34 @@ public class helper
         {
 
             ViolationType violationType = new ViolationType
-                 {
-                     Violation_type_id = (int)row[0],
-                     Violation_type_name = (string)row[1],
-                    Minimum_price = (int)row[2],
-                     Maximum_price = (int)row[3],
-                       Penalty = (int)row[4],
-                     Interception_status = Convert.ToBoolean(row[5])
-                 };
-            
+            {
+                Violation_type_id = (int)row[0],
+                Violation_type_name = (string)row[1],
+                Minimum_price = (int)row[2],
+                Maximum_price = (int)row[3],
+                Penalty = (int)row[4],
+                Interception_status = System.Convert.ToBoolean(row[5])
+            };
+
             resoult.Add(violationType);
         }
         return resoult;
+    }
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DateTime date)
+        {
+            return date.ToString("dd-MM-yyyy");
+        }
+        return Binding.DoNothing;
+
+
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
     //public Wpf_Traffic_violation.MagrationDB.Violation PrepareReceipt(Violation Violation)
     //{
@@ -197,4 +214,6 @@ public class helper
 
 
     //}
+
+
 }

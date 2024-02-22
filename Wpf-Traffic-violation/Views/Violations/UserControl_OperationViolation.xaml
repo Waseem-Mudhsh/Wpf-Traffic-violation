@@ -8,13 +8,13 @@
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="560" Width="1360">
+           >
     <UserControl.DataContext>
         <ViewModel:ViolationViewModel/>
     </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
-            <StackPanel  Height="60" Background="WhiteSmoke" Orientation="Horizontal" HorizontalAlignment="Left" Width="1360" >
+            <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center"  >
 
                 <!--top-->
 
@@ -85,18 +85,18 @@
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="12,0,0,0" Width="70" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">إضافة</TextBlock>
-                        <materialDesign:PackIcon Kind="Add" Margin="5 0 0 0" Width="20" Height="24" />
+                        <materialDesign:PackIcon Kind="Add" Margin="0 0 0 0" Width="25" Height="24" />
                     </StackPanel>   
                 </Button>
 
             </StackPanel>
 
         </Border>
-        <StackPanel  Background="White" >
+        <StackPanel  Background="White"  HorizontalAlignment="Center">
 
             <DataGrid x:Name="GriddataViolation"  Style="{StaticResource Style_Datagrid}" Margin="10 5 40 5" ItemsSource="{Binding Grid_Violation}"  SelectedItem="{Binding Current_Violation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="1400" HorizontalAlignment="Right"
-                       Height="480" Width="1194"  >
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"  HorizontalAlignment="Right"
+                       Height="680" Width="1194"  >
 
                 <DataGrid.Columns>
 

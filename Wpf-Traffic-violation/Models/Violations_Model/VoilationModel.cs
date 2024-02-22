@@ -179,14 +179,22 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         //}
         public ObservableCollection<Violation> GetAllViolationReport(string typrviolation, string from_date, string to_date)//تجرية المزامنة
         {
-            to_date = (to_date == null) ? from_date : to_date;
-
-            var From = Convert.ToDateTime(from_date);
-            var To = Convert.ToDateTime(to_date);
             ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
-            Violations = violationServices.GetAllViolationReport(typrviolation, From, To);
+
+            try
+            {
+                var From = Convert.ToDateTime(from_date);
+                var To = Convert.ToDateTime(to_date);
+                Violations = violationServices.GetAllViolationReport(typrviolation, From, To);
+            }
+            catch (Exception)
+            {
+
+
+            }
 
             return Violations;
+
 
         }
         public ObservableCollection<ReceiptReportModel> GetViolationByReceiptDetailes(string typrviolation, string from_date, string to_date)
@@ -195,7 +203,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             try
             {
 
-                to_date = (to_date == "") ? from_date : to_date;
+                to_date = (to_date == null) ? from_date : to_date;
                 var From = Convert.ToDateTime(from_date);
                 var To = Convert.ToDateTime(to_date);
                 Hashtable key = new Hashtable();

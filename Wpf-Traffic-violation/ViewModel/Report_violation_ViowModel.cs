@@ -32,6 +32,7 @@ namespace Wpf_Traffic_violation.ViewModel
         Provinces_Model Provinces_Model;
         Show_Report ShowReport = new Show_Report();
 
+        helper helper;
 
         #endregion
         #region Proprties
@@ -350,6 +351,7 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Report_violation_ViowModel()
         {
+            helper = new helper();
             Violation_type = true;
             Showcommand1 = new RelayCommand(Par => ShowReport1());
             Showcommand2 = new RelayCommand(Par => ShowReport2());
@@ -398,6 +400,9 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void Show_allviolation()
         {
+            if (To_date == null || To_date == "")
+                To_date = To_date;
+
             var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
             var ExtraDetel = new ExtraDetailReportModel();
             var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
@@ -406,8 +411,7 @@ namespace Wpf_Traffic_violation.ViewModel
             var validationDate = ValidationData(typrviolation, From_date, To_date);
             if (validationDate)
             {
-                ExtraDetel.From_date = String.Format("{0:dd-MM-yyyy}", From_date);
-                ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date);
+                ExtraDetel.To_date = To_date;
                 extraDetailReportModels.Add(ExtraDetel);
                 var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
                 ShowReport.ReportViewerDemo.Reset();
@@ -447,6 +451,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
                 ExtraDetel.SumViolationTypcount = sumviolationType;
                 ExtraDetel.SumViolationPenaltyCount = sumamount;
+                var date = Convert.ToDateTime(From_date).ToString("yyyy/MM/dd");
                 ExtraDetel.From_date = //DateTime.ParseExact(DateTime.Now.ToString(),)
                     String.Format("{0:dd-MM-yyyy}", From_date); ;
                 ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date); ; ;
@@ -476,7 +481,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public bool ValidationData(string typrviolation, string from_date, string to_date)
         {
-            if (typrviolation != null && (from_date != null || from_date != ""))
+            if (typrviolation != null && (from_date != null))
             {
                 return true;
             }

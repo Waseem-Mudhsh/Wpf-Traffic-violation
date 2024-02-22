@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Wpf_Traffic_violation.Views.Reports.Violations
 {
@@ -23,6 +11,71 @@ namespace Wpf_Traffic_violation.Views.Reports.Violations
         public UserControl_ReportAllViolations()
         {
             InitializeComponent();
+        }
+
+        private void DatePicker_SelectedfromDateChanged(object sender, EventArgs ea)
+        {
+            try
+            {
+                DatePicker datePicker = (DatePicker)sender;
+                if (datePicker != null)
+                {
+                    DateTime? date = datePicker.SelectedDate;
+                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+                    datePicker.SelectedDate = Convert.ToDateTime(value);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+        private void DatePicker_SelectedToDateChanged(object sender, EventArgs ea)
+        {
+            try
+            {
+                DatePicker datePicker = (DatePicker)sender;
+                if (datePicker != null)
+                {
+                    DateTime? date = datePicker.SelectedDate;
+                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+                    datePicker.SelectedDate = Convert.ToDateTime(value);
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+        private void DatePicker_SelectedDateChanged(object sender, EventArgs ea)
+        {
+            try
+            {
+                DatePicker datePicker = (DatePicker)sender;
+                if (datePicker != null)
+                {
+                    DateTime? date = datePicker.SelectedDate;
+                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+                    datePicker.SelectedDate = Convert.ToDateTime(value);
+
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
         }
     }
 }

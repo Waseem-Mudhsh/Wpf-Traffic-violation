@@ -8,8 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Views="clr-namespace:Wpf_Traffic_violation.Views"
         mc:Ignorable="d"
-        Height="725" Width="1360" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
-
+          Style="{StaticResource DefaultWindowStyle}">
     <Grid  x:Name="Grid_mainWindow" Background="{x:Null}"  >
        
             <!--<local:ElementMenu/>-->

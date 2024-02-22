@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="625" d:DesignWidth="1360">
+           >
     <DockPanel Background="Gray" >
         <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -8,8 +8,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             
-             d:DesignHeight="725" d:DesignWidth="1360">
-    <Grid x:Name="GridMain" Width="1360" Height="725">
+             >
+    <Grid x:Name="GridMain">
         <DockPanel x:Name="DockMain">
             <materialDesign:ColorZone Mode="PrimaryDark" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
                 <Grid  >
@@ -72,7 +72,7 @@
                 </Grid>
             </materialDesign:ColorZone>
             <!--Dock fill-->
-            <Frame x:Name="Frame_main" Width="1360" Height="665" Background="#F5F5F5" NavigationUIVisibility="Hidden" >
+            <Frame x:Name="Frame_main"  Background="#F5F5F5" NavigationUIVisibility="Hidden" >
                 <!--<Frame Content="{Binding Path=SubItems.Screen}"/>-->
                 <!--<local:Home />-->
                 <!--<local:UserControlForm1/>-->

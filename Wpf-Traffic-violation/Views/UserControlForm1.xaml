@@ -7,22 +7,8 @@
            
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="665" d:DesignWidth="1360">
-    <UserControl.Resources>
-        <!--<Style TargetType="Button" x:Key="sub1" BasedOn="{StaticResource MaterialDesignFlatButton}">
-            <Setter Property="Foreground" Value="#BCBEC0"/>
-            <Setter Property="Background" Value="#E6E7E8"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="true" >
-
-                    <Setter Property="Foreground" Value="#022551"></Setter>
-
-
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
-       
-    </UserControl.Resources>
+             >
+  
     <DockPanel Background="{x:Null}">
         <!--panalDock top-->
 
@@ -96,7 +82,7 @@
             </StackPanel>
             
         </Grid>
-        <Frame DockPanel.Dock="Top" Width="1360" Height="625" x:Name="GridPageFrom1"   NavigationUIVisibility="Hidden" />
+        <Frame DockPanel.Dock="Top"  x:Name="GridPageFrom1"   NavigationUIVisibility="Hidden" />
 
         <!--<StackPanel DockPanel.Dock="Top"  Background="Gray" Width="1360" Height="625" x:Name="StackPanelForm1">
             <Button  Margin="188"></Button>

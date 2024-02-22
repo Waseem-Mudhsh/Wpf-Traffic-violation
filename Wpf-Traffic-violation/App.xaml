@@ -242,7 +242,6 @@
                 <!--<Setter Property="ColumnHeaderStyle" Value="{DynamicResource headerstyle}"/>-->
             </Style>
 
-
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="FontFamily" Value="Tajawal"/>
@@ -254,7 +253,12 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>-->
-
+            <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
+                <Setter Property="Height" Value="725"/>
+                <Setter Property="Width" Value="1360"/>
+                <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+                <Setter Property="WindowStyle" Value="ThreeDBorderWindow"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

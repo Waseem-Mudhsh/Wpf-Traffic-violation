@@ -21,6 +21,7 @@ namespace Wpf_Traffic_violation.ViewModel
     public class QureyIdNumber_ViewModel : BindableBase
     {
         #region Objects And Variables
+
         Models.ViolationTypeModel violationTypeModel = new ViolationTypeModel();
         PlateOfType_Model PlateOfType_Model = new PlateOfType_Model();
         Provinces_Model provinces_Model = new Provinces_Model();
@@ -683,6 +684,16 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else
             {
+
+                if (MessageBox.Show("Do you want to close this window?",
+                      "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    // Close the window  
+                }
+                else
+                {
+                    // Do not close the window  
+                }
                 var ReciptPrint = new ReceiptPrintModel();
                 ReportDataSource ds;
                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();

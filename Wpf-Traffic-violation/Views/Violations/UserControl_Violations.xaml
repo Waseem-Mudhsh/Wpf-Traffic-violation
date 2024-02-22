@@ -6,14 +6,11 @@
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-               d:DesignHeight="625" d:DesignWidth="1360">
+        
+             >
     <DockPanel Background="Gray" >
         <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-
-
-
-             
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" UseLayoutRounding="False" >
                     <StackPanel Orientation="Vertical" Width="110" HorizontalAlignment="Center" >
@@ -32,7 +29,7 @@
 
             </StackPanel>
         </StackPanel>
-        <Frame x:Name="Frame_Violation" DockPanel.Dock="Bottom" Height="560" BorderThickness="1" BorderBrush="Blue" NavigationUIVisibility="Hidden">
+        <Frame x:Name="Frame_Violation" DockPanel.Dock="Bottom" BorderThickness="1" BorderBrush="Blue" NavigationUIVisibility="Hidden">
             <Frame.Background>
                 <ImageBrush ImageSource="/Wpf-Traffic-violation;component/Assets/Violation.png"/>
             </Frame.Background>
