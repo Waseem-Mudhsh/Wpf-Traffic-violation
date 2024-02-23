@@ -603,7 +603,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=DateString()</Value>
+                      <Value>=Fields!DateNow.Value</Value>
                       <Style>
                         <FontFamily>Hacen Beirut Poster</FontFamily>
                         <FontSize>12pt</FontSize>

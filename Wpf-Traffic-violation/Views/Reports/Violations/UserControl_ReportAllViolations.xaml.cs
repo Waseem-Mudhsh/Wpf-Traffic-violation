@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Wpf_Traffic_violation.Views.Reports.Violations
 {
@@ -13,69 +12,70 @@ namespace Wpf_Traffic_violation.Views.Reports.Violations
             InitializeComponent();
         }
 
-        private void DatePicker_SelectedfromDateChanged(object sender, EventArgs ea)
-        {
-            try
-            {
-                DatePicker datePicker = (DatePicker)sender;
-                if (datePicker != null)
-                {
-                    DateTime? date = datePicker.SelectedDate;
-                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
-                    datePicker.SelectedDate = Convert.ToDateTime(value);
-                }
-            }
-            catch (Exception)
-            {
+        //private void DatePicker_SelectedfromDateChanged(object sender, EventArgs ea)
+        //{
+        //    try
+        //    {
+        //        DatePicker datePicker = (DatePicker)sender;
+        //        if (datePicker != null)
+        //        {
+        //            DateTime? date = datePicker.SelectedDate;
+        //            string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+        //            //datePicker.SelectedDate = Convert.ToDateTime(value);
+        //            from.Text = value;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-
-
-        }
-        private void DatePicker_SelectedToDateChanged(object sender, EventArgs ea)
-        {
-            try
-            {
-                DatePicker datePicker = (DatePicker)sender;
-                if (datePicker != null)
-                {
-                    DateTime? date = datePicker.SelectedDate;
-                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
-                    datePicker.SelectedDate = Convert.ToDateTime(value);
+        //        throw;
+        //    }
 
 
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
-        }
-        private void DatePicker_SelectedDateChanged(object sender, EventArgs ea)
-        {
-            try
-            {
-                DatePicker datePicker = (DatePicker)sender;
-                if (datePicker != null)
-                {
-                    DateTime? date = datePicker.SelectedDate;
-                    string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
-                    datePicker.SelectedDate = Convert.ToDateTime(value);
-
-                }
+        //}
+        //private void DatePicker_SelectedToDateChanged(object sender, EventArgs ea)
+        //{
+        //    try
+        //    {
+        //        DatePicker datePicker = (DatePicker)sender;
+        //        if (datePicker != null)
+        //        {
+        //            DateTime? date = datePicker.SelectedDate;
+        //            string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+        //            //datePicker.SelectedDate = Convert.ToDateTime(value);
 
 
-            }
-            catch (Exception)
-            {
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-            }
+        //        throw;
+        //    }
 
 
-        }
+        //}
+        //private void DatePicker_SelectedDateChanged(object sender, EventArgs ea)
+        //{
+        //    try
+        //    {
+        //        DatePicker datePicker = (DatePicker)sender;
+        //        if (datePicker != null)
+        //        {
+        //            DateTime? date = datePicker.SelectedDate;
+        //            string value = date != null ? date.Value.ToString("yyyy-MM-dd") : null;
+        //            datefrom.Text = value;
+
+        //        }
+
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+
+
+        //}
     }
 }

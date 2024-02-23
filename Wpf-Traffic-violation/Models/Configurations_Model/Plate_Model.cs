@@ -1,14 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Services;
 using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Services.helper;
@@ -19,14 +17,17 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
     {
         ValidationRegex validationRegex;
         ViolationServices violationServices;
+        OpreationSql opreationSql;
+
         SP_Query sP_Query;
         Isphelper isphelper;
         PlateOfType_Model PlateOfType_Model = new PlateOfType_Model();
         Provinces_Model Provinces_Model = new Provinces_Model();
         public Plate_Model()
         {
-            validationRegex= new ValidationRegex(); 
-            sP_Query = new SP_Query();   
+            validationRegex = new ValidationRegex();
+            sP_Query = new SP_Query();
+            opreationSql = new OpreationSql();
             violationServices = new ViolationServices();
             isphelper = new Sphelper();
         }
@@ -95,7 +96,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
         {
             ObservableCollection<PlateDetails> Plates = new ObservableCollection<PlateDetails>();
             Plates = violationServices.GetPlate();
-         
+
             return Plates;
 
         }
@@ -257,13 +258,14 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
             try
             {
                 var result = isphelper.GetCollection(sP_Query.GetplateType, validationRegex.nameOfSp(sP_Query.GetplateType));
-                if (result.Count>0)
+                if (result.Count > 0)
                 {
                     foreach (DataRow row in result)
                     {
-                        var platetype = new PlateOfType() {
+                        var platetype = new PlateOfType()
+                        {
                             Plate_type_id = (int)row[0],
-                            Plate_type_name= (string)row[1],
+                            Plate_type_name = (string)row[1],
                         };
 
                         plateOfTypes.Add(platetype);
@@ -272,7 +274,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -280,6 +282,50 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
 
             return plateOfTypes;
+        }
+
+        public RrivewViolation GetReviewOfplate(RrivewViolation rrivewViolation)
+        {
+            RrivewViolation rivewViolation = new RrivewViolation();
+            Hashtable keys = new Hashtable();
+            keys.Add("vehicleId", rrivewViolation.vehicleId);
+            keys.Add("violationType", rrivewViolation.violationType);
+            keys.Add("violationprov", rrivewViolation.violationprov);
+            keys.Add("DateReview", rrivewViolation.DateReview);
+            var param = isphelper.prpareParam(keys);
+            var result = isphelper.GetCollectionByParam(sP_Query.Getreviewviolation, "Getreviewviolation", param);
+            if (result.Data.Count <= 0)
+            {
+                SqlParameter[] par = new SqlParameter[3];
+
+                par[0] = new SqlParameter("@vehicleId", SqlDbType.Int)
+                {
+                    Value = rrivewViolation.vehicleId,
+                };
+                par[1] = new SqlParameter("@violationType", SqlDbType.NVarChar)
+                {
+                    Value = rrivewViolation.violationType,
+
+                };
+                par[2] = new SqlParameter("@violationprov", SqlDbType.NVarChar)
+                {
+                    Value = rrivewViolation.violationprov,
+                };
+
+                var res = isphelper.Operarion(par, opreationSql.opReviewViolation, "opReviewViolation");
+                return null;
+            }
+            else
+            {
+                foreach (DataRow item in result.Data)
+                {
+
+                    rivewViolation.DateReview = Convert.ToString((DateTime)item[4]);
+                }
+            }
+
+
+            return rivewViolation;
         }
         /////////////////////////////////end GetExcel/////////////////////////////////////
     }

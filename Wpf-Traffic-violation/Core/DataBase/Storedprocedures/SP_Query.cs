@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wpf_Traffic_violation.Services.DataBase.Storedprocedures
+﻿namespace Wpf_Traffic_violation.Services.DataBase.Storedprocedures
 {
-    public  class SP_Query
+    public class SP_Query
     {
 
 
-        public SP_Query() {  }
+        public SP_Query() { }
 
-        public  string SP_GetViolationTye = "Create PROCEDURE [dbo].[GetViolationTypes]\r\n\r\nAS\r\nBEGIN\r\n\t\r\nSELECT [Violation_type_id]\r\n      ,[Violation_type_name]\r\n      ,[Minimum_price]\r\n      ,[Maximum_price]\r\n      ,[Penalty]\r\n      ,[Interception_status]\r\n  FROM [dbo].[Violation_type]\r\nEND";
+        public string SP_GetViolationTye = "Create PROCEDURE [dbo].[GetViolationTypes]\r\n\r\nAS\r\nBEGIN\r\n\t\r\nSELECT [Violation_type_id]\r\n      ,[Violation_type_name]\r\n      ,[Minimum_price]\r\n      ,[Maximum_price]\r\n      ,[Penalty]\r\n      ,[Interception_status]\r\n  FROM [dbo].[Violation_type]\r\nEND";
         public string SP_GetDirectorate = "CREATE PROCEDURE [dbo].[GetDirectorate]  \r\nAS\r\nBEGIN\r\n\tSET NOCOUNT ON;\r\n\r\n\tSELECT [Directorate_id],[Directorate_name],[Province_id] FROM [dbo].[Directorate]\r\nEND";
         public string SP_getprovincById = "CREATE PROCEDURE  [dbo].[GetPtovinceById]   \r\n@Province_id int \r\nAS\r\nBEGIN\r\n\tSET NOCOUNT ON;\r\n\r\n\tSELECT [Province_id],[Province_name] FROM [dbo].[Province] where Province_id= @Province_id\r\nEND";
         public string SP_getprovincNameById = "CREATE PROCEDURE  [dbo].[GetPtovinceById]   \r\n@Province_id int \r\nAS\r\nBEGIN\r\n\tSET NOCOUNT ON;\r\n\r\n\tSELECT [Province_name] FROM [dbo].[Province] where Province_id= @Province_id\r\nEND";
@@ -29,5 +23,6 @@ namespace Wpf_Traffic_violation.Services.DataBase.Storedprocedures
         public string GetViolationByName = "CREATE PROCEDURE [dbo].[GetViolationByName] \r\n@nameofViolation nvarchar(25)\r\nAS\r\nBEGIN\r\n\t\r\nSELECT [Violation_type_id]\r\n      ,[Violation_type_name]\r\n      ,[Minimum_price]\r\n      ,[Maximum_price]\r\n      ,[Penalty]\r\n      ,[Interception_status]\r\n  FROM [dbo].[Violation_type]\r\n  where Violation_type_name=@nameofViolation\r\nEND";
         public string GetplatypeByName = "CREATE PROCEDURE GetplatypeByName\r\n\t@nameType nvarchar(25)\r\nAS\r\nBEGIN\r\n\tSET NOCOUNT ON;\r\nSELECT [Plate_type_id]\r\n      ,[Plate_type_name]\r\n      ,[Status]\r\n  FROM [dbo].[Plate_type]\r\n  where [Plate_type_name]=@nameType\r\nEND";
         public string Rep_VilationbyRecipt = "\r\nCREATE PROCEDURE [dbo].[Rep_VilationbyRecipt]\r\n\t@fromData DateTime,\r\n\t@toData DateTime\r\nAS\r\nBEGIN\r\n\t  SELECT \r\n\t    \r\n           RECPT.RECEIPT_ID,\r\n\t\t   VIOL.VEHICLE_ID,\r\n\t\t     RECPT.Receipt_amount,\r\n\t\t   VIOL.PAYMENT_STATUS,\r\n\t\t   RCPTDET.NAMEOFPAID,\r\n\t\t   PLATYPE.PLATE_TYPE_NAME,\r\n\t\t   PROV.PROVINCE_ID,\r\n\t\t   RCPTDET.RESONOFPAID\r\n\t\t   , count(RECPT.RECEIPT_ID) countOfViolation\r\n\t\t\r\n\r\n              FROM VIOLATION VIOL WITH (NOLOCK) \r\n              INNER JOIN RECEIPT_DETAIL RCPTDET WITH(NOLOCK) ON RCPTDET.VIOLATION_ID=VIOL.VIOLATION_ID\r\n\t\t\t  INNER JOIN RECEIPT RECPT WITH(NOLOCK) ON RECPT.RECEIPT_ID=RCPTDET.RECEIPT_ID\r\n\t\t\t  INNER JOIN PLATE_TYPE PLATYPE WITH (NOLOCK) ON PLATYPE.PLATE_TYPE_ID=VIOL.PLATE_ID\r\n\t\t\t  INNER JOIN PROVINCE PROV WITH (NOLOCK) ON PROV.PROVINCE_ID=VIOL.PROVINCEID\r\n\t\t\t  WHERE \r\n\t\t\t  VIOL.PAYMENT_STATUS=1 AND\r\n\t\t\t  CAST(RECPT.RECEIPT_DATE AS DATE)>=cast(@fromData as date)\r\n\t\t\t  and CAST(RECPT.RECEIPT_DATE AS DATE) <= cast(@toData as date)\r\n\t\t\t    group by RECPT.Receipt_id,  VIOL.VEHICLE_ID,RECPT.Receipt_amount, VIOL.PAYMENT_STATUS,RCPTDET.NAMEOFPAID\r\n\t\t\t  , PLATYPE.PLATE_TYPE_NAME, PROV.PROVINCE_ID,   RCPTDET.RESONOFPAID\r\nEND\r\nGO\r\n";
+        public string Getreviewviolation = "\r\nCREATE PROCEDURE Getreviewviolation\r\n@vehicleId int,\r\n@violationType nvarchar(10),\r\n@violationprov nvarchar(10),\r\n@DateReview\tDateTime\r\nAS\r\nBEGIN\r\n SELECT top 1 [ID]\r\n      ,[vehicleId]\r\n      ,[violationType]\r\n      ,[violationprov]\r\n      ,cast([DateReview] as date)\r\n      FROM [dbo].[ReviewViolation]\r\n\t   where [vehicleId]=@vehicleId and [violationType]=@violationType and [violationprov]=@violationprov \r\n\t   order by 1desc \r\nEND\r\nGO\r\n";
     }
 }

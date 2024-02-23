@@ -684,92 +684,102 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else
             {
-
-                if (MessageBox.Show("Do you want to close this window?",
+                RrivewViolation rrivewViolation = new RrivewViolation
+                {
+                    DateReview = Convert.ToString(DateTime.Now),
+                    vehicleId = Convert.ToInt32(Current_Violation.Plate_Num),
+                    violationprov = Convert.ToString(SelectedProvinces.Province_id),
+                    violationType = SelectedPlateType.Plate_type_name,
+                };
+                var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
+                if (GetReviewOfplate != null)
+                {
+                    if (MessageBox.Show("تم طباعة الافادة سابقا بتاريخ " + GetReviewOfplate.DateReview + "اذا اردت اعادة طباعة الافادة اضغط Yes ",
                       "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    // Close the window  
-                }
-                else
-                {
-                    // Do not close the window  
-                }
-                var ReciptPrint = new ReceiptPrintModel();
-                ReportDataSource ds;
-                ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-                Show_Report ShowReport = new Show_Report();
-                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-
-                if (Grid_Violation1.Count <= 0)
-                {
-                    ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
-                    ReciptPrint.VehicleId = Current_Violation.Plate_Num;
-                    model.Add(ReciptPrint);
-                    ShowReport.ReportViewerDemo.Reset();
-                    ds = new ReportDataSource("DataSetViolation", result);
-                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                    ds = new ReportDataSource("DataSetReport", model);
-                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                    printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                    printerSettings.DefaultPageSettings.Landscape = true;
-                    ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
-                    ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReportNull.rdlc";
-                    ShowReport.ReportViewerDemo.RefreshReport();
-                    ShowReport.Show();
-
-                }
-                else
-                {
-                    foreach (Violation v in Grid_Violation1)
                     {
-
-                        foreach (var type in Grid_ViolationType)
-                        {
-                            if (type.Violation_type_id == v.Violation_type_id)
-                            {
-                                ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                                break;
-                            }
-
-                        }
+                        reviewViolationRecipt(result);
                     }
-                    var dataTableForViolationtype = new ObservableCollection<ViolationType>();
-                    var violationsTypeSelected = new List<KeyValuePair<string, int>>();
-                    ReciptPrint.ViolationPenalty = AmountSelected;
-                    ReciptPrint.DateOfReceipt = DateTime.Now.ToString();
-                    ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
-                    ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
-                    ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
-                    ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
-                    //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-                    model.Add(ReciptPrint);
-                    //Show_Report ShowReport = new Show_Report();
-                    //ReportDataSource ds;
-                    ShowReport.ReportViewerDemo.Reset();
-                    ds = new ReportDataSource("DataSetViolation", result);
-                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                    ds = new ReportDataSource("DataSetReport", model);
-                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-
-                    //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                    printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                    printerSettings.DefaultPageSettings.Landscape = true;
-                    ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
-                    ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReport.rdlc";
-                    ShowReport.ReportViewerDemo.RefreshReport();
-                    ShowReport.Show();
-
+                    else
+                    {
+                        //close the window 
+                    }
 
                 }
-
-
-
-
             }
             Grid_Violation1 = null;
 
         }
+        public void reviewViolationRecipt(ObservableCollection<Violation> result)
+        {
+            var ReciptPrint = new ReceiptPrintModel();
+            ReportDataSource ds;
+            ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
+            Show_Report ShowReport = new Show_Report();
+            System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
 
+            if (Grid_Violation1.Count <= 0)
+            {
+                ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
+                ReciptPrint.VehicleId = Current_Violation.Plate_Num;
+                model.Add(ReciptPrint);
+                ShowReport.ReportViewerDemo.Reset();
+                ds = new ReportDataSource("DataSetViolation", result);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                ds = new ReportDataSource("DataSetReport", model);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.Landscape = true;
+                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReportNull.rdlc";
+                ShowReport.ReportViewerDemo.RefreshReport();
+                ShowReport.Show();
+
+            }
+            else
+            {
+                foreach (Violation v in Grid_Violation1)
+                {
+
+                    foreach (var type in Grid_ViolationType)
+                    {
+                        if (type.Violation_type_id == v.Violation_type_id)
+                        {
+                            ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
+                            break;
+                        }
+
+                    }
+                }
+                var dataTableForViolationtype = new ObservableCollection<ViolationType>();
+                var violationsTypeSelected = new List<KeyValuePair<string, int>>();
+                ReciptPrint.ViolationPenalty = AmountSelected;
+                ReciptPrint.DateOfReceipt = DateTime.Now.ToString();
+                ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
+                ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
+                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
+                ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
+                //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
+                model.Add(ReciptPrint);
+                //Show_Report ShowReport = new Show_Report();
+                //ReportDataSource ds;
+                ShowReport.ReportViewerDemo.Reset();
+                ds = new ReportDataSource("DataSetViolation", result);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                ds = new ReportDataSource("DataSetReport", model);
+                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+
+                //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.Landscape = true;
+                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReport.rdlc";
+                ShowReport.ReportViewerDemo.RefreshReport();
+                ShowReport.Show();
+
+
+            }
+
+        }
         bool CanConfimpay() => true;
         //Current_Receipt != null;
 

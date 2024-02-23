@@ -308,6 +308,22 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+        DateTime datetest;
+        public DateTime Datetest
+        {
+            get
+            {
+                return datetest;
+            }
+            set
+            {
+                if (datetest != value)
+                {
+                    datetest = value;
+                    RaisePropertyChanged("To_date");
+                }
+            }
+        }
 
 
         Violation current_Violation;
@@ -400,6 +416,7 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void Show_allviolation()
         {
+
             if (To_date == null || To_date == "")
                 To_date = To_date;
 
@@ -411,6 +428,9 @@ namespace Wpf_Traffic_violation.ViewModel
             var validationDate = ValidationData(typrviolation, From_date, To_date);
             if (validationDate)
             {
+                //DateTime.Now.ToString("");
+                ExtraDetel.DateNow = DateTime.Now.ToShortDateString();
+                ExtraDetel.From_date = From_date;
                 ExtraDetel.To_date = To_date;
                 extraDetailReportModels.Add(ExtraDetel);
                 var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
@@ -420,6 +440,10 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 ds = new ReportDataSource("DataSet2", extraDetailReportModels);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.Landscape = true;
+                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Report_All_Violation.rdlc";
                 ShowReport.ReportViewerDemo.RefreshReport();
                 ShowReport.Show();

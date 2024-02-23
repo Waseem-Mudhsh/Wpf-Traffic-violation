@@ -63,16 +63,16 @@
                     </Border>
                     <Border Name="border_day" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_day, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel Name="Panel_day" >
-                            <DatePicker x:Name="datefrom" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" SelectedDateChanged="DatePicker_SelectedDateChanged" Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
-
+                            <DatePicker x:Name="datefrom" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="0 10 16 10" />
+    
                         </StackPanel>
                     </Border>
                     <Border Name="border_date" BorderThickness="0 0 0 1" BorderBrush="LightGray" Opacity="50" Grid.Row="2" Visibility="{Binding ElementName=RadioButton_date, Path=IsChecked, Converter={StaticResource Convertbool}}">
                         <StackPanel Name="Panel_date" Orientation="Horizontal" >
                             <!--<TextBlock Text="من :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>-->
-                            <DatePicker x:Name="from" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" SelectedDateChanged="DatePicker_SelectedfromDateChanged" Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
+                            <DatePicker x:Name="from" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding From_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Width="85" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="129 10 0 10" />
                             <TextBlock Text="الى :" Margin="10 0 04 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" FontFamily="Tajawal" FontSize="13" FontWeight="Bold" Foreground="White"/>
-                            <DatePicker x:Name="to" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding To_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" SelectedDateChanged="DatePicker_SelectedToDateChanged" Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
+                            <DatePicker x:Name="to" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding To_date,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="80" Height="40" Background="White" FontFamily="Tajawal" FontSize="16" BorderThickness="1" Margin="05 10 0 10" />
 
                         </StackPanel>
                     </Border>
