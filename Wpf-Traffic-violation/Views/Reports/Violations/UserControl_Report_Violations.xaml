@@ -25,20 +25,20 @@
             <StackPanel Grid.Column="1">
                 <Button Uid="1" Name="but1" Command="{Binding Showcommand1}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Margin="10" >
                     <StackPanel Orientation="Horizontal"  >
-                        <TextBlock  VerticalAlignment="Center"   > كشف المخالفات</TextBlock>
+                        <TextBlock  VerticalAlignment="Center"   >تقرير اجمالي</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
                 <Button Uid="2" Name="but2" Command="{Binding Showcommand2}" HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" >
                     <StackPanel Orientation="Horizontal"  >
-                        <TextBlock  VerticalAlignment="Center"   > كشف المخالفات حسب</TextBlock>
+                        <TextBlock  VerticalAlignment="Center"   > تقرير الحملة</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>
 
                 <Button Uid="3" Name="but3"  HorizontalAlignment="Right" Style="{StaticResource Repotr_Button}" Command="{Binding Showcommand3}"  >
                     <StackPanel Orientation="Horizontal"  >
-                        <TextBlock  VerticalAlignment="Center"   > كشف السندات</TextBlock>
+                        <TextBlock  VerticalAlignment="Center"   > تقرير يومي</TextBlock>
                         <materialDesign:PackIcon Kind="Sitemap"   Width="24" Height="24"  HorizontalAlignment="Right" Margin="10 0 0 0" />
                     </StackPanel>
                 </Button>

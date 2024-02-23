@@ -9,7 +9,7 @@
      
         mc:Ignorable="d"
         Title="Show_Report"  Height="1000" Width="1000" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" BorderBrush="#FFDD2C00" WindowStyle="None" ScrollViewer.VerticalScrollBarVisibility="Disabled" ResizeMode="NoResize">
-    <Grid Background="White"  HorizontalAlignment="Center" >
+        <Grid Background="White"  HorizontalAlignment="Center" >
         <WindowsFormsHost   Height="900" Width="900"  >
             <rv:ReportViewer x:Name="ReportViewerDemo"  Dock="Fill" ZoomMode="FullPage"  >
             </rv:ReportViewer>

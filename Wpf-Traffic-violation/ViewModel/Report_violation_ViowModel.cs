@@ -416,6 +416,7 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void Show_allviolation()
         {
+            UserControl_ReportAllViolations UserControl_ReportAllViolations = new UserControl_ReportAllViolations();
 
             if (To_date == null || To_date == "")
                 To_date = To_date;
@@ -488,8 +489,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 ds = new ReportDataSource("DataSet2", extraDetailReportModels);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                printerSettings.DefaultPageSettings.Landscape = true;
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom A4", 1027, 1169);
+                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
                 ShowReport.ReportViewerDemo.RefreshReport();
