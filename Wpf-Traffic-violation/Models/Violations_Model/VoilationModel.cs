@@ -344,24 +344,31 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         }
         public bool GetExcel(ObservableCollection<Violation> Violations)
         {
-            OpenFileDialog op = new OpenFileDialog();
 
-
-            op.Title = "Select a Excel File";
-            op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
-            if (op.ShowDialog() == true)
+            try
             {
-                var data = _excelReader.ReadExcelFile(op.FileName);
-                if (data)
+                OpenFileDialog op = new OpenFileDialog();
+                op.Title = "Select a Excel File";
+                op.Filter = "AllFiles | *.* | Excel Files |*.XLSX";
+                if (op.ShowDialog() == true)
                 {
-                    return true;
+                    var data = _excelReader.ReadExcelFile(op.FileName);
+                    if (data)
+                    {
+                        MessageBox.Show("تم اضافة المخالفات بنجاح");
+                        return true;
+
+                    }
+
+
                 }
 
 
             }
+            catch (Exception)
+            {
 
-
-
+            }
             return false;
 
         }

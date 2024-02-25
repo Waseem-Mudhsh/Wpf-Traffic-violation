@@ -603,11 +603,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 IsEditing = true;
                 string filename1 = "Violation/" + Current_Violation.Violation_photo1 + ".jpg";
                 string filename2 = "Violation/" + Current_Violation.Violation_photo2 + ".jpg";
-
-
                 win = new Window_AddViolation { DataContext = this };
                 Current_Violation = ViolationModel.GetViolationForEdit(Current_Violation.Violation_id);
-
                 win.street.Text = Current_Violation.String_Street;
                 win.selectProvince.Text = Convert.ToString(Current_Violation.Provinceid);
                 win.viol_type.Text = Current_Violation.Plate_Type;
