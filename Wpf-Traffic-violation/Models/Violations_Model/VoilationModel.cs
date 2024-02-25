@@ -204,8 +204,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             {
 
                 to_date = (to_date == null) ? from_date : to_date;
-                var From = Convert.ToDateTime(from_date);
-                var To = Convert.ToDateTime(to_date);
+                //var From = Convert.ToDateTime(from_date);
+                //var To = Convert.ToDateTime(to_date);
                 Hashtable key = new Hashtable();
                 key.Add("fromData", from_date);
                 key.Add("toData", to_date);

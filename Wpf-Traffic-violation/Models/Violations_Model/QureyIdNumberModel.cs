@@ -1,13 +1,8 @@
-﻿using NPOI.OpenXml4Net.OPC.Internal;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Core.DataAccess;
 using Wpf_Traffic_violation.Services;
@@ -36,7 +31,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         }
 
         ///////////////////////////////// start GetCitizens/////////////////////////////////////
-        public Vehicle GetVehicleCard( int Id)
+        public Vehicle GetVehicleCard(int Id)
         {
             Vehicle Vehicle = new Vehicle();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
@@ -132,45 +127,50 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             {
                 foreach (DataRow row in response.Data)
                 {
-                    Violation per = new Violation
+                    if ((int)row[8] == 0)
                     {
-                        Violation_id = (int)row[0]
+                        Violation per = new Violation
+                        {
+                            Violation_id = (int)row[0]
                      ,
-                        Violation_date = row[1].ToString()
+                            Violation_date = row[1].ToString()
                      ,
-                        Plate_id = (int)row[2]
+                            Plate_id = (int)row[2]
                      ,
-                        Street_id = (int)row[3]
+                            Street_id = (int)row[3]
                      ,
-                        Teaffic_man_id = (int)row[4]
+                            Teaffic_man_id = (int)row[4]
                      ,
-                        Violation_type_id = (int)row[5]
+                            Violation_type_id = (int)row[5]
                      ,
-                        Notise = row[6].ToString()
+                            Notise = row[6].ToString()
                      ,
-                        Violation_penalty = (int)row[7]
+                            Violation_penalty = (int)row[7]
                      ,
-                        Payment_status = (int)row[8]
+                            Payment_status = (int)row[8]
                      ,
-                        Plate_Num = (string)row[9]
+                            Plate_Num = (string)row[9]
                      ,
-                        VounchrNum = (int)row[10]
+                            VounchrNum = (int)row[10]
                       ,
-                        Provinceid = (int)row[11]
+                            Provinceid = (int)row[11]
                      ,
-                        Plate_Type = (string)row[12]
+                            Plate_Type = (string)row[12]
                         ,
-                        String_ViolationType = (string)row[13]
+                            String_ViolationType = (string)row[13]
                         ,
-                        String_TrafficMan = (string)row[14]
+                            String_TrafficMan = (string)row[14]
                         ,
-                        String_Street = (string)row[15]
+                            String_Street = (string)row[15]
                         ,
-                        Amount = (int)row[16]
+                            Amount = (int)row[16]
                       ,
-                        String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
+                            String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
 
-                    };
+                        };
+                        Violations.Add(per);
+                    }
+
                     //per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
                     //per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
                     //per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
@@ -178,7 +178,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                     //per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
                     //per.Amount =  per.Violation_penalty;
                     //per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
-                    Violations.Add(per); //الي بنربطه مع الجريد فيو
+                    //الي بنربطه مع الجريد فيو
                 }
             }
 
@@ -186,12 +186,12 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
         }
 
-        public ObservableCollection<Violation> GetViolation( int Id)
+        public ObservableCollection<Violation> GetViolation(int Id)
         {
-            
-            
-           ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
-           
+
+
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+
             //SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             ////Class_SqlConnection sql = new Class_SqlConnection();
             //using (con)

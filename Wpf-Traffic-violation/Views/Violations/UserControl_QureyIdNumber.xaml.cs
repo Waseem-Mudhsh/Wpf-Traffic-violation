@@ -80,23 +80,7 @@ namespace Wpf_Traffic_violation.Views
                 var item = checkBox.DataContext; // This gives you the item bound to the row
                                                  // Do something with the item...
             }
-            //DataGridCell cell = sender as DataGridCell;
-            //if (cell != null)
-            //{
-            //    Violation model = cell.DataContext as Violation;
-            //    if (model.Isselected == true)
-            //    {
-            //        value = Convert.ToInt32(SelectedAmount.Text);
-            //        value += model.Violation_penalty;
-            //        SelectedAmount.Text = value.ToString();
 
-
-            //    }
-
-
-
-
-            //}
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="625" d:DesignWidth="1360">
+             >
 
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="but_flipper"  >
@@ -21,7 +21,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid Height="625" Width="1360">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="525"/>
             <RowDefinition Height="100"/>

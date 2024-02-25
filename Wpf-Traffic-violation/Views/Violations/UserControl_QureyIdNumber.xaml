@@ -7,8 +7,7 @@
               xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
-             mc:Ignorable="d" 
-          >
+             mc:Ignorable="d" >
     <UserControl.DataContext>
         <ViewModel:QureyIdNumber_ViewModel/>
     </UserControl.DataContext>
@@ -27,26 +26,37 @@
                 <ComboBox Name="filterSearchbytypplate" Width="100" Height="30" BorderThickness="1" 
                   ItemsSource="{Binding GridPlateType}"
                   SelectedItem="{Binding SelectedPlateType}" 
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
+               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" 
+                          Foreground="Black"  >
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Plate_type_name}" />
+                            <TextBlock Text="{Binding Plate_type_name}" Foreground="Black" Background="White"  />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
+                    </ComboBox.Resources>
                 </ComboBox>
                 <TextBlock Text="رمز المحافظه" Margin="20 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
 
                 <ComboBox Name="filterSearchbycode" Width="100" Height="30" BorderThickness="1" 
                   ItemsSource="{Binding GridProvinces}"
                   SelectedItem="{Binding SelectedProvinces}"
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal"  >
+               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal"   Foreground="Black"  BorderBrush="Black"    >
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Province_id}" />
+                            <TextBlock Text="{Binding Province_id}"  Foreground="Black" Background="White"   />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
+                    </ComboBox.Resources>
                 </ComboBox>
                 <Button Width="40" Height="40" Padding="0" Command="{Binding Showcommand}" Name="searchBT1" Click="Button_Click" Background="OrangeRed" materialDesign:ShadowAssist.ShadowDepth="Depth1" >
                     <materialDesign:PackIcon Kind="Search" Foreground="White"  Width="24" Height="24" HorizontalAlignment="Center" />

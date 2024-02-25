@@ -72,7 +72,7 @@
                 <TextBlock Text="  رقم اللوحة :" Margin="5 0 40 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <TextBox    x:Name="a"  Width="185" Text="{Binding Current_Violation.Plate_Num}"
                         materialDesign:HintAssist.Hint="رقم اللوحة..."
-                         BorderThickness="1,1,1,1" Padding="20 8 0 5" UseLayoutRounding="False" Background="White"  Margin="0 9 12 9" FontFamily="Tajawal" FontSize="14" />
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White"  Margin="0 9 12 9" FontFamily="Tajawal" FontSize="14" />
                 <!--<controls:AutoCompleteBox Name="a"  Width="185" ItemsSource="{Binding Grid_Plate}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5"

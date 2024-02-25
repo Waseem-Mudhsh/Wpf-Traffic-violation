@@ -489,6 +489,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 //Currunt_Vehicle= await Task.Run(() => QureyIdNumberModel.GetVehicleCard( Selected_Plate.Plate_id));
                 Grid_Violation = new ObservableCollection<Violation>();
                 Grid_Violation = await Task.Run(() => QureyIdNumberModel.GetViolationQurey(Current_Violation));
+
+
                 if (Grid_Violation.Count <= 0)
                 {
                     MessageBox.Show("لايوجد بيانات");
@@ -497,6 +499,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Count = Grid_Violation.Count;
                 foreach (Violation a in Grid_Violation)
                 {
+
                     TotalAmount += a.Violation_penalty;
                     a.Isselected = true;
 

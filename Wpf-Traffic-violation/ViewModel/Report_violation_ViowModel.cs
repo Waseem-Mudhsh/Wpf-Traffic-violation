@@ -457,51 +457,59 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void show_violationByReceiptDetailes()
         {
-            int sumamount = 0;
-            int sumviolationType = 0;
-
-            var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
-            var ExtraDetel = new ExtraDetailReportModel();
-
-            var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
-            ShowReport = new Show_Report();
-            var validationDate = ValidationData(typrviolation, From_date, To_date);
-            if (validationDate)
+            try
             {
-                var violations = ViolationModel.GetViolationByReceiptDetailes(typrviolation, From_date, To_date);
-                foreach (var item in violations)
+                int sumamount = 0;
+                int sumviolationType = 0;
+
+                var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
+                var ExtraDetel = new ExtraDetailReportModel();
+
+                var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
+                ShowReport = new Show_Report();
+                var validationDate = ValidationData(typrviolation, From_date, To_date);
+                if (validationDate)
                 {
-                    sumamount += item.ViolationPenalty;
-                    sumviolationType += item.ViolationTypcount;
-                }
-                ExtraDetel.SumViolationTypcount = sumviolationType;
-                ExtraDetel.SumViolationPenaltyCount = sumamount;
-                var date = Convert.ToDateTime(From_date).ToString("yyyy/MM/dd");
-                ExtraDetel.From_date = //DateTime.ParseExact(DateTime.Now.ToString(),)
-                    String.Format("{0:dd-MM-yyyy}", From_date); ;
-                ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date); ; ;
-                extraDetailReportModels.Add(ExtraDetel);
-                userControlviolationReceipt.ReportViewerDemo.Reset();
-                ShowReport.ReportViewerDemo.Reset();
-                //Create New Dataset That Content ExtraDetaile for report
-                ds = new ReportDataSource("DataSet1", violations);
-                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                ds = new ReportDataSource("DataSet2", extraDetailReportModels);
-                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom A4", 1027, 1169);
-                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
-                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
-                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
-                ShowReport.ReportViewerDemo.RefreshReport();
-                userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
+                    var violations = ViolationModel.GetViolationByReceiptDetailes(typrviolation, From_date, To_date);
+                    foreach (var item in violations)
+                    {
+                        sumamount += item.ViolationPenalty;
+                        sumviolationType += item.ViolationTypcount;
+                    }
+                    ExtraDetel.SumViolationTypcount = sumviolationType;
+                    ExtraDetel.SumViolationPenaltyCount = sumamount;
+                    var date = Convert.ToDateTime(From_date).ToString("yyyy/MM/dd");
+                    ExtraDetel.From_date = //DateTime.ParseExact(DateTime.Now.ToString(),)
+                        String.Format("{0:dd-MM-yyyy}", From_date); ;
+                    ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date); ; ;
+                    extraDetailReportModels.Add(ExtraDetel);
+                    userControlviolationReceipt.ReportViewerDemo.Reset();
+                    ShowReport.ReportViewerDemo.Reset();
+                    //Create New Dataset That Content ExtraDetaile for report
+                    ds = new ReportDataSource("DataSet1", violations);
+                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                    ds = new ReportDataSource("DataSet2", extraDetailReportModels);
+                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                    System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                    printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom A4", 1027, 1169);
+                    printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
+                    ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                    ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
+                    ShowReport.ReportViewerDemo.RefreshReport();
+                    userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
 
-                ShowReport.Show();
+                    ShowReport.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Some Data Need To Fill");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Some Data Need To Fill");
+
             }
+
         }
 
         public bool ValidationData(string typrviolation, string from_date, string to_date)

@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 namespace Wpf_Traffic_violation.Views
@@ -34,7 +22,17 @@ namespace Wpf_Traffic_violation.Views
 
         private void filterSearchbycode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-         }
+
+        }
+        private void DataGridCell_Selected(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                var item = checkBox.DataContext; // This gives you the item bound to the row
+                                                 // Do something with the item...
+            }
+
+        }
     }
 }
