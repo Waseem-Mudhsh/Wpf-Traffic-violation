@@ -470,7 +470,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 var validationDate = ValidationData(typrviolation, From_date, To_date);
                 if (validationDate)
                 {
-                    var violations = ViolationModel.GetViolationByReceiptDetailes(typrviolation, From_date, To_date);
+                    var violations = ViolationModel.GetViolationByReceiptDetailes(From_date, To_date);
                     foreach (var item in violations)
                     {
                         sumamount += item.ViolationPenalty;

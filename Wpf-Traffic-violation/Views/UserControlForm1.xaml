@@ -49,11 +49,26 @@
                         <materialDesign:PackIcon Kind="Users" Margin="12 0 0 0" Width="24" Height="24" />
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                <!--<Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
                                       Uid="4" Click="but1_Click" x:Name="but3" Margin="0,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center">الحسابات</TextBlock>
                         <materialDesign:PackIcon Kind="LocalAtm" Margin="12 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>-->
+                <!--<Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                      Uid="4" Click="but1_Click" x:Name="but3" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center">الحجز</TextBlock>
+                        <materialDesign:PackIcon Kind="CarBack" Margin="12 0 0 0" Width="24" Height="24" />
+                    </StackPanel>
+                </Button>-->
+                
+                <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
+                                       Uid="2" Click="but1_Click" x:Name="but5" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  VerticalAlignment="Center">الأعتراضات</TextBlock>
+                        <materialDesign:PackIcon Kind="HandLeft" Margin="14 0 0 0" Width="24" Height="24" />
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
@@ -64,10 +79,10 @@
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  
-                                       Uid="2" Click="but1_Click" x:Name="but5" Margin="0,0,0,0">
+                                      Uid="4" Click="but1_Click" x:Name="but3" Margin="0,0,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock  VerticalAlignment="Center">الأعتراضات</TextBlock>
-                        <materialDesign:PackIcon Kind="HandLeft" Margin="14 0 0 0" Width="24" Height="24" />
+                        <TextBlock  VerticalAlignment="Center">الحجز</TextBlock>
+                        <materialDesign:PackIcon Kind="CarBack" Margin="12 0 0 0" Width="24" Height="24" />
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource sub_but_From}" HorizontalAlignment="Right"  

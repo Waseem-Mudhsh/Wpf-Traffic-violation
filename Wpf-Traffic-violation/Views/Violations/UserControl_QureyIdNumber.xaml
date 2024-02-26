@@ -22,42 +22,39 @@
            
                
                 <TextBlock Text="نوع اللوحة" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
+                    <!--<ComboBox Name="filterSearchbytypplate" Width="100" Height="30" BorderThickness="1" ItemsSource="{Binding GridPlateType}" SelectedItem="{Binding SelectedPlateType}" Padding="10,10,0,0"
+                          Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" Foreground="Black">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Plate_type_name}" Foreground="Black"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
+                        </ComboBox.Resources>
+                    </ComboBox>-->
+                <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35" ItemsSource="{Binding GridPlateType}"  Foreground="Black" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14"  Padding="10,10,0,0"
+                                              ValueMemberPath="Plate_type_name" 
+                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
+                                             
+                                          />
 
-                <ComboBox Name="filterSearchbytypplate" Width="100" Height="30" BorderThickness="1" 
-                  ItemsSource="{Binding GridPlateType}"
-                  SelectedItem="{Binding SelectedPlateType}" 
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" 
-                          Foreground="Black"  >
 
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Plate_type_name}" Foreground="Black" Background="White"  />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                    <ComboBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
-                    </ComboBox.Resources>
-                </ComboBox>
+
                 <TextBlock Text="رمز المحافظه" Margin="20 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
 
-                <ComboBox Name="filterSearchbycode" Width="100" Height="30" BorderThickness="1" 
-                  ItemsSource="{Binding GridProvinces}"
-                  SelectedItem="{Binding SelectedProvinces}"
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal"   Foreground="Black"  BorderBrush="Black"    >
-
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Province_id}"  Foreground="Black" Background="White"   />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                    <ComboBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
-                    </ComboBox.Resources>
-                </ComboBox>
+             
+                <controls:AutoCompleteBox Name="filterSearchbycode"   Width="100" Height="35"  ItemsSource="{Binding GridProvinces}" Foreground="Black"  Background="White"
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14"  Padding="10,10,0,0"
+                                              ValueMemberPath="Province_id" 
+                                              SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedProvinces.Province_id,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
+                                             
+                                          />
                 <Button Width="40" Height="40" Padding="0" Command="{Binding Showcommand}" Name="searchBT1" Click="Button_Click" Background="OrangeRed" materialDesign:ShadowAssist.ShadowDepth="Depth1" >
                     <materialDesign:PackIcon Kind="Search" Foreground="White"  Width="24" Height="24" HorizontalAlignment="Center" />
                 </Button>
@@ -108,7 +105,7 @@
                         <!--///////////////////////////////////////////////////////////////////////////////////////-->
                     </StackPanel>
                     <!--////////////////////////////////////////////////////////////////////-->
-                    <StackPanel Margin="10 1 10 2" >
+                    <!--<StackPanel Margin="10 1 10 2" >
                         <materialDesign:ColorZone Height="40" Mode="PrimaryDark">
                             <TextBlock Text="بيانات المركبة" FontFamily="Tajawal" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         </materialDesign:ColorZone>
@@ -134,7 +131,7 @@
 
                                 </Style>
                             </Grid.Resources>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="0" FlowDirection="RightToLeft"  BorderThickness="1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -144,7 +141,7 @@
                                 </StackPanel>
 
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="1" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -154,7 +151,7 @@
                                 </StackPanel>
 
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="2" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -164,7 +161,7 @@
                                 </StackPanel>
 
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="3" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -173,7 +170,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="175"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="4" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -182,7 +179,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_model}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="173"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="5" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -191,7 +188,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_shape}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10 0 10 4" Width="176"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="6" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -200,7 +197,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="175"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="7" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -209,7 +206,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_color}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="172"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="8" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -218,7 +215,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Potty_id}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="173"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="9" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -227,7 +224,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_engine_num}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="174"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="10" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -236,7 +233,7 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Vehicle_customs_num}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="171"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
                             <Border Grid.Row="11" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
@@ -245,10 +242,10 @@
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Release_date_c}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="177"/>
                                 </StackPanel>
                             </Border>
-                            <!--////////////////////////////////////////////////////////////////////-->
+                            --><!--////////////////////////////////////////////////////////////////////--><!--
 
                         </Grid>
-                    </StackPanel>
+                    </StackPanel>-->
                     <!--////////////////////////////////////////////////////////////////////-->
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top" Height="400">

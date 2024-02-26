@@ -40,7 +40,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>اسم الدافع</Value>
+                              <Value>رقم السند</Value>
                               <Style>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
@@ -268,12 +268,14 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>رقم السند</Value>
+                              <Value>اسم الدافع</Value>
                               <Style>
+                                <FontStyle>Normal</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#ffffff</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -304,14 +306,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="NameOfPaid">
+                    <Textbox Name="ReceiptId">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NameOfPaid.Value</Value>
+                              <Value>=Fields!ReceiptId.Value</Value>
                               <Style>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
@@ -323,7 +325,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>NameOfPaid</rd:DefaultName>
+                      <rd:DefaultName>ReceiptId</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -514,14 +516,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ReceiptId">
+                    <Textbox Name="NameOfPaid1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ReceiptId.Value</Value>
+                              <Value>=Fields!NameOfPaid.Value</Value>
                               <Style>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
@@ -533,7 +535,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ReceiptId</rd:DefaultName>
+                      <rd:DefaultName>NameOfPaid1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -576,7 +578,7 @@
         <Top>3.43625in</Top>
         <Left>0.28126in</Left>
         <Height>0.5in</Height>
-        <Width>7.94586in</Width>
+        <Width>7.94587in</Width>
         <Style>
           <Border>
             <Style>None</Style>

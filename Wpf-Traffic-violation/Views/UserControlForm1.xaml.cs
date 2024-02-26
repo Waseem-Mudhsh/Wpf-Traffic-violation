@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Wpf_Traffic_violation.Models;
-using Wpf_Traffic_violation.Models.Users_Model;
-using Wpf_Traffic_violation.Properties;
-using Wpf_Traffic_violation.ViewModel;
 using Wpf_Traffic_violation.Views.Reports;
 
 namespace Wpf_Traffic_violation.Views
@@ -42,7 +28,6 @@ namespace Wpf_Traffic_violation.Views
             Button but = ((Button)sender);
             Changed_Backgroung(but);
             int index = int.Parse(((Button)e.Source).Uid);
-            PermissionUser PermissionUser;
 
             var permation = Properties.Settings.Default.Userpermission;
             //var getUserForms = AllPermissions.GetFormPermation(permation);
@@ -55,7 +40,7 @@ namespace Wpf_Traffic_violation.Views
 
                 case 1:
                     {
-                        
+
                         UserControl_Violations UserControl_Violations = new UserControl_Violations();
                         UserControl_Violations.but1.IsEnabled = false;
                         UserControl_Violations.but2.IsEnabled = false;
@@ -78,21 +63,21 @@ namespace Wpf_Traffic_violation.Views
                 case 2:
                     {
 
-                        UserControl_Objections UserControl_Objections = new UserControl_Objections();
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 8;
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Objections.but1.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 9;
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Objections.but2.IsEnabled = false;
-                        }
+                        //UserControl_Objections UserControl_Objections = new UserControl_Objections();
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 8;
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Objections.but1.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 9;
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Objections.but2.IsEnabled = false;
+                        //}
 
-                        GridPageFrom1.Content = UserControl_Objections;
+                        //GridPageFrom1.Content = UserControl_Objections;
                         break;
                     }
                 case 3:
@@ -129,53 +114,53 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 4:
                     {
-                        UserControl_Accounts UserControl_Accounts = new UserControl_Accounts();
-                        PermissionUser = new PermissionUser();
-
-
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Accounts.but1.IsEnabled = false;
-                        }
-
-
+                        //UserControl_Accounts UserControl_Accounts = new UserControl_Accounts();
                         //PermissionUser = new PermissionUser();
-                        //PermissionUser.Form_id = 13;
-                        //
+
+
                         //if (PermissionUser.Form == false)
                         //{
-                        //    UserControl_Accounts.but2.IsEnabled = false;
+                        //    UserControl_Accounts.but1.IsEnabled = false;
                         //}
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 14;
 
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Accounts.but3.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 15;
 
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Accounts.but4.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 16;
+                        ////PermissionUser = new PermissionUser();
+                        ////PermissionUser.Form_id = 13;
+                        ////
+                        ////if (PermissionUser.Form == false)
+                        ////{
+                        ////    UserControl_Accounts.but2.IsEnabled = false;
+                        ////}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 14;
 
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Accounts.but5.IsEnabled = false;
-                        }
-                        PermissionUser = new PermissionUser();
-                        PermissionUser.Form_id = 17;
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Accounts.but3.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 15;
 
-                        if (PermissionUser.Form == false)
-                        {
-                            UserControl_Accounts.but6.IsEnabled = false;
-                        }
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Accounts.but4.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 16;
 
-                        GridPageFrom1.Content = UserControl_Accounts;
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Accounts.but5.IsEnabled = false;
+                        //}
+                        //PermissionUser = new PermissionUser();
+                        //PermissionUser.Form_id = 17;
+
+                        //if (PermissionUser.Form == false)
+                        //{
+                        //    UserControl_Accounts.but6.IsEnabled = false;
+                        //}
+
+                        //GridPageFrom1.Content = UserControl_Accounts;
 
                         break;
                     }
@@ -185,10 +170,10 @@ namespace Wpf_Traffic_violation.Views
                         GridPageFrom1.Content = userControl_SystemMaintenance;
                         break;
                     }
-               
+
             }
 
-           
+
         }
 
 
@@ -232,5 +217,5 @@ namespace Wpf_Traffic_violation.Views
             GridPageFrom1.Content = new UserControl_Home();
         }
     }
-    }
+}
 

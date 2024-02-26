@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Wpf_Traffic_violation.Models.Violations_Model;
 using Wpf_Traffic_violation.Services;
 
 namespace Wpf_Traffic_violation.Models
@@ -25,9 +20,9 @@ namespace Wpf_Traffic_violation.Models
 
         }
 
-        public Wpf_Traffic_violation.MagrationDB.Receipt CreateReceipt(Receipt current_Receipt,int count)
+        public Wpf_Traffic_violation.MagrationDB.Receipt CreateReceipt(Receipt current_Receipt, int count)
         {
-            var receiptModel = _helper.CreateReceiptModel(current_Receipt,count);
+            var receiptModel = _helper.CreateReceiptModel(current_Receipt, count);
 
             var result = receipt.CreateNewRecipt(receiptModel);
             return result;
@@ -69,17 +64,23 @@ namespace Wpf_Traffic_violation.Models
                     {
                         Receipt per = new Receipt
                         {
-                             Receipt_id = (int)row[0]
-                            ,Account_id = (int)row[1]
-                            ,Receipt_statement = row[2].ToString()
-                            ,Receipt_amount = (int)row[3]
-                            ,Receipt_status=(bool)row[4]
-                            ,Receipt_date = row[5].ToString()
-                            ,Post_date = row[6].ToString()
-                            
+                            Receipt_id = (int)row[0]
+                            ,
+                            Account_id = (int)row[1]
+                            ,
+                            Receipt_statement = row[2].ToString()
+                            ,
+                            Receipt_amount = (int)row[3]
+                            ,
+                            Receipt_status = (bool)row[4]
+                            ,
+                            Receipt_date = row[5].ToString()
+                            ,
+                            Post_date = row[6].ToString()
+
                         };
                         per.String_Account = new Class_SqlConnection().Get_row("GetAccountName", per.Account_id);
-                        
+
                         Receipts.Add(per);
                     }
                 }
@@ -143,45 +144,7 @@ namespace Wpf_Traffic_violation.Models
             var result = receipt.CreateReciptDetail(PrpareModel);
             return result;
         }
-        //public bool OperarionReceiptdetail(int Receipt_detail_id, int Receipt_id, string Receipt_detail_statement, int Violation_id, int Receipt_detail_amount, string operartion)
-        //{
-        //    Class_SqlConnection sql = new Class_SqlConnection();
 
-        //    SqlParameter[] param = new SqlParameter[6];
-        //    //@user_id, @user_name, @user_pass, @user_type, @user_status
-
-        //    param[0] = new SqlParameter("@Receipt_detail_id", SqlDbType.Int)
-        //    {
-        //        Value = Receipt_detail_id
-        //    };
-        //    param[1] = new SqlParameter("@Receipt_id", SqlDbType.Int)
-        //    {
-        //        Value = Receipt_id
-        //    };
-        //    param[2] = new SqlParameter("@Receipt_detail_statement", SqlDbType.NVarChar, 50)
-        //    {
-        //        Value = Receipt_detail_statement
-        //    };
-        //    param[3] = new SqlParameter("@Violation_id", SqlDbType.Int)
-        //    {
-        //        Value = Violation_id
-        //    };
-        //    param[4] = new SqlParameter("@Receipt_detail_amount", SqlDbType.Int)
-        //    {
-        //        Value = Receipt_detail_amount
-        //    };
-        //    param[5] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
-        //    {
-        //        Value = operartion
-        //    };
-
-        //    if (!sql.Operarion("opReceiptdetail", param))
-        //    {
-        //        return false;
-
-        //    }
-        //    return true;
-        //}
 
 
         /////////////////////////////////start Check_Exsit /////////////////////////////////////
@@ -226,7 +189,7 @@ namespace Wpf_Traffic_violation.Models
             }
         }
 
-    
+
 
         /////////////////////////////////end Check_Exsit/////////////////////////////////////
 

@@ -42,41 +42,22 @@
                             Command="{Binding FilterViolation}" materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
-                <ComboBox Name="filterSearchbytypplate" Width="100" Height="30" BorderThickness="1" 
-                  ItemsSource="{Binding GridPlateType}"
-                  SelectedItem="{Binding SelectedPlateType}" 
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" 
-                                Foreground="Black"  BorderBrush="Black">
+                <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35"  ItemsSource="{Binding GridPlateType}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14"  Padding="10,10,0,0"
+                                              ValueMemberPath="Plate_type_name" 
+                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
+                                             
+                                          />
 
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Plate_type_name}" Foreground="Black" Background="White"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                    <ComboBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Black"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
-                    </ComboBox.Resources>
-                </ComboBox>
                 <TextBlock Text="نوع اللوحة" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
-                <ComboBox Name="filterSearchbycode" Width="100" Height="30" BorderThickness="1" 
-                  ItemsSource="{Binding GridProvinces}"
-                  SelectedItem="{Binding SelectedProvinces}"
-               Padding="10,10,0,0" Background="White" Margin="0,9,5,9"  FontSize="14" FontFamily="Tajawal" SelectionChanged="filterSearchbycode_SelectionChanged"
-                            Foreground="Black"  BorderBrush="Black"  >
-
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Province_id}" Foreground="Black" Background="White" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                    <ComboBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White"/>
-                    </ComboBox.Resources>
-                </ComboBox>
+                <controls:AutoCompleteBox Name="filterSearchbycode"   Width="100" Height="35"  ItemsSource="{Binding GridProvinces}" 
+                                              ItemTemplate="{StaticResource AutoId}" 
+                                              FontSize="14"  Padding="10,10,0,0"
+                                              ValueMemberPath="Province_id" 
+                                              SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedProvinces.Province_id,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
+                                             
+                                          />
                 <TextBlock Text="رمز المحافظه" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
                 <TextBox    x:Name="textBox" Width="216" Height="30" Text="{Binding SelectedPlatNum}" 
                         materialDesign:HintAssist.Hint="" 

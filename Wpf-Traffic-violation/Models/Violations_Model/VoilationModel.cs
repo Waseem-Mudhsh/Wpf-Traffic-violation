@@ -197,7 +197,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
 
         }
-        public ObservableCollection<ReceiptReportModel> GetViolationByReceiptDetailes(string typrviolation, string from_date, string to_date)
+        public ObservableCollection<ReceiptReportModel> GetViolationByReceiptDetailes(string from_date, string to_date)
         {
             ObservableCollection<ReceiptReportModel> result = new ObservableCollection<ReceiptReportModel>();
             try
@@ -223,7 +223,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                         NameOfPaid = (string)item[4],
                         PlateType = (string)item[5],
                         Provinceid = (int)item[6],
-                        ReasonOfPaid = ((string)item[7] == null) ? " " : (string)item[7],
+                        ReasonOfPaid = (string)item[7],
                         ViolationTypcount = (int)item[8],
 
                     };
@@ -231,7 +231,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                     result.Add(model);
                 }
 
-                //return violationServices.GetAllViolationByReceiptDetailes(typrviolation, From, To);
+
 
             }
             catch (Exception e)

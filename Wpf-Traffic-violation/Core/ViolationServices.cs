@@ -1,31 +1,20 @@
-﻿using CrystalDecisions.Shared.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SqlClient;
 
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media.Animation;
 using Wpf_Traffic_violation.MagrationDB;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
 using Wpf_Traffic_violation.Models.Violations_Model;
 using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Services.helper;
-using Xceed.Wpf.Toolkit.Primitives;
-
-using Violation = Wpf_Traffic_violation.MagrationDB.Violation;
 
 namespace Wpf_Traffic_violation.Services
 {
- public class ViolationServices
+    public class ViolationServices
     {
 
 
@@ -38,20 +27,20 @@ namespace Wpf_Traffic_violation.Services
         public ViolationServices()
         {
             sphelper = new Sphelper();
-            sP_ViolationType=new SP_Query();
-           objcontext =new TrafficViolationEntitiesUat() ;
+            sP_ViolationType = new SP_Query();
+            objcontext = new TrafficViolationEntitiesUat();
 
         }
-        public  ObservableCollection<Models.Violations_Model.Violation> GetAllViolation()
+        public ObservableCollection<Models.Violations_Model.Violation> GetAllViolation()
         {
             ObservableCollection<Models.Violations_Model.Violation> violations = new ObservableCollection<Models.Violations_Model.Violation>();
             try
             {
 
                 var result = from objvio in objcontext.Violations select objvio;
-            
 
-                
+
+
                 foreach (var row in result)
                 {
                     var Violationtype = new Violation_type();
@@ -63,14 +52,14 @@ namespace Wpf_Traffic_violation.Services
                     var PlateName = objcontext.PlateDetailes.Find(row.Plate_id).PlateName.ToString();
                     var violationModel = new Models.Violations_Model.Violation
                     {
-                        Violation_id= (int)row.VounchrNum,
-                        Violation_date =Convert.ToString(row.Violation_date),
-                        String_ViolationType= Violationtype.Violation_type_name,
-                        Plate_Type=PlateName,
-                       Amount= Violationtype.Maximum_price,
-                       String_Street=streetname,
-                      Payment_status=(int)row.Payment_status,
-                      Plate_Num=row.vehicle_id
+                        Violation_id = (int)row.VounchrNum,
+                        Violation_date = Convert.ToString(row.Violation_date),
+                        String_ViolationType = Violationtype.Violation_type_name,
+                        Plate_Type = PlateName,
+                        Amount = Violationtype.Maximum_price,
+                        String_Street = streetname,
+                        Payment_status = (int)row.Payment_status,
+                        Plate_Num = row.vehicle_id
 
 
                     };
@@ -80,17 +69,17 @@ namespace Wpf_Traffic_violation.Services
 
                 }
             }
-            catch(Exception e)
+            catch (Exception)
             {
 
             }
-            return  violations;
+            return violations;
         }
         public ObservableCollection<Models.Violations_Model.Violation> GetAllViolationReport(string typrviolation, DateTime fromd, DateTime tod)
         {
 
             ObservableCollection<Models.Violations_Model.Violation> violations = new ObservableCollection<Models.Violations_Model.Violation>();
-                
+
             try
             {
                 int countOfViolationstrue = 0;
@@ -108,14 +97,13 @@ namespace Wpf_Traffic_violation.Services
                                   objvio.Violation_penalty,
                                   objvio.Payment_status
                               });
-            
+
                 foreach (var row in result)
                 {
                     if (row.Payment_status == 1)
                     {
                         countOfViolationstrue += 1;
                         sumOfViolationPenaltytru += (int)row.Violation_penalty;
-
                     }
                     else
                     {
@@ -129,7 +117,7 @@ namespace Wpf_Traffic_violation.Services
                     Violation_id = countOfViolationstrue,
                     //Violation_date = Convert.ToString(row.Violation_date),
                     Violation_penalty = sumOfViolationPenaltytru,
-                    Payment_status =1,
+                    Payment_status = 1,
                 };
                 var upaidViolation = new Models.Violations_Model.Violation
                 {
@@ -142,7 +130,7 @@ namespace Wpf_Traffic_violation.Services
                 violations.Add(paidViolation);
                 violations.Add(upaidViolation);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -153,7 +141,7 @@ namespace Wpf_Traffic_violation.Services
         {
 
             ObservableCollection<Models.Violations_Model.Violation> violations = new ObservableCollection<Models.Violations_Model.Violation>();
-            var result = from obj in objcontext.Violations where obj.vehicle_id == platNum && obj.Payment_status==0 select obj;
+            var result = from obj in objcontext.Violations where obj.vehicle_id == platNum && obj.Payment_status == 0 select obj;
 
 
 
@@ -189,14 +177,16 @@ namespace Wpf_Traffic_violation.Services
 
 
         }
-        public ObservableCollection<Models.Violations_Model.Violation> GetViolation(string violation_id,int provicid = 0,int plattypid=0)
+        public ObservableCollection<Models.Violations_Model.Violation> GetViolation(string violation_id, int provicid = 0, int plattypid = 0)
         {
 
             ObservableCollection<Models.Violations_Model.Violation> violations = new ObservableCollection<Models.Violations_Model.Violation>();
             try
             {
-                var result = from obj in objcontext.Violations where obj.vehicle_id ==violation_id && obj.Payment_status==0
-                               && obj.Plate_id==plattypid && obj.Provinceid==provicid select obj;
+                var result = from obj in objcontext.Violations
+                             where obj.vehicle_id == violation_id && obj.Payment_status == 0
+                               && obj.Plate_id == plattypid && obj.Provinceid == provicid
+                             select obj;
 
 
 
@@ -211,7 +201,7 @@ namespace Wpf_Traffic_violation.Services
                         Teaffic_man_id = row.Teaffic_man_id,
                         Violation_type_id = row.Violation_type_id,
                         Notise = row.Notise,
-                       Violation_penalty = (int)row.Violation_penalty,
+                        Violation_penalty = (int)row.Violation_penalty,
                         Payment_status = (int)row.Payment_status,
                         CreatedOn = row.CreatedOn,
                         CreatedBy = (int)row.Createdby,
@@ -220,7 +210,7 @@ namespace Wpf_Traffic_violation.Services
                         Violation_id = (int)row.Violation_id,
                         Provinceid = Convert.ToInt32(row.Provinceid),
                         Plate_Num = row.vehicle_id,
-                        VounchrNum=(int) row.VounchrNum,
+                        VounchrNum = (int)row.VounchrNum,
 
 
 
@@ -230,11 +220,11 @@ namespace Wpf_Traffic_violation.Services
                 }
 
             }
-            catch(Exception e)
+            catch (Exception)
             {
 
             }
-         
+
             return violations;
 
 
@@ -260,7 +250,7 @@ namespace Wpf_Traffic_violation.Services
                 {
                     return i;
                 }
-               
+
 
 
             }
@@ -319,18 +309,19 @@ namespace Wpf_Traffic_violation.Services
             try
             {
                 var entityToUpdate = objcontext.Violations.Find(violationID);
-                if(entityToUpdate != null)
+                if (entityToUpdate != null)
                 {
                     entityToUpdate.Payment_status = 1;
-                   var commit= objcontext.SaveChanges();
+                    var commit = objcontext.SaveChanges();
                     if (commit > 0)
                     {
                         result = true;
                     }
-                   
+
                 }
 
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
 
             }
@@ -340,37 +331,38 @@ namespace Wpf_Traffic_violation.Services
         public ObservableCollection<PlateDetails> GetPlate()
         {
             ObservableCollection<PlateDetails> plates = new ObservableCollection<PlateDetails>();
-          
+
             try
             {
                 var result = from detl in objcontext.PlateDetailes
-                              join prov in  objcontext.Provinces on detl.Province_id equals prov.Province_id
-                             select new {
+                             join prov in objcontext.Provinces on detl.Province_id equals prov.Province_id
+                             select new
+                             {
                                  detl.ID,
                                  detl.Province_id,
                                  prov.Province_name,
                                  detl.PlateName,
-                                 detl.Status   
-                             } ;
-                foreach(var row in result)
+                                 detl.Status
+                             };
+                foreach (var row in result)
                 {
                     PlateDetails plateDetails = new PlateDetails
                     {
                         Plate_id = row.ID,
                         Province_id = row.Province_id,
-                        Province_name =row.Province_name,
+                        Province_name = row.Province_name,
                         PlateName = row.PlateName,
                         Status = (int)row.Status,
                     };
                     plates.Add(plateDetails);
                 }
-                    //objcontext.PlateDetailes.FirstOrDefault();
+                //objcontext.PlateDetailes.FirstOrDefault();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
-         
+
 
             return plates;
         }
@@ -411,25 +403,25 @@ namespace Wpf_Traffic_violation.Services
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
             return false;
         }
-        public bool Insertbulk(MagrationDB.Violation violation, int rowCount,int count)
+        public bool Insertbulk(MagrationDB.Violation violation, int rowCount, int count)
         {
-           
+
             try
             {
-               
+
                 objcontext.Violations.Add(violation);
                 count++;
                 if (count == 384)
                 {
 
                 }
-                if (count== rowCount)
+                if (count == rowCount)
                 {
                     var result = objcontext.SaveChanges();
                     if (result > 0)
@@ -439,10 +431,10 @@ namespace Wpf_Traffic_violation.Services
 
                 }
                 return true;
-               
+
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -451,20 +443,20 @@ namespace Wpf_Traffic_violation.Services
 
         public ObservableCollection<ReceiptReportModel> GetAllViolationByReceiptDetailes(string typrviolation, DateTime from_date, DateTime to_date)
         {
-  
+
             ObservableCollection<ReceiptReportModel> receiptReportModel = new ObservableCollection<ReceiptReportModel>();
-          try
+            try
             {
-                if(typrviolation== "unPaid")
+                if (typrviolation == "unPaid")
                 {
-                     var  resoult = from violaton in objcontext.Violations
+                    var resoult = from violaton in objcontext.Violations
                                   join recpdrtail in objcontext.Receipt_detail on violaton.Violation_id equals recpdrtail.Violation_id
                                   join recpts in objcontext.Receipts on recpdrtail.Receipt_id equals recpts.Receipt_id
                                   join violtionType in objcontext.Violation_type on violaton.Violation_type_id equals violtionType.Violation_type_id
-                                where violaton.Payment_status==1 && violaton.Violation_date >= from_date && violaton.Violation_date <=to_date
+                                  where violaton.Payment_status == 1 && violaton.Violation_date >= from_date && violaton.Violation_date <= to_date
 
 
-                                select new
+                                  select new
                                   {
                                       recpts.Receipt_id,
                                       violaton.vehicle_id,
@@ -473,7 +465,7 @@ namespace Wpf_Traffic_violation.Services
                                       violtionType.Violation_type_name,
                                       recpdrtail.NameOfPaid,
                                       recpdrtail.ResonOfPaid
-                                  }  ;
+                                  };
 
                     foreach (var row in resoult)
                     {
@@ -491,25 +483,25 @@ namespace Wpf_Traffic_violation.Services
 
                     }
                 }
-                else if(typrviolation == "IsPaid")
+                else if (typrviolation == "IsPaid")
                 {
-                   var  resoult = from violaton in objcontext.Violations
-                              join recpdrtail in objcontext.Receipt_detail on violaton.Violation_id equals recpdrtail.Violation_id
-                              join recpts in objcontext.Receipts on recpdrtail.Receipt_id equals recpts.Receipt_id
-                              join violtionType in objcontext.Violation_type on violaton.Violation_type_id equals violtionType.Violation_type_id
-                              where violaton.Payment_status == 0 && violaton.Violation_date >=from_date && violaton.Violation_date <= to_date
+                    var resoult = from violaton in objcontext.Violations
+                                  join recpdrtail in objcontext.Receipt_detail on violaton.Violation_id equals recpdrtail.Violation_id
+                                  join recpts in objcontext.Receipts on recpdrtail.Receipt_id equals recpts.Receipt_id
+                                  join violtionType in objcontext.Violation_type on violaton.Violation_type_id equals violtionType.Violation_type_id
+                                  where violaton.Payment_status == 0 && violaton.Violation_date >= from_date && violaton.Violation_date <= to_date
 
 
-                              select new
-                              {
-                                  recpts.Receipt_id,
-                                  violaton.vehicle_id,
-                                  violaton.Violation_penalty,
-                                  violaton.Payment_status,
-                                  violtionType.Violation_type_name,
-                                  recpdrtail.NameOfPaid,
-                                  recpdrtail.ResonOfPaid
-                              };
+                                  select new
+                                  {
+                                      recpts.Receipt_id,
+                                      violaton.vehicle_id,
+                                      violaton.Violation_penalty,
+                                      violaton.Payment_status,
+                                      violtionType.Violation_type_name,
+                                      recpdrtail.NameOfPaid,
+                                      recpdrtail.ResonOfPaid
+                                  };
                     foreach (var row in resoult)
                     {
                         var model = new ReceiptReportModel
@@ -539,13 +531,14 @@ namespace Wpf_Traffic_violation.Services
                                  new
                                  {
                                      recpts.Receipt_id,
-                                     vehicle_id= platedetl.Province_id+"/"+ violaton.vehicle_id + platedetl.PlateName,
+                                     vehicle_id = platedetl.Province_id + "/" + violaton.vehicle_id + platedetl.PlateName,
                                      violaton.Violation_penalty,
                                      violaton.Payment_status,
                                      violaton.Violation_type_id,
                                      recpdrtail.NameOfPaid,
                                      recpts.Receipt_statement
-                                 }).GroupBy(x => new {
+                                 }).GroupBy(x => new
+                                 {
 
                                      x.Receipt_id,
                                      x.vehicle_id,
@@ -561,17 +554,17 @@ namespace Wpf_Traffic_violation.Services
                                  }).GroupBy(x => x.data.Receipt_id).Select(group => group.FirstOrDefault());
 
 
-                     foreach (var row in resoult)
+                    foreach (var row in resoult)
                     {
                         var model = new ReceiptReportModel
                         {
-                         
+
                             ReceiptId = row.data.Receipt_id,
                             ReasonOfPaid = row.data.Receipt_statement,
                             NameOfPaid = row.data.NameOfPaid,
                             ViolationPenalty = (int)row.data.Violation_penalty,
-                            ViolationTypeName =Convert.ToString( row.Count),
-                            VehicleId=row.data.vehicle_id
+                            ViolationTypeName = Convert.ToString(row.Count),
+                            VehicleId = row.data.vehicle_id
 
 
                         };
@@ -581,7 +574,7 @@ namespace Wpf_Traffic_violation.Services
 
                 }
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 return null;
 
@@ -593,8 +586,8 @@ namespace Wpf_Traffic_violation.Services
         {
 
 
-            var result =objcontext.PlateDetailes.ToList(); 
-            foreach(var i in result)
+            var result = objcontext.PlateDetailes.ToList();
+            foreach (var i in result)
             {
                 if (i.PlateName == v.Trim())
                 {
@@ -602,16 +595,16 @@ namespace Wpf_Traffic_violation.Services
                 }
             }
             return null;
-           
+
         }
 
         public MagrationDB.Street GetStreet(string street)
         {
-           
-             var ListStreet = objcontext.Streets.ToList();
-            foreach(var i in ListStreet)
+
+            var ListStreet = objcontext.Streets.ToList();
+            foreach (var i in ListStreet)
             {
-                if(i.Street_name== street.Trim())
+                if (i.Street_name == street.Trim())
                 {
                     return i;
                 }
@@ -619,10 +612,10 @@ namespace Wpf_Traffic_violation.Services
             var modelSTreet = new MagrationDB.Street
             {
                 Street_name = street.Trim(),
-                Directerate_id=2
+                Directerate_id = 2
             };
-           var result =objcontext.Streets.Add(modelSTreet);
-            var commit= objcontext.SaveChanges();
+            var result = objcontext.Streets.Add(modelSTreet);
+            var commit = objcontext.SaveChanges();
             if (commit <= 0)
             {
                 return null;

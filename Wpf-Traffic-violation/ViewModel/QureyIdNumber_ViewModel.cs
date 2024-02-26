@@ -606,84 +606,91 @@ namespace Wpf_Traffic_violation.ViewModel
             int x = 1;
             if (action == 1)
             {
-                var ReciptPrint = new ReceiptPrintModel();
-
-
-                ReceiptModel = new ReceiptModel();
-                ///Add Detaile for receipt
-                Current_Receipt.NameOfPaid = NameOfPaid;
-                Current_Receipt.ResonOfPaid = ResonOfPaid;
-                Current_Receipt.Receipt_amountwithdiscont = (AmountSelected - DiscontAmnt);
-                VoilationModel = new VoilationModel();
-                var receiptid = ReceiptModel.CreateReceipt(Current_Receipt, Count);
-                if (receiptid.Receipt_id != 0)
+                if (string.IsNullOrEmpty(NameOfPaid))
                 {
-                    foreach (Violation v in Grid_Violation1)
-                    {
-                        //amount = v.Amount + v.Violation_penalty;
-
-                        var isCreated = ReceiptModel.OperarionReceiptdetail(x, receiptid.Receipt_id, v.String_ViolationType, v.Violation_id, v.Amount, NameOfPaid, ResonOfPaid, AmountSelected);
-
-
-                        if (isCreated.Receipt_detail_id != 0 || isCreated.Receipt_detail_id != null)
-                        {
-                            ReciptPrint.NameOfPaid = isCreated.NameOfPaid;
-                            ReciptPrint.ReasonOfPaid = isCreated.ResonOfPaid;
-                            ReciptPrint.VehicleId = result.FirstOrDefault().Plate_Num;//Convert.ToInt32(v.Plate_Num);
-                            ReciptPrint.ReceiptId = receiptid.Receipt_id;
-                            ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
-                            ReciptPrint.DateOfReceipt = Convert.ToString(receiptid.Post_date);
-                            foreach (var type in Grid_ViolationType)
-                            {
-                                if (type.Violation_type_id == v.Violation_type_id)
-                                {
-                                    ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                                    break;
-                                }
-
-                            }
-
-                            v.Payment_status = 1;
-                            //VoilationModel.OperarionViolation(v, "Update");
-                            VoilationModel.updateVilation(v.Violation_id);
-                        }
-                        x++;
-                    }
-                    if (receiptid.Receipt_id != 0)
-                    {
-                        ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-
-                        ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
-                        ReciptPrint.ViolationPenalty = AmountSelected;
-                        ReciptPrint.DateOfReceipt = DateTime.Now.ToString();
-                        ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
-                        ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
-                        ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
-                        model.Add(ReciptPrint);
-                        Show_Report ShowReport = new Show_Report();
-                        ReportDataSource ds;
-                        ShowReport.ReportViewerDemo.Reset();
-                        ds = new ReportDataSource("DataSetRecipt", model);
-                        ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                        System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                        printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                        //printerSettings.DefaultPageSettings.Landscape = true;
-                        ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
-                        ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
-                        ShowReport.ReportViewerDemo.RefreshReport();
-                        ShowReport.Show();
-
-                    }
-                    MessageBox.Show("تمت عملية السداد بنجاح");
-                    win.Close();
-                    Grid_Violation.Clear();
+                    MessageBox.Show("يرجى ادخال بيانات الدافع");
+                    Pay();
                 }
                 else
                 {
-                    MessageBox.Show("هناك مشكله في انشاء السند");
-                    win.Close();
+                    var ReciptPrint = new ReceiptPrintModel();
+                    ReceiptModel = new ReceiptModel();
+                    ///Add Detaile for receipt
+                    Current_Receipt.NameOfPaid = NameOfPaid;
+                    Current_Receipt.ResonOfPaid = ResonOfPaid;
+                    Current_Receipt.Receipt_amountwithdiscont = (AmountSelected - DiscontAmnt);
+                    VoilationModel = new VoilationModel();
+                    var receiptid = ReceiptModel.CreateReceipt(Current_Receipt, Count);
+                    if (receiptid.Receipt_id != 0)
+                    {
+                        foreach (Violation v in Grid_Violation1)
+                        {
+                            //amount = v.Amount + v.Violation_penalty;
 
+                            var isCreated = ReceiptModel.OperarionReceiptdetail(x, receiptid.Receipt_id, v.String_ViolationType, v.Violation_id, v.Amount, NameOfPaid, ResonOfPaid, AmountSelected);
+
+
+                            if (isCreated.Receipt_detail_id != 0 || isCreated.Receipt_detail_id != null)
+                            {
+                                ReciptPrint.NameOfPaid = isCreated.NameOfPaid;
+                                ReciptPrint.ReasonOfPaid = isCreated.ResonOfPaid;
+                                ReciptPrint.VehicleId = result.FirstOrDefault().Plate_Num;//Convert.ToInt32(v.Plate_Num);
+                                ReciptPrint.ReceiptId = receiptid.Receipt_id;
+                                ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
+                                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                                foreach (var type in Grid_ViolationType)
+                                {
+                                    if (type.Violation_type_id == v.Violation_type_id)
+                                    {
+                                        ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
+                                        break;
+                                    }
+
+                                }
+
+                                v.Payment_status = 1;
+                                //VoilationModel.OperarionViolation(v, "Update");
+                                VoilationModel.updateVilation(v.Violation_id);
+                            }
+                            x++;
+                        }
+                        if (receiptid.Receipt_id != 0)
+                        {
+                            ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
+
+                            ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
+                            ReciptPrint.ViolationPenalty = AmountSelected;
+                            ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                            ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
+                            ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
+                            ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
+                            model.Add(ReciptPrint);
+                            Show_Report ShowReport = new Show_Report();
+                            ReportDataSource ds;
+                            ShowReport.ReportViewerDemo.Reset();
+                            ds = new ReportDataSource("DataSetRecipt", model);
+                            ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                            System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                            printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                            //printerSettings.DefaultPageSettings.Landscape = true;
+                            ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                            ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
+                            ShowReport.ReportViewerDemo.RefreshReport();
+                            ShowReport.Show();
+
+                        }
+                        MessageBox.Show("تمت عملية السداد بنجاح");
+                        win.Close();
+                        Grid_Violation.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("هناك مشكله في انشاء السند");
+                        win.Close();
+
+                    }
                 }
+
             }
             else
             {

@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf_Traffic_violation.Models;
-using Wpf_Traffic_violation.Models.Users_Model;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -45,11 +32,13 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 2:
                     {
-                        UserControl_QureyViolation UserControl_QureyViolation = new UserControl_QureyViolation();
-                        UserControl_QureyViolation.butn1.IsEnabled = true;
-                        UserControl_QureyViolation.butn2.IsEnabled = true;
-                        UserControl_QureyViolation.butn3.IsEnabled = true;
-                      
+                        UserControl_QureyIdNumber userControl_QureyIdNumber = new UserControl_QureyIdNumber();
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        Frame_Violation.Content = userControl_QureyIdNumber;
+
+                        break;
+
                         //AllPermissions AllPermissions = new AllPermissions();
                         //PermissionUser PermissionUser;
                         //PermissionUser = new PermissionUser();
@@ -73,7 +62,7 @@ namespace Wpf_Traffic_violation.Views
                         //    UserControl_QureyViolation.butn3.IsEnabled = false;
                         //}
 
-                        Frame_Violation.Content = UserControl_QureyViolation;
+                        //Frame_Violation.Content = UserControl_QureyViolation;
                         break;
                     }
             }
@@ -86,13 +75,13 @@ namespace Wpf_Traffic_violation.Views
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-           
-          
+
+
 
 
             but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
-          
+
 
 
 

@@ -75,6 +75,15 @@ public class helper : IValueConverter
         Wpf_Traffic_violation.MagrationDB.Receipt_detail receiptDetail = new Wpf_Traffic_violation.MagrationDB.Receipt_detail();
         try
         {
+            if (string.IsNullOrEmpty(nameOfPaid))
+            {
+                nameOfPaid = "صاحب المركبه";
+
+            }
+            if (string.IsNullOrEmpty(resonOfPaid))
+            {
+                resonOfPaid = "مقابل دفع مخالفات مخالفة";
+            }
             receiptDetail = new Wpf_Traffic_violation.MagrationDB.Receipt_detail
             {
                 Receipt_id = receipt_id,
