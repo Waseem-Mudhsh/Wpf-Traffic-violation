@@ -343,7 +343,7 @@
                             </Border>
                             <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
                             <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
-                                <TextBlock x:Name="SelectedAmount"   Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
+                                <TextBlock x:Name="SelectedAmount"   Text="{Binding TotalAmount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
                             </Border>
 
                             <TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>

@@ -287,42 +287,52 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
         public RrivewViolation GetReviewOfplate(RrivewViolation rrivewViolation)
         {
             RrivewViolation rivewViolation = new RrivewViolation();
-            Hashtable keys = new Hashtable();
-            keys.Add("vehicleId", rrivewViolation.vehicleId);
-            keys.Add("violationType", rrivewViolation.violationType);
-            keys.Add("violationprov", rrivewViolation.violationprov);
-            keys.Add("DateReview", rrivewViolation.DateReview);
-            var param = isphelper.prpareParam(keys);
-            var result = isphelper.GetCollectionByParam(sP_Query.Getreviewviolation, "Getreviewviolation", param);
-            if (result.Data.Count <= 0)
+
+            try
             {
-                SqlParameter[] par = new SqlParameter[3];
-
-                par[0] = new SqlParameter("@vehicleId", SqlDbType.Int)
+                Hashtable keys = new Hashtable();
+                keys.Add("vehicleId", rrivewViolation.vehicleId);
+                keys.Add("violationType", rrivewViolation.violationType);
+                keys.Add("violationprov", rrivewViolation.violationprov);
+                keys.Add("DateReview", rrivewViolation.DateReview);
+                var param = isphelper.prpareParam(keys);
+                var result = isphelper.GetCollectionByParam(sP_Query.Getreviewviolation, "Getreviewviolation", param);
+                if (result.Data.Count <= 0)
                 {
-                    Value = rrivewViolation.vehicleId,
-                };
-                par[1] = new SqlParameter("@violationType", SqlDbType.NVarChar)
-                {
-                    Value = rrivewViolation.violationType,
+                    SqlParameter[] par = new SqlParameter[3];
 
-                };
-                par[2] = new SqlParameter("@violationprov", SqlDbType.NVarChar)
-                {
-                    Value = rrivewViolation.violationprov,
-                };
+                    par[0] = new SqlParameter("@vehicleId", SqlDbType.Int)
+                    {
+                        Value = rrivewViolation.vehicleId,
+                    };
+                    par[1] = new SqlParameter("@violationType", SqlDbType.NVarChar)
+                    {
+                        Value = rrivewViolation.violationType,
 
-                var res = isphelper.Operarion(par, opreationSql.opReviewViolation, "opReviewViolation");
-                return null;
-            }
-            else
-            {
-                foreach (DataRow item in result.Data)
-                {
+                    };
+                    par[2] = new SqlParameter("@violationprov", SqlDbType.NVarChar)
+                    {
+                        Value = rrivewViolation.violationprov,
+                    };
 
-                    rivewViolation.DateReview = Convert.ToString((DateTime)item[4]);
+                    var res = isphelper.Operarion(par, opreationSql.opReviewViolation, "opReviewViolation");
+                    return null;
                 }
+                else
+                {
+                    foreach (DataRow item in result.Data)
+                    {
+
+                        rivewViolation.DateReview = Convert.ToString((DateTime)item[4]);
+                    }
+                }
+
             }
+            catch (Exception)
+            {
+
+            }
+
 
 
             return rivewViolation;

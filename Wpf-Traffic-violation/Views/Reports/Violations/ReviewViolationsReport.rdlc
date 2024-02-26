@@ -25,7 +25,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.0682in</Top>
-        <Left>2.62847in</Left>
+        <Left>2.37847in</Left>
         <Height>0.48958in</Height>
         <Width>2.15625in</Width>
         <Style>
@@ -65,7 +65,7 @@
         </Paragraphs>
         <rd:DefaultName>Company_name</rd:DefaultName>
         <Top>0.15874cm</Top>
-        <Left>14.70843cm</Left>
+        <Left>14.07343cm</Left>
         <Height>3.16302cm</Height>
         <Width>5.48979cm</Width>
         <ZIndex>1</ZIndex>
@@ -84,7 +84,7 @@
         <Value>Screenshot_20200119_210524_comfacebookkatanacopy</Value>
         <Sizing>FitProportional</Sizing>
         <Top>0cm</Top>
-        <Left>8.42799cm</Left>
+        <Left>8.11049cm</Left>
         <Height>1.63229cm</Height>
         <Width>1.60584cm</Width>
         <ZIndex>2</ZIndex>
@@ -117,7 +117,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
         <Top>0.19667in</Top>
-        <Left>0.93625in</Left>
+        <Left>0.68625in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -156,7 +156,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>7.155in</Left>
+        <Left>6.905in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -195,7 +195,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>5.18436in</Left>
+        <Left>4.93436in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>5</ZIndex>
@@ -234,7 +234,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>3.38228in</Left>
+        <Left>3.13228in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>6</ZIndex>
@@ -273,9 +273,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>3.48307in</Top>
-        <Left>2.74373in</Left>
+        <Left>2.47984in</Left>
         <Height>0.25in</Height>
-        <Width>5.58333in</Width>
+        <Width>5.22222in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -509,7 +509,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatDateTime(Fields!Violation_date.Value, DateFormat.ShortDate)</Value>
+                              <Value>=Fields!Violation_date.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -620,7 +620,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSetViolation</DataSetName>
         <Top>2.26958in</Top>
-        <Left>2.37846in</Left>
+        <Left>2.12846in</Left>
         <Height>0.5in</Height>
         <Width>5.77654in</Width>
         <ZIndex>8</ZIndex>
@@ -646,7 +646,7 @@
         </Paragraphs>
         <rd:DefaultName>VounchrNum</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>6.31125in</Left>
+        <Left>6.06125in</Left>
         <Height>0.25in</Height>
         <Width>0.80208in</Width>
         <ZIndex>9</ZIndex>
@@ -676,7 +676,7 @@
         </Paragraphs>
         <rd:DefaultName>VehicleId</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>4.41006in</Left>
+        <Left>4.16006in</Left>
         <Height>0.25in</Height>
         <Width>0.73264in</Width>
         <ZIndex>10</ZIndex>
@@ -706,7 +706,7 @@
         </Paragraphs>
         <rd:DefaultName>VehicleTypeName</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>2.31092in</Left>
+        <Left>2.06092in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>11</ZIndex>
@@ -736,7 +736,7 @@
         </Paragraphs>
         <rd:DefaultName>CountOfType</rd:DefaultName>
         <Top>3.48307in</Top>
-        <Left>1.67428in</Left>
+        <Left>1.42428in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>12</ZIndex>
@@ -757,7 +757,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=FormatDateTime(First(Fields!To.Value, "DataSetReport"), DateFormat.ShortDate)</Value>
+                <Value>=Fields!To.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -880,7 +880,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.2175in</Top>
-        <Left>6.81457in</Left>
+        <Left>6.56457in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>16</ZIndex>
@@ -919,7 +919,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.52306in</Top>
-        <Left>6.43957in</Left>
+        <Left>6.18957in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>17</ZIndex>
@@ -941,7 +941,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>8.32706in</Width>
+  <Width>7.92081in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

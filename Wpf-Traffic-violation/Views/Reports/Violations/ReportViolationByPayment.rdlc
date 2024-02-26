@@ -641,7 +641,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>= DateString()</Value>
+                <Value>=Now()</Value>
                 <Style>
                   <FontFamily>Hacen Beirut Poster</FontFamily>
                   <FontSize>12pt</FontSize>

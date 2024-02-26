@@ -721,6 +721,7 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void reviewViolationRecipt(ObservableCollection<Violation> result)
         {
+
             var ReciptPrint = new ReceiptPrintModel();
             ReportDataSource ds;
             ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
@@ -731,6 +732,8 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
+                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString("dd/mm/yyyy");
                 model.Add(ReciptPrint);
                 ShowReport.ReportViewerDemo.Reset();
                 ds = new ReportDataSource("DataSetViolation", result);
@@ -760,13 +763,14 @@ namespace Wpf_Traffic_violation.ViewModel
 
                     }
                 }
+                ReciptPrint.VehicleId = Current_Violation.Plate_Num;
                 var dataTableForViolationtype = new ObservableCollection<ViolationType>();
                 var violationsTypeSelected = new List<KeyValuePair<string, int>>();
                 ReciptPrint.ViolationPenalty = AmountSelected;
-                ReciptPrint.DateOfReceipt = DateTime.Now.ToString();
+                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
                 ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
-                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
+                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString("dd/mm/yyyy");
                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                 model.Add(ReciptPrint);
