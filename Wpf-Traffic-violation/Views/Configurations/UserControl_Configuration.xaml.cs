@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Wpf_Traffic_violation.Views.Configurations;
 
 namespace Wpf_Traffic_violation.Views
@@ -75,9 +64,9 @@ namespace Wpf_Traffic_violation.Views
                     {
                         UserControl_TypesViolations userControl_TypesViolations = new UserControl_TypesViolations();
                         userControl_TypesViolations.but1.IsEnabled = true;
-                        userControl_TypesViolations.    But_Add_TypeViolation.IsEnabled = true;
-                        userControl_TypesViolations.    But_Edit_TypeViolation.IsEnabled = true;
-                        userControl_TypesViolations.    But_Delete_TypeViolation.IsEnabled = true;
+                        userControl_TypesViolations.But_Add_TypeViolation.IsEnabled = true;
+                        userControl_TypesViolations.But_Edit_TypeViolation.IsEnabled = true;
+                        userControl_TypesViolations.But_Delete_TypeViolation.IsEnabled = true;
                         Frame_Configuration.Content = new UserControl_TypesViolations();
 
 
@@ -129,8 +118,8 @@ namespace Wpf_Traffic_violation.Views
             but8.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but9.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but10.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but11.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-           
+            //but11.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+
 
 
             but1.BorderBrush = Brushes.White;
@@ -143,7 +132,7 @@ namespace Wpf_Traffic_violation.Views
             but8.BorderBrush = Brushes.White;
             but9.BorderBrush = Brushes.White;
             but10.BorderBrush = Brushes.White;
-            but11.BorderBrush = Brushes.White;
+            //but11.BorderBrush = Brushes.White;
 
 
             //but.Foreground = Brushes.DarkOrange;
