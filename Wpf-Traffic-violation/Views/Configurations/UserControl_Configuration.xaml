@@ -31,7 +31,7 @@
                                           Uid="9" x:Name="but9" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="LocationCity"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
-                        <TextBlock    >المديريات</TextBlock>
+                        <TextBlock    >بيانات الفاصل</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button  Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
@@ -41,13 +41,13 @@
                         <TextBlock    >أنواع المخالفات</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <!--<Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                           Uid="7" x:Name="but11" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="DesktopWindows"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    >بيانات اللوحة</TextBlock>
                     </StackPanel>
-                </Button>
+                </Button>-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                           Uid="6" x:Name="but6" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">

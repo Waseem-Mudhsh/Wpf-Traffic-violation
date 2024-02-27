@@ -1,13 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Wpf_Traffic_violation.Models
@@ -19,84 +15,84 @@ namespace Wpf_Traffic_violation.Models
             ObservableCollection<Vehicle> Vehicles = new ObservableCollection<Vehicle>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
-            {
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
+            //using (con)
+            //{
+            //    try
+            //    {
+            //        con.Open();
+            //    }
+            //    catch (Exception)
+            //    {
 
-                    MessageBox.Show("Cant Open con");
-                }
-                //SqlCommand Command = new SqlCommand("Select * from Person", con);
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetVehicle",
-                    Connection = con
+            //        MessageBox.Show("Cant Open con");
+            //    }
+            //    SqlCommand Command = new SqlCommand("Select * from Person", con);
+            //    SqlCommand Command = new SqlCommand
+            //    {
+            //        CommandType = CommandType.StoredProcedure,
+            //        CommandText = "GetVehicle",
+            //        Connection = con
 
-                };
-                DataTable dt1;
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        Vehicle per = new Vehicle
-                        {
-                            Potty_id = (int)row[0],
-                            Vehicle_engine_num = (int)row[1],
-                            Vehicle_color = row[2].ToString(),
-                            Vehicle_shape = row[3].ToString(),
-                            Vehicle_model = row[4].ToString(),
-                            Vehicle_customs_num = (int)row[5],
-                            Company_manu_name = row[6].ToString(),
-                            Status_v = (int)row[7],
-                            Release_palc_c = (int)row[8],
-                            Release_date_c = row[9].ToString()
-                        };
+            //    };
+            //    DataTable dt1;
+            //    DataTable dt = new DataTable();
+            //    SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+            //    dataAdapter.Fill(dt);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        foreach (DataRow row in dt.Rows)
+            //        {
+            //            Vehicle per = new Vehicle
+            //            {
+            //                Potty_id = (int)row[0],
+            //                Vehicle_engine_num = (int)row[1],
+            //                Vehicle_color = row[2].ToString(),
+            //                Vehicle_shape = row[3].ToString(),
+            //                Vehicle_model = row[4].ToString(),
+            //                Vehicle_customs_num = (int)row[5],
+            //                Company_manu_name = row[6].ToString(),
+            //                Status_v = (int)row[7],
+            //                Release_palc_c = (int)row[8],
+            //                Release_date_c = row[9].ToString()
+            //            };
 
-                        dt1 = new VehicleModel().GetVehicle_card(per.Potty_id);
+            //            dt1 = new VehicleModel().GetVehicle_card(per.Potty_id);
 
-                        if (dt1.Rows.Count > 0)
-                        {
-                            foreach (DataRow row1 in dt1.Rows)
-                            {
-                                per.Vehicle_card_id = (int)row1[0];
-                                per.Release_date = row1[1].ToString();
-                                per.Release_plase = (int)row1[2];
-                                per.Citizen_id = (int)row1[3];
-                                per.Noties = row1[4].ToString();
-                                per.Status = (int)row1[5];
-                                per.String_Provinces_vc = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_plase);
-                                per.String_Citizen = new Class_SqlConnection().Get_row("getCitizenName", per.Citizen_id);
-                            }
-                        }
-                        per.String_Provinces = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_palc_c);
-                        
-                        if (per.Status == 1)
-                            per.String_Status = "نشطة";
-                        else if (per.Status == 2)
-                            per.String_Status = "منتهية";
-                        else if (per.Status == 3)
-                            per.String_Status = "مفقودة";
+            //            if (dt1.Rows.Count > 0)
+            //            {
+            //                foreach (DataRow row1 in dt1.Rows)
+            //                {
+            //                    per.Vehicle_card_id = (int)row1[0];
+            //                    per.Release_date = row1[1].ToString();
+            //                    per.Release_plase = (int)row1[2];
+            //                    per.Citizen_id = (int)row1[3];
+            //                    per.Noties = row1[4].ToString();
+            //                    per.Status = (int)row1[5];
+            //                    per.String_Provinces_vc = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_plase);
+            //                    per.String_Citizen = new Class_SqlConnection().Get_row("getCitizenName", per.Citizen_id);
+            //                }
+            //            }
+            //            per.String_Provinces = new Class_SqlConnection().Get_row("GetProvince_name", per.Release_palc_c);
 
-                        if (per.Status_v == 1)
-                            per.String_Status_v = "نشطة";
-                        else if(per.Status_v == 2)
-                            per.String_Status_v = "غير نشط";
+            //            if (per.Status == 1)
+            //                per.String_Status = "نشطة";
+            //            else if (per.Status == 2)
+            //                per.String_Status = "منتهية";
+            //            else if (per.Status == 3)
+            //                per.String_Status = "مفقودة";
 
-                        dt1 = null;
+            //            if (per.Status_v == 1)
+            //                per.String_Status_v = "نشطة";
+            //            else if (per.Status_v == 2)
+            //                per.String_Status_v = "غير نشط";
 
-                        Vehicles.Add(per); //الي بنربطه مع الجريد فيو
-                    }
-                }
+            //            dt1 = null;
 
-            }
+            //            Vehicles.Add(per); //الي بنربطه مع الجريد فيو
+            //        }
+            //    }
+
+            //}
             return Vehicles;
         }
 

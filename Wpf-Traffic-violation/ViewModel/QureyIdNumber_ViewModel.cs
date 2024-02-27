@@ -475,6 +475,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         async Task Show()
         {
+            Grid_Violation = null;
             AmountSelected = 0;
             if (SelectedProvinces == null || SelectedPlateType == null || Current_Violation.Plate_Num == null)
             {
@@ -500,10 +501,11 @@ namespace Wpf_Traffic_violation.ViewModel
                 foreach (Violation a in Grid_Violation)
                 {
 
-                    TotalAmount += a.Violation_penalty;
+                    AmountSelected += a.Violation_penalty;
                     a.Isselected = true;
 
                 }
+                TotalAmount = AmountSelected;
             }
 
 
@@ -637,7 +639,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ReciptPrint.VehicleId = result.FirstOrDefault().Plate_Num;//Convert.ToInt32(v.Plate_Num);
                                 ReciptPrint.ReceiptId = receiptid.Receipt_id;
                                 ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
-                                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                                ReciptPrint.DateOfReceipt = (DateTime.Now).ToString("yyyy/MM/dd");
                                 foreach (var type in Grid_ViolationType)
                                 {
                                     if (type.Violation_type_id == v.Violation_type_id)
@@ -660,7 +662,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
                             ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
                             ReciptPrint.ViolationPenalty = AmountSelected;
-                            ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                            ReciptPrint.DateOfReceipt = DateTime.Now.ToString("yyyy/MM/dd");
                             ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                             ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
                             ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
@@ -781,7 +783,6 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 ds = new ReportDataSource("DataSetReport", model);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-
                 //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
                 printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
                 printerSettings.DefaultPageSettings.Landscape = true;
@@ -792,6 +793,8 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
             }
+
+            TotalAmount = 0;
 
         }
         bool CanConfimpay() => true;

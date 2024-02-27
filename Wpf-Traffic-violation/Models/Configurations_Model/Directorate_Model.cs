@@ -90,11 +90,12 @@ namespace Wpf_Traffic_violation.Models
                 Value = operartion
             };
             var response = sphelper.Operarion(param, opreationSql.SP_Director_Opreation, validationRegex.nameOfSp(opreationSql.SP_Director_Opreation));
-            if (response.Data == false)
+            if (response.Code != -1)
             {
                 return false;
             }
             cacheManager.Remove();
+            GetDirectorate();
             return true;
         }
         ///////////////////////////////// end opTrafficMan/////////////////////////////////////

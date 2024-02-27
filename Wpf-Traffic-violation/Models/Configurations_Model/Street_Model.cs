@@ -64,8 +64,9 @@ namespace Wpf_Traffic_violation.Models
                         per.Province_name = provinces_Model.GetProvinces_nameBydirecterateId(per.Directerate_id);
                         Streets.Add(per);
                     }
+                    cacheManager.setkey(Streets);
                 }
-                cacheManager.setkey(Streets);
+
 
             }
 

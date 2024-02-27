@@ -1,15 +1,7 @@
-﻿using ControlzEx.Standard;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
 using Wpf_Traffic_violation.Core.helper;
 using Wpf_Traffic_violation.Services.helper;
 
@@ -36,7 +28,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                     }
                     catch (Exception)
                     {
-                     //   Result.Message = "Cant Open Conncation";
+                        //   Result.Message = "Cant Open Conncation";
 
                     }
 
@@ -60,7 +52,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                                 DataTable dt = new DataTable();
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                                 dataAdapter.Fill(dt);
-                             return dt.Rows;
+                                return dt.Rows;
 
                             }
                             else if (resultString == "Does Not Exist")
@@ -80,7 +72,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                                 DataTable dt = new DataTable();
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
                                 dataAdapter.Fill(dt);
-                               return dt.Rows;
+                                return dt.Rows;
 
                             }
                         }
@@ -92,9 +84,9 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-               // Result.Message = ex.Message.ToString();
+                // Result.Message = ex.Message.ToString();
             }
             return null;
         }
@@ -113,7 +105,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                     {
                         con.Open();
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         result.Message = "Cant Open Conncation";
 
@@ -153,7 +145,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                                 {
                                     dataAdapter.Fill(dt);
                                 }
-                                if(dt.Rows.Count<=0) result.Code = 3;
+                                if (dt.Rows.Count <= 0) result.Code = 3;
                                 result.Data = dt.Rows;
 
 
@@ -195,7 +187,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -265,7 +257,7 @@ namespace Wpf_Traffic_violation.Core.DataAccess
 
                                 }
                                 result.Code = Command.ExecuteNonQuery();
-                              
+
 
                             }
                             else if (resultString == "Does Not Exist")
@@ -300,12 +292,13 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                         }
                     }
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
 
             }
-            
-          
+
+
             return result;
         }
 
@@ -325,15 +318,15 @@ namespace Wpf_Traffic_violation.Core.DataAccess
 
             foreach (DictionaryEntry key in items)
             {
-              string param="@"+ key.Key;
-             var newparms= command.Parameters.AddWithValue(param, key.Value);
+                string param = "@" + key.Key;
+                var newparms = command.Parameters.AddWithValue(param, key.Value);
 
                 //command.Parameters.AddRange(newparms)/*;*/
             }
 
             return command;
         }
-      
-    
+
+
     }
 }

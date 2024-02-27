@@ -12,6 +12,7 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_OperationViolation()
         {
             InitializeComponent();
+
         }
 
         private void But_Add_Violation_Click(object sender, RoutedEventArgs e)
@@ -34,5 +35,7 @@ namespace Wpf_Traffic_violation.Views
             }
 
         }
+
+
     }
 }

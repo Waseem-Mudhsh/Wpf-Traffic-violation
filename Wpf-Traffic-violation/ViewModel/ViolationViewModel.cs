@@ -264,7 +264,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (selectedplateOfType != value)
                 {
                     selectedplateOfType = value;
-
+                    Filter();
                     RaisePropertyChanged("selectedplateOfType");
                 }
             }
@@ -282,7 +282,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (selectedProvinces != value)
                 {
                     selectedProvinces = value;
-
+                    Filter();
                     RaisePropertyChanged("selectedProvinces");
                 }
             }
@@ -431,6 +431,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (selectedPlatNum != value)
                 {
                     selectedPlatNum = value;
+                    Filter();
                     RaisePropertyChanged("SelectedPlatNum");
                 }
             }
@@ -546,44 +547,62 @@ namespace Wpf_Traffic_violation.ViewModel
         //&& PermissionUser.Add_opretion == true;
         void Filter()
         {
+
             try
             {
                 ObservableCollection<Violation> filteredViolations = new ObservableCollection<Violation>();
                 var selscteProvi = SelectedProvinces;
                 var selectedPlate = SelectedPlateType;
-
-                if (Grid_Violation.Count > 0)
+                if (Grid_Violation != null)
                 {
-
-                    if (SelectedPlatNum == "")
+                    if (Grid_Violation.Count > 0)
                     {
-                        filteredViolations = new ObservableCollection<Violation>(
-                          Grid_Violation.Where(x => x.Provinceid == SelectedProvinces.Province_id
-                           && x.Plate_id == SelectedPlateType.Plate_type_id)
-                          );
-                    }
-                    else
-                    {
-                        filteredViolations = new ObservableCollection<Violation>(
-                           Grid_Violation.Where(x => x.Plate_Num == SelectedPlatNum
-                                                  &&
-                                                     x.Provinceid == SelectedProvinces.Province_id
-                            && x.Plate_id == SelectedPlateType.Plate_type_id)
-                           );
+                        if (selscteProvi != null && selectedPlate != null && !string.IsNullOrEmpty(SelectedPlatNum))
+                        {
+                            filteredViolations = new ObservableCollection<Violation>(
+                              Grid_Violation.Where(x => x.Plate_Num == SelectedPlatNum
+                                                     &&
+                                                        x.Provinceid == SelectedProvinces.Province_id
+                               && x.Plate_id == SelectedPlateType.Plate_type_id)
+                              );
 
-                    }
-                    // Clear the Grid_Violation collection and add the filtered items back
-                    Grid_Violation.Clear();
-                    foreach (var violation in filteredViolations)
-                    {
-                        Grid_Violation.Add(violation);
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(SelectedPlatNum) && selscteProvi != null && selectedPlate == null)
+                            {
+                                filteredViolations = new ObservableCollection<Violation>(
+                             Grid_Violation.Where(x => x.Provinceid == SelectedProvinces.Province_id));
+                            }
+                            else if (string.IsNullOrEmpty(SelectedPlatNum) && selscteProvi == null && selectedPlate != null)
+                            {
+                                filteredViolations = new ObservableCollection<Violation>(
+                                 Grid_Violation.Where(x => x.Plate_id == SelectedPlateType.Plate_type_id));
+                            }
+                            else
+                            {
+                                filteredViolations = new ObservableCollection<Violation>(
+                              Grid_Violation.Where(x => x.Plate_Num == SelectedPlatNum)
+                              );
 
-                    }
-                    if (Grid_Violation.Count <= 0)
-                    {
-                        MessageBox.Show("لايوجد بيانات");
-                        asyncViolation();
+                            }
 
+                        }
+
+
+                        // Clear the Grid_Violation collection and add the filtered items back
+                        Grid_Violation.Clear();
+                        foreach (var violation in filteredViolations)
+                        {
+                            Grid_Violation.Add(violation);
+
+                        }
+                        if (Grid_Violation.Count <= 0)
+                        {
+                            MessageBox.Show("لايوجد بيانات");
+                            asyncViolation();
+
+                        }
                     }
                 }
 

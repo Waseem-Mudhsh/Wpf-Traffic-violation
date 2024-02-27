@@ -274,7 +274,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
                 ////////////////////////////////////////////////////////////
                 Current_Activity.Activity_operation_num = 1;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                //ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
 
             }
