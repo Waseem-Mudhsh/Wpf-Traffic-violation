@@ -456,7 +456,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>= Format(DateAdd(DateInterval.Day, -30, Today()), "dd") &amp; "/" &amp;  Format(DateAdd(DateInterval.Day, -30, Today()), "MM") &amp; "/" &amp; Format(DateAdd(DateInterval.Day, -30, Today()), "yyyy")</Value>
+                <Value>=First(Fields!DateOfReceipt.Value, "DataSetReport")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -494,8 +494,38 @@
           </Border>
         </Style>
       </Image>
+      <Textbox Name="To2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>= Format(DateAdd(DateInterval.Day, -45, Today()), "dd") &amp; "/" &amp;  Format(DateAdd(DateInterval.Day, -30, Today()), "MM") &amp; "/" &amp; Format(DateAdd(DateInterval.Day, -30, Today()), "yyyy")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>To</rd:DefaultName>
+        <Top>4.80084in</Top>
+        <Left>6.07499in</Left>
+        <Height>0.25in</Height>
+        <Width>1in</Width>
+        <ZIndex>14</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>4.97098in</Height>
+    <Height>5.1064in</Height>
     <Style>
       <Border>
         <Style>Solid</Style>

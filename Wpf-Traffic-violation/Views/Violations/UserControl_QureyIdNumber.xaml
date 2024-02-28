@@ -243,7 +243,7 @@
                               materialDesign:DataGridAssist.CellPadding="1 5 8 8" 
                               materialDesign:DataGridAssist.ColumnHeaderPadding="8" 
                               RowDetailsVisibilityMode="VisibleWhenSelected"
-                        Height="455" RenderTransformOrigin="0.496,0.654"  >
+                       RenderTransformOrigin="0.496,0.654"  >
                         <DataGrid.CellStyle>
                             <Style TargetType="{x:Type DataGridCell}">
                                 <EventSetter Event="Selected" Handler="DataGridCell_Selected"/>

@@ -1,13 +1,9 @@
 ﻿
 using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
-using Wpf_Traffic_violation.Core.DataAccess;
-using Wpf_Traffic_violation.MagrationDB;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Enum;
 using Wpf_Traffic_violation.Models.Violations_Model;
@@ -30,17 +26,16 @@ public class ExcelReader
     public bool ReadExcelFile(string filePath)
     {
         Street_Model street_Model = new Street_Model(); ;
-        ViolationTypeModel violationTypeModel=new ViolationTypeModel();
+        ViolationTypeModel violationTypeModel = new ViolationTypeModel();
         VoilationModel ViolationModel = new VoilationModel();
         PlateOfType_Model plateOfType_Model = new PlateOfType_Model();
-        int count = 1;
-    
+
         FileInfo fileInfo = new FileInfo(filePath);
         try
         {
             using (ExcelPackage package = new ExcelPackage(fileInfo))
             {
-               
+
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Assuming data is in the first worksheet
 
@@ -68,10 +63,10 @@ public class ExcelReader
                         var violatiotype = violationTypeModel.GetViolationTypeByName(worksheet.Cells[row, 4].Text);
                         var platypeid = plateOfType_Model.GetPlateByName(plateName[0]).Plate_type_id;
                         var streetid = street_Model.GetStreetByName(worksheet.Cells[row, 5].Text);
-                        if (violatiotype==null || platypeid==0 || streetid==null)
+                        if (violatiotype == null || platypeid == 0 || streetid == null)
                         {
-                             MessageBox.Show("قد يكون هناك بيانات غير مهيئه في النظام "+row + "يرجى مراجعة البايانات في الصف ");
-                             return false;
+                            MessageBox.Show("قد يكون هناك بيانات غير مهيئه في النظام " + row + "يرجى مراجعة البايانات في الصف ");
+                            return false;
                         }
                         var Violationdata = new Violation
                         {
@@ -94,21 +89,21 @@ public class ExcelReader
                             UpdateOn = null,
                         };
 
-                        var result = ViolationModel.ExcutOperarionViolationBulk(Violationdata, (int)operationEnum, rowCount, count++);
+                        var result = ViolationModel.ExcutOperarionViolation(Violationdata, (int)operationEnum);
                         if (!result)
                         {
                             return false;
 
                         }
                     }
-                
+
                     else
                     {
-                        MessageBox.Show(+row+"هناك بيانات فارغة يجب ادخالها في الصف رقم");
+                        MessageBox.Show(+row + "هناك بيانات فارغة يجب ادخالها في الصف رقم");
 
-                    }  
+                    }
                 }
-               
+
             }
 
 
@@ -118,8 +113,8 @@ public class ExcelReader
             MessageBox.Show(ex.Message);
         }
 
-      
-      
+
+
         return true;
     }
 }

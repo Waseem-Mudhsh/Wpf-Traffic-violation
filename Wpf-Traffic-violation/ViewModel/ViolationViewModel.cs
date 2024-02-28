@@ -251,6 +251,7 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
         }
+
         //ObservableCollection<PlateOfType> plate_Types;
         PlateOfType selectedplateOfType;
         public PlateOfType SelectedPlateType
@@ -270,6 +271,24 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
         }
+        PlateOfType selectedplateOfTypeAdd;
+        public PlateOfType SelectedPlateTypeAdd
+        {
+            get
+            {
+                return selectedplateOfTypeAdd;
+            }
+            set
+            {
+                if (selectedplateOfTypeAdd != value)
+                {
+                    selectedplateOfTypeAdd = value;
+
+                    RaisePropertyChanged("selectedplateOfTypeAdd");
+                }
+            }
+
+        }
         Provinces selectedProvinces;
         public Provinces SelectedProvinces
         {
@@ -284,6 +303,24 @@ namespace Wpf_Traffic_violation.ViewModel
                     selectedProvinces = value;
                     Filter();
                     RaisePropertyChanged("selectedProvinces");
+                }
+            }
+
+        }
+        Provinces selectedProvincesadd;
+        public Provinces SelectedProvincesAdd
+        {
+            get
+            {
+                return selectedProvincesadd;
+            }
+            set
+            {
+                if (selectedProvincesadd != value)
+                {
+                    selectedProvincesadd = value;
+
+                    RaisePropertyChanged("selectedProvincesadd");
                 }
             }
 
@@ -534,7 +571,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Image1 = new BitmapImage();
             Image2 = new BitmapImage();
             Selected_ViolationType = new ViolationType();
-            SelectedPlateType = new PlateOfType();
+            SelectedPlateTypeAdd = new PlateOfType();
             Selected_Street = new Streets();
             Selected_TrafficMan = new TrafficMan();
             int maxid = 1;
@@ -740,8 +777,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Violation.CreatedOn = DateTime.Now.Date.ToString();
                 Current_Violation.Violation_type_id = Selected_ViolationType.Violation_type_id;
                 //Current_Violation.Plate_id = 1; 
-                Current_Violation.Plate_id = SelectedPlateType.Plate_type_id;
-                Current_Violation.Provinceid = SelectedProvinces.Province_id;
+                Current_Violation.Plate_id = SelectedPlateTypeAdd.Plate_type_id;
+                Current_Violation.Provinceid = SelectedProvincesAdd.Province_id;
                 Current_Violation.Street_id = Selected_Street.Street_id;
                 //Current_Violation.Street_id =4;
                 Current_Violation.Violation_penalty = Selected_ViolationType.Maximum_price;

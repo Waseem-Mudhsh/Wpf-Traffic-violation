@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Windows;
 using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Services;
@@ -322,8 +323,8 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                 {
                     foreach (DataRow item in result.Data)
                     {
-
-                        rivewViolation.DateReview = Convert.ToString((DateTime)item[4]);
+                        rivewViolation.DateReview = DateTime.Parse(Convert.ToString((DateTime)item[4]), CultureInfo.InvariantCulture).ToShortDateString();
+                        ;
                     }
                 }
 

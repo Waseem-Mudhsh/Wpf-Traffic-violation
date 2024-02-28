@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -602,6 +603,11 @@ namespace Wpf_Traffic_violation.ViewModel
 
             if (Cuontviolation_selected > 0)
             {
+                foreach (var item in Grid_Violation1)
+                {
+                    //DateTime dateviolation = Convert.ToDateTime(item.Violation_date);
+                    item.Violation_date = System.DateTime.Parse(item.Violation_date, CultureInfo.InvariantCulture).ToShortDateString();
+                }
                 result = Grid_Violation1;
 
             }
@@ -712,8 +718,9 @@ namespace Wpf_Traffic_violation.ViewModel
                             violationType = SelectedPlateType.Plate_type_name,
                         };
                         var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
-                        if (GetReviewOfplate != null)
+                        if (GetReviewOfplate.DateReview != null)
                         {
+
                             if (MessageBox.Show("تم طباعة الافادة سابقا بتاريخ " + GetReviewOfplate.DateReview + "اذا اردت اعادة طباعة الافادة اضغط Yes ",
                               "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                             {
@@ -724,6 +731,10 @@ namespace Wpf_Traffic_violation.ViewModel
                                 //close the window 
                             }
 
+                        }
+                        else
+                        {
+                            reviewViolationRecipt(result);
                         }
                     }
 
@@ -751,8 +762,10 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
-                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
-                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString("dd/mm/yyyy");
+
+                ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
+
+                ReciptPrint.To = DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 model.Add(ReciptPrint);
                 ShowReport.ReportViewerDemo.Reset();
                 ds = new ReportDataSource("DataSetViolation", result);
@@ -786,7 +799,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 var dataTableForViolationtype = new ObservableCollection<ViolationType>();
                 var violationsTypeSelected = new List<KeyValuePair<string, int>>();
                 ReciptPrint.ViolationPenalty = AmountSelected;
-                ReciptPrint.DateOfReceipt = DateTime.Now.ToString("dd/mm/yyyy");
+                ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                 ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString("dd/mm/yyyy");
