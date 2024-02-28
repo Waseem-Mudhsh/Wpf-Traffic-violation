@@ -109,12 +109,12 @@ namespace Wpf_Traffic_violation.Views
             Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
             but1.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+            //but2.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but3.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but4.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+            //but4.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but5.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but6.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
-            but7.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
+            //but7.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but8.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but9.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
             but10.Foreground = new SolidColorBrush(Color.FromArgb(ColorforN.A, ColorforN.R, ColorforN.G, ColorforN.B));
@@ -123,12 +123,12 @@ namespace Wpf_Traffic_violation.Views
 
 
             but1.BorderBrush = Brushes.White;
-            but2.BorderBrush = Brushes.White;
+            //but2.BorderBrush = Brushes.White;
             but3.BorderBrush = Brushes.White;
-            but4.BorderBrush = Brushes.White;
+            //but4.BorderBrush = Brushes.White;
             but5.BorderBrush = Brushes.White;
             but6.BorderBrush = Brushes.White;
-            but7.BorderBrush = Brushes.White;
+            //but7.BorderBrush = Brushes.White;
             but8.BorderBrush = Brushes.White;
             but9.BorderBrush = Brushes.White;
             but10.BorderBrush = Brushes.White;

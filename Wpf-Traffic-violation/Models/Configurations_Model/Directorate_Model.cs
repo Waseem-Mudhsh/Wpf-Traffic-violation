@@ -22,6 +22,7 @@ namespace Wpf_Traffic_violation.Models
         SP_Query sP_Query;
         ValidationRegex validationRegex;
         CacheManager<Directorate> cacheManager;
+        CacheManager<Provinces> cacheManagerprov;
         public Directorate_Model()
         {
             opreationSql = new OpreationSql();
@@ -29,6 +30,7 @@ namespace Wpf_Traffic_violation.Models
             sphelper = new Directorates();
             sP_Query = new SP_Query();
             cacheManager = new CacheManager<Directorate>("Directorate");
+            cacheManagerprov = new CacheManager<Provinces>("Provinces");
 
 
         }
@@ -95,7 +97,10 @@ namespace Wpf_Traffic_violation.Models
                 return false;
             }
             cacheManager.Remove();
+            cacheManagerprov.Remove();
             GetDirectorate();
+            provinces_model.GetProvinces();
+
             return true;
         }
         ///////////////////////////////// end opTrafficMan/////////////////////////////////////

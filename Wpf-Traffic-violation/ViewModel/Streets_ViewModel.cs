@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -20,7 +17,7 @@ namespace Wpf_Traffic_violation.ViewModel
         Street_Model Streets_Model = new Street_Model();
         PermissionUser PermissionUser;
         ActivityModel ActivityModel = new ActivityModel();
-       
+
 
         #endregion
         #region Proprties
@@ -105,13 +102,13 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
-      
+
         #endregion
         #region Construcor
         public Streets_ViewModel()
         {
             asyncStreets();
-            
+
 
             Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit());
@@ -122,7 +119,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 27;
-           
+
 
             Current_Activity = new Activity();
         }
@@ -139,7 +136,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             int maxid = new Class_SqlConnection().Get_Max("Street", "Street_id");
 
-            Current_Street = new Streets { Street_id = maxid+1, Province_name = "" };
+            Current_Street = new Streets { Street_id = maxid + 1, Province_name = "" };
             Selected_Dirctorate = new Directorate();
             win = new Window_AddStreet { DataContext = this };
             win.ShowDialog();
@@ -151,12 +148,12 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-           foreach(Directorate a in Grid_Ditectorate)
+            foreach (Directorate a in Grid_Ditectorate)
             {
                 if (a.Directorate_id == Current_Street.Directerate_id)
                     Selected_Dirctorate = a;
 
-                    
+
             }
             IsEditing = true;
 
@@ -170,7 +167,7 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanEdit() => Current_Street != null && PermissionUser.Update_opretion == true;
         void Delet()
         {
-            
+
             string message = "هل تريد الحذف ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
@@ -191,7 +188,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.Activity_operation_num = 3;
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
-               if( Streets_Model.OperarionStreets(Current_Street, "Delete"))
+                if (Streets_Model.OperarionStreets(Current_Street, "Delete"))
                 {
                     Grid_Streets.Remove(Current_Street);
                     asyncStreets();
@@ -234,7 +231,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Activity.Activity_record_num = Current_Street.Street_id;
 
             //////////////////////////////////////////////////////////
-            
+
 
             //Current_Street.Province_name = "تعز";
             Current_Street.Directerate_id = Selected_Dirctorate.Directorate_id;
@@ -250,8 +247,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 MessageBox.Show(message, caption, buttons, icon);
 
                 ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 2;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                //Current_Activity.Activity_operation_num = 2;
+                //ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
             }
             else if (Streets_Model.Check_Exsit(Current_Street.Street_id))
@@ -268,7 +265,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Streets_Model.OperarionStreets(Current_Street, "Insert");
                 //Current_Street.Province_name = Selected_Provinces.Province_name;
                 Grid_Streets = new ObservableCollection<Streets>();
-                Grid_Streets=Streets_Model.GetStreets();
+                Grid_Streets = Streets_Model.GetStreets();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية التعديل";
@@ -277,8 +274,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 MessageBox.Show(message, caption, buttons, icon);
 
                 ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 1;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                //Current_Activity.Activity_operation_num = 1;
+                //ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
             }
 
@@ -294,7 +291,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Streets_Model.GetExcel(Grid_Streets);
             Grid_Streets = new ObservableCollection<Streets>();
-            Grid_Streets= Streets_Model.GetStreets();
+            Grid_Streets = Streets_Model.GetStreets();
         }
         #endregion
         #region Commands

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -80,7 +77,7 @@ namespace Wpf_Traffic_violation.ViewModel
         public PlateOfType_ViewModel()
         {
             asyncPlateOfType();
-           
+
             Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit());
             Deletecommand = new RelayCommand(par => Delet());
@@ -90,7 +87,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 23;
-           
+
 
             Current_Activity = new Activity();
         }
@@ -106,7 +103,7 @@ namespace Wpf_Traffic_violation.ViewModel
         public void Add()
         {
             int maxid = new Class_SqlConnection().Get_Max("Plate_type", "Plate_type_id");
-            Current_PlateOfType = new PlateOfType { Plate_type_id = maxid+1};
+            Current_PlateOfType = new PlateOfType { Plate_type_id = maxid + 1 };
             win = new Window_AddTypeOfplates { DataContext = this };
             win.ShowDialog();
 
@@ -117,9 +114,9 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-        
+
             IsEditing = true;
-           
+
             win = new Window_AddTypeOfplates { DataContext = this };
 
             win.ShowDialog();
@@ -140,11 +137,11 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Activity.User_id = Properties.Settings.Default.Userid;
                 Current_Activity.Form_id = 23;
                 Current_Activity.Activity_record_num = Current_PlateOfType.Plate_type_id;
-                
-             
+
+
                 //////////////////////////////////////////////////////////////
 
-                
+
 
                 //////////////////////////////////////////////////////////
                 ////////////////////////////////////////////////////////////
@@ -194,7 +191,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Activity.Activity_record_num = Current_PlateOfType.Plate_type_id;
 
             //////////////////////////////////////////////////////////
-            
+
 
             if (IsEditing && Plates_Model.Check_Exsit(Current_PlateOfType.Plate_type_id))
             {
@@ -230,7 +227,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 Plates_Model.OperarionPlateOfType(Current_PlateOfType, "Insert");
                 Grid_PlateOftype = new ObservableCollection<PlateOfType>();
-                Grid_PlateOftype= Plates_Model.GetPlateOfType();
+                Grid_PlateOftype = Plates_Model.GetPlateOfType();
                 close();
                 string message = "تمت عملية الإضافة بنجاح";
                 string caption = "عملية الأضافة";
@@ -238,8 +235,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
                 ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 1;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                //Current_Activity.Activity_operation_num = 1;
+                //ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
 
             }
@@ -260,7 +257,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             Plates_Model.GetExcel(Grid_PlateOftype);
             Grid_PlateOftype = new ObservableCollection<PlateOfType>();
-            Grid_PlateOftype= Plates_Model.GetPlateOfType();
+            Grid_PlateOftype = Plates_Model.GetPlateOfType();
         }
 
         #endregion

@@ -1,15 +1,10 @@
-﻿using ControlzEx.Standard;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Core.DataAccess;
 using Wpf_Traffic_violation.Core.DataBase.Storedprocedures;
@@ -78,19 +73,20 @@ namespace Wpf_Traffic_violation.Models
             {
                 ViolationTypes = getviolatioType;
             }
-            else {
+            else
+            {
                 var result = sphelper.GetCollection(sP_ViolationType.SP_GetViolationTye, validationRegex.nameOfSp(sP_ViolationType.SP_GetViolationTye));
 
                 if (result.Count <= 0) return null;
                 ViolationTypes = helper.GetViollationcollecttion(result);
 
-                cacheManager.setkey( ViolationTypes);
+                cacheManager.setkey(ViolationTypes);
 
             }
-           
-          
-            
-                
+
+
+
+
             //ViolationTypes = violationServices.GetViolationTypes();
             return ViolationTypes;
         }
@@ -101,7 +97,7 @@ namespace Wpf_Traffic_violation.Models
         ///////////////////////////////// start OperarionViolationType/////////////////////////////////////
         public bool OperarionViolationType(ViolationType violationType, string operartion)
         {
-        
+
 
             SqlParameter[] param = new SqlParameter[7];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
@@ -124,7 +120,7 @@ namespace Wpf_Traffic_violation.Models
             };
             param[4] = new SqlParameter("@Penalty", SqlDbType.Int)
             {
-                Value =( violationType.Penalty==0)?1: violationType.Penalty
+                Value = (violationType.Penalty == 0) ? 1 : violationType.Penalty
             };
             param[5] = new SqlParameter("@Interception_status", SqlDbType.Bit)
             {
@@ -147,7 +143,7 @@ namespace Wpf_Traffic_violation.Models
 
                 return true;
             }
-        
+
         }
 
         ///////////////////////////////// end string/////////////////////////////////////
@@ -211,7 +207,7 @@ namespace Wpf_Traffic_violation.Models
             try
             {
                 ObservableCollection<ViolationType> getviolatioType = cacheManager.GetCach as ObservableCollection<ViolationType>;
-                if (getviolatioType!=null)
+                if (getviolatioType != null)
                 {
                     foreach (ViolationType type in getviolatioType)
                     {
@@ -229,27 +225,37 @@ namespace Wpf_Traffic_violation.Models
                 else
                 {
                     Hashtable key = new Hashtable();
-                        key.Add("name", name);
+                    key.Add("name", name);
                     var param = sphelper.prpareParam(key);
-                    var violationTypes = sphelper.GetCollectionByParam(sP_ViolationType.GetViolationByName, "GetViolationByName",param);
-                     var prepareVilatiotype=   helper.GetViollationcollecttion(violationTypes.Data);
-                    foreach (var item in prepareVilatiotype)
+                    var violationTypes = sphelper.GetCollectionByParam(sP_ViolationType.GetViolationByName, "GetViolationByName", param);
+                    var prepareVilatiotype = helper.GetViollationcollecttion(violationTypes.Data);
+                    if (prepareVilatiotype.Count > 0)
                     {
-                        result.Penalty = Convert.ToInt32(item.Penalty);
-                        result.Maximum_price = Convert.ToInt32(item.Maximum_price);
-                        result.Minimum_price = Convert.ToInt32(item.Minimum_price);
-                        result.Violation_type_name = item.Violation_type_name;
-                        result.Interception_status = Convert.ToInt32(item.Interception_status);
-                        result.Violation_type_id = item.Violation_type_id;
-                        break;
-                    } 
+                        foreach (var item in prepareVilatiotype)
+                        {
+                            result.Penalty = Convert.ToInt32(item.Penalty);
+                            result.Maximum_price = Convert.ToInt32(item.Maximum_price);
+                            result.Minimum_price = Convert.ToInt32(item.Minimum_price);
+                            result.Violation_type_name = item.Violation_type_name;
+                            result.Interception_status = Convert.ToInt32(item.Interception_status);
+                            result.Violation_type_id = item.Violation_type_id;
+                            break;
+                        }
+
+                    }
+                    else
+                    {
+                        result = null;
+
+                    }
+
 
                 }
 
-              
+
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

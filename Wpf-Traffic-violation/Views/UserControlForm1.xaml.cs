@@ -84,12 +84,12 @@ namespace Wpf_Traffic_violation.Views
                     {
                         UserControl_Configuration UserControl_Configuration = new UserControl_Configuration();
                         UserControl_Configuration.but1.IsEnabled = true;
-                        UserControl_Configuration.but2.IsEnabled = true;
+                        //UserControl_Configuration.but2.IsEnabled = true;
                         UserControl_Configuration.but3.IsEnabled = true;
-                        UserControl_Configuration.but4.IsEnabled = true;
+                        //UserControl_Configuration.but4.IsEnabled = true;
                         UserControl_Configuration.but5.IsEnabled = true;
                         UserControl_Configuration.but6.IsEnabled = true;
-                        UserControl_Configuration.but7.IsEnabled = true;
+                        //UserControl_Configuration.but7.IsEnabled = true;
                         UserControl_Configuration.but8.IsEnabled = true;
                         UserControl_Configuration.but9.IsEnabled = true;
                         UserControl_Configuration.but10.IsEnabled = true;

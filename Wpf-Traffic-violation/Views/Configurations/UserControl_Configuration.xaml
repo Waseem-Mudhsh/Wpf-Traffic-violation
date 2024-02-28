@@ -55,20 +55,20 @@
                         <TextBlock    >أنواع اللوحات</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <!--<Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" Visibility="Hidden"
                                            Uid="5" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="DriversLicense"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    >بيانات الرخص</TextBlock>
                     </StackPanel>
-                </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                </Button>-->
+                <!--<Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" Visibility="Hidden"
                                           Uid="4" x:Name="but7" Margin="0,4,7,4" Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Toc"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    >فئات الرخص</TextBlock>
                     </StackPanel>
-                </Button>
+                </Button>-->
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="3" x:Name="but3" Margin="0,4,7,4"  Click="but_sub_ButtonClick">
                     <StackPanel Orientation="Vertical" >
@@ -76,14 +76,14 @@
                         <TextBlock    >بيانات المركبة</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <!--<Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" Visibility="Hidden"
                                            Uid="2" x:Name="but2" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="CardAccountDetailsOutline"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
                         <TextBlock    >بيانات المواطن</TextBlock>
                     </StackPanel>
-                </Button>
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                </Button>-->
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" Visibility="Hidden"
                                            Uid="1" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="CardAccountDetailsStarOutline"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />

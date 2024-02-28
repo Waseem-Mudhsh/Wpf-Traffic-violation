@@ -446,8 +446,8 @@ namespace Wpf_Traffic_violation.ViewModel
             Showcommand = new RelayCommand(Par => Show(), Par => CanShow());
             Paycommand = new RelayCommand(Par => Pay(), Par => CanPay());
             ConfimPaycommand = new RelayCommand(Par => Confimpay(1), Par => CanConfimpay());
-            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2), Par => true);
-            ShowDetaileForViolationNull = new RelayCommand(Par => Confimpay(3), Par => true);
+            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2));
+            ShowDetaileForViolationNull = new RelayCommand(Par => Confimpay(3));
             //Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             //Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
             //Savecommand = new RelayCommand(par => Save(), par => CanSave());
@@ -696,27 +696,44 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else
             {
-                RrivewViolation rrivewViolation = new RrivewViolation
+                try
                 {
-                    DateReview = Convert.ToString(DateTime.Now),
-                    vehicleId = Convert.ToInt32(Current_Violation.Plate_Num),
-                    violationprov = Convert.ToString(SelectedProvinces.Province_id),
-                    violationType = SelectedPlateType.Plate_type_name,
-                };
-                var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
-                if (GetReviewOfplate != null)
-                {
-                    if (MessageBox.Show("تم طباعة الافادة سابقا بتاريخ " + GetReviewOfplate.DateReview + "اذا اردت اعادة طباعة الافادة اضغط Yes ",
-                      "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (SelectedProvinces == null && SelectedPlateType == null)
                     {
-                        reviewViolationRecipt(result);
+                        MessageBox.Show("يجب ادخال البيانات");
                     }
                     else
                     {
-                        //close the window 
+                        RrivewViolation rrivewViolation = new RrivewViolation
+                        {
+                            DateReview = Convert.ToString(DateTime.Now),
+                            vehicleId = Convert.ToInt32(Current_Violation.Plate_Num),
+                            violationprov = Convert.ToString(SelectedProvinces.Province_id),
+                            violationType = SelectedPlateType.Plate_type_name,
+                        };
+                        var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
+                        if (GetReviewOfplate != null)
+                        {
+                            if (MessageBox.Show("تم طباعة الافادة سابقا بتاريخ " + GetReviewOfplate.DateReview + "اذا اردت اعادة طباعة الافادة اضغط Yes ",
+                              "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                            {
+                                reviewViolationRecipt(result);
+                            }
+                            else
+                            {
+                                //close the window 
+                            }
+
+                        }
                     }
 
                 }
+                catch (Exception)
+                {
+
+                }
+
+
             }
             Grid_Violation1 = null;
 

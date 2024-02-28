@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -75,18 +72,18 @@ namespace Wpf_Traffic_violation.ViewModel
         public ViolationType_ViewModel()
         {
             asyncViolationType();
-           
+
             Addcommand = new RelayCommand(Par => Add());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit());
             Deletecommand = new RelayCommand(par => Delet());
             Savecommand = new RelayCommand(par => Save(), par => CanSave());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
-            
+
 
             PermissionUser = new PermissionUser();
-            PermissionUser.Form_id =25;
-           
+            PermissionUser.Form_id = 25;
+
             Current_Activity = new Activity();
         }
         #endregion
@@ -102,7 +99,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
 
             Currunt_ViolationType = new ViolationType();
-            Currunt_ViolationType.Violation_type_id = new Class_SqlConnection().Get_Max("Violation_type", "Violation_type_id")+1;
+            Currunt_ViolationType.Violation_type_id = new Class_SqlConnection().Get_Max("Violation_type", "Violation_type_id") + 1;
             win = new Window_AddTypeOFViolations { DataContext = this };
             win.ShowDialog();
 
@@ -145,7 +142,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
                 //////////////////////////////////////////////////////////
 
-               if(  violationTypeModel.OperarionViolationType(Currunt_ViolationType, "Delete"))
+                if (violationTypeModel.OperarionViolationType(Currunt_ViolationType, "Delete"))
                 {
                     Grid_ViolationTypes.Remove(Currunt_ViolationType);
                     string message1 = "تمت عملية الحذف بنجاح";
@@ -154,8 +151,8 @@ namespace Wpf_Traffic_violation.ViewModel
                     MessageBoxButton buttons1 = MessageBoxButton.OK;
                     MessageBox.Show(message1, caption1, buttons1, icon1);
                     ////////////////////////////////////////////////////////////
-                    Current_Activity.Activity_operation_num = 3;
-                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    //Current_Activity.Activity_operation_num = 3;
+                    //ActivityModel.OperarionActivity(current_Activity, "Insert");
                     ////////////////////////////////////////////////////////////
                 }
                 else
@@ -191,7 +188,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Activity.Activity_record_num = Currunt_ViolationType.Violation_type_id;
 
             //////////////////////////////////////////////////////////
-            
+
             if (IsEditing)
             {
                 violationTypeModel.OperarionViolationType(Currunt_ViolationType, "Update");
@@ -239,7 +236,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             violationTypeModel.GetExcel(Grid_ViolationTypes);
             Grid_ViolationTypes = new ObservableCollection<ViolationType>();
-            Grid_ViolationTypes=violationTypeModel.GetViolationTypes();
+            Grid_ViolationTypes = violationTypeModel.GetViolationTypes();
         }
 
         #endregion

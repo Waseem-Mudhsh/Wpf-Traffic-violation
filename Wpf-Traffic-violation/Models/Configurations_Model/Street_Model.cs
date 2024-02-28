@@ -210,18 +210,25 @@ namespace Wpf_Traffic_violation.Models
                     key.Add("name", name.Trim());
                     var param = isphelper.prpareParam(key);
                     var streets = isphelper.GetCollectionByParam(sP_Query.GetStreetbyName, "GetStreetbyId", param);
-
-                    foreach (DataRow str in streets.Data)
+                    if (streets.Data != null)
                     {
-                        if (Convert.ToString(str[1]) == name.Trim())
+                        foreach (DataRow str in streets.Data)
                         {
-                            result.Street_id = (int)str[0];
-                            result.Street_name = (string)str[1];
-                            result.Directerate_id = (int)str[2];
-                            break;
-                        }
+                            if (Convert.ToString(str[1]) == name.Trim())
+                            {
+                                result.Street_id = (int)str[0];
+                                result.Street_name = (string)str[1];
+                                result.Directerate_id = (int)str[2];
+                                break;
+                            }
 
+                        }
                     }
+                    else
+                    {
+                        result = null;
+                    }
+
 
 
                 }
