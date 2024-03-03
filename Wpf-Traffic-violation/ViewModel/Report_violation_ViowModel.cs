@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf_Traffic_violation.Commands;
@@ -430,9 +431,10 @@ namespace Wpf_Traffic_violation.ViewModel
             if (validationDate)
             {
                 //DateTime.Now.ToString("");
-                ExtraDetel.DateNow = DateTime.Now.ToShortDateString();
-                ExtraDetel.From_date = From_date;
-                ExtraDetel.To_date = To_date;
+                ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
+                ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
+
+                ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
                 extraDetailReportModels.Add(ExtraDetel);
                 var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
                 ShowReport.ReportViewerDemo.Reset();
@@ -481,11 +483,11 @@ namespace Wpf_Traffic_violation.ViewModel
                         }
                         ExtraDetel.SumViolationTypcount = sumviolationType;
                         ExtraDetel.SumViolationPenaltyCount = sumamount;
-                        var date = Convert.ToDateTime(From_date).ToString("yyyy/MM/dd");
-                        ExtraDetel.From_date = //DateTime.ParseExact(DateTime.Now.ToString(),)
-                            String.Format("{0:dd-MM-yyyy}", From_date); ;
-                        ExtraDetel.To_date = String.Format("{0:dd-MM-yyyy}", To_date); ; ;
+                        var date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
+                        ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();//DateTime.ParseExact(DateTime.Now.ToString(),)
+                        ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
                         extraDetailReportModels.Add(ExtraDetel);
+                        ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                         userControlviolationReceipt.ReportViewerDemo.Reset();
                         ShowReport.ReportViewerDemo.Reset();
                         //Create New Dataset That Content ExtraDetaile for report

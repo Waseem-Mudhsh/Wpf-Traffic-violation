@@ -641,7 +641,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Now()</Value>
+                <Value>=Fields!DateNow.Value</Value>
                 <Style>
                   <FontFamily>Hacen Beirut Poster</FontFamily>
                   <FontSize>12pt</FontSize>

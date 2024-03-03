@@ -501,7 +501,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>= Format(DateAdd(DateInterval.Day, -45, Today()), "dd") &amp; "/" &amp;  Format(DateAdd(DateInterval.Day, -30, Today()), "MM") &amp; "/" &amp; Format(DateAdd(DateInterval.Day, -30, Today()), "yyyy")</Value>
+                <Value>=First(Fields!To.Value, "DataSetReport")</Value>
                 <Style />
               </TextRun>
             </TextRuns>

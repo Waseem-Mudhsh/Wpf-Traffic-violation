@@ -718,7 +718,7 @@ namespace Wpf_Traffic_violation.ViewModel
                             violationType = SelectedPlateType.Plate_type_name,
                         };
                         var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
-                        if (GetReviewOfplate.DateReview != null)
+                        if (GetReviewOfplate != null)
                         {
 
                             if (MessageBox.Show("تم طباعة الافادة سابقا بتاريخ " + GetReviewOfplate.DateReview + "اذا اردت اعادة طباعة الافادة اضغط Yes ",
@@ -764,7 +764,6 @@ namespace Wpf_Traffic_violation.ViewModel
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
 
                 ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
-
                 ReciptPrint.To = DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 model.Add(ReciptPrint);
                 ShowReport.ReportViewerDemo.Reset();
@@ -802,7 +801,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
-                ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString("dd/mm/yyyy");
+                ReciptPrint.To = System.DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                 model.Add(ReciptPrint);

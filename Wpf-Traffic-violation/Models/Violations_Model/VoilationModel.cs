@@ -185,7 +185,38 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             {
                 var From = Convert.ToDateTime(from_date);
                 var To = Convert.ToDateTime(to_date);
-                Violations = violationServices.GetAllViolationReport(typrviolation, From, To);
+                Hashtable key = new Hashtable();
+                key.Add("From", from_date);
+                key.Add("To", to_date);
+                var param = sphelper.prpareParam(key);
+                var violations = sphelper.GetCollectionByParam(sP_Query.GetAllViolationReport, "GetAllViolationReport", param);
+                foreach (DataRow item in violations.Data)
+                {
+                    if ((int)item[2] == 0)
+                    {
+                        Violation violation = new Violation
+                        {
+                            Violation_id = (int)item[0],
+                            Violation_penalty = (int)item[1],
+                            Payment_status = (int)item[2],
+                        };
+                        Violations.Add(violation);
+
+                    }
+                    else
+                    {
+                        Violation violation = new Violation
+                        {
+                            Violation_id = (int)item[0],
+                            Violation_penalty = (int)item[1],
+                            Payment_status = (int)item[2],
+                        };
+                        Violations.Add(violation);
+
+                    }
+
+
+                }
             }
             catch (Exception)
             {
