@@ -1,13 +1,7 @@
-﻿using conn;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Users_Model;
@@ -17,7 +11,7 @@ namespace Wpf_Traffic_violation.ViewModel
 {
     public class Account_ViewModel : BindableBase
     {
-        
+
         #region Objects And Variables
         AccountModel AccountModel = new AccountModel();
         Window_AddAccont win;
@@ -110,7 +104,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 {
                     selected_Parent = value;
                     Currunt_Account.Account_parent = Selected_Parent.Account_id;
-                    Currunt_Account.Account_id= AccountModel.GetCreate_Account(Selected_Parent.Account_id);
+                    Currunt_Account.Account_id = AccountModel.GetCreate_Account(Selected_Parent.Account_id);
                     Currunt_Account.String_AccParent = Selected_Parent.Account_name;
                     RaisePropertyChanged("Selected_Parent");
                 }
@@ -120,12 +114,12 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Account_ViewModel()
         {
-            
-            asyncAccounts();
-           
-            
 
-           
+            asyncAccounts();
+
+
+
+
 
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -135,8 +129,8 @@ namespace Wpf_Traffic_violation.ViewModel
             Excelcommand = new RelayCommand(par => GetExcel());
 
             PermissionUser = new PermissionUser();
-            
-           
+
+
 
             Current_Activity = new Activity();
         }
@@ -145,10 +139,10 @@ namespace Wpf_Traffic_violation.ViewModel
         private async Task asyncAccounts()
         {
             Grid_Accounts = new ObservableCollection<Account>();
-            Grid_Accounts = await Task.Run(()=> AccountModel.GetAccounts());
+            Grid_Accounts = await Task.Run(() => AccountModel.GetAccounts());
 
             Grid_AccountParent = new ObservableCollection<Account>();
-            Grid_AccountParent= await Task.Run(() => AccountModel.GetAccountParent());
+            Grid_AccountParent = await Task.Run(() => AccountModel.GetAccountParent());
         }
         public void Add()
         {
@@ -259,7 +253,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Activity.Activity_record_num = Currunt_Account.Account_id;
 
             //////////////////////////////////////////////////////////
-            
+
 
 
 
@@ -290,7 +284,7 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else if (AccountModel.Check_Exsit(Currunt_Account.Account_id))
             {
-                
+
                 Currunt_Account.Account_status = true;
                 string message = "رقم المستخدم موجود مسبقا";
                 string caption = "رسالة خطا";
@@ -313,15 +307,15 @@ namespace Wpf_Traffic_violation.ViewModel
                 MessageBoxButton buttons = MessageBoxButton.OK;
                 MessageBox.Show(message, caption, buttons, icon);
 
-                 ////////////////////////////////////////////////////////////
-                    Current_Activity.Activity_operation_num = 1;
-                    ActivityModel.OperarionActivity(current_Activity, "Insert");
-                    ////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////
+                Current_Activity.Activity_operation_num = 1;
+                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                ////////////////////////////////////////////////////////////
 
             }
 
-            
-            Grid_Accounts= AccountModel.GetAccounts();
+
+            Grid_Accounts = AccountModel.GetAccounts();
 
 
             //Enable_Grid = false;
@@ -337,7 +331,7 @@ namespace Wpf_Traffic_violation.ViewModel
             // Currunt_Account = new Account();
             AccountModel.GetExcel(Grid_Accounts);
             Grid_Accounts = new ObservableCollection<Account>();
-            Grid_Accounts= AccountModel.GetAccounts();
+            Grid_Accounts = AccountModel.GetAccounts();
 
         }
 

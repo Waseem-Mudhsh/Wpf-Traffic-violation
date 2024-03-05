@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -82,7 +79,7 @@ namespace Wpf_Traffic_violation.ViewModel
         public Citizen_ViewModel()
         {
             asyncCitizen();
-            
+
             Addcommand = new RelayCommand(Par => Add(), Par => CanAdd());//This Bind with Button Add
             Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
@@ -92,7 +89,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 19;
-           
+
 
 
             Current_Activity = new Activity();
@@ -108,7 +105,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public void Add()
         {
-            Currunt_Citizen = new Citizen ();
+            Currunt_Citizen = new Citizen();
             win = new Window_AddCitizen { DataContext = this };
             win.ShowDialog();
 
@@ -119,7 +116,7 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanAdd() => true && PermissionUser.Add_opretion == true;
         void Edit()
         {
-            
+
             IsEditing = true;
             win = new Window_AddCitizen { DataContext = this };
             win.Citizen_identitytype.IsEnabled = false;
@@ -129,7 +126,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         }
         bool CanEdit() => Currunt_Citizen != null && PermissionUser.Update_opretion == true;
-        void Delet()
+        async void Delet()
         {
             string message = "هل تريد الحذف ؟";
             string caption = "تأكيد";
@@ -147,9 +144,9 @@ namespace Wpf_Traffic_violation.ViewModel
 
                 //////////////////////////////////////////////////////////
 
-               
-                
-                
+
+
+
                 if (CitizenModel.OperarionCitizen(Currunt_Citizen, "Delete"))
                 {
                     ////////////////////////////////////////////////////////////
@@ -162,9 +159,9 @@ namespace Wpf_Traffic_violation.ViewModel
                     MessageBoxButton buttons1 = MessageBoxButton.OK;
                     MessageBox.Show(message1, caption1, buttons1, icon1);
                     Grid_Citizens.Remove(Currunt_Citizen);
-                    asyncCitizen();
+                    await asyncCitizen();
                 }
-                
+
                 else
                 {
                     string message1 = "يوجد سجلات مرتبطة بهذا المواطن";
@@ -176,9 +173,9 @@ namespace Wpf_Traffic_violation.ViewModel
 
                     MessageBox.Show(message1, caption1, buttons1, icon1);
                 }
-                
 
-               
+
+
 
             }
             else
@@ -289,7 +286,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
             citizenModel.GetExcel(Grid_Citizens);
             Grid_Citizens = new ObservableCollection<Citizen>();
-            Grid_Citizens= citizenModel.GetCitizens();
+            Grid_Citizens = citizenModel.GetCitizens();
         }
 
         #endregion

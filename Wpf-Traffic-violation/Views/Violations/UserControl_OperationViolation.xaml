@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
+
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
            >
@@ -29,7 +30,7 @@
                            materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                         <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                     </Button>-->
-                  
+
                 </StackPanel>
                 <Button  Command="{Binding Excelcommand}"
                                    Height="40"       Uid="7"  x:Name="but1" Padding="0" Margin="5,0,20,0" Background="#FF097221" BorderBrush="{x:Null}" Width="150" >
@@ -67,7 +68,7 @@
                     <controls:AutoCompleteBox.InputBindings >
                         <KeyBinding Command="{Binding FilterViolation}" Key="Enter"  ></KeyBinding>
                     </controls:AutoCompleteBox.InputBindings>
-                    </controls:AutoCompleteBox>
+                </controls:AutoCompleteBox>
                 <TextBlock Text="رمز المحافظه" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
                 <TextBox    x:Name="textBox" Width="216" Height="30" Text="{Binding SelectedPlatNum}" 
                         materialDesign:HintAssist.Hint="" 
@@ -100,7 +101,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0">إضافة</TextBlock>
                         <materialDesign:PackIcon Kind="Add" Margin="0 0 0 0" Width="25" Height="24" />
-                    </StackPanel>   
+                    </StackPanel>
                 </Button>
 
             </StackPanel>
@@ -111,23 +112,22 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <!--<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-                <Button Content="Up" Width="50" Height="25" Click="ScrollUpButton_Click" />
-                <Button Content="Down" Width="50" Height="25" Click="ScrollDownButton_Click" />
-            </StackPanel>-->
-           
             <StackPanel  Background="White"  HorizontalAlignment="Center">
-
-                <DataGrid x:Name="GriddataViolation"  Style="{StaticResource Style_Datagrid}" Margin="10 5 40 5" ItemsSource="{Binding Grid_Violation}"  
-                      SelectedItem="{Binding Current_Violation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"  HorizontalAlignment="Right"
-                        ScrollViewer.CanContentScroll="True" 
-                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                       Height="680" Width="1194"  >
+                <DataGrid  x:Name="GriddataViolation"
+                           Style="{StaticResource Style_Datagrid}"
+                           ItemsSource="{Binding Grid_Violation}"  
+                          SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8"
+                           materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                          AutoGenerateColumns="False"
+                          ScrollViewer.CanContentScroll="True" 
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                             Height="680" Width="1194" 
+                           >
                     <DataGrid.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
-                            <EventSetter Event="Selected" Handler="DataGridCell_Selected"/>
+                            <EventSetter Event="DataGridCell.Selected" Handler="DataGridCell_Selected"/>
                         </Style>
                     </DataGrid.CellStyle>
                     <DataGrid.Columns>
@@ -136,6 +136,7 @@
                                         Header="رقم القسيمة" MinWidth="100" 
                                          />
 
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                         <!-- set a max length to get an indicator in the editor -->
                         <DataGridTextColumn Binding="{Binding Violation_date}"
                                                            Header="التاريخ"
@@ -157,9 +158,7 @@
                         <DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة" MinWidth="300"
                                                         
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-
-                        </DataGridTextColumn>
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                         <DataGridTextColumn Binding="{Binding Amount}"
                                                            Header="المبلغ"  MinWidth="80"
                                                             
@@ -184,24 +183,17 @@
                         <DataGridTextColumn Binding="{Binding Notise}"
                                                         Header="ملاحظة" MinWidth="100"
                                                         
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-
-
-                        </DataGridTextColumn>
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                         <DataGridTextColumn Binding="{Binding String_Status}"
                                                         Header="حالة السداد" MinWidth="10"
                                                         
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
-
-
-                        </DataGridTextColumn>
-
-                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
 
                     </DataGrid.Columns>
                 </DataGrid>
+
             </StackPanel>
         </Grid>
-       
+
     </DockPanel>
 </UserControl>

@@ -1,14 +1,9 @@
-﻿using ControlzEx.Standard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Wpf_Traffic_violation.MagrationDB;
 
 namespace Wpf_Traffic_violation.Services
 {
-   public class ReceiptServices
+    public class ReceiptServices
     {
 
         TrafficViolationEntitiesUat objcontext;
@@ -22,14 +17,14 @@ namespace Wpf_Traffic_violation.Services
             var resoult = new Wpf_Traffic_violation.MagrationDB.Receipt();
             try
             {
-                resoult= objcontext.Receipts.Add(receipt);
-              var Iscommit=  objcontext.SaveChanges();
+                resoult = objcontext.Receipts.Add(receipt);
+                var Iscommit = objcontext.SaveChanges();
                 if (Iscommit > 0)
                 {
                     return resoult;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -45,16 +40,17 @@ namespace Wpf_Traffic_violation.Services
             {
 
                 result = objcontext.Receipt_detail.Add(prpareModel);
-              var commit=  objcontext.SaveChanges();
-                 if (commit > 0)
+                var commit = objcontext.SaveChanges();
+                if (commit > 0)
                 {
                     var updateRecipt = objcontext.Receipts.Find(prpareModel.Receipt_id);
                     updateRecipt.Receipt_status = true;
                     objcontext.SaveChanges();
-                }   
+                }
                 //resoult = true;
 
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
             }
 

@@ -8,18 +8,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="pack://application:.,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />-->
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.lightblue.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml"/>
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.lightblue.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate x:Key="AutoId">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding  Search}"/>
-
-
-
                 </StackPanel>
             </DataTemplate>
 
@@ -198,7 +195,7 @@
                 </Style.Triggers>
             </Style>
             <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-            <Style  TargetType="DataGridColumnHeader">
+            <!--<Style  TargetType="DataGridColumnHeader">
                 <Setter Property="Background" Value="#606060"/>
                 <Setter Property="Foreground" Value="#E9E9E9"/>
                 <Setter Property="FontSize" Value="12"/>
@@ -208,7 +205,7 @@
 
 
 
-            </Style>
+            </Style>-->
             <!--style Style_Datagrid-->
             <Style TargetType="DataGrid" x:Key="Style_Datagrid">
                 <Setter Property="materialDesign:DataGridAssist.CellPadding" Value="15 5 5 5"/>
@@ -242,6 +239,9 @@
                 <!--<Setter Property="ColumnHeaderStyle" Value="{DynamicResource headerstyle}"/>-->
             </Style>
 
+            <!--DataGridColumnHeader Style-->
+
+      
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="FontFamily" Value="Tajawal"/>

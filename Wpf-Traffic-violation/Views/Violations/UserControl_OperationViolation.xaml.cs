@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-
 namespace Wpf_Traffic_violation.Views
 {
     /// <summary>
@@ -35,6 +34,7 @@ namespace Wpf_Traffic_violation.Views
             }
 
         }
+
 
 
     }

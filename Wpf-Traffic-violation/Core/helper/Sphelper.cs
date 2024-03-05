@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
-using ControlzEx.Standard;
-using Wpf_Traffic_violation.Core.helper;
 using System.Collections;
-using System.Xml.Linq;
+using System.Data;
+using System.Data.SqlClient;
+using Wpf_Traffic_violation.Core.helper;
 
 namespace Wpf_Traffic_violation.Services.helper
 {
-    public class Sphelper: Isphelper
+    public class Sphelper : Isphelper
     {
-        
+
 
         //public SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
 
 
-        public DataRowCollection GetCollection(string SpStoredProcedureQuery, string name=null)
+        public DataRowCollection GetCollection(string SpStoredProcedureQuery, string name = null)
         {
-                SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-               DataRowCollection Result = null;
+            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            DataRowCollection Result = null;
             try
             {
                 using (con)
@@ -51,7 +44,7 @@ namespace Wpf_Traffic_violation.Services.helper
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                                 dataAdapter.Fill(dt);
 
-                                Result= dt.Rows ;
+                                Result = dt.Rows;
                             }
                             else if (resultString == "Does Not Exist")
                             {
@@ -69,10 +62,10 @@ namespace Wpf_Traffic_violation.Services.helper
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
                                 dataAdapter.Fill(dt);
 
-                                Result= dt.Rows;
+                                Result = dt.Rows;
                             }
 
-                        
+
                         }
                         else
                         {
@@ -82,7 +75,7 @@ namespace Wpf_Traffic_violation.Services.helper
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -100,14 +93,14 @@ namespace Wpf_Traffic_violation.Services.helper
             Response<DataRowCollection> result = new Response<DataRowCollection>();
             try
             {
-               con.Close();
+                con.Close();
                 using (con)
                 {
                     try
                     {
                         con.Open();
                     }
-                    catch (Exception  e)
+                    catch (Exception)
                     {
                         result.Message = "Cant Open Conncation";
 
@@ -132,13 +125,13 @@ namespace Wpf_Traffic_violation.Services.helper
                                     Connection = con
 
                                 };
-                              
+
                                 if (parameters != null)
                                 {
                                     sqlCommand.Parameters.Clear();
                                     foreach (SqlParameter param in parameters.Parameters)
                                     {
-                                        sqlCommand.Parameters.AddWithValue(param.ParameterName,param.Value);
+                                        sqlCommand.Parameters.AddWithValue(param.ParameterName, param.Value);
                                     }
 
                                 }
@@ -174,24 +167,24 @@ namespace Wpf_Traffic_violation.Services.helper
 
 
                                 }
-                               //sqlCommand.ExecuteNonQuery();
+                                //sqlCommand.ExecuteNonQuery();
                                 DataTable dt = new DataTable();
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
                                 dataAdapter.Fill(dt);
-                                if(dt.Rows.Count<=0)
-                                    result.Code = 0;    
+                                if (dt.Rows.Count <= 0)
+                                    result.Code = 0;
                                 result.Data = dt.Rows;
 
                             }
                         }
                         else
                         {
-                        
+
                         }
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -204,7 +197,7 @@ namespace Wpf_Traffic_violation.Services.helper
             return result;
         }
 
-        public DataRowCollection GetMax(string SpStoredProcedureQuery, string name = null,string tablename=null, string namecolmn = null)
+        public DataRowCollection GetMax(string SpStoredProcedureQuery, string name = null, string tablename = null, string namecolmn = null)
         {
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
 
@@ -264,12 +257,12 @@ namespace Wpf_Traffic_violation.Services.helper
                         }
                         else
                         {
-                         
+
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -282,7 +275,7 @@ namespace Wpf_Traffic_violation.Services.helper
 
         public DataRowCollection GetNameOfRow(string SpStoredProcedureQuery, string operation = null, string nameSp = null, int id = 0)
         {
-            DataRowCollection response=null;
+            DataRowCollection response = null;
             try
             {
                 SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
@@ -314,7 +307,7 @@ namespace Wpf_Traffic_violation.Services.helper
                                 SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
                                 dataAdapter.Fill(dt);
 
-                                response= dt.Rows;
+                                response = dt.Rows;
                             }
                             else if (resultString == "Does Not Exist")
                             {
@@ -346,7 +339,7 @@ namespace Wpf_Traffic_violation.Services.helper
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -447,7 +440,7 @@ namespace Wpf_Traffic_violation.Services.helper
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -480,6 +473,6 @@ namespace Wpf_Traffic_violation.Services.helper
             return command;
         }
 
-    
+
     }
 }
