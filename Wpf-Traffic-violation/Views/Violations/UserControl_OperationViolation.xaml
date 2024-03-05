@@ -117,19 +117,13 @@
                            Style="{StaticResource Style_Datagrid}"
                            ItemsSource="{Binding Grid_Violation}"  
                           SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8"
-                           materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                          AutoGenerateColumns="False"
-                          ScrollViewer.CanContentScroll="True" 
-                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
                              Height="680" Width="1194" 
                            >
-                    <DataGrid.CellStyle>
+                    <!--<DataGrid.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
                             <EventSetter Event="DataGridCell.Selected" Handler="DataGridCell_Selected"/>
                         </Style>
-                    </DataGrid.CellStyle>
+                    </DataGrid.CellStyle>-->
                     <DataGrid.Columns>
 
                         <DataGridTextColumn Binding="{Binding VounchrNum}"
@@ -148,7 +142,7 @@
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                         <DataGridTextColumn Binding="{Binding Plate_Type}"
-                                                           Header="نوع اللوحة"  MinWidth="80"
+                                                           Header="نوع اللوحة"  MinWidth="50"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                         <DataGridTextColumn Binding="{Binding Provinceid}"
@@ -156,7 +150,7 @@
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                         <DataGridTextColumn Binding="{Binding String_ViolationType}"
-                                                        Header="نوع المخالفة" MinWidth="300"
+                                                        Header="نوع المخالفة" MinWidth="50"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                         <DataGridTextColumn Binding="{Binding Amount}"

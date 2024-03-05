@@ -8,6 +8,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Icon/Icons.xaml"/>
+                <ResourceDictionary Source="Assets/Themes/LightTheme.xaml"/>
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml"/>
@@ -82,8 +84,7 @@
                               CornerRadius="1 1 1 1"
                               BorderThickness="1,1,1,0"
                               Padding="1"
-                              BorderBrush="#cfd8dc"                      
-                                    >
+                              BorderBrush="#cfd8dc">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
 
                                 </ContentPresenter>
@@ -216,7 +217,7 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="AlternatingRowBackground" Value="LightBlue"/>
                 <Setter Property="GridLinesVisibility" Value="All"/>
-                <Setter Property="ColumnHeaderHeight" Value="40"/>
+                <Setter Property="ColumnHeaderHeight" Value="70"/>
                 <!--<Setter Property="Foreground" Value="Brown"/>-->
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Margin" Value="5"/>
@@ -229,19 +230,107 @@
                 <Setter Property="IsReadOnly" Value="True"/>
                 <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
                 <!--<Setter Property="ScrollViewer.CanContentScroll" Value="True"/>-->
+                <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                 <Setter Property="FontFamily" Value="Tajawal"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="CanUserSortColumns" Value="True"/>
                 <Setter Property="AutoGenerateColumns" Value="False"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                <!--<Setter Property="SelectionMode" Value="Single"/>-->
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <!--<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>-->
+                <Setter Property="SelectionMode" Value="Single"/>
                 <Setter Property="FlowDirection" Value="RightToLeft"/>
                 <!--<Setter Property="ColumnHeaderStyle" Value="{DynamicResource headerstyle}"/>-->
             </Style>
 
             <!--DataGridColumnHeader Style-->
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontFamily" Value="Tajawal"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Padding" Value="10,0,0,0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                            <Grid>
+                            <Border  BorderBrush="{TemplateBinding BorderBrush}"
+                                         BorderThickness="{TemplateBinding BorderThickness}"
+                                         Background="{TemplateBinding BorderBrush}"
+                                         Padding="{TemplateBinding Padding}">
 
-      
+                                <Grid Margin="{TemplateBinding Padding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          RecognizesAccessKey="True"
+                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                    <StackPanel 
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Margin="5,0,0,0">
+                                            <Path x:Name="SortUpIcon"
+                                              Data="{DynamicResource SortUp}"
+                                              Height="{TemplateBinding FontSize}"
+                                              Fill="{DynamicResource DataGrid.Column.Header.Icon.Static}" Stretch="Uniform" Width="10"/>
+
+                                            <Path x:Name="SortDownIcon"
+                                              Data="{DynamicResource SortDown}"
+                                              Height="{TemplateBinding FontSize}"
+                                              Fill="{DynamicResource DataGrid.Column.Header.Icon.Static}" Stretch="Uniform" Width="10"/>
+                                    </StackPanel>
+                                    
+                                </Grid>
+                                
+                            </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="SortDirection" Value="Ascending">
+                                    <Setter TargetName="SortDownIcon"
+                                             Property="Fill"
+                                             Value="{DynamicResource Sort.Up.Icon.Active}"
+                                            />
+
+                                </Trigger>
+                                <Trigger Property="SortDirection" Value="Descending">
+                                    <Setter TargetName="SortUpIcon"
+                                             Property="Fill"
+                                             Value="{DynamicResource Sort.Up.Icon.Active}"/>
+
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                           
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type DataGridCell}">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="#333333"/>
+                <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="Padding" Value="5,0,5,0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#0080FF"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="#0080FF"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="#888888"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="FontFamily" Value="Tajawal"/>
