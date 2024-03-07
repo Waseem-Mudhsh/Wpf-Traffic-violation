@@ -38,6 +38,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
         public ObservableCollection<Violation> GetViolation()
         {
+            //int count = 0;
             ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
             var response = sphelper.GetCollection(sP_Query.getViolation, "getViolation");
             if (response.Count > 0)
@@ -93,8 +94,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                     Violations.Add(per); //الي بنربطه مع الجريد فيو
                 }
             }
-
             return Violations;
+
 
         }
 

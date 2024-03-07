@@ -21,7 +21,9 @@
                     <TextBlock Text="{Binding  Search}"/>
                 </StackPanel>
             </DataTemplate>
-
+       
+            <!--#region ButtonStyle -->
+       
             <Style TargetType="Button" x:Key="sub1" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="Foreground" Value="#BCBEC0"/>
                 <Setter Property="Background" Value="#E6E7E8"/>
@@ -76,7 +78,6 @@
                 <Setter Property="Height" Value="40"/>
                 <Setter Property="Width" Value="131"/>
                 <!--<Setter Property="Focusable" Value="True"/>-->
-
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -196,55 +197,47 @@
                 </Style.Triggers>
             </Style>
             <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-            <!--<Style  TargetType="DataGridColumnHeader">
-                <Setter Property="Background" Value="#606060"/>
-                <Setter Property="Foreground" Value="#E9E9E9"/>
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="FontFamily" Value="Tajawal"/>
-                <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="Padding" Value="10,0,0,0"/>
+            <!--#endregion-->
 
-
-
-            </Style>-->
+            <!--#region DataGridStyle -->
             <!--style Style_Datagrid-->
+
             <Style TargetType="DataGrid" x:Key="Style_Datagrid">
                 <Setter Property="materialDesign:DataGridAssist.CellPadding" Value="15 5 5 5"/>
                 <Setter Property="HeadersVisibility" Value="Column"/>
                 <Setter Property="RowHeight" Value="40"/>
-                <Setter Property="CanUserSortColumns" Value="False"/>
+                <Setter Property="CanUserSortColumns" Value="false"/>
                 <!--<Setter Property="RowBackground" Value="Lavender"/>-->
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="AlternatingRowBackground" Value="LightBlue"/>
-                <Setter Property="GridLinesVisibility" Value="All"/>
+                <!--<Setter Property="GridLinesVisibility" Value="All"/>-->
                 <Setter Property="ColumnHeaderHeight" Value="70"/>
                 <!--<Setter Property="Foreground" Value="Brown"/>-->
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="CanUserAddRows" Value="False"/>
                 <Setter Property="CanUserDeleteRows" Value="False"/>
-                <Setter Property="CanUserReorderColumns" Value="False"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <!--<Setter Property="CanUserReorderColumns" Value="False"/>-->
+                <!--<Setter Property="HorizontalAlignment" Value="Right"/>-->
                 <Setter Property="BorderBrush" Value="DarkGray"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="IsReadOnly" Value="True"/>
                 <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
                 <!--<Setter Property="ScrollViewer.CanContentScroll" Value="True"/>-->
-                <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
-                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+                <!--<Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />-->
+                <!--<Setter Property="ScrollViewer.CanContentScroll" Value="False" />-->
                 <Setter Property="FontFamily" Value="Tajawal"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="CanUserSortColumns" Value="True"/>
                 <Setter Property="AutoGenerateColumns" Value="False"/>
                 <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
                 <!--<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>-->
-                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="SelectionMode" Value="Extended"/>
                 <Setter Property="FlowDirection" Value="RightToLeft"/>
-                <!--<Setter Property="ColumnHeaderStyle" Value="{DynamicResource headerstyle}"/>-->
+                <Setter Property="ColumnHeaderStyle" Value="{DynamicResource StylecolumnHeder}"/>
             </Style>
-
             <!--DataGridColumnHeader Style-->
-            <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="StylecolumnHeder">
                 <Setter Property="Background" Value="Black"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontSize" Value="12"/>
@@ -255,23 +248,23 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
                             <Grid>
-                            <Border  BorderBrush="{TemplateBinding BorderBrush}"
+                                <Border  BorderBrush="{TemplateBinding BorderBrush}"
                                          BorderThickness="{TemplateBinding BorderThickness}"
                                          Background="{TemplateBinding BorderBrush}"
                                          Padding="{TemplateBinding Padding}">
 
-                                <Grid Margin="{TemplateBinding Padding}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="Auto" />
+                                    <Grid Margin="{TemplateBinding Padding}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto"/>
 
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                           RecognizesAccessKey="True"
                                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 
-                                    <StackPanel 
+                                        <StackPanel 
                                         Grid.Column="1"
                                         Orientation="Horizontal"
                                         Margin="5,0,0,0">
@@ -284,11 +277,11 @@
                                               Data="{DynamicResource SortDown}"
                                               Height="{TemplateBinding FontSize}"
                                               Fill="{DynamicResource DataGrid.Column.Header.Icon.Static}" Stretch="Uniform" Width="10"/>
-                                    </StackPanel>
-                                    
-                                </Grid>
-                                
-                            </Border>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </Border>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="SortDirection" Value="Ascending">
@@ -305,7 +298,7 @@
 
                                 </Trigger>
                             </ControlTemplate.Triggers>
-                           
+
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -331,6 +324,9 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+         
+            <!--#endregion-->
+           
             <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="FontFamily" Value="Tajawal"/>
