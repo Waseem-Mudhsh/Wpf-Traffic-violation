@@ -1,13 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Wpf_Traffic_violation.Models
@@ -21,45 +17,45 @@ namespace Wpf_Traffic_violation.Models
         public ObservableCollection<ReasonsToObject> GetReasonToObjection()
         {
             ObservableCollection<ReasonsToObject> ReasonToobjections = new ObservableCollection<ReasonsToObject>();
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
-            {
-                try
-                {
-                    con.Open();
-                }
-                catch (Exception)
-                {
+            //SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            ////Class_SqlConnection sql = new Class_SqlConnection();
+            //using (con)
+            //{
+            //    try
+            //    {
+            //        con.Open();
+            //    }
+            //    catch (Exception)
+            //    {
 
-                    MessageBox.Show("Cant Open con");
-                }
-                //SqlCommand Command = new SqlCommand("Select * from Person", con);
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetReasonToObjection",
-                    Connection = con
+            //        MessageBox.Show("Cant Open con");
+            //    }
+            //    //SqlCommand Command = new SqlCommand("Select * from Person", con);
+            //    SqlCommand Command = new SqlCommand
+            //    {
+            //        CommandType = CommandType.StoredProcedure,
+            //        CommandText = "GetReasonToObjection",
+            //        Connection = con
 
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        ReasonsToObject per = new ReasonsToObject
-                        {
-                            Reason_inter_id = (int)row[0],
-                            Reason = row[1].ToString(),
+            //    };
+            //    DataTable dt = new DataTable();
+            //    SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
+            //    dataAdapter.Fill(dt);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        foreach (DataRow row in dt.Rows)
+            //        {
+            //            ReasonsToObject per = new ReasonsToObject
+            //            {
+            //                Reason_inter_id = (int)row[0],
+            //                Reason = row[1].ToString(),
 
-                        };
+            //            };
 
-                        ReasonToobjections.Add(per); //الي بنربطه مع الجريد فيو
-                    }
-                }
-            }
+            //            ReasonToobjections.Add(per); //الي بنربطه مع الجريد فيو
+            //        }
+            //    }
+            //}
 
             return ReasonToobjections;
         }

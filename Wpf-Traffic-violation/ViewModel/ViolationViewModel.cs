@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Syncfusion.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,6 +36,8 @@ namespace Wpf_Traffic_violation.ViewModel
         PermissionUser PermissionUser;
         OpenFileDialog op1;
         OpenFileDialog op2;
+        private int _currentPage = 0;
+        private int _pageSize = 10;
         #endregion
         #region Proprties
         ObservableCollection<Violation> grid_Violation;
@@ -514,10 +517,9 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public ViolationViewModel()
         {
-
-            //var watch = System.Diagnostics.Stopwatch.StartNew();
-            asyncViolation();
             asyncGrid();
+            asyncViolation();
+
             //watch.Stop();
             //var elapsedMs = watch.ElapsedMilliseconds;
             //MessageBox.Show($"Total execution time1:{ elapsedMs}");
@@ -531,21 +533,57 @@ namespace Wpf_Traffic_violation.ViewModel
             Excelcommand = new RelayCommand(par => GetExcel());
             AddPhoto1command = new RelayCommand(par => AddPhoto1());
             AddPhoto2command = new RelayCommand(par => AddPhoto2());
+            NextPageComannd = new RelayCommand(par => GetNextPage());
+            BackPageComannd = new RelayCommand(par => BackToPage());
             Current_Activity = new Activity();
         }
+
+
 
         #endregion
         #region Methodes And Events
         private async Task asyncViolation()
         {
+            //await asyncGrid();
             SelectedPlatNum = "";
             Current_Violation = new Violation { Violation_id = 0, Plate_Num = "" };
             Grid_Violation = new ObservableCollection<Violation>();
             Local_CollectionViolation = new ObservableCollection<Violation>();
             Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
-            foreach (Violation violation in Grid_Violation)
+            Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+            _currentPage = 1;
+        }
+        private async Task BackToPage()
+        {
+            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+
+            //local_CollectionViolation.Clear();
+            _currentPage--;
+            if (_currentPage == 0)
             {
-                Local_CollectionViolation.Add(violation);
+                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+            }
+            else
+            {
+                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+            }
+
+        }
+
+        private async Task GetNextPage()
+        {
+            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+
+            //local_CollectionViolation.Clear();
+            _currentPage++;
+            if ((Grid_Violation.Count() / _currentPage) == _pageSize)
+            {
+                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+            }
+            else
+            {
+                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+
             }
 
 
@@ -975,6 +1013,8 @@ namespace Wpf_Traffic_violation.ViewModel
         public RelayCommand AddPhoto1command { get; set; }
         public RelayCommand AddPhoto2command { get; set; }
         public RelayCommand FilterViolation { get; set; }
+        public RelayCommand BackPageComannd { get; set; }
+        public RelayCommand NextPageComannd { get; set; }
 
         #endregion
 

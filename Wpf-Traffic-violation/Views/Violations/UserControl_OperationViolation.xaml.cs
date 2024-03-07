@@ -20,10 +20,7 @@ namespace Wpf_Traffic_violation.Views
             win.ShowDialog();
         }
 
-        private void filterSearchbycode_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
         private void DataGridCell_Selected(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;

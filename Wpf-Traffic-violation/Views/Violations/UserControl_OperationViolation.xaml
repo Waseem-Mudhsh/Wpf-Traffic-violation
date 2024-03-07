@@ -15,10 +15,8 @@
     </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue">
-            <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center"  >
-
+            <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center">
                 <!--top-->
-
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Margin="30 0" FlowDirection="RightToLeft" >
                     <!--<controls:AutoCompleteBox Width="200" ItemsSource="{Binding Grid_Violation }" 
                                               ItemTemplate="{StaticResource AutoId}" 
@@ -108,58 +106,54 @@
 
         </Border>
         <Grid>
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <StackPanel  Background="White"  HorizontalAlignment="Center">
+            <StackPanel Grid.Row="0" Background="White"  Height="480">
                 <DataGrid  x:Name="GriddataViolation"
                            Style="{StaticResource Style_Datagrid}"
-                           ItemsSource="{Binding Grid_Violation}"  
+                           ItemsSource="{Binding Local_CollectionViolation}"  
                           SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8"
-                           materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                          AutoGenerateColumns="False"
-                          ScrollViewer.CanContentScroll="True" 
-                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
                              Height="680" Width="1194" 
                            >
-                    <DataGrid.CellStyle>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <EventSetter Event="DataGridCell.Selected" Handler="DataGridCell_Selected"/>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    <DataGrid.Columns>
 
-                        <DataGridTextColumn Binding="{Binding VounchrNum}"
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="رقم" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DataContext.RowNumber, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn  Binding="{Binding VounchrNum}"
                                         Header="رقم القسيمة" MinWidth="100" 
                                          />
 
                         <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                         <!-- set a max length to get an indicator in the editor -->
-                        <DataGridTextColumn Binding="{Binding Violation_date}"
+                        <DataGridTextColumn   Binding="{Binding Violation_date}"
                                                            Header="التاريخ"
                                                        MinWidth="80"
-                                                           
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <DataGridTextColumn Binding="{Binding Plate_Num}"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+                        <DataGridTextColumn   Binding="{Binding Plate_Num}"
                                                            Header="رقم اللوحة"  MinWidth="80"
-                                                          
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <DataGridTextColumn Binding="{Binding Plate_Type}"
-                                                           Header="نوع اللوحة"  MinWidth="80"
-                                                          
+                        <DataGridTextColumn   Binding="{Binding Plate_Type}"
+                                                           Header="نوع اللوحة"  MinWidth="50"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <DataGridTextColumn Binding="{Binding Provinceid}"
+                        <DataGridTextColumn   Binding="{Binding Provinceid}"
                                                            Header="رمز المحافظة"  MinWidth="80"
-                                                          
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <DataGridTextColumn Binding="{Binding String_ViolationType}"
-                                                        Header="نوع المخالفة" MinWidth="300"
-                                                        
+                        <DataGridTextColumn 
+                                                        Header="نوع المخالفة" MinWidth="50"
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                        <DataGridTextColumn Binding="{Binding Amount}"
+                        <DataGridTextColumn  Binding="{Binding Amount}"
                                                            Header="المبلغ"  MinWidth="80"
                                                             
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
@@ -171,7 +165,7 @@
                                                            Header="المديرية"  MinWidth="80"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />-->
-                        <DataGridTextColumn Binding="{Binding String_Street}"
+                        <DataGridTextColumn   Binding="{Binding String_Street}"
                                                            Header="مكان المخالفة"  MinWidth="80"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
@@ -180,11 +174,11 @@
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />-->
 
-                        <DataGridTextColumn Binding="{Binding Notise}"
+                        <DataGridTextColumn   Binding="{Binding Notise}"
                                                         Header="ملاحظة" MinWidth="100"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                        <DataGridTextColumn Binding="{Binding String_Status}"
+                        <DataGridTextColumn   Binding="{Binding String_Status}"
                                                         Header="حالة السداد" MinWidth="10"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
@@ -192,6 +186,25 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
+            </StackPanel>
+            <StackPanel Grid.Row="1" Background="White"  >
+                <StackPanel   Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button  x:Name="BackPage" Command="{Binding BackPageComannd}" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0"></TextBlock>
+                            <materialDesign:PackIcon Kind="ArrowCollapseLeft" Margin="0 0 0 0" Width="25" Height="24" />
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="NextPage" Command="{Binding NextPageComannd}"
+                          HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0"></TextBlock>
+                            <materialDesign:PackIcon Kind="ArrowCollapseRight" Margin="0 0 0 0" Width="25" Height="24" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                
+               
             </StackPanel>
         </Grid>
 
