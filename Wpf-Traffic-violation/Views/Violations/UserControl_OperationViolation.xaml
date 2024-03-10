@@ -119,7 +119,7 @@
                            Style="{StaticResource Style_Datagrid}"
                            ItemsSource="{Binding Local_CollectionViolation}"  
                           SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Height="680" Width="1194" 
+                             Height="510" Width="1194" 
                            >
 
                     <DataGrid.Columns>

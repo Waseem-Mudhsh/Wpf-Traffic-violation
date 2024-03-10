@@ -68,7 +68,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (local_CollectionViolation != value)
                 {
                     local_CollectionViolation = value;
-                    RaisePropertyChanged("local_CollectionViolation");
+                    RaisePropertyChanged("Local_CollectionViolation");
                 }
             }
         }
@@ -553,37 +553,47 @@ namespace Wpf_Traffic_violation.ViewModel
             Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             _currentPage = 1;
         }
-        private async Task BackToPage()
+        private void BackToPage()
         {
-            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
 
             //local_CollectionViolation.Clear();
             _currentPage--;
             if (_currentPage == 0)
             {
-                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             }
             else
             {
-                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
             }
 
         }
 
-        private async Task GetNextPage()
+        private void GetNextPage()
         {
-            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
 
-            //local_CollectionViolation.Clear();
             _currentPage++;
-            if ((Grid_Violation.Count() / _currentPage) == _pageSize)
+            int pageCount = (int)Math.Round((double)Grid_Violation.Count() / _currentPage, MidpointRounding.AwayFromZero);
+
+            if (pageCount >= _pageSize)
             {
-                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
+                //local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             }
             else
             {
-                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
-
+                Local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+                _currentPage = 1;
             }
 
 

@@ -99,6 +99,72 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
         }
 
+        public ObservableCollection<Violation> GetViolationForOperations(int pagsiz, int pageNumber)
+        {
+            //int count = 0;
+            Hashtable key = new Hashtable();
+            key.Add("pageSize", pagsiz);
+            key.Add("pageNumber", pageNumber);
+            var param = sphelper.prpareParam(key);
+            ObservableCollection<Violation> Violations = new ObservableCollection<Violation>();
+            var response = sphelper.GetCollectionByParam(sP_Query.getViolationForOperation, "getViolationForOperation", param);
+            if (response.Data.Count > 0)
+            {
+                foreach (DataRow row in response.Data)
+                {
+                    Violation per = new Violation
+                    {
+                        Violation_id = (int)row[0]
+                     ,
+                        Violation_date = row[1].ToString()
+                     ,
+                        Plate_id = (int)row[2]
+                     ,
+                        Street_id = (int)row[3]
+                     ,
+                        Teaffic_man_id = (int)row[4]
+                     ,
+                        Violation_type_id = (int)row[5]
+                     ,
+                        Notise = row[6].ToString()
+                     ,
+                        Violation_penalty = (int)row[7]
+                     ,
+                        Payment_status = (int)row[8]
+                     ,
+                        Plate_Num = (string)row[9]
+                     ,
+                        VounchrNum = (int)row[10]
+                      ,
+                        Provinceid = (int)row[11]
+                     ,
+                        Plate_Type = (string)row[12]
+                        ,
+                        String_ViolationType = (string)row[13]
+                        ,
+                        String_TrafficMan = (string)row[14]
+                        ,
+                        String_Street = (string)row[15]
+                        ,
+                        Amount = (int)row[16]
+                      ,
+                        String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
+
+                    };
+                    //per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
+                    //per.Plate_Type = new Class_SqlConnection().Get_row("getPlateTypenames", per.Plate_id);
+                    //per.String_ViolationType = new Class_SqlConnection().Get_row("GetViolationtype_name", per.Violation_type_id);
+                    //per.String_TrafficMan = new Class_SqlConnection().Get_row("GetTrafficMan_name", per.Teaffic_man_id);
+                    //per.String_Street = new Class_SqlConnection().Get_row("GetStreet_name", per.Street_id);
+                    //per.Amount =  per.Violation_penalty;
+                    //per.String_Status = (per.Payment_status == 1) ? "مسدد" : "غير مسدد";
+                    Violations.Add(per); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return Violations;
+
+
+        }
         ///////////////////////////////// end GetPlateOfType/////////////////////////////////////
         //public ObservableCollection<Violation> GetViolation()//تجرية المزامنة
         //{
