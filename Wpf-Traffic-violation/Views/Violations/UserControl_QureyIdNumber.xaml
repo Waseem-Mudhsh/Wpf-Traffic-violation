@@ -63,58 +63,63 @@
                 </Button>-->
             </StackPanel>
         </Border>
-        <Grid Background="#f5f5f5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="467*"/>
-                <ColumnDefinition Width="893*"/>
-            </Grid.ColumnDefinitions>
-            <DockPanel  Background="#f5f5f5" Name="panal_query"  Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Width="340">
-                    <!--////////////////////////////////////////////////////////////////////-->
-                    <StackPanel Margin="10" >
-                        <materialDesign:ColorZone Height="40" Mode="PrimaryDark">
-                            <TextBlock Text="نتائج الأستعلام" FontFamily="Tajawal" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-                        </materialDesign:ColorZone>
-                        <!--///////////////////////////////////////////////////////////////////////////////////////-->
-                        <Border Height="300" BorderThickness="1 0 1 1" BorderBrush="DodgerBlue">
-                            <StackPanel  Background="White" FlowDirection="RightToLeft" Margin="0,0,0,0" >
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="عدد المخالفات الغير مدفوعة :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
-                                    <TextBlock Text="{Binding Count}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5" Width="75"/>
-                                </StackPanel>
-                                <!--..................................................................................-->
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="أجمالي المبلغ المطلوب :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
-                                    <TextBlock Text="{Binding TotalAmount}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5" Width="135"/>
-                                </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="#f5f5f5" Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <!--<ColumnDefinition Width="467*"/>
+                    <ColumnDefinition Width="893*"/>-->
+                </Grid.ColumnDefinitions>
+                <DockPanel  Background="#f5f5f5" Name="panal_query"  Grid.ColumnSpan="2" >
+                    <StackPanel Grid.Column="0" DockPanel.Dock="Right"  Orientation="Vertical" Width="340">
+                        <!--////////////////////////////////////////////////////////////////////-->
+                        <StackPanel Margin="10" >
+                            <materialDesign:ColorZone Height="40" Mode="PrimaryDark">
+                                <TextBlock Text="نتائج الأستعلام" FontFamily="Tajawal" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+                            </materialDesign:ColorZone>
+                            <!--///////////////////////////////////////////////////////////////////////////////////////-->
+                            <Border Height="300" BorderThickness="1 0 1 1" BorderBrush="DodgerBlue">
+                                <StackPanel  Background="White" FlowDirection="RightToLeft" Margin="0,0,0,0" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="عدد المخالفات الغير مدفوعة :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
+                                        <TextBlock Text="{Binding Count}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5" Width="75"/>
+                                    </StackPanel>
+                                    <!--..................................................................................-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="أجمالي المبلغ المطلوب :" FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5"/>
+                                        <TextBlock Text="{Binding TotalAmount}" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15 5 5 5" Width="135"/>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                                    <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
-                                        <TextBlock x:Name="SelectedAmount"   Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
-                                    </Border>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                                    <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt}"
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                        <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
+                                            <TextBlock x:Name="SelectedAmount"   Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                        <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt}"
                         materialDesign:HintAssist.Hint="0"
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                                <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                            <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-                        <!--///////////////////////////////////////////////////////////////////////////////////////-->
-                    </StackPanel>
-                    <!--////////////////////////////////////////////////////////////////////-->
-                    <!--<StackPanel Margin="10 1 10 2" >
+                            </Border>
+                            <!--///////////////////////////////////////////////////////////////////////////////////////-->
+                        </StackPanel>
+                        <!--////////////////////////////////////////////////////////////////////-->
+                        <!--<StackPanel Margin="10 1 10 2" >
                         <materialDesign:ColorZone Height="40" Mode="PrimaryDark">
                             <TextBlock Text="بيانات المركبة" FontFamily="Tajawal" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                         </materialDesign:ColorZone>
@@ -142,29 +147,32 @@
                             </Grid.Resources>
                             <Border Grid.Row="0" FlowDirection="RightToLeft"  BorderThickness="1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="51" HorizontalAlignment="Center" Width="938" >
-                                    --><!--<TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                    -->
+                        <!--<TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
                                     <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
                                         <TextBlock x:Name="SelectedAmount"   Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
                                     </Border>-->
 
-                                    <!--<TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                        <!--<TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
                                     <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt}"
                         materialDesign:HintAssist.Hint="0"
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />-->
 
-                                    <!--<Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
+                        <!--<Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
                                             <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
                                         </StackPanel>
-                                    </Button>--><!--
+                                    </Button>-->
+                        <!--
 
                                 </StackPanel>
                             </Border>
                             <Border Grid.Row="1" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 
                             </Border>
-                            --><!--<Border Grid.Row="0" FlowDirection="RightToLeft"  BorderThickness="1" BorderBrush="Black">
+                            -->
+                        <!--<Border Grid.Row="0" FlowDirection="RightToLeft"  BorderThickness="1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                         <TextBlock  Text="أسم المالك " Foreground="Black" Margin="10 0" Width="90" HorizontalAlignment="Left"/>
@@ -173,8 +181,8 @@
                                 </StackPanel>
 
                             </Border>-->
-                            
-                            <!--<Border Grid.Row="1" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
+
+                        <!--<Border Grid.Row="1" FlowDirection="RightToLeft"  BorderThickness="1 0 1 1" BorderBrush="Black">
                                 <StackPanel Orientation="Horizontal">
                                     <Grid Background="LightGray" Width="125" HorizontalAlignment="Left">
                                         <TextBlock  Text="رقم كرت السير" FontSize="14" Foreground="Black" Margin="10 0" Width="95" HorizontalAlignment="Left"/>
@@ -271,85 +279,86 @@
                                     </Grid>
                                     <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Currunt_Vehicle.Release_date_c}" Foreground="Black"  FontSize="14" FontWeight="Bold" Margin="10,2" Width="177"/>
                                 </StackPanel>
-                            </Border>--><!--
+                            </Border>-->
+                        <!--
                             
 
                         </Grid>
                     </StackPanel>-->
-                    <!--////////////////////////////////////////////////////////////////////-->
-                </StackPanel>
+                        <!--////////////////////////////////////////////////////////////////////-->
+                    </StackPanel>
 
-                <StackPanel DockPanel.Dock="Top" Height="400">
-                    <DataGrid Name="dataGrid" Margin="0,10,10,10" Style="{StaticResource Style_Datagrid}" IsReadOnly="False"
+                    <StackPanel  DockPanel.Dock="Top" Grid.Column="1"  >
+                        <DataGrid Name="dataGrid" Margin="0,10,10,10" Style="{StaticResource Style_Datagrid}" IsReadOnly="False"
                               ItemsSource="{Binding Grid_Violation}" 
                               SelectedItem="{Binding Currunt_Violation}" 
                               materialDesign:DataGridAssist.CellPadding="1 5 8 8" 
                               materialDesign:DataGridAssist.ColumnHeaderPadding="8" 
                               RowDetailsVisibilityMode="VisibleWhenSelected"
                         Height="355" RenderTransformOrigin="0.496,0.654"  >
-                        <DataGrid.CellStyle>
-                            <Style TargetType="{x:Type DataGridCell}">
-                                <EventSetter Event="Selected" Handler="DataGridCell_Selected"/>
-                            </Style>
-                        </DataGrid.CellStyle>
-                        <DataGrid.Resources>
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <EventSetter Event="Selected" Handler="DataGridCell_Selected"/>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Resources>
 
-                        </DataGrid.Resources>
-                        <DataGrid.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleX="-0.472"/>
-                                <RotateTransform/>
-                                <TranslateTransform X="-1.884"/>
-                            </TransformGroup>
-                        </DataGrid.RenderTransform>
-                        <DataGrid.Columns>
-                            <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" 
+                            </DataGrid.Resources>
+                            <DataGrid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="-0.472"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-1.884"/>
+                                </TransformGroup>
+                            </DataGrid.RenderTransform>
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" 
                                                     
                                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
-                                <DataGridCheckBoxColumn.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <EventSetter Event="CheckBox.Unchecked" Handler="CheckBox_UNChecked"/>
-                                        <EventSetter Event="CheckBox.Checked" Handler="CheckBox_Checked"/>
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <EventSetter Event="CheckBox.Unchecked" Handler="CheckBox_UNChecked"/>
+                                            <EventSetter Event="CheckBox.Checked" Handler="CheckBox_Checked"/>
 
-                                    </Style>
-                                </DataGridCheckBoxColumn.CellStyle>
-                            </DataGridCheckBoxColumn>
-                            <DataGridTextColumn Binding="{Binding VounchrNum}"
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridTextColumn Binding="{Binding VounchrNum}"
                                         Header="رقم القسيمة" MinWidth="80"
                                          />
-                            <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-                            <materialDesign:DataGridTextColumn Binding="{Binding Plate_Num}"
+                                <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
+                                <materialDesign:DataGridTextColumn Binding="{Binding Plate_Num}"
                                                            Header="رقم اللوحة"  MinWidth="80"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
-                            <materialDesign:DataGridTextColumn Binding="{Binding Violation_date}"
+                                <materialDesign:DataGridTextColumn Binding="{Binding Violation_date}"
                                                            Header="تاريخ المخالفة"  MinWidth="100"
                                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" 
                                                            />
-                            <!-- set a max length to get an indicator in the editor -->
+                                <!-- set a max length to get an indicator in the editor -->
 
-                            <materialDesign:DataGridTextColumn Binding="{Binding String_ViolationType}"
+                                <materialDesign:DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة"  MinWidth="150"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 
-                            </materialDesign:DataGridTextColumn>
-                            <materialDesign:DataGridTextColumn Binding="{Binding String_Street}"
+                                </materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Binding="{Binding String_Street}"
                                                            Header="المكان "  MinWidth="80"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
-                            <materialDesign:DataGridTextColumn Binding="{Binding Violation_penalty}"
+                                <materialDesign:DataGridTextColumn Binding="{Binding Violation_penalty}"
                                                            Header="الغرامة " MinWidth="80"
                                                             
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <materialDesign:DataGridTextColumn Binding="{Binding String_TrafficMan}"
+                                <materialDesign:DataGridTextColumn Binding="{Binding String_TrafficMan}"
                                                            Header="بواسطة"  MinWidth="100"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <materialDesign:DataGridTextColumn Binding="{Binding Notise}"
+                                <materialDesign:DataGridTextColumn Binding="{Binding Notise}"
                                                            Header="ملاحظة"  MinWidth="80"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
@@ -358,43 +367,39 @@
 
 
 
-                            <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                                <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 
-                        </DataGrid.Columns>
-                    </DataGrid>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
+                    </StackPanel>
+
+
+
+
+                </DockPanel>
+
+            </Grid>
+            <!--<StackPanel Grid.Row="1" Background="White"  >
+                <StackPanel   Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button  x:Name="BackPage" Command="{Binding BackPageComannd}" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0"></TextBlock>
+                            <materialDesign:PackIcon Kind="ArrowCollapseLeft" Margin="0 0 0 0" Width="25" Height="24" />
+                        </StackPanel>
+                    </Button>
+                    <Button  x:Name="NextPage" Command="{Binding NextPageComannd}"
+                          HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0"></TextBlock>
+                            <materialDesign:PackIcon Kind="ArrowCollapseRight" Margin="0 0 0 0" Width="25" Height="24" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
-                <!--<StackPanel DockPanel.Dock="Top" Height="64" HorizontalAlignment="Right" Width="1020">
-                        <Border  BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Center"   Margin="10 1 4 0">
-                            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" Height="51" HorizontalAlignment="Center" Width="938" >
-                                <TextBlock Text="إجمالي المبلغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 20 0"/>
-                                <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black" >
-                                    <TextBlock Text="{Binding TotalAmount}" TextAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="Black" Margin="15,5,20,5"/>
-                                </Border>
-                                <TextBlock Text="المبلغ المحدد =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                                <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
-                                    <TextBlock x:Name="SelectedAmount"   Text="{Binding AmountSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
-                                </Border>
 
-                                <TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                                <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt}"
-                        materialDesign:HintAssist.Hint="0"
-                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
-                                <Button x:Name="but_PayViolation" Height="40" Width="100" Margin="10 0"  Padding="0" Command="{Binding Paycommand}">
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <materialDesign:PackIcon Kind="AttachMoney" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                                        <TextBlock Text="تسديد" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="18" Padding="5 2 0 2"/>
-                                    </StackPanel>
-                                </Button>
-
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>-->
-             
-       
-
-            </DockPanel>
+            </StackPanel>-->
         </Grid>
+      
     </DockPanel>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SqlClient;
 
@@ -371,7 +372,22 @@ namespace Wpf_Traffic_violation.Services
         {
             try
             {
-                //objcontext.Violations.delete
+                using (var obj = objcontext)
+                {
+                    var entityToDelete = obj.Violations.Find(violation.Violation_id);
+                    if (entityToDelete != null)
+                    {
+                        obj.Entry(entityToDelete).State = EntityState.Deleted;
+                        obj.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+                }
+
 
             }
             catch
@@ -381,9 +397,26 @@ namespace Wpf_Traffic_violation.Services
             return true;
         }
 
-        internal bool Edite(MagrationDB.Violation violation)
+        public bool Edite(MagrationDB.Violation violation)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var obj = objcontext)
+                {
+                    var entityToUpdate = obj.Violations.Find(violation.Violation_id);
+                    if (entityToUpdate != null)
+                    {
+                        obj.Entry(entityToUpdate).CurrentValues.SetValues(violation);
+                        return true;
+                    }
+                    else { return false; }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+
+            }
         }
 
         /// <summary>
