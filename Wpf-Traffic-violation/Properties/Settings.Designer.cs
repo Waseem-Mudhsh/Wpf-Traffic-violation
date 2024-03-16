@@ -154,7 +154,7 @@ namespace Wpf_Traffic_violation.Properties {
                 this["Deportationtype"] = value;
             }
         }
-        public List<PermissionUser> Userpermission
+        
         {
             get
             {
