@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using Syncfusion.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +33,8 @@ namespace Wpf_Traffic_violation.ViewModel
         Window_PayViolation win;
         ReceiptWindow receiptWindow;
         ReceiptModel ReceiptModel;
+        private int _currentPage = 0;
+        private int _pageSize = 10;
         VoilationModel VoilationModel;
         EntryModel EntryModel = new EntryModel();
         helper _helper;
@@ -176,6 +179,22 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
 
+        }
+        ObservableCollection<Violation> local_CollectionViolation;
+        public ObservableCollection<Violation> Local_CollectionViolation//يربط مع الجرد فيو 
+        {
+            get
+            {
+                return local_CollectionViolation;
+            }
+            set
+            {
+                if (local_CollectionViolation != value)
+                {
+                    local_CollectionViolation = value;
+                    RaisePropertyChanged("Local_CollectionViolation");
+                }
+            }
         }
         ObservableCollection<ViolationType> grid_ViolationType;
         public ObservableCollection<ViolationType> Grid_ViolationType//يربط مع الجرد فيو 
@@ -473,7 +492,52 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
+        private void BackToPage()
+        {
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
 
+            //local_CollectionViolation.Clear();
+            _currentPage--;
+            if (_currentPage == 0)
+            {
+                Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+            }
+            else
+            {
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
+            }
+
+        }
+
+        private void GetNextPage()
+        {
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+
+            _currentPage++;
+            int pageCount = (int)Math.Round((double)Grid_Violation.Count() / _currentPage, MidpointRounding.AwayFromZero);
+
+            if (pageCount >= _pageSize)
+            {
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
+                //local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+            }
+            else
+            {
+                _currentPage = 1;
+                Local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+
+            }
+
+
+        }
         async Task Show()
         {
             Grid_Violation = null;
@@ -491,7 +555,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 //Currunt_Vehicle= await Task.Run(() => QureyIdNumberModel.GetVehicleCard( Selected_Plate.Plate_id));
                 Grid_Violation = new ObservableCollection<Violation>();
                 Grid_Violation = await Task.Run(() => QureyIdNumberModel.GetViolationQurey(Current_Violation));
-
+                //Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+                //_currentPage = 1;
 
                 if (Grid_Violation.Count <= 0)
                 {

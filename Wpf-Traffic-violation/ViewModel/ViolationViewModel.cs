@@ -68,7 +68,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (local_CollectionViolation != value)
                 {
                     local_CollectionViolation = value;
-                    RaisePropertyChanged("local_CollectionViolation");
+                    RaisePropertyChanged("Local_CollectionViolation");
                 }
             }
         }
@@ -553,36 +553,47 @@ namespace Wpf_Traffic_violation.ViewModel
             Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             _currentPage = 1;
         }
-        private async Task BackToPage()
+        private void BackToPage()
         {
-            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
 
             //local_CollectionViolation.Clear();
             _currentPage--;
             if (_currentPage == 0)
             {
-                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             }
             else
             {
-                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
             }
 
         }
 
-        private async Task GetNextPage()
+        private void GetNextPage()
         {
-            Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
+            //Grid_Violation = await Task.Run(() => ViolationModel.GetViolation());
 
-            //local_CollectionViolation.Clear();
             _currentPage++;
-            if ((Grid_Violation.Count() / _currentPage) == _pageSize)
+            int pageCount = (int)Math.Round((double)Grid_Violation.Count() / _currentPage, MidpointRounding.AwayFromZero);
+
+            if (pageCount >= _pageSize)
             {
-                local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+                Local_CollectionViolation.Clear();
+                foreach (var violation in Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>())
+                {
+                    Local_CollectionViolation.Add(violation);
+                }
+                //local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             }
             else
             {
-                local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
+                _currentPage = 1;
+                Local_CollectionViolation = Grid_Violation.Skip(_currentPage * _pageSize).Take(_pageSize).ToObservableCollection<Violation>();
 
             }
 
@@ -680,7 +691,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         }
                     }
                 }
-
+                Local_CollectionViolation = Grid_Violation;
             }
             catch (Exception)
             {
@@ -794,7 +805,15 @@ namespace Wpf_Traffic_violation.ViewModel
                 //ActivityModel.OperarionActivity(current_Activity,"Insert");
                 ////////////////////////////////////////////////////////////
 
-                ViolationModel.ExcutOperarionViolation(Current_Violation, (int)OperationEnum.DeleteOperation);
+                if (ViolationModel.ExcutOperarionViolation(Current_Violation, (int)OperationEnum.DeleteOperation))
+                {
+                    message = "تمت عملية الحذف بنجاح";
+                    caption = "عملية الحذف";
+                    icon = MessageBoxImage.Information;
+                    buttons = MessageBoxButton.OK;
+                    MessageBox.Show(message, caption, buttons, icon);
+                    asyncViolation();
+                }
                 //EntryModel.DeleteEntry(Selected_Plate.Account_id, 345, Current_Violation.Violation_date);
                 Grid_Violation.Remove(Current_Violation);
             }
@@ -822,9 +841,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 Current_Violation.Violation_penalty = Selected_ViolationType.Maximum_price;
 
                 bool isExist = false;
-
-
-                if (IsEditing && isExist)
+                if (IsEditing)
                 {
 
                     if (op1 != null)
@@ -834,10 +851,6 @@ namespace Wpf_Traffic_violation.ViewModel
                         Current_Violation.Violation_photo1 = Convert.ToByte("photo1" + Current_Violation.Violation_id);
                         op1 = null;
                     }
-                    else
-                    {
-                        Current_Violation.Violation_photo1 = Convert.ToByte("-");
-                    }
 
                     if (op2 != null)
                     {
@@ -846,49 +859,64 @@ namespace Wpf_Traffic_violation.ViewModel
                         Current_Violation.Violation_photo2 = Convert.ToByte("photo2" + Current_Violation.Violation_id);
                         op2 = null;
                     }
+                    //else
+                    //{
+
+                    //    Current_Violation.Violation_photo2 = Convert.ToByte("-");
+                    //}
+
+                    if (ViolationModel.ExcutOperarionViolation(Current_Violation, (int)OperationEnum.editeOperation))
+                    {
+                        string message = "تمت عملية التعديل بنجاح";
+                        string caption = "عملية التعديل";
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        asyncViolation();
+                        close();
+
+                    }
                     else
                     {
-
-                        Current_Violation.Violation_photo2 = Convert.ToByte("-");
+                        string message = "لم يتم التعديل يرجىء مراجعة البيانات المدخله";
+                        string caption = "عملية التعديل";
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        asyncViolation();
+                        close();
                     }
 
 
-                    Current_Violation.New_amount = new Class_SqlConnection().Get_number("GetViolationTypeMount", Current_Violation.Violation_type_id) + Current_Violation.Violation_penalty;
+                    //Current_Violation.New_amount = new Class_SqlConnection().Get_number("GetViolationTypeMount", Current_Violation.Violation_type_id) + Current_Violation.Violation_penalty;
 
-                    if (Current_Violation.New_amount == Current_Violation.Amount)
-                    {
-                        ViolationModel.OperarionViolation(Current_Violation, "Update");
-                    }
-                    else
-                    {/////////////////////////////
-                        ViolationModel.OperarionViolation(Current_Violation, "Update");
+                    //if (Current_Violation.New_amount == Current_Violation.Amount)
+                    //{
+                    //    ViolationModel.OperarionViolation(Current_Violation, "Update");
+                    //}
+                    //else
+                    //{/////////////////////////////
+                    //    ViolationModel.OperarionViolation(Current_Violation, "Update");
 
-                        EntryModel.UpdateEntry(Selected_Plate.Account_id, 345, Current_Violation.Violation_date, Current_Violation.New_amount);
-                    }
+                    //    //EntryModel.UpdateEntry(Selected_Plate.Account_id, 345, Current_Violation.Violation_date, Current_Violation.New_amount);
+                    //}
                     IsEditing = false;
                     ////////////////////////////////////////////////////////////
-                    Current_Activity.Activity_operation_num = 2;
-                    ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    //Current_Activity.Activity_operation_num = 2;
+                    //ActivityModel.OperarionActivity(current_Activity, "Insert");
                     ////////////////////////////////////////////////////////////
 
-                    string message = "تمت عملية التعديل بنجاح";
-                    string caption = "عملية التعديل";
-                    MessageBoxImage icon = MessageBoxImage.Information;
-                    MessageBoxButton buttons = MessageBoxButton.OK;
-                    MessageBox.Show(message, caption, buttons, icon);
-                    asyncViolation();
-                    close();
-                }
-
-                else if (isExist)
-                {
-                    string message = "رقم المستخدم موجود مسبقا";
-                    string caption = "رسالة خطا";
-                    MessageBoxImage icon = MessageBoxImage.Error;
-                    MessageBoxButton buttons = MessageBoxButton.OK;
-                    MessageBox.Show(message, caption, buttons, icon);
 
                 }
+                //else if (isExist)
+                //{
+                //    string message = "رقم المستخدم موجود مسبقا";
+                //    string caption = "رسالة خطا";
+                //    MessageBoxImage icon = MessageBoxImage.Error;
+                //    MessageBoxButton buttons = MessageBoxButton.OK;
+                //    MessageBox.Show(message, caption, buttons, icon);
+
+                //}
                 else
                 {
 
@@ -929,8 +957,17 @@ namespace Wpf_Traffic_violation.ViewModel
                         asyncViolation();
 
                     }
+                    else
+                    {
+                        string message = "هناك مشكلة حصلت او ان البيانات المدخله ناقصه";
+                        string caption = "عملية الإضافة";
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        asyncViolation();
+                        close();
+                    }
                     asyncViolation();
-
                     close();
                     //string message = "تمت عملية الإضافة بنجاح";
                     //string caption = "عملية الإضافة";
@@ -942,9 +979,9 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                MessageBox.Show(e.Message);
             }
 
 

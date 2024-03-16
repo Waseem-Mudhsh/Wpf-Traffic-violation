@@ -35,6 +35,7 @@ public class helper : IValueConverter
             Notise = Violation.Notise,
             UpdatedBy = Violation.UpdateBy,
             UpdateOn = Violation.UpdateOn,
+            Violation_id = Violation.Violation_id,
         };
         return data;
 
