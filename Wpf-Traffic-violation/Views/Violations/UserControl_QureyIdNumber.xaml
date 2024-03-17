@@ -68,7 +68,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Grid Background="#f5f5f5" Grid.Row="0" >
+            <Grid  Grid.Row="0" >
                 <Grid.ColumnDefinitions>
                     <!--<ColumnDefinition Width="467*"/>
                     <ColumnDefinition Width="893*"/>-->
@@ -362,10 +362,6 @@
                                                            Header="ملاحظة"  MinWidth="80"
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-
-
-
-
 
                                 <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 
