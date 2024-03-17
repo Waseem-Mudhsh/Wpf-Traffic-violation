@@ -9,16 +9,17 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using Wpf_Traffic_violation.Models.Users_Model;
 using Wpf_Traffic_violation.Models;
+using Wpf_Traffic_violation.Models.Users_Model;
 
 namespace Wpf_Traffic_violation.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         private static AllPermissions allPermissions = new AllPermissions();
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
@@ -110,28 +111,6 @@ namespace Wpf_Traffic_violation.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
-            "Integrated Security=True")]
-        public string Traffic_Violation_ManagementConnectionString {
-            get {
-                return ((string)(this["Traffic_Violation_ManagementConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
-            "Integrated Security=True")]
-        public string Traffic_Violation_ManagementConnectionString1 {
-            get {
-                return ((string)(this["Traffic_Violation_ManagementConnectionString1"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Data.DataTable permission {
@@ -155,6 +134,29 @@ namespace Wpf_Traffic_violation.Properties {
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Account_Order {
+            get {
+                return ((int)(this["Account_Order"]));
+            }
+            set {
+                this["Account_Order"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
+            "Integrated Security=True")]
+        public string Traffic_Violation_ManagementConnectionString {
+            get {
+                return ((string)(this["Traffic_Violation_ManagementConnectionString"]));
+            }
+        }
+        public List<PermissionUser> Userpermission
         {
             get
             {
@@ -165,15 +167,14 @@ namespace Wpf_Traffic_violation.Properties {
                 this["Userpermission"] = value;
             }
         }
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Account_Order {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Traffic_Violation_Management;" +
+            "Integrated Security=True")]
+        public string Traffic_Violation_ManagementConnectionString1 {
             get {
-                return ((int)(this["Account_Order"]));
-            }
-            set {
-                this["Account_Order"] = value;
+                return ((string)(this["Traffic_Violation_ManagementConnectionString1"]));
             }
         }
     }

@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf_Traffic_violation.Services;
+using Wpf_Traffic_violation.Models;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -24,8 +13,9 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_Main()
         {
             InitializeComponent();
+            GetUserControlData();
             Frame_main.Content = new UserControlForm1();
-            
+
         }
 
         private void But_close_Click(object sender, RoutedEventArgs e)
@@ -43,13 +33,13 @@ namespace Wpf_Traffic_violation.Views
             {
                 return;
             }
-            
+
         }
 
         private void But_Home_Click(object sender, RoutedEventArgs e)
         {
 
-            
+
             Frame_main.Content = new UserControlForm1();
 
         }
@@ -60,10 +50,11 @@ namespace Wpf_Traffic_violation.Views
             string message = "هل تريد تسجيل الخروج ؟";
             string caption = "تأكيد";
             MessageBoxButton buttons = MessageBoxButton.YesNo;
-            
+
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
+
                 GridMain.Children.Clear();
                 GridMain.Children.Add(new UserControl_Login());
             }
@@ -78,6 +69,27 @@ namespace Wpf_Traffic_violation.Views
         private void But_mins_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private List<UserControlData> GetUserControlData()
+        {
+            var userControlData = new List<UserControlData>();
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is UserControl)
+                {
+                    var userControl = window;
+                    var data = new UserControlData
+                    {
+                        Name = userControl.Name,
+                        // Add additional properties here as needed
+                    };
+                    userControlData.Add(data);
+                }
+            }
+
+            return userControlData;
         }
     }
 }
