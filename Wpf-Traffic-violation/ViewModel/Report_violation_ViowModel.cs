@@ -1,16 +1,6 @@
-﻿using Microsoft.Reporting.WinForms;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using Wpf_Traffic_violation.Commands;
-using Wpf_Traffic_violation.Models;
-using Wpf_Traffic_violation.Models.Configurations_Model;
-using Wpf_Traffic_violation.Models.Violations_Model;
-using Wpf_Traffic_violation.Views.Reports;
-using Wpf_Traffic_violation.Views.Reports.Violations;
 
 namespace Wpf_Traffic_violation.ViewModel
 {
@@ -420,7 +410,7 @@ namespace Wpf_Traffic_violation.ViewModel
             UserControl_ReportAllViolations UserControl_ReportAllViolations = new UserControl_ReportAllViolations();
 
             if (To_date == null || To_date == "")
-                To_date = To_date;
+                To_date = From_date;
 
             var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
             var ExtraDetel = new ExtraDetailReportModel();
@@ -520,6 +510,11 @@ namespace Wpf_Traffic_violation.ViewModel
             catch (Exception)
             {
 
+            }
+            finally
+            {
+                From_date = null;
+                To_date = null;
             }
 
         }

@@ -381,6 +381,7 @@
     <Compile Include="Core\helper\ICacheManager.cs" />
     <Compile Include="Core\helper\PermissionHelper.cs" />
     <Compile Include="Core\helper\ResponseObject.cs" />
+    <Compile Include="Core\UserControlInfoAttribute.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
