@@ -432,9 +432,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (validationDate)
                 {
                     //DateTime.Now.ToString("");
-                    ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
+                    ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToShortDateString(), CultureInfo.InvariantCulture).ToShortDateString();
                     ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
-
                     ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
                     extraDetailReportModels.Add(ExtraDetel);
                     var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
@@ -499,8 +498,8 @@ namespace Wpf_Traffic_violation.ViewModel
                         var date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
                         ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();//DateTime.ParseExact(DateTime.Now.ToString(),)
                         ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
+                        ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToShortDateString(), CultureInfo.InvariantCulture).ToShortDateString();
                         extraDetailReportModels.Add(ExtraDetel);
-                        ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                         //userControlviolationReceipt.ReportViewerDemo.Reset();
                         ShowReport.ReportViewerDemo.Reset();
                         //Create New Dataset That Content ExtraDetaile for report
@@ -509,14 +508,12 @@ namespace Wpf_Traffic_violation.ViewModel
                         ds = new ReportDataSource("DataSet2", extraDetailReportModels);
                         ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                         System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-
                         printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom A4", 1027, 1169);
                         printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
                         ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                         ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
                         ShowReport.ReportViewerDemo.RefreshReport();
                         //userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
-
                         ShowReport.Show();
 
                     }
