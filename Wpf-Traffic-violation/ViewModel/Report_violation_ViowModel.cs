@@ -11,7 +11,6 @@ using Wpf_Traffic_violation.Models.Configurations_Model;
 using Wpf_Traffic_violation.Models.Violations_Model;
 using Wpf_Traffic_violation.Views.Reports;
 using Wpf_Traffic_violation.Views.Reports.Violations;
-
 namespace Wpf_Traffic_violation.ViewModel
 {
     public class Report_violation_ViowModel : BindableBase
@@ -417,44 +416,57 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         public void Show_allviolation()
         {
-            UserControl_ReportAllViolations UserControl_ReportAllViolations = new UserControl_ReportAllViolations();
-
-            if (To_date == null || To_date == "")
-                To_date = To_date;
-
-            var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
-            var ExtraDetel = new ExtraDetailReportModel();
-            var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
-
-            ShowReport = new Show_Report();
-            var validationDate = ValidationData(typrviolation, From_date, To_date);
-            if (validationDate)
+            try
             {
-                //DateTime.Now.ToString("");
-                ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
-                ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
+                UserControl_ReportAllViolations UserControl_ReportAllViolations = new UserControl_ReportAllViolations();
 
-                ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
-                extraDetailReportModels.Add(ExtraDetel);
-                var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
-                ShowReport.ReportViewerDemo.Reset();
-                //dt = new Class_SqlConnection().GetData("Report_Violation", par);
-                ds = new ReportDataSource("DataSet1", data);
-                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                ds = new ReportDataSource("DataSet2", extraDetailReportModels);
-                ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                printerSettings.DefaultPageSettings.Landscape = true;
-                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
-                ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Report_All_Violation.rdlc";
-                ShowReport.ReportViewerDemo.RefreshReport();
-                ShowReport.Show();
+                if (To_date == null || To_date == "")
+                    To_date = From_date;
+
+                var extraDetailReportModels = new ObservableCollection<ExtraDetailReportModel>();
+                var ExtraDetel = new ExtraDetailReportModel();
+                var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
+
+                ShowReport = new Show_Report();
+                var validationDate = ValidationData(typrviolation, From_date, To_date);
+                if (validationDate)
+                {
+                    //DateTime.Now.ToString("");
+                    ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToShortDateString(), CultureInfo.InvariantCulture).ToShortDateString();
+                    ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
+                    ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
+                    extraDetailReportModels.Add(ExtraDetel);
+                    var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
+                    ShowReport.ReportViewerDemo.Reset();
+                    //dt = new Class_SqlConnection().GetData("Report_Violation", par);
+                    ds = new ReportDataSource("DataSet1", data);
+                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                    ds = new ReportDataSource("DataSet2", extraDetailReportModels);
+                    ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
+                    System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                    printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                    printerSettings.DefaultPageSettings.Landscape = true;
+                    ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                    ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Report_All_Violation.rdlc";
+                    ShowReport.ReportViewerDemo.RefreshReport();
+                    ShowReport.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Some Data Need To Fill");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Some Data Need To Fill");
+
+                throw;
             }
+            finally
+            {
+                From_date = null;
+                To_date = null;
+            }
+
 
         }
         public void show_violationByReceiptDetailes()
@@ -486,9 +498,9 @@ namespace Wpf_Traffic_violation.ViewModel
                         var date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
                         ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();//DateTime.ParseExact(DateTime.Now.ToString(),)
                         ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
+                        ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToShortDateString(), CultureInfo.InvariantCulture).ToShortDateString();
                         extraDetailReportModels.Add(ExtraDetel);
-                        ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
-                        userControlviolationReceipt.ReportViewerDemo.Reset();
+                        //userControlviolationReceipt.ReportViewerDemo.Reset();
                         ShowReport.ReportViewerDemo.Reset();
                         //Create New Dataset That Content ExtraDetaile for report
                         ds = new ReportDataSource("DataSet1", violations);
@@ -501,8 +513,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                         ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReportViolationByPayment.rdlc";
                         ShowReport.ReportViewerDemo.RefreshReport();
-                        userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
-
+                        //userControlviolationReceipt.ReportViewerDemo = ShowReport.ReportViewerDemo;
                         ShowReport.Show();
 
                     }
@@ -520,6 +531,11 @@ namespace Wpf_Traffic_violation.ViewModel
             catch (Exception)
             {
 
+            }
+            finally
+            {
+                From_date = null;
+                To_date = null;
             }
 
         }

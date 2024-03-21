@@ -22,7 +22,7 @@ namespace Wpf_Traffic_violation.ViewModel
     {
 
         #region Objects And Variables
-
+        List<PermissionUser> permation = Properties.Settings.Default.Userpermission;
         Window_AddViolation win;
         ActivityModel ActivityModel = new ActivityModel();
         VoilationModel ViolationModel = new VoilationModel();
@@ -691,7 +691,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         }
                     }
                 }
-                Local_CollectionViolation = Grid_Violation;
+                Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
             }
             catch (Exception)
             {

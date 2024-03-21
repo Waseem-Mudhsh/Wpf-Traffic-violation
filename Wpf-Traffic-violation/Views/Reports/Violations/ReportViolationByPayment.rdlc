@@ -641,7 +641,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!DateNow.Value</Value>
+                <Value>=First(Fields!DateNow.Value,"DataSet2")</Value>
                 <Style>
                   <FontFamily>Hacen Beirut Poster</FontFamily>
                   <FontSize>12pt</FontSize>

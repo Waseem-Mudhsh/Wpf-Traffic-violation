@@ -257,37 +257,43 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 key.Add("To", to_date);
                 var param = sphelper.prpareParam(key);
                 var violations = sphelper.GetCollectionByParam(sP_Query.GetAllViolationReport, "GetAllViolationReport", param);
-                foreach (DataRow item in violations.Data)
+                if (violations.Data.Count >= 0)
                 {
-                    if ((int)item[2] == 0)
+                    foreach (DataRow item in violations.Data)
                     {
-                        Violation violation = new Violation
+
+                        if ((int)item[2] == 0)
                         {
-                            Violation_id = (int)item[0],
-                            Violation_penalty = (int)item[1],
-                            Payment_status = (int)item[2],
-                        };
-                        Violations.Add(violation);
+
+                            Violation violation = new Violation
+                            {
+                                Violation_id = (int)item[0],
+                                Violation_penalty = Convert.ToInt32((int)item[1]),
+                                Payment_status = (int)item[2],
+                            };
+                            Violations.Add(violation);
+
+                        }
+                        else
+                        {
+
+                            Violation violation = new Violation
+                            {
+                                Violation_id = (int)item[0],
+                                Violation_penalty = (int)item[1],
+                                Payment_status = (int)item[2],
+                            };
+                            Violations.Add(violation);
+
+                        }
+
 
                     }
-                    else
-                    {
-                        Violation violation = new Violation
-                        {
-                            Violation_id = (int)item[0],
-                            Violation_penalty = (int)item[1],
-                            Payment_status = (int)item[2],
-                        };
-                        Violations.Add(violation);
-
-                    }
-
-
                 }
-            }
-            catch (Exception)
-            {
 
+            }
+            catch (Exception e)
+            {
 
             }
 

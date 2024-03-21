@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf_Traffic_violation.Models;
+using Wpf_Traffic_violation.Core;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -13,7 +15,7 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_Main()
         {
             InitializeComponent();
-            GetUserControlData();
+            //GetUserControlData();
             Frame_main.Content = new UserControlForm1();
 
         }
@@ -27,7 +29,7 @@ namespace Wpf_Traffic_violation.Views
             MessageBoxImage icon = MessageBoxImage.Question;
             if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
             }
             else
             {
@@ -68,28 +70,29 @@ namespace Wpf_Traffic_violation.Views
 
         private void But_mins_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            System.Windows.Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
 
-        private List<UserControlData> GetUserControlData()
+        private List<UserControl> GetUserControlData()
         {
-            var userControlData = new List<UserControlData>();
 
-            foreach (Window window in Application.Current.Windows)
+            var userControls = new List<UserControl>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (window is UserControl)
+                foreach (Type type in assembly.GetTypes())
                 {
-                    var userControl = window;
-                    var data = new UserControlData
+                    UserControlInfoAttribute attribute = type.GetCustomAttribute<UserControlInfoAttribute>();
+                    if (attribute != null)
                     {
-                        Name = userControl.Name,
-                        // Add additional properties here as needed
-                    };
-                    userControlData.Add(data);
+                        //dataAccess.AddUserControlRegistration(attribute.XamlFilePath); // Store in database
+                    }
                 }
             }
 
-            return userControlData;
+            return userControls;
+
         }
     }
 }

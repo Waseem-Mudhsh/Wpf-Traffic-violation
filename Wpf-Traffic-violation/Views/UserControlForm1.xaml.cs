@@ -31,10 +31,6 @@ namespace Wpf_Traffic_violation.Views
 
             var permation = Properties.Settings.Default.Userpermission;
             //var getUserForms = AllPermissions.GetFormPermation(permation);
-
-
-
-
             switch (index)
             {
 
