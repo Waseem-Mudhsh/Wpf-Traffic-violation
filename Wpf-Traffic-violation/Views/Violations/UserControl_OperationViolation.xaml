@@ -150,7 +150,7 @@
                         <DataGridTextColumn   Binding="{Binding Provinceid}"
                                                            Header="رمز المحافظة"  MinWidth="80"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                        <DataGridTextColumn 
+                        <DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة" MinWidth="50"
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                         <DataGridTextColumn  Binding="{Binding Amount}"

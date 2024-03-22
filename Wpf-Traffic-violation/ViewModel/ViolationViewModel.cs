@@ -704,14 +704,20 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             try
             {
+
+
                 Current_Violation.New_amount = 0;
                 IsEditing = true;
                 string filename1 = "Violation/" + Current_Violation.Violation_photo1 + ".jpg";
                 string filename2 = "Violation/" + Current_Violation.Violation_photo2 + ".jpg";
                 win = new Window_AddViolation { DataContext = this };
                 Current_Violation = ViolationModel.GetViolationForEdit(Current_Violation.Violation_id);
+                //Selected_ViolationType.Violation_type_name = Current_Violation.String_ViolationType;
+                //SelectedPlateTypeAdd.Plate_type_name = Current_Violation.Plate_Type;
+                //Selected_ViolationType.Violation_type_id= Current_Violation.
                 win.street.Text = Current_Violation.String_Street;
-                win.selectProvince.Text = Convert.ToString(Current_Violation.Provinceid);
+                //win.viol_type
+                win.selectProvince.Text = Current_Violation.Provinceid.ToString();
                 win.viol_type.Text = Current_Violation.Plate_Type;
                 win.a.Text = Current_Violation.Plate_Num;
                 win.MultiSelectCombobox.Text = Current_Violation.String_ViolationType;

@@ -89,13 +89,13 @@
                                           />-->
                 <ComboBox Name="selectProvince" Width="300" Height="40" BorderThickness="1"
                   ItemsSource="{Binding GridProvinces}"
-                  SelectedItem="{Binding SelectedProvincesAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedProvincesAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                  
               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
                     <!-- Optional: You can customize the appearance of each item in the ComboBox -->
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Province_id}" />
+                            <TextBlock Text="{Binding Province_id , StringFormat={}{0}}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -103,7 +103,7 @@
                 <TextBlock Text="نوع اللوحة :" Margin="20 0 28 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <ComboBox Name="viol_type" Width="300" Height="40" BorderThickness="1"
                   ItemsSource="{Binding GridPlateType}"
-                  SelectedItem="{Binding SelectedPlateTypeAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedPlateTypeAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="{Binding Plate_type_name}"
                Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
                
                     <ComboBox.ItemTemplate>
