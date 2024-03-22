@@ -18,6 +18,7 @@ namespace Wpf_Traffic_violation.Views
             //GetUserControlData();
             Frame_main.Content = new UserControlForm1();
 
+
         }
 
         private void But_close_Click(object sender, RoutedEventArgs e)
