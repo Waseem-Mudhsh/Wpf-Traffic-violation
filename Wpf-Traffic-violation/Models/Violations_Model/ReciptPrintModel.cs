@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models.Violations_Model
@@ -12,13 +9,13 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         private int _receiptId;
         private string _vehicleId;
         private int _violationPenalty;
-        private string _paymentStatus; 
+        private string _paymentStatus;
         private string _violationTypeName;
         private string _vehicleTypeName;
         private int _VounchrNum;
-        private string _nameOfPaid; 
-        private string _reasonOfPaid; 
-        private string _to; private 
+        private string _nameOfPaid;
+        private string _reasonOfPaid;
+        private string _to; private
             string _dateOfReceipt;
         private int _countOfType;
         private List<KeyValuePair<string, int>> _violationsType = new List<KeyValuePair<string, int>>();
@@ -158,7 +155,22 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
-
+        private string _detalsForOldViolation;
+        public string DetalsForOldViolation
+        {
+            get
+            {
+                return _detalsForOldViolation;
+            }
+            set
+            {
+                if (_detalsForOldViolation != value)
+                {
+                    _detalsForOldViolation = value;
+                    RaisePropertyChanged("DetalsForOldViolation");
+                }
+            }
+        }
         public override void CollectErrors()
         {
             throw new NotImplementedException();

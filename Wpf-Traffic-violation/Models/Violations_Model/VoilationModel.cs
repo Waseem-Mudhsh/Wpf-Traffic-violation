@@ -80,6 +80,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                         String_Street = (string)row[15]
                         ,
                         Amount = (int)row[16]
+                       ,
+                        CreatedOn = (string)row[17]
                       ,
                         String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
 
@@ -147,6 +149,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                         String_Street = (string)row[15]
                         ,
                         Amount = (int)row[16]
+                        ,
+                        CreatedOn = (string)row[17]
                       ,
                         String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
 
@@ -384,6 +388,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             }
             else if (operationType == 2)
             {
+                //violationData.UpdateOn = DateTime.Now.ToString();
                 excute = violationServices.Edite(violationData);
             }
             else if (operationType == 3)

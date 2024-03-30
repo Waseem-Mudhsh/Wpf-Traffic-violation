@@ -715,12 +715,46 @@ namespace Wpf_Traffic_violation.ViewModel
                 //Selected_ViolationType.Violation_type_name = Current_Violation.String_ViolationType;
                 //SelectedPlateTypeAdd.Plate_type_name = Current_Violation.Plate_Type;
                 //Selected_ViolationType.Violation_type_id= Current_Violation.
-                win.street.Text = Current_Violation.String_Street;
-                //win.viol_type
-                win.selectProvince.Text = Current_Violation.Provinceid.ToString();
-                win.viol_type.Text = Current_Violation.Plate_Type;
+                foreach (var item in GridProvinces)
+                {
+                    if (item.Province_id == Current_Violation.Provinceid)
+                    {
+                        SelectedProvincesAdd = item;
+                        break;
+                    }
+
+                }
+                foreach (var item in GridPlateType)
+                {
+                    if (item.Plate_type_name == Current_Violation.Plate_Type)
+                    {
+                        SelectedPlateTypeAdd = item;
+                        break;
+                    }
+
+                }
+                foreach (var item in Grid_Streets)
+                {
+                    if (item.Street_name == Current_Violation.String_Street)
+                    {
+                        Selected_Street = item;
+                        break;
+                    }
+
+                }
+                foreach (var item in Grid_ViolationType)
+                {
+                    if (item.Violation_type_id == Current_Violation.Violation_type_id)
+                    {
+                        Selected_ViolationType = item;
+                        break;
+                    }
+
+                }
+                //win.viol_type.Text = Current_Violation.Plate_Type;
                 win.a.Text = Current_Violation.Plate_Num;
-                win.MultiSelectCombobox.Text = Current_Violation.String_ViolationType;
+                //win.MultiSelectCombobox.ItemTemplate
+                //win.MultiSelectCombobox.Text = Current_Violation.String_ViolationType;
 
                 try
                 {

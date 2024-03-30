@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -299,6 +300,43 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+        public int _selectCountoldyar;
+
+        public int SelectCountOldYar
+        {
+            get
+            {
+                return _selectCountoldyar;
+            }
+            set
+            {
+                if (_selectCountoldyar != value)
+                {
+                    _selectCountoldyar = value;
+                    RaisePropertyChanged("SelectCountOldYar");
+                }
+            }
+        }
+        public int _amountOfCountOldYar;
+
+        public int AmountOfCountOldYar
+        {
+            get
+            {
+                return _amountOfCountOldYar;
+            }
+            set
+            {
+                if (_amountOfCountOldYar != value)
+                {
+                    _amountOfCountOldYar = value;
+                    RaisePropertyChanged("AmountOfCountOldYar");
+                }
+            }
+        }
+
+
+
         int discontAmnt;
         public int DiscontAmnt
         {
@@ -468,6 +506,7 @@ namespace Wpf_Traffic_violation.ViewModel
             ConfimPaycommand = new RelayCommand(Par => Confimpay(1), Par => CanConfimpay());
             ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2));
             ShowDetaileForViolationNull = new RelayCommand(Par => Confimpay(3));
+
             //Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
             //Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
             //Savecommand = new RelayCommand(par => Save(), par => CanSave());
@@ -886,6 +925,13 @@ namespace Wpf_Traffic_violation.ViewModel
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                 ReciptPrint.To = System.DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
+                /// old violation
+                StringBuilder detoldviolation = new StringBuilder();
+                string[] pattern = new string[] { "  مخالفة اعوام سابقه عدد", "   مبلغ" };
+                detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
+                detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
+                ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
+                //end old violation
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                 model.Add(ReciptPrint);
                 //Show_Report ShowReport = new Show_Report();

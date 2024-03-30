@@ -233,7 +233,37 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox6">
+		<Textbox Name="DetalsForOldViolation">
+			<CanGrow>true</CanGrow>
+			<KeepTogether>true</KeepTogether>
+			<Paragraphs>
+				<Paragraph>
+					<TextRuns>
+						<TextRun>
+							<Value>=First(Fields!DetalsForOldViolation.Value, "DataSetReport")</Value>
+							<Style />
+						</TextRun>
+					</TextRuns>
+					<Style />
+				</Paragraph>
+			</Paragraphs>
+			<rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
+			<Top>1.73833in</Top>
+			<Left>5.66006in</Left>
+			<Height>0.25in</Height>
+			<Width>0.73264in</Width>
+			<ZIndex>5</ZIndex>
+			<Style>
+				<Border>
+					<Style>None</Style>
+				</Border>
+				<PaddingLeft>2pt</PaddingLeft>
+				<PaddingRight>2pt</PaddingRight>
+				<PaddingTop>2pt</PaddingTop>
+				<PaddingBottom>2pt</PaddingBottom>
+			</Style>
+		</Textbox>
+		<Textbox Name="Textbox6">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -1152,6 +1182,10 @@
           <DataField>DateOfReceipt</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+		  <Field Name="DetalsForOldViolation">
+			  <DataField>DetalsForOldViolation</DataField>
+			  <rd:TypeName>System.String</rd:TypeName>
+		  </Field>
         <Field Name="Error">
           <DataField>Error</DataField>
           <rd:TypeName>System.String</rd:TypeName>

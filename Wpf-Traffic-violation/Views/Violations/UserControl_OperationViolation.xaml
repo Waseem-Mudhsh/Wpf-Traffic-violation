@@ -183,6 +183,10 @@
                                                         Header="حالة السداد" MinWidth="10"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+                            <DataGridTextColumn   Binding="{Binding CreatedOn}"
+                                                           Header="تاريخ الاضافة"
+                                                       MinWidth="80"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
                         </DataGrid.Columns>
                     </DataGrid>
