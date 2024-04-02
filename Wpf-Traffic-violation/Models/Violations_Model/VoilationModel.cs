@@ -631,6 +631,31 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
         }
 
+        public void AddOldViolation(oldviolation oldviolation)
+        {
+
+
+            SqlParameter[] param = new SqlParameter[4];
+            param[0] = new SqlParameter("@Amount", SqlDbType.Int)
+            {
+                Value = oldviolation.Amount
+            };
+            param[1] = new SqlParameter("@Counts", SqlDbType.Int)
+            {
+                Value = oldviolation.Counts
+            };
+            param[2] = new SqlParameter("@PlatNumber", SqlDbType.NVarChar, 50)
+            {
+                Value = oldviolation.PlatNumber
+            };
+
+            param[3] = new SqlParameter("@Rceipt_Id", SqlDbType.Int)
+            {
+                Value = oldviolation.Rceipt_Id
+            };
+            var response = sphelper.Operarion(param, sP_Query.getviolationFoEdit, "AddOldvilation");
+        }
+
 
 
         ///////////////////////////////// start OperarionReasonToOblection/////////////////////////////////////

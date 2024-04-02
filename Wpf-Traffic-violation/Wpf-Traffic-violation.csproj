@@ -593,6 +593,7 @@
     <Compile Include="Models\Configurations_Model\ViolationTypeModel.cs" />
     <Compile Include="Models\Violations_Model\ExcelData.cs" />
     <Compile Include="Models\Violations_Model\ExtraDetailReportModel.cs" />
+    <Compile Include="Models\Violations_Model\oldviolation.cs" />
     <Compile Include="Models\Violations_Model\QueryPersonalNumberModel.cs" />
     <Compile Include="Models\Violations_Model\QureyIdNumberModel.cs" />
     <Compile Include="Models\Violations_Model\ReceiptReportModel.cs" />

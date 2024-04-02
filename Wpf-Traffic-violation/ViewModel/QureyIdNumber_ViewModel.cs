@@ -712,7 +712,6 @@ namespace Wpf_Traffic_violation.ViewModel
                 {
                     foreach (var item in Grid_Violation1)
                     {
-                        //DateTime dateviolation = Convert.ToDateTime(item.Violation_date);
                         item.Violation_date = System.DateTime.Parse(item.Violation_date, CultureInfo.InvariantCulture).ToShortDateString();
                     }
                     result = Grid_Violation1;
@@ -794,6 +793,14 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ShowReport.Show();
 
                             }
+                            oldviolation oldviolation = new oldviolation
+                            {
+                                Amount = AmountOfCountOldYar,
+                                Counts = SelectCountOldYar,
+                                PlatNumber = Current_Violation.Plate_Num,
+                                Rceipt_Id = receiptid.Receipt_id
+                            };
+                            VoilationModel.AddOldViolation(oldviolation);
                             MessageBox.Show("تمت عملية السداد بنجاح");
                             win.Close();
                             Grid_Violation.Clear();
@@ -925,13 +932,14 @@ namespace Wpf_Traffic_violation.ViewModel
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                 ReciptPrint.To = System.DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
-                /// old violation
+
+                #region old violation
                 StringBuilder detoldviolation = new StringBuilder();
                 string[] pattern = new string[] { "  مخالفة اعوام سابقه عدد", "   مبلغ" };
                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                //end old violation
+                #endregion
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                 model.Add(ReciptPrint);
                 //Show_Report ShowReport = new Show_Report();
