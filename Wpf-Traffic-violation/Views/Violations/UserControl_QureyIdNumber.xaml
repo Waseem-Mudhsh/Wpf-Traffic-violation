@@ -114,6 +114,32 @@
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="اعوام سابقة  =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                        <TextBox    x:Name="selectCountoldyar"   Height="40" Width="240" Text="{Binding SelectCountOldYar}"
+                        materialDesign:HintAssist.Hint="0"
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="اجمالي مبالغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                        <TextBox    x:Name="AmountselectCountoldyar"   Height="40" Width="240" Text="{Binding AmountOfCountOldYar}"
+                        materialDesign:HintAssist.Hint="0"
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
+
+                                    </StackPanel>
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <TextBlock Text=" اعوام سابقة =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
+                                        <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 0 20 0">
+                                            <TextBlock x:Name="selectCountoldyar"   Text="{Binding SelectCountOldYar,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
+                                        </Border>
+                                    </StackPanel>-->
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <TextBlock Text=" اجمالي مبالغ =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 10 20 0"/>
+                                        <Border Width="130" Height="40"  BorderThickness="1" BorderBrush="Black"  Margin="0 10 20 0">
+                                            <TextBlock x:Name="AmountselectCountoldyar"   Text="{Binding AmountOfCountOldYar,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextAlignment="Center" FontFamily="Tajawal" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9,7" Width="110"/>
+                                        </Border>
+                                    </StackPanel>-->
                                 </StackPanel>
                             </Border>
                             <!--///////////////////////////////////////////////////////////////////////////////////////-->

@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
-    <PublishUrl>C:\Users\Eng-Ibrahim.M.A\Desktop\New folder\New folder\Traffic-Violation\Apps\</PublishUrl>
+    <PublishUrl>C:\Users\Eng-Ibrahim.M.A\Desktop\New folder\New folder\Traffic-Violation\Finalviolation\Apps\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -12,7 +12,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -384,6 +384,7 @@
     <Compile Include="Core\helper\ICacheManager.cs" />
     <Compile Include="Core\helper\PermissionHelper.cs" />
     <Compile Include="Core\helper\ResponseObject.cs" />
+    <Compile Include="Core\helper\Screenresolution.cs" />
     <Compile Include="Core\UserControlInfoAttribute.cs" />
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
@@ -592,6 +593,7 @@
     <Compile Include="Models\Configurations_Model\ViolationTypeModel.cs" />
     <Compile Include="Models\Violations_Model\ExcelData.cs" />
     <Compile Include="Models\Violations_Model\ExtraDetailReportModel.cs" />
+    <Compile Include="Models\Violations_Model\oldviolation.cs" />
     <Compile Include="Models\Violations_Model\QueryPersonalNumberModel.cs" />
     <Compile Include="Models\Violations_Model\QureyIdNumberModel.cs" />
     <Compile Include="Models\Violations_Model\ReceiptReportModel.cs" />

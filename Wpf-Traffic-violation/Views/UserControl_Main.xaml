@@ -7,78 +7,80 @@
              mc:Ignorable="d" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            
              >
-    <Grid x:Name="GridMain">
-        <DockPanel x:Name="DockMain">
-            <materialDesign:ColorZone Mode="PrimaryDark" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
-                <Grid  >
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                        <!--<materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="10 0 0 0 "  />-->
-                        <TextBlock Name="TextBlockUserName" Text="سليمان اليوسفي" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="60,0,0,0" />
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_user"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="الصفحة الشخصية" Margin="10,0,0,0" >
-                            <materialDesign:PackIcon Foreground="White" Kind="User" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                        </Button>
+        <Grid x:Name="GridMain">
+            <DockPanel x:Name="DockMain">
+                <materialDesign:ColorZone Mode="PrimaryDark" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Height="30">
+                    <Grid  >
 
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Right"  Orientation="Horizontal" Width="80">
-                       
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_mins"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Click="But_mins_Click" Margin="0,0,10,0" >
-                            <materialDesign:PackIcon Foreground="White" Kind="Minus" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_close_Click" Padding="0" >
-                            <materialDesign:PackIcon Foreground="White" Kind="Power" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                        </Button>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <TextBlock x:Name="TextB1locProjectName1" Text="نظام إدارة المخالفات المرورية - محافظة تعز" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="0 5 0 0 " />
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                            <!--<materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="10 0 0 0 "  />-->
+                            <TextBlock Name="TextBlockUserName" Text="سليمان اليوسفي" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="60,0,0,0" />
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_user"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="الصفحة الشخصية" Margin="10,0,0,0" >
+                                <materialDesign:PackIcon Foreground="White" Kind="User" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                            </Button>
 
-                </Grid>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right"  Orientation="Horizontal" Width="80">
 
-            </materialDesign:ColorZone>
-            <!--Dock bottom-->
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_mins"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Click="But_mins_Click" Margin="0,0,10,0" >
+                                <materialDesign:PackIcon Foreground="White" Kind="Minus" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_close_Click" Padding="0" >
+                                <materialDesign:PackIcon Foreground="White" Kind="Power" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                            </Button>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock x:Name="TextB1locProjectName1" Text="نظام إدارة المخالفات المرورية - محافظة تعز" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="0 5 0 0 " />
+                        </StackPanel>
 
-            <materialDesign:ColorZone DockPanel.Dock="Bottom" Mode="PrimaryDark" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="30" Width="1360">
-                <Grid   >
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
-                        <!--<materialDesign:MaterialDateDisplay VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="8" Margin="26,0,0,0" Width="281"  TabIndex="2147483642" IsHitTestVisible="True"/>-->
-                        <!--<DatePicker SelectedDate="{x:Static sys:DateTime.Now}" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
-                        <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now},
+                    </Grid>
+
+                </materialDesign:ColorZone>
+                <!--Dock bottom-->
+
+                <materialDesign:ColorZone DockPanel.Dock="Bottom" Mode="PrimaryDark" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="30" Width="1360">
+                    <Grid   >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,0">
+                            <!--<materialDesign:MaterialDateDisplay VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="8" Margin="26,0,0,0" Width="281"  TabIndex="2147483642" IsHitTestVisible="True"/>-->
+                            <!--<DatePicker SelectedDate="{x:Static sys:DateTime.Now}" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+                            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now},
                              StringFormat='{}{0:  dd/MM/yyyy}'}" FontFamily="Tajawal" FontSize="16"  Margin="5" />
 
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_Home"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_Home_Click" Padding="0" ToolTip="الشاشة الرئيسية" >
-                            <materialDesign:PackIcon Foreground="White" Kind="Home" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                        </Button>
-                        <Rectangle Width="1" Fill="#B2FFFFFF" ></Rectangle>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_Logout"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,5,0"  Padding="0" Click="But_Logout_Click" ToolTip="تسجيل خروج" >
-                            <materialDesign:PackIcon Foreground="White" Kind="Logout" Width="24" Height="24" VerticalAlignment="Bottom"    />
-                        </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_Home"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_Home_Click" Padding="0" ToolTip="الشاشة الرئيسية" >
+                                <materialDesign:PackIcon Foreground="White" Kind="Home" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                            </Button>
+                            <Rectangle Width="1" Fill="#B2FFFFFF" ></Rectangle>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_Logout"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,5,0"  Padding="0" Click="But_Logout_Click" ToolTip="تسجيل خروج" >
+                                <materialDesign:PackIcon Foreground="White" Kind="Logout" Width="24" Height="24" VerticalAlignment="Bottom"    />
+                            </Button>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-
-
-                        <!--<TextBlock x:Name="TextB1locProjectName" Text="مشروع تخرج - طلاب كلية الهندسة و تقنية المعلومات - جامعة تعز" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="0 0 60 0 " FontWeight="Regular" />-->
-
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
 
 
-                </Grid>
-            </materialDesign:ColorZone>
-            <!--Dock fill-->
-            <Frame x:Name="Frame_main"  Background="#F5F5F5" NavigationUIVisibility="Hidden" >
-                <!--<Frame Content="{Binding Path=SubItems.Screen}"/>-->
-                <!--<local:Home />-->
-                <!--<local:UserControlForm1/>-->
+                            <!--<TextBlock x:Name="TextB1locProjectName" Text="مشروع تخرج - طلاب كلية الهندسة و تقنية المعلومات - جامعة تعز" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="0 0 60 0 " FontWeight="Regular" />-->
 
-            </Frame>
-        </DockPanel>
+                        </StackPanel>
 
-    </Grid>
+
+                    </Grid>
+                </materialDesign:ColorZone>
+                <!--Dock fill-->
+                <Frame x:Name="Frame_main"  Background="#F5F5F5" NavigationUIVisibility="Hidden" >
+                    <!--<Frame Content="{Binding Path=SubItems.Screen}"/>-->
+                    <!--<local:Home />-->
+                    <!--<local:UserControlForm1/>-->
+
+                </Frame>
+            </DockPanel>
+
+        </Grid>
+
+       
 </UserControl>

@@ -655,6 +655,26 @@ namespace Wpf_Traffic_violation.Services
             }
             return result;
         }
+        private bool _disposed = false;
+
+        protected void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    objcontext?.Dispose();
+                }
+                _disposed = true;
+            }
+
+            Dispose(disposing);
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 }

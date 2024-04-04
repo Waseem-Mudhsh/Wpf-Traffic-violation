@@ -89,13 +89,12 @@
                                           />-->
                 <ComboBox Name="selectProvince" Width="300" Height="40" BorderThickness="1"
                   ItemsSource="{Binding GridProvinces}"
-                  SelectedItem="{Binding SelectedProvincesAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 
+                  SelectedItem="{Binding SelectedProvincesAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
                     <!-- Optional: You can customize the appearance of each item in the ComboBox -->
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Province_id}" />
+                            <TextBlock Text="{Binding Province_id }" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -103,7 +102,7 @@
                 <TextBlock Text="نوع اللوحة :" Margin="20 0 28 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <ComboBox Name="viol_type" Width="300" Height="40" BorderThickness="1"
                   ItemsSource="{Binding GridPlateType}"
-                  SelectedItem="{Binding SelectedPlateTypeAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedPlateTypeAdd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="{Binding Plate_type_name}"
                Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
                
                     <ComboBox.ItemTemplate>
@@ -112,6 +111,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                
            
             </StackPanel>
             
@@ -124,7 +124,7 @@
                           Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Name="ComboBox_Provinces" >
+                            <TextBlock Name="ComboBox_violationtype" >
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}النوع: {0}, المبلغ: {1}">
                                         <Binding Path="Violation_type_name" />
@@ -143,13 +143,26 @@
             <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
                 <TextBlock Text="المكان  :" Margin="18 0 27 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
 
-                <controls:AutoCompleteBox Name="street"  Width="240" ItemsSource="{Binding Grid_Streets}" 
+                <ComboBox Name="street" Width="300" Height="40" BorderThickness="1"
+                  ItemsSource="{Binding Grid_Streets}"
+                  SelectedItem="{Binding Selected_Street, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="{Binding Street_name}"
+               Padding="10,10,0,0" Background="White" Margin="0,9,5,9" FontSize="14" FontFamily="Tajawal" >
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Street_name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--<controls:AutoCompleteBox Name="street"  Width="240" ItemsSource="{Binding Grid_Streets}" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14" Padding="20 8 0 5" 
                                               ValueMemberPath="Street_name" 
                                               SelectedItem="{Binding Selected_Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Selected_Street.Street_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
                                              
-                                          />
+                                          />-->
+                
+                
                 <TextBlock Text="بواسطة :" Margin="25 0 24 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <controls:AutoCompleteBox Name="trafficman"  Width="240" ItemsSource="{Binding Grid_TrafficMan}" 
                                               ItemTemplate="{StaticResource AutoId}" 

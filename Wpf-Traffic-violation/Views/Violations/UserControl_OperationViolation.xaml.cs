@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -11,6 +12,15 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_OperationViolation()
         {
             InitializeComponent();
+            Window MainWindow = System.Windows.Application.Current.MainWindow;
+            PresentationSource MainWindowPresentationSource = PresentationSource.FromVisual(MainWindow);
+            Matrix m = MainWindowPresentationSource.CompositionTarget.TransformToDevice;
+            var DpiWidthFactor = m.M11;
+            var DpiHeightFactor = m.M22;
+            double ScreenHeight = SystemParameters.PrimaryScreenHeight * DpiHeightFactor;
+            double ScreenWidth = SystemParameters.PrimaryScreenWidth * DpiWidthFactor;
+            this.trkSetWidthAdjust.Width = ScreenWidth - 240;//assigning the width for the panel
+            this.TrkAnalysisDataGrid.Height = ScreenHeight - 160;//assigning the Height for the DataGrid
 
         }
 

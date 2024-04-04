@@ -15,7 +15,7 @@
         <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" x:Name="But_close"  Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"  Margin="0,0,0,0" Click="But_close_Click" Padding="0" >
             <materialDesign:PackIcon Foreground="White" Kind="Power" Width="24" Height="24" VerticalAlignment="Bottom"    />
         </Button>
-        <WindowsFormsHost   Height="700" Width="900" HorizontalAlignment="Center" >
+        <WindowsFormsHost   Height="700" Width="900" HorizontalAlignment="Stretch" >
             <rv:ReportViewer x:Name="ReportViewerDemo"  Dock="Fill" ZoomMode="FullPage"  >
             </rv:ReportViewer>
         </WindowsFormsHost>

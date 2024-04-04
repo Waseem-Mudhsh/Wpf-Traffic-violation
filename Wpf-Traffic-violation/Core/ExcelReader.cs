@@ -71,14 +71,14 @@ public class ExcelReader
                         var Violationdata = new Violation
                         {
                             Teaffic_man_id = 1,
-                            Violation_date = Convert.ToString(DateTime.Now),
+                            CreatedOn = Convert.ToString(DateTime.Now),
                             Plate_Num = worksheet.Cells[row, 2].Text,
                             Violation_photo1 = img,
                             Violation_photo2 = img,
                             Violation_type_id = violatiotype.Violation_type_id,
                             VounchrNum = Convert.ToInt32(worksheet.Cells[row, 1].Text),
                             CreatedBy = 1,
-                            CreatedOn = (worksheet.Cells[row, 6].Text == null || worksheet.Cells[row, 6].Text == "") ? Convert.ToString(DateTime.Now) : worksheet.Cells[row, 6].Text,
+                            Violation_date = (worksheet.Cells[row, 6].Text == null || worksheet.Cells[row, 6].Text == "") ? Convert.ToString(DateTime.Now) : worksheet.Cells[row, 6].Text,
                             Plate_id = platypeid,
                             Street_id = streetid.Street_id,
                             Violation_penalty = violatiotype.Maximum_price,

@@ -23,8 +23,9 @@
     </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="525"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="1">

@@ -14,7 +14,8 @@ namespace Wpf_Traffic_violation
         public MainWindow()
         {
             InitializeComponent();
-
+            this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             //base.DataContext= unityContainer;
         }
         private void SwitchScreen(UserControl Screen)
