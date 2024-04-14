@@ -771,7 +771,6 @@ namespace Wpf_Traffic_violation.ViewModel
                             if (receiptid.Receipt_id != 0)
                             {
                                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-
                                 ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
                                 ReciptPrint.ViolationPenalty = AmountSelected;
                                 ReciptPrint.DateOfReceipt = DateTime.Now.ToString("yyyy/MM/dd");
@@ -779,19 +778,19 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
                                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
                                 model.Add(ReciptPrint);
-                                Show_Report ShowReport = new Show_Report();
+                                ReciptReportTemplate ShowReport = new ReciptReportTemplate();
                                 ReportDataSource ds;
                                 ShowReport.ReportViewerDemo.Reset();
                                 ds = new ReportDataSource("DataSetRecipt", model);
                                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                                 System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
                                 printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                                //printerSettings.DefaultPageSettings.Landscape = true;
+                                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
+                                                                                                                               //printerSettings.DefaultPageSettings.Landscape = true;
                                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
                                 ShowReport.ReportViewerDemo.RefreshReport();
                                 ShowReport.Show();
-
                             }
                             oldviolation oldviolation = new oldviolation
                             {
@@ -883,7 +882,7 @@ namespace Wpf_Traffic_violation.ViewModel
             var ReciptPrint = new ReceiptPrintModel();
             ReportDataSource ds;
             ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-            Show_Report ShowReport = new Show_Report();
+            ReciptReportTemplate ShowReport = new ReciptReportTemplate();
             System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
 
             if (Grid_Violation1.Count <= 0)
@@ -900,8 +899,10 @@ namespace Wpf_Traffic_violation.ViewModel
                 ds = new ReportDataSource("DataSetReport", model);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
 
                 printerSettings.DefaultPageSettings.Landscape = true;
+
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReportNull.rdlc";
                 ShowReport.ReportViewerDemo.RefreshReport();

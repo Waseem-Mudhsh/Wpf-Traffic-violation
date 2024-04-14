@@ -233,37 +233,7 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-		<Textbox Name="DetalsForOldViolation">
-			<CanGrow>true</CanGrow>
-			<KeepTogether>true</KeepTogether>
-			<Paragraphs>
-				<Paragraph>
-					<TextRuns>
-						<TextRun>
-							<Value>=First(Fields!DetalsForOldViolation.Value, "DataSetReport")</Value>
-							<Style />
-						</TextRun>
-					</TextRuns>
-					<Style />
-				</Paragraph>
-			</Paragraphs>
-			<rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
-			<Top>1.73833in</Top>
-			<Left>5.66006in</Left>
-			<Height>0.25in</Height>
-			<Width>0.73264in</Width>
-			<ZIndex>5</ZIndex>
-			<Style>
-				<Border>
-					<Style>None</Style>
-				</Border>
-				<PaddingLeft>2pt</PaddingLeft>
-				<PaddingRight>2pt</PaddingRight>
-				<PaddingTop>2pt</PaddingTop>
-				<PaddingBottom>2pt</PaddingBottom>
-			</Style>
-		</Textbox>
-		<Textbox Name="Textbox6">
+      <Textbox Name="Textbox6">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -287,7 +257,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.48307in</Top>
+        <Top>3.85807in</Top>
         <Left>2.47984in</Left>
         <Height>0.25in</Height>
         <Width>5.22222in</Width>
@@ -709,7 +679,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetViolation</DataSetName>
-        <Top>2.26958in</Top>
+        <Top>2.64458in</Top>
         <Left>1.12846in</Left>
         <Height>0.5in</Height>
         <Width>6.77654in</Width>
@@ -825,7 +795,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>CountOfType</rd:DefaultName>
-        <Top>3.48307in</Top>
+        <Top>3.85807in</Top>
         <Left>1.42428in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1060,7 +1030,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>SumViolationTypcount</rd:DefaultName>
-        <Top>2.95424in</Top>
+        <Top>3.32924in</Top>
         <Left>3.98296in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
@@ -1096,6 +1066,42 @@
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>19</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="DetalsForOldViolation">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!DetalsForOldViolation.Value, "DataSetReport")</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
+        <Top>2.18625in</Top>
+        <Left>2.73263in</Left>
+        <Height>0.25in</Height>
+        <Width>5.17237in</Width>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1182,10 +1188,10 @@
           <DataField>DateOfReceipt</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-		  <Field Name="DetalsForOldViolation">
-			  <DataField>DetalsForOldViolation</DataField>
-			  <rd:TypeName>System.String</rd:TypeName>
-		  </Field>
+        <Field Name="DetalsForOldViolation">
+          <DataField>DetalsForOldViolation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Error">
           <DataField>Error</DataField>
           <rd:TypeName>System.String</rd:TypeName>
