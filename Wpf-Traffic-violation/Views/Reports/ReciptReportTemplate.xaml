@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Traffic_violation.Views.Reports"
-        xmlns:BoldReport="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
+        xmlns:BoldReport="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         mc:Ignorable="d"
-        Title="ReciptReportTemplate" Height="450" Width="800">
-    <Grid>
+         Title="Show_Report"  Height="1200" Width="1000" FlowDirection="RightToLeft" BorderThickness="1" SnapsToDevicePixels="True"
+        WindowStartupLocation="Manual" BorderBrush="#FFDD2C00" WindowStyle="ThreeDBorderWindow" ScrollViewer.VerticalScrollBarVisibility="Visible" ResizeMode="NoResize">
 
-        <BoldReport:ReportViewer x:Name="ReportViewerDemo"   />
+    <Grid Background="White"  HorizontalAlignment="Center" >
 
-  
+        <WindowsFormsHost   Height="1200" Width="827" HorizontalAlignment="Stretch" >
+            <rv:ReportViewer x:Name="ReportViewerDemo"  Dock="Fill" ZoomMode="FullPage"  >
+            </rv:ReportViewer>
+        </WindowsFormsHost>
+
     </Grid>
 </Window>
