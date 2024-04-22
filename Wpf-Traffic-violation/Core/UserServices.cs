@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.MagrationDB;
 
 namespace Wpf_Traffic_violation.Services
 {
-   public class UserServices
+    public class UserServices
     {
         TrafficViolationEntitiesUat objcontext;
         public UserServices()
         {
-            objcontext =new TrafficViolationEntitiesUat();
+            objcontext = new TrafficViolationEntitiesUat();
 
         }
         public bool Login(string userName, string Pasw)
         {
-            bool canLogin = false;   
+            bool canLogin = false;
             try
             {
-                
+
                 if (Properties.Settings.Default.Userid != 0 || Properties.Settings.Default.UserNameSystem != null)
                 {
                     Properties.Settings.Default.Userid = 0;
@@ -43,22 +40,27 @@ namespace Wpf_Traffic_violation.Services
                 }
                 if (Properties.Settings.Default.Userid == 0)
                 {
-                    canLogin= false;
+                    canLogin = false;
+                }
+                else
+                {
+                    canLogin = true;
+
                 }
 
-                canLogin= true;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
             }
-            return canLogin;
-       
 
-      
-          
+            return canLogin;
+
+
+
+
         }
 
         public object checkforuser()
@@ -66,6 +68,6 @@ namespace Wpf_Traffic_violation.Services
             throw new NotImplementedException();
         }
 
-      
+
     }
 }
