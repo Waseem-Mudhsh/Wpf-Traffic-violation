@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models.Violations_Model
@@ -235,7 +231,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             }
         }
         int plate_TypeId;
-        public  int Plate_TypeId
+        public int Plate_TypeId
 
         {
             get
@@ -331,24 +327,24 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 if (string_Street != value)
                 {
                     string_Street = value;
-                    
+
                     RaisePropertyChanged("String_Street");
                 }
             }
         }
-     
+
         int amount;
         public int Amount
         {
             get
             {
-                return  amount;
+                return amount;
             }
             set
             {
-                if ( amount != value)
+                if (amount != value)
                 {
-                     amount = value;
+                    amount = value;
                     RaisePropertyChanged("Amount");
                 }
             }
@@ -509,9 +505,26 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             }
         }
 
+        private int receptid;
+        public int Receptid
+        {
+            get
+            {
+                return receptid;
+            }
+            set
+            {
+                if (receptid != value)
+                {
+                    receptid = value;
+
+                    RaisePropertyChanged("receptid");
+                }
+            }
+        }
         private void Combine1()
         {
-            Search = String.Join(" || ", Violation_id, String_ViolationType, String_TrafficMan,String_Status, String_PlateDetail);
+            Search = String.Join(" || ", Violation_id, String_ViolationType, String_TrafficMan, String_Status, String_PlateDetail);
         }
 
 
@@ -527,10 +540,10 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             {
                 Errors.Add("Violation_date", "يجب تحدبد التاريخ");
             }
-          
+
 
         }
 
-      
+
     }
 }
