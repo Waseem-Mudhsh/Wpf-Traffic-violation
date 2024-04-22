@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SqlClient;
 
 using System.Linq;
+using System.Windows;
 using Wpf_Traffic_violation.MagrationDB;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
@@ -399,18 +400,39 @@ namespace Wpf_Traffic_violation.Services
 
         public bool Edite(MagrationDB.Violation violation)
         {
+            var isEdit = false;
             try
             {
-                using (var obj = objcontext)
+                using (var obj = new TrafficViolationEntitiesUat())
                 {
                     var entityToUpdate = obj.Violations.Find(violation.Violation_id);
+                    //var entityToUpdate = obj.Violations.FirstOrDefault(v => v.Violation_id == violation.Violation_id);
                     if (entityToUpdate != null)
                     {
-                        obj.Entry(entityToUpdate).CurrentValues.SetValues(violation);
-                        return true;
+                        try
+                        {
+                            obj.Entry(entityToUpdate).CurrentValues.SetValues(violation);
+                            var result = obj.SaveChanges();
+                            if (result > 0)
+                            {
+                                isEdit = true;
+                            }
+                            else
+                            {
+                                isEdit = false;
+
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+
+                        }
+
                     }
-                    else { return false; }
+                    else { isEdit = false; }
                 }
+                return isEdit;
             }
             catch (Exception e)
             {

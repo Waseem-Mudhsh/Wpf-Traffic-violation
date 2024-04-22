@@ -43,6 +43,5 @@ namespace Wpf_Traffic_violation.Views
         }
 
 
-
     }
 }

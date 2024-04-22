@@ -38,6 +38,20 @@
                     </StackPanel>
                 </Button>
                 <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Command="{Binding FilterViolationwithrecpt}" materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
+                </Button>
+                <TextBox    x:Name="textBoxrecpt" Width="100" Height="35" Text="{Binding Selectedreceptid}" 
+                        materialDesign:HintAssist.Hint="" 
+                         BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,5" FontFamily="Tajawal" FontSize="14" 
+                            >
+
+                
+
+                </TextBox>
+                <TextBlock Text="رقم السند" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
+
+                <Button  Height="40" Width="40" Padding="0" Background="OrangeRed" VerticalAlignment="Center" HorizontalAlignment="Center"
                             Command="{Binding FilterViolation}" materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
@@ -68,11 +82,12 @@
                     </controls:AutoCompleteBox.InputBindings>
                 </controls:AutoCompleteBox>
                 <TextBlock Text="رمز المحافظه" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
-                <TextBox    x:Name="textBox" Width="216" Height="30" Text="{Binding SelectedPlatNum}" 
+                <TextBox    x:Name="textBox" Width="100" Height="35" Text="{Binding SelectedPlatNum}" 
                         materialDesign:HintAssist.Hint="" 
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,5" FontFamily="Tajawal" FontSize="14" 
                             >
-                    <!--<TextBox.InputBindings>
+                    
+                        <!--<TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterViolation}" Key="Enter"  ></KeyBinding>
                     </TextBox.InputBindings>-->
 
@@ -124,13 +139,13 @@
                            >
 
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="رقم" >
+                            <!--<DataGridTemplateColumn Header="رقم" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding DataContext.RowNumber, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
                             <DataGridTextColumn  Binding="{Binding VounchrNum}"
                                         Header="رقم القسيمة" MinWidth="100" 
@@ -187,8 +202,14 @@
                                                            Header="تاريخ الاضافة"
                                                        MinWidth="80"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
+                            <DataGridTextColumn   Binding="{Binding Receptid}"
+                                                           Header="رقم السند"
+                                                       MinWidth="80"
+                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
                         </DataGrid.Columns>
+                       
+                        
                     </DataGrid>
 
                 </StackPanel>

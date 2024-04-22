@@ -476,6 +476,23 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+        int selectedreceptid;
+        public int Selectedreceptid
+        {
+            get
+            {
+                return selectedreceptid;
+            }
+            set
+            {
+                if (selectedreceptid != value)
+                {
+                    selectedreceptid = value;
+                    RaisePropertyChanged("Selectedreceptid");
+                }
+            }
+
+        }
         BitmapImage image1;
         public BitmapImage Image1
         {
@@ -529,6 +546,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Deletecommand = new RelayCommand(par => Delet(), par => CanDelet());
             Savecommand = new RelayCommand(par => Save(), par => CanSave());
             FilterViolation = new RelayCommand(par => Filter());
+            FilterViolationwithrecpt = new RelayCommand(par => FilterwitResipt());
             Closecommand = new RelayCommand(par => close());
             Excelcommand = new RelayCommand(par => GetExcel());
             AddPhoto1command = new RelayCommand(par => AddPhoto1());
@@ -536,6 +554,61 @@ namespace Wpf_Traffic_violation.ViewModel
             NextPageComannd = new RelayCommand(par => GetNextPage());
             BackPageComannd = new RelayCommand(par => BackToPage());
             Current_Activity = new Activity();
+        }
+
+        private void FilterwitResipt()
+        {
+            try
+            {
+                if (Selectedreceptid != 0)
+                {
+                    ObservableCollection<Violation> filteredViolations = new ObservableCollection<Violation>();
+                    var selscteProvi = SelectedProvinces;
+                    var selectedPlate = SelectedPlateType;
+                    if (Grid_Violation != null)
+                    {
+                        if (Grid_Violation.Count > 0)
+                        {
+                            foreach (var obj in Grid_Violation)
+                            {
+                                if (obj.Receptid != 0)
+                                {
+                                    filteredViolations.Add(obj);
+
+                                }
+
+
+                            }
+                            // Clear the Grid_Violation collection and add the filtered items back
+                            Grid_Violation.Clear();
+                            foreach (var violation in filteredViolations)
+                            {
+                                Grid_Violation.Add(violation);
+
+                            }
+                            if (Grid_Violation.Count <= 0)
+                            {
+                                MessageBox.Show("لايوجد بيانات");
+                                asyncViolation();
+
+                            }
+                        }
+                    }
+                    Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
+
+                }
+                else
+                {
+                    MessageBox.Show("ينبغي عليك ادخال رقم السند المراد البحث عنه");
+                    asyncViolation();
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
 
@@ -546,6 +619,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             //await asyncGrid();
             SelectedPlatNum = "";
+            Selectedreceptid = 0;
             Current_Violation = new Violation { Violation_id = 0, Plate_Num = "" };
             Grid_Violation = new ObservableCollection<Violation>();
             Local_CollectionViolation = new ObservableCollection<Violation>();
@@ -704,104 +778,113 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             try
             {
-
-
-                Current_Violation.New_amount = 0;
-                IsEditing = true;
-                string filename1 = "Violation/" + Current_Violation.Violation_photo1 + ".jpg";
-                string filename2 = "Violation/" + Current_Violation.Violation_photo2 + ".jpg";
-                win = new Window_AddViolation { DataContext = this };
-                Current_Violation = ViolationModel.GetViolationForEdit(Current_Violation.Violation_id);
-                //Selected_ViolationType.Violation_type_name = Current_Violation.String_ViolationType;
-                //SelectedPlateTypeAdd.Plate_type_name = Current_Violation.Plate_Type;
-                //Selected_ViolationType.Violation_type_id= Current_Violation.
-                foreach (var item in GridProvinces)
+                if (Current_Violation.Violation_id != 0)
                 {
-                    if (item.Province_id == Current_Violation.Provinceid)
+                    Current_Violation.New_amount = 0;
+                    //IsEditing = true;
+                    string filename1 = "Violation/" + Current_Violation.Violation_photo1 + ".jpg";
+                    string filename2 = "Violation/" + Current_Violation.Violation_photo2 + ".jpg";
+                    win = new Window_AddViolation { DataContext = this };
+                    Current_Violation = ViolationModel.GetViolationForEdit(Current_Violation.Violation_id);
+                    //Selected_ViolationType.Violation_type_name = Current_Violation.String_ViolationType;
+                    //SelectedPlateTypeAdd.Plate_type_name = Current_Violation.Plate_Type;
+                    //Selected_ViolationType.Violation_type_id= Current_Violation.
+                    foreach (var item in GridProvinces)
                     {
-                        SelectedProvincesAdd = item;
-                        break;
+                        if (item.Province_id == Current_Violation.Provinceid)
+                        {
+                            SelectedProvincesAdd = item;
+                            break;
+                        }
+
+                    }
+                    foreach (var item in GridPlateType)
+                    {
+                        if (item.Plate_type_name == Current_Violation.Plate_Type)
+                        {
+                            SelectedPlateTypeAdd = item;
+                            break;
+                        }
+
+                    }
+                    foreach (var item in Grid_Streets)
+                    {
+                        if (item.Street_name == Current_Violation.String_Street)
+                        {
+                            Selected_Street = item;
+                            break;
+                        }
+
+                    }
+                    foreach (var item in Grid_ViolationType)
+                    {
+                        if (item.Violation_type_id == Current_Violation.Violation_type_id)
+                        {
+                            Selected_ViolationType = item;
+                            break;
+                        }
+
+                    }
+                    //win.viol_type.Text = Current_Violation.Plate_Type;
+                    win.a.Text = Current_Violation.Plate_Num;
+                    //win.MultiSelectCombobox.ItemTemplate
+                    //win.MultiSelectCombobox.Text = Current_Violation.String_ViolationType;
+
+                    try
+                    {
+                        //BitmapImage image1 = new BitmapImage();
+                        //image1.BeginInit();
+                        //image1.CacheOption = BitmapCacheOption.OnLoad;
+                        //image1.UriSource = new Uri(filename1, UriKind.Relative);
+                        //image1.EndInit();
+                        //Image1 = image1;
+                    }
+                    catch (Exception)
+                    {
+                        filename1 = @"../Wpf-Traffic-violation\Wpf-Traffic-violation\Assets\car_64px.png";
+                        BitmapImage image1 = new BitmapImage();
+                        image1.BeginInit();
+                        image1.CacheOption = BitmapCacheOption.OnLoad;
+                        image1.UriSource = new Uri(filename1, UriKind.Relative);
+                        image1.EndInit();
+                        win.logo1.Source = image1;
+                    }
+                    try
+                    {
+                        //BitmapImage image2 = new BitmapImage();
+                        //image2.BeginInit();
+                        //image2.CacheOption = BitmapCacheOption.OnLoad;
+                        //image2.UriSource = new Uri(filename2, UriKind.Relative);
+                        //image2.EndInit();
+                        //Image2 = image2;
+                        win.ShowDialog();
+                    }
+                    catch (Exception)
+                    {
+                        filename2 = @"D:\level 5\ادارة المرور\المشروع\المشروع\نسخة 20_9_2020\Wpf-Traffic-violation\Wpf-Traffic-violation\Assets\car_64px.png";
+                        BitmapImage image2 = new BitmapImage();
+                        image2.BeginInit();
+                        image2.CacheOption = BitmapCacheOption.OnLoad;
+                        image2.UriSource = new Uri(filename2, UriKind.Relative);
+                        image2.EndInit();
+                        win.logo2.Source = image2;
+                        win.ShowDialog();
+
                     }
 
                 }
-                foreach (var item in GridPlateType)
+                else
                 {
-                    if (item.Plate_type_name == Current_Violation.Plate_Type)
-                    {
-                        SelectedPlateTypeAdd = item;
-                        break;
-                    }
+                    MessageBox.Show("يجب عليك اختيار محالفه للتعديل");
 
                 }
-                foreach (var item in Grid_Streets)
-                {
-                    if (item.Street_name == Current_Violation.String_Street)
-                    {
-                        Selected_Street = item;
-                        break;
-                    }
 
-                }
-                foreach (var item in Grid_ViolationType)
-                {
-                    if (item.Violation_type_id == Current_Violation.Violation_type_id)
-                    {
-                        Selected_ViolationType = item;
-                        break;
-                    }
 
-                }
-                //win.viol_type.Text = Current_Violation.Plate_Type;
-                win.a.Text = Current_Violation.Plate_Num;
-                //win.MultiSelectCombobox.ItemTemplate
-                //win.MultiSelectCombobox.Text = Current_Violation.String_ViolationType;
-
-                try
-                {
-                    //BitmapImage image1 = new BitmapImage();
-                    //image1.BeginInit();
-                    //image1.CacheOption = BitmapCacheOption.OnLoad;
-                    //image1.UriSource = new Uri(filename1, UriKind.Relative);
-                    //image1.EndInit();
-                    //Image1 = image1;
-                }
-                catch (Exception)
-                {
-                    filename1 = @"../Wpf-Traffic-violation\Wpf-Traffic-violation\Assets\car_64px.png";
-                    BitmapImage image1 = new BitmapImage();
-                    image1.BeginInit();
-                    image1.CacheOption = BitmapCacheOption.OnLoad;
-                    image1.UriSource = new Uri(filename1, UriKind.Relative);
-                    image1.EndInit();
-                    win.logo1.Source = image1;
-                }
-                try
-                {
-                    //BitmapImage image2 = new BitmapImage();
-                    //image2.BeginInit();
-                    //image2.CacheOption = BitmapCacheOption.OnLoad;
-                    //image2.UriSource = new Uri(filename2, UriKind.Relative);
-                    //image2.EndInit();
-                    //Image2 = image2;
-                    win.ShowDialog();
-                }
-                catch (Exception)
-                {
-                    filename2 = @"D:\level 5\ادارة المرور\المشروع\المشروع\نسخة 20_9_2020\Wpf-Traffic-violation\Wpf-Traffic-violation\Assets\car_64px.png";
-                    BitmapImage image2 = new BitmapImage();
-                    image2.BeginInit();
-                    image2.CacheOption = BitmapCacheOption.OnLoad;
-                    image2.UriSource = new Uri(filename2, UriKind.Relative);
-                    image2.EndInit();
-                    win.logo2.Source = image2;
-                    win.ShowDialog();
-
-                }
 
             }
             catch (Exception)
             {
-
+                MessageBox.Show("يجب عليك اختيار محالفه للتعديل");
             }
 
 
@@ -1090,6 +1173,7 @@ namespace Wpf_Traffic_violation.ViewModel
         public RelayCommand AddPhoto1command { get; set; }
         public RelayCommand AddPhoto2command { get; set; }
         public RelayCommand FilterViolation { get; set; }
+        public RelayCommand FilterViolationwithrecpt { get; set; }
         public RelayCommand BackPageComannd { get; set; }
         public RelayCommand NextPageComannd { get; set; }
 

@@ -777,7 +777,17 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                                 ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
                                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
+
+                                #region old violation
+                                StringBuilder detoldviolation = new StringBuilder();
+                                string[] pattern = new string[] { "  مخالفة اعوام سابقه عدد", "   مبلغ" };
+                                detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
+                                detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
+                                ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
+                                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                                #endregion
                                 model.Add(ReciptPrint);
+
                                 ReciptReportTemplate ShowReport = new ReciptReportTemplate();
                                 ReportDataSource ds;
                                 ShowReport.ReportViewerDemo.Reset();
@@ -900,8 +910,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
                 printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
-
-                printerSettings.DefaultPageSettings.Landscape = true;
+                //printerSettings.DefaultPageSettings.Landscape = true;
 
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReportNull.rdlc";
@@ -940,6 +949,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
+                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+
                 #endregion
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                 model.Add(ReciptPrint);
@@ -951,8 +962,10 @@ namespace Wpf_Traffic_violation.ViewModel
                 ds = new ReportDataSource("DataSetReport", model);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                //printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
                 printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                printerSettings.DefaultPageSettings.Landscape = true;
+                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+                //printerSettings.DefaultPageSettings.Landscape = true;
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.ReviewViolationsReport.rdlc";
                 ShowReport.ReportViewerDemo.RefreshReport();

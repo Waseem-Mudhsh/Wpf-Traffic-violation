@@ -84,6 +84,9 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                         CreatedOn = (string)row[17]
                       ,
                         String_Status = ((int)row[8] == 1) ? "مسدد" : "غير مسدد"
+                        ,
+                        Receptid = (int)row[21]
+
 
                     };
                     //per.Plate_Num = new Class_SqlConnection().Get_row("getPlateNum", per.Plate_id);
