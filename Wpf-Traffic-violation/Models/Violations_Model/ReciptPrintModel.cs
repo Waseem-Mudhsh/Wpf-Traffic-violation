@@ -69,6 +69,16 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 RaisePropertyChanged("ViolationPenalty");
             }
         }
+        private int _countAllviolation;
+        public int CountAllviolation
+        {
+            get { return _countAllviolation; }
+            set
+            {
+                _countAllviolation = value;
+                RaisePropertyChanged("CountAllviolation");
+            }
+        }
 
         public string PaymentStatus
         {

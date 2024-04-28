@@ -908,7 +908,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 ds = new ReportDataSource("DataSetReport", model);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 900, 1169);
                 printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
                 //printerSettings.DefaultPageSettings.Landscape = true;
 
@@ -950,6 +950,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
                 ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                ReciptPrint.CountAllviolation = ReciptPrint.CountOfType + SelectCountOldYar;
 
                 #endregion
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
@@ -963,7 +964,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
                 //printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 900, 1169);
                 printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
                 //printerSettings.DefaultPageSettings.Landscape = true;
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);

@@ -25,7 +25,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.0682in</Top>
-        <Left>2.00347in</Left>
+        <Left>3.00347in</Left>
         <Height>0.48958in</Height>
         <Width>2.15625in</Width>
         <Style>
@@ -65,9 +65,9 @@
         </Paragraphs>
         <rd:DefaultName>Company_name</rd:DefaultName>
         <Top>0.15874cm</Top>
-        <Left>12.16843cm</Left>
+        <Left>15.34343cm</Left>
         <Height>3.16302cm</Height>
-        <Width>5.48979cm</Width>
+        <Width>6.06661cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -97,14 +97,16 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
         <Top>0.19667in</Top>
-        <Left>1.02778in</Left>
+        <Left>1.31092in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>0.92866in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -141,7 +143,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>5.53in</Left>
+        <Left>6.53in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -180,7 +182,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>3.55936in</Left>
+        <Left>4.55936in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -219,7 +221,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>1.75728in</Left>
+        <Left>2.75728in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>5</ZIndex>
@@ -240,7 +242,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>اجمـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــالي عدد المخالفات</Value>
+                <Value>اجمــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــالي عدد المخالفات</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
@@ -258,13 +260,13 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>3.85807in</Top>
-        <Left>1.60484in</Left>
+        <Left>4.13417in</Left>
         <Height>0.25in</Height>
-        <Width>5.22222in</Width>
+        <Width>4.054in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -276,19 +278,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.94256in</Width>
+              <Width>1.14048in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.93214in</Width>
+              <Width>2.13006in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.0101in</Width>
+              <Width>1.20802in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.93214in</Width>
+              <Width>2.13006in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.0101in</Width>
+              <Width>1.20802in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -679,10 +681,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSetViolation</DataSetName>
-        <Top>2.64458in</Top>
-        <Left>0.125in</Left>
+        <Top>2.51958in</Top>
+        <Left>0.52083in</Left>
         <Height>0.5in</Height>
-        <Width>6.82706in</Width>
+        <Width>7.81662in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -706,7 +708,7 @@
         </Paragraphs>
         <rd:DefaultName>VounchrNum</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>4.68625in</Left>
+        <Left>5.68625in</Left>
         <Height>0.25in</Height>
         <Width>0.80208in</Width>
         <ZIndex>8</ZIndex>
@@ -736,7 +738,7 @@
         </Paragraphs>
         <rd:DefaultName>VehicleId</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>2.78506in</Left>
+        <Left>3.78506in</Left>
         <Height>0.25in</Height>
         <Width>0.73264in</Width>
         <ZIndex>9</ZIndex>
@@ -766,7 +768,7 @@
         </Paragraphs>
         <rd:DefaultName>VehicleTypeName</rd:DefaultName>
         <Top>1.73833in</Top>
-        <Left>0.68592in</Left>
+        <Left>1.68592in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>10</ZIndex>
@@ -787,7 +789,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!CountOfType.Value, "DataSetReport")</Value>
+                <Value>=Sum(Fields!CountAllviolation.Value, "DataSetReport")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -796,13 +798,13 @@
         </Paragraphs>
         <rd:DefaultName>CountOfType</rd:DefaultName>
         <Top>3.85807in</Top>
-        <Left>0.54928in</Left>
+        <Left>3.13228in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>0.93245in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -826,8 +828,9 @@
         </Paragraphs>
         <rd:DefaultName>To</rd:DefaultName>
         <Top>0.19667in</Top>
+        <Left>0.33364in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>0.97728in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -864,6 +867,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.2175in</Top>
+        <Left>1in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>13</ZIndex>
@@ -902,6 +906,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.52306in</Top>
+        <Left>1in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>14</ZIndex>
@@ -940,7 +945,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.2175in</Top>
-        <Left>5.93957in</Left>
+        <Left>6.93957in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>15</ZIndex>
@@ -979,7 +984,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
         <Top>4.52306in</Top>
-        <Left>5.56457in</Left>
+        <Left>6.56457in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>16</ZIndex>
@@ -998,7 +1003,7 @@
         <Value>armsofYemen</Value>
         <Sizing>FitProportional</Sizing>
         <Top>0.19667in</Top>
-        <Left>2.75917in</Left>
+        <Left>3.75917in</Left>
         <Height>0.39583in</Height>
         <Width>0.75in</Width>
         <ZIndex>17</ZIndex>
@@ -1020,7 +1025,6 @@
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>13pt</FontSize>
                   <FontWeight>Bold</FontWeight>
-                  <Color>White</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1030,16 +1034,15 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>SumViolationTypcount</rd:DefaultName>
-        <Top>3.32924in</Top>
-        <Left>3.60796in</Left>
+        <Top>3.85807in</Top>
+        <Left>0.95864in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
-          <BackgroundColor>Maroon</BackgroundColor>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -1062,7 +1065,7 @@
         </Paragraphs>
         <rd:DefaultName>To</rd:DefaultName>
         <Top>4.80084in</Top>
-        <Left>5.78in</Left>
+        <Left>6.78in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>19</ZIndex>
@@ -1076,7 +1079,7 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="DetalsForOldViolation">
+      <Textbox Name="DetalsForOldViolation2">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -1092,19 +1095,130 @@
               </TextRun>
             </TextRuns>
             <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
+        <Top>3.15216in</Top>
+        <Left>4.83153in</Left>
+        <Height>0.25in</Height>
+        <Width>3.36151in</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="DetalsForOldViolation3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>اجمالي عدد محالفات جديدة</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
+        <Top>3.4716in</Top>
+        <Left>6.04072in</Left>
+        <Height>0.25in</Height>
+        <Width>2.15232in</Width>
+        <ZIndex>21</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="DetalsForOldViolation4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Sum(Fields!CountOfType.Value, "DataSetReport")</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
               <TextAlign>Center</TextAlign>
             </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
-        <Top>2.18625in</Top>
-        <Left>1.23263in</Left>
+        <Top>3.4716in</Top>
+        <Left>4.83153in</Left>
         <Height>0.25in</Height>
-        <Width>5.17237in</Width>
-        <ZIndex>20</ZIndex>
+        <Width>1.20919in</Width>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox7">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>مبلغ</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.85807in</Top>
+        <Left>1.9255in</Left>
+        <Height>0.25in</Height>
+        <Width>1.13542in</Width>
+        <ZIndex>23</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -1120,7 +1234,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>7.17915in</Width>
+  <Width>8.42915in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -1180,6 +1294,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="CountAllviolation">
+          <DataField>CountAllviolation</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="CountOfType">
           <DataField>CountOfType</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
