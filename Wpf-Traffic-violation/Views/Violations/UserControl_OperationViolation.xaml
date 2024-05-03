@@ -126,11 +126,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Background="White"  Height="480">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" Background="White"  Height="auto" Width="1300">
                     <DataGrid  x:Name="GriddataViolation"
                            Style="{StaticResource Style_Datagrid}"
                            ItemsSource="{Binding Local_CollectionViolation}"  
@@ -211,9 +211,9 @@
                        
                         
                     </DataGrid>
-
+                   
                 </StackPanel>
-                <StackPanel Grid.Row="1" Background="White"  >
+                <StackPanel Grid.Column="0" Background="White" Margin="100,200,0,0"   Width="100" >
                     <StackPanel   Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button  x:Name="BackPage" Command="{Binding BackPageComannd}" >
                             <StackPanel Orientation="Horizontal">

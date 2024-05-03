@@ -371,31 +371,72 @@ namespace Wpf_Traffic_violation.Services
 
         internal bool Delete(MagrationDB.Violation violation)
         {
+            var isDeleted = false;
             try
             {
-                using (var obj = objcontext)
+                using (var obj = new TrafficViolationEntitiesUat())
                 {
                     var entityToDelete = obj.Violations.Find(violation.Violation_id);
+                    //var entityToUpdate = obj.Violations.FirstOrDefault(v => v.Violation_id == violation.Violation_id);
                     if (entityToDelete != null)
                     {
-                        obj.Entry(entityToDelete).State = EntityState.Deleted;
-                        obj.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                        try
+                        {
+                            obj.Entry(entityToDelete).State = EntityState.Deleted;
+                            var result = obj.SaveChanges();
+                            if (result > 0)
+                            {
+                                isDeleted = true;
+                            }
+                            else
+                            {
+                                isDeleted = false;
 
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+
+                        }
+
+                    }
+                    else { isDeleted = false; }
                 }
-
-
+                return isDeleted;
             }
-            catch
+            catch (Exception e)
             {
+                throw new NotImplementedException();
 
             }
-            return true;
+            //try
+            //{
+
+
+            //    using (var obj = objcontext)
+            //    {
+            //        var entityToDelete = obj.Violations.Find(violation.Violation_id);
+            //        if (entityToDelete != null)
+            //        {
+            //            obj.Entry(entityToDelete).State = EntityState.Deleted;
+            //            obj.SaveChanges();
+            //            return true;
+            //        }
+            //        else
+            //        {
+            //            return false;
+            //        }
+
+            //    }
+
+
+            //}
+            //catch
+            //{
+
+            //}
+            //return true;
         }
 
         public bool Edite(MagrationDB.Violation violation)

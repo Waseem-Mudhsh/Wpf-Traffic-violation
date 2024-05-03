@@ -683,6 +683,11 @@ namespace Wpf_Traffic_violation.ViewModel
                         AmountSelected += a.Violation_penalty;
                     }
                 }
+                //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
+                AmountSelected = (AmountSelected - discontAmnt);
+                if (AmountOfCountOldYar != 0)
+                    AmountSelected = (AmountSelected + AmountOfCountOldYar);
+
                 Current_Receipt = new Receipt
                 {
                     Account_id = 1,
@@ -693,8 +698,7 @@ namespace Wpf_Traffic_violation.ViewModel
                     Post_date = ""
 
                 };
-                //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
-                AmountSelected = (AmountSelected - discontAmnt);
+                //AmountSelected = (AmountSelected - discontAmnt);
 
             }
 
@@ -784,7 +788,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                                //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
                                 #endregion
                                 model.Add(ReciptPrint);
 
