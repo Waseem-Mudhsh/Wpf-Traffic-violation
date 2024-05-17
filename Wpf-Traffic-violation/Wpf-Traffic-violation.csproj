@@ -12,7 +12,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -806,6 +806,15 @@
     <Compile Include="Views\Reports\Violations\UserControl_Report_Violations.xaml.cs">
       <DependentUpon>UserControl_Report_Violations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reservation\Enter_Reservation.xaml.cs">
+      <DependentUpon>Enter_Reservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\Exite_reservation.xaml.cs">
+      <DependentUpon>Exite_reservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\Main_reservation.xaml.cs">
+      <DependentUpon>Main_reservation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControlForm1.xaml.cs">
       <DependentUpon>UserControlForm1.xaml</DependentUpon>
     </Compile>
@@ -1206,6 +1215,18 @@
     <Page Include="Views\Reports\Violations\UserControl_Report_Violations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reservation\Enter_Reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservation\Exite_reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservation\Main_reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControlForm1.xaml">
       <SubType>Designer</SubType>

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Views.Reports;
+using Wpf_Traffic_violation.Views.Reservation;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -111,7 +112,8 @@ namespace Wpf_Traffic_violation.Views
                     }
                 case 4:
                     {
-                        //UserControl_Accounts UserControl_Accounts = new UserControl_Accounts();
+                        Main_reservation main_Reservation = new Main_reservation();
+
                         //PermissionUser = new PermissionUser();
 
 
@@ -157,7 +159,7 @@ namespace Wpf_Traffic_violation.Views
                         //    UserControl_Accounts.but6.IsEnabled = false;
                         //}
 
-                        //GridPageFrom1.Content = UserControl_Accounts;
+                        GridPageFrom1.Content = main_Reservation;
 
                         break;
                     }
