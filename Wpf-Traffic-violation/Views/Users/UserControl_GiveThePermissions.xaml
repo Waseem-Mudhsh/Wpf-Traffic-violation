@@ -25,7 +25,7 @@
 
 
 
-                    
+
 
                     <Button  x:Name="But_Add_Permission" Width="120" Command="{Binding Permissioncommand}" Click="RadioButton_Click"
                      Height="40" Uid="7"   Padding="0" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="290,0,0,0"  >
@@ -39,12 +39,10 @@
 
             </Border>
             <StackPanel DockPanel.Dock="Top" Background="White" >
-
-
-                <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="10,5,5,0" ItemsSource="{Binding Grid_User}" SelectedItem="{Binding Currunt_User}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="450" HorizontalAlignment="Right"
+                <DataGrid  Style="{StaticResource Style_Datagrid}" ItemsSource="{Binding Grid_User}" SelectedItem="{Binding Currunt_User}"
+                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="450"
                          Height="475" >
-                  
+
                     <DataGrid.Columns>
 
                         <DataGridTextColumn Binding="{Binding Userid}"
@@ -53,11 +51,12 @@
                         <DataGridTextColumn Binding="{Binding Username}"
                                                         Header="أسم المستخدم"  MinWidth="200"
                                                         
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
-                           
-                             
-                        </DataGridTextColumn>
+                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300"/>
                         <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
+
+
+
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 
                         <!-- set a max length to get an indicator in the editor -->
                         <DataGridTextColumn Binding="{Binding String_userstatus}"
@@ -68,14 +67,12 @@
 
 
 
-                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
-
                     </DataGrid.Columns>
                 </DataGrid>
 
             </StackPanel>
         </DockPanel>
-        <DockPanel  x:Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft"  Visibility="Hidden">
+        <DockPanel  x:Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft"  Visibility="Visible">
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Left"  >
 
@@ -89,11 +86,11 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
-                    <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
-                    <ComboBox Width="150" Height="40"  ItemsSource="{Binding Comb}" SelectedItem="{Binding selected_value}" 
+                        <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
+                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Comb}" SelectedItem="{Binding selected_value}" 
                           Padding="10,10,0,0" Background="White" Margin="0 0 0 0"  FontFamily="Tajawal" FontSize="14" BorderThickness="1">
 
-                    </ComboBox>
+                        </ComboBox>
                     </StackPanel>
                     <Button  x:Name="But_Save_ParmissionSet" 
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
@@ -102,7 +99,7 @@
                             <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">حفظ</TextBlock>
                         </StackPanel>
                     </Button>
-                   
+
 
 
                 </StackPanel>

@@ -7,13 +7,12 @@ namespace Wpf_Traffic_violation.Views.Reservation
     /// <summary>
     /// Interaction logic for Main_reservation.xaml
     /// </summary>
-    public partial class Main_reservation : Window
+    public partial class Main_reservation : UserControl
     {
         public Main_reservation()
         {
             InitializeComponent();
         }
-
         private void but_sub_ButtonClick(object sender, RoutedEventArgs e)
         {
             Button but = ((Button)sender);
@@ -45,7 +44,6 @@ namespace Wpf_Traffic_violation.Views.Reservation
 
         private void Changed_Background(Button but)
         {
-
             Color ColorforN = (Color)ColorConverter.ConvertFromString("#B29FA8DA");//color forground
             Color ColorforF = (Color)ColorConverter.ConvertFromString("#03719C");//color Cureent
 
@@ -67,6 +65,5 @@ namespace Wpf_Traffic_violation.Views.Reservation
             //but.BorderBrush = Brushes.DarkOrange;
             but.BorderBrush = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
         }
-
     }
 }

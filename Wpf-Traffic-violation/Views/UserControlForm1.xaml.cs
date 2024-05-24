@@ -113,54 +113,14 @@ namespace Wpf_Traffic_violation.Views
                 case 4:
                     {
                         Main_reservation main_Reservation = new Main_reservation();
-
-                        //PermissionUser = new PermissionUser();
-
-
-                        //if (PermissionUser.Form == false)
-                        //{
-                        //    UserControl_Accounts.but1.IsEnabled = false;
-                        //}
-
-
-                        ////PermissionUser = new PermissionUser();
-                        ////PermissionUser.Form_id = 13;
-                        ////
-                        ////if (PermissionUser.Form == false)
-                        ////{
-                        ////    UserControl_Accounts.but2.IsEnabled = false;
-                        ////}
-                        //PermissionUser = new PermissionUser();
-                        //PermissionUser.Form_id = 14;
-
-                        //if (PermissionUser.Form == false)
-                        //{
-                        //    UserControl_Accounts.but3.IsEnabled = false;
-                        //}
-                        //PermissionUser = new PermissionUser();
-                        //PermissionUser.Form_id = 15;
-
-                        //if (PermissionUser.Form == false)
-                        //{
-                        //    UserControl_Accounts.but4.IsEnabled = false;
-                        //}
-                        //PermissionUser = new PermissionUser();
-                        //PermissionUser.Form_id = 16;
-
-                        //if (PermissionUser.Form == false)
-                        //{
-                        //    UserControl_Accounts.but5.IsEnabled = false;
-                        //}
-                        //PermissionUser = new PermissionUser();
-                        //PermissionUser.Form_id = 17;
-
-                        //if (PermissionUser.Form == false)
-                        //{
-                        //    UserControl_Accounts.but6.IsEnabled = false;
-                        //}
-
                         GridPageFrom1.Content = main_Reservation;
 
+                        break;
+                    }
+                case 5:
+                    {
+                        UserControl_Users userControl_Users = new UserControl_Users();
+                        GridPageFrom1.Content = userControl_Users;
                         break;
                     }
                 case 7:
