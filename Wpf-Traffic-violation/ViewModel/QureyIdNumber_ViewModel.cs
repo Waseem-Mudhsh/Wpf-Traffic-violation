@@ -953,7 +953,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
                 ReciptPrint.CountAllviolation = ReciptPrint.CountOfType + SelectCountOldYar;
 
                 #endregion
