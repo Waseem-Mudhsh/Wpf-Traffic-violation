@@ -530,6 +530,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Grid_Streets = Street_Model.GetStreets();
 
 
+
         }
         private void BackToPage()
         {
@@ -671,6 +672,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             AmountSelected = 0;
             Cuontviolation_selected = 0;
+
             Grid_Violation1 = new ObservableCollection<Violation>();
             if (Grid_Violation != null)
             {
@@ -882,9 +884,9 @@ namespace Wpf_Traffic_violation.ViewModel
             finally
             {
                 Grid_Violation1 = null;
-                Cuontviolation_selected = 0;
-                AmountSelected = 0;
-                discontAmnt = 0;
+                //Cuontviolation_selected = 0;
+                //AmountSelected = 0;
+                //discontAmnt = 0;
 
             }
 
@@ -980,6 +982,11 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
             TotalAmount = 0;
+            discontAmnt = 0;
+            SelectCountOldYar = 0;
+            AmountOfCountOldYar = 0;
+            //AmountSelected = 0;
+
 
         }
         bool CanConfimpay() => true;

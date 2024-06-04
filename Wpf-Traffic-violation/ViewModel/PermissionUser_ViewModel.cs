@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
@@ -14,6 +11,7 @@ namespace Wpf_Traffic_violation.ViewModel
     {
 
         #region Objects And Variables
+        //Models.UserModel userModel = new UserModel();
 
 
         Models.Users_Model.PermissionUserModel PermissionUserModel = new Models.Users_Model.PermissionUserModel();
@@ -23,6 +21,39 @@ namespace Wpf_Traffic_violation.ViewModel
         #endregion
         #region Proprties
         ObservableCollection<String> comb;
+        ObservableCollection<User_type> grid_Usertype;
+        public ObservableCollection<User_type> Grid_Usertype
+        {
+            get
+            {
+                return grid_Usertype;
+            }
+            set
+            {
+                if (grid_Usertype != value)
+                {
+                    grid_Usertype = value;
+                    RaisePropertyChanged("Grid_Usertype");
+                }
+            }
+        }
+        User_type selected_UserType;
+        public User_type Selected_UserType
+        {
+            get
+            {
+                return selected_UserType;
+            }
+            set
+            {
+                if (selected_UserType != value)
+                {
+                    selected_UserType = value;
+                    RaisePropertyChanged("Selected_UserType");
+                }
+            }
+        }
+
         public ObservableCollection<String> Comb //يربط مع الجرد فيو 
         {
             get
@@ -139,6 +170,9 @@ namespace Wpf_Traffic_violation.ViewModel
             Comb.Add("الإعدادات");
             Comb.Add("التقارير");
 
+            Grid_Usertype = new ObservableCollection<User_type>();
+            Grid_Usertype = UserModel.GetUserType();
+
             // PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "setting", 1);
             Grid_User = new ObservableCollection<User>();
             Grid_User = UserModel.GetUsers();
@@ -149,8 +183,8 @@ namespace Wpf_Traffic_violation.ViewModel
             Changecommad = new RelayCommand(par => Change());
 
             PermissionUser = new PermissionUser();
-            PermissionUser.Form_id =31;
-           
+            PermissionUser.Form_id = 31;
+
         }
         #endregion
         #region Methodes And Events
@@ -158,7 +192,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
 
             Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
-            Grid_PermissionUsers= PermissionUserModel.GetPermissionUser( "setting", Currunt_User.Userid);
+            Grid_PermissionUsers = PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid);
             selected_value = "المخالفات";
         }
         bool CanSetPermission() => Currunt_User != null && PermissionUser.Add_opretion == true;
@@ -178,43 +212,43 @@ namespace Wpf_Traffic_violation.ViewModel
             Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
 
             if (selected_value == "المخالفات")
-             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "violation", Currunt_User.Userid));
-                 
+            {
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("violation", Currunt_User.Userid));
+
             }
             else if (selected_value == "المستخدمين")
             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "user", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("user", Currunt_User.Userid));
             }
-            else if(selected_value == "الإعدادات")
+            else if (selected_value == "الإعدادات")
             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "setting", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid));
 
             }
             else if (selected_value == "الإعتراضات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "interception", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("interception", Currunt_User.Userid));
             }
             else if (selected_value == "البلاغات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "communication", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("communication", Currunt_User.Userid));
             }
             else if (selected_value == "الحسابات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "account", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("account", Currunt_User.Userid));
             }
             else if (selected_value == "التهيئة")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "format", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("format", Currunt_User.Userid));
             }
             else if (selected_value == "التقارير")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "report", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("report", Currunt_User.Userid));
             }
 
 
