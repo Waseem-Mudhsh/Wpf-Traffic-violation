@@ -21,11 +21,6 @@
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center" >
 
-                    <!--top-->
-
-
-
-
 
                     <Button  x:Name="But_Add_Permission" Width="120" Command="{Binding Permissioncommand}" Click="RadioButton_Click"
                      Height="40" Uid="7"   Padding="0" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="290,0,0,0"  >
@@ -91,13 +86,22 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
-                    <!--<StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                  
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
                         <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
-                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Comb}" SelectedItem="{Binding selected_value}" 
+                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Grid_menu}"
+                           SelectedItem="{Binding Selected_Menu,UpdateSourceTrigger=PropertyChanged }" 
                           Padding="10,10,0,0" Background="White" Margin="0 0 0 0"  FontFamily="Tajawal" FontSize="14" BorderThickness="1">
-
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Menu_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            
                         </ComboBox>
-                    </StackPanel>-->
+                       
+
+                    </StackPanel>
                     <Button  x:Name="But_Save_ParmissionSet" 
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
                         <StackPanel Orientation="Horizontal">
@@ -114,7 +118,7 @@
             <StackPanel DockPanel.Dock="Top" Background="White" >
 
 
-                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_PermissionUsers}" SelectedItem="{Binding Currunt_PermissionUser}" 
+                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_formMenu}" SelectedItem="{Binding Currunt_PermissionForm}" 
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="900" HorizontalAlignment="Left"
                         Height="480"  >
                     <DataGrid.Resources>
@@ -123,7 +127,7 @@
                     <DataGrid.Columns>
 
 
-                        <DataGridTextColumn Binding="{Binding String_form}"
+                        <DataGridTextColumn Binding="{Binding FormName}"
                                                         Header="أسم الشاشة"  MinWidth="300"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
@@ -132,11 +136,11 @@
                         <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
 
                         <!-- set a max length to get an indicator in the editor -->
-                        <DataGridCheckBoxColumn Binding="{Binding Form}"
+                        <DataGridCheckBoxColumn Binding="{Binding Is_active}"
                                         Header="نشط" MaxWidth="80" MinWidth="60" 
                                          
                                          />
-                        <DataGridCheckBoxColumn Binding="{Binding Add_opretion}"
+                        <DataGridCheckBoxColumn  Binding="{Binding Add_opretion}"
                                         Header="إضافة" MaxWidth="80" MinWidth="60" 
                                          
                                          />

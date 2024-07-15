@@ -539,6 +539,9 @@
     <Compile Include="Models\AllPermissions.cs" />
     <Compile Include="Models\Communication_Model\Communication.cs" />
     <Compile Include="Models\Communication_Model\CommunicationModel.cs" />
+    <Compile Include="Models\Configurations_Model\FormModel.cs" />
+    <Compile Include="Models\Configurations_Model\MenuDetail.cs" />
+    <Compile Include="Models\Configurations_Model\MenuDto.cs" />
     <Compile Include="Models\Configurations_Model\PlateDetails.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense_Model.cs" />
@@ -549,6 +552,7 @@
     <Compile Include="Models\Class_SqlConnection.cs" />
     <Compile Include="Models\Configurations_Model\Plate.cs" />
     <Compile Include="Models\Configurations_Model\Plate_Model.cs" />
+    <Compile Include="Models\Configurations_Model\PrivilegemenuUser.cs" />
     <Compile Include="Models\Configurations_Model\Provinces_Model.cs" />
     <Compile Include="Models\Configurations_Model\Directorate.cs" />
     <Compile Include="Models\Configurations_Model\PlateOfType.cs" />

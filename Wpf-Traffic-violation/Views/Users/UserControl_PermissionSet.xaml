@@ -20,9 +20,6 @@
 
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center" >
-
-                    <!--top-->
-
                     <Button  x:Name="But_Permission"  Margin="50 0 0 0"  Command="{Binding Permissioncommand}" Click="But_Permission_Click"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" >
                         <StackPanel Orientation="Horizontal">

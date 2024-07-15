@@ -1,20 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Models.Configurations_Model;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models.Users_Model
 {
     public class PermissionUserModel
     {
         ///////////////////////////////// start GetPermissionUser/////////////////////////////////////
-
-        public ObservableCollection<PermissionUser> GetPermissionUser( string menu, int user_Id)
+        Isphelper sphelper;
+        SP_Query sP_Query;
+        ValidationRegex validationRegex;
+        public PermissionUserModel()
+        {
+            validationRegex = new ValidationRegex();
+            sphelper = new configuration();
+            sP_Query = new SP_Query();
+        }
+        public ObservableCollection<PermissionUser> GetPermissionUser(string menu, int user_Id)
         {
             ObservableCollection<PermissionUser> PermissionUsers = new ObservableCollection<PermissionUser>();
             SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
@@ -118,6 +127,120 @@ namespace Wpf_Traffic_violation.Models.Users_Model
 
             }
             return true;
+        }
+
+        public ObservableCollection<MenuDto> GetMenu()
+        {
+            ObservableCollection<MenuDto> GetAllMenu = new ObservableCollection<MenuDto>();
+
+            var response = sphelper.GetCollection(sP_Query.GetAllMenu, "GetAllMenu");
+            if (response.Count > 0)
+            {
+                foreach (DataRow row in response)
+                {
+                    MenuDto per = new MenuDto
+                    {
+                        Menu_id = (int)row[0],
+                        Menu_name = (string)row[1],
+
+                    };
+
+
+                    //}
+                    GetAllMenu.Add(per); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return GetAllMenu;
+        }
+        public ObservableCollection<MenuDetail> GetMenuDetl()
+        {
+            ObservableCollection<MenuDetail> GetAllMenuDetl = new ObservableCollection<MenuDetail>();
+
+            var response = sphelper.GetCollection(sP_Query.GetAllMenuDetl, "GetAllMenuDetl");
+            if (response.Count > 0)
+            {
+                foreach (DataRow row in response)
+                {
+                    MenuDetail per = new MenuDetail
+                    {
+
+                        ID = (int)row[0],
+                        menu_id = (int)row[1],
+                        User_type_id = (int)row[2],
+                        is_active = (bool)row[3]
+
+
+                    };
+
+
+                    //}
+                    GetAllMenuDetl.Add(per); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return GetAllMenuDetl;
+        }
+        public ObservableCollection<FormModel> GetFormBymenuid(int menuId)
+        {
+            ObservableCollection<FormModel> GetAllMenuDetl = new ObservableCollection<FormModel>();
+
+            Hashtable keys = new Hashtable();
+            keys.Add("menuId", menuId);
+            var getparam = sphelper.prpareParam(keys);
+            var result = sphelper.GetCollectionByParam(sP_Query.GetFormBymenuid, "GetFormBymenuid", getparam);
+            if (result.Data.Count > 0)
+            {
+                foreach (DataRow row in result.Data)
+                {
+                    FormModel per = new FormModel
+                    {
+                        FormId = (int)row[0],
+                        FormName = (string)row[1],
+                        MenuId = (int)row[2],
+                        FormType = (int)row[3],
+                        //Code = ((string)row[4] == null) ? "" : (string)row[4]
+
+                    };
+
+
+                    //}
+                    GetAllMenuDetl.Add(per); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return GetAllMenuDetl;
+        }
+        public ObservableCollection<PrivilegemenuUser> GetPrivilegeUser(int menuId, int usertypeId)
+        {
+            ObservableCollection<PrivilegemenuUser> GetAllMenuDetl = new ObservableCollection<PrivilegemenuUser>();
+
+            Hashtable keys = new Hashtable();
+            keys.Add("menuId", menuId);
+            keys.Add("usertypeId", usertypeId);
+            var getparam = sphelper.prpareParam(keys);
+            var result = sphelper.GetCollectionByParam(sP_Query.GetmenuPrivilegeUser, "GetmenuPrivilegeUser", getparam);
+            if (result.Data.Count > 0)
+            {
+                foreach (DataRow row in result.Data)
+                {
+                    PrivilegemenuUser privilegemenuUser = new PrivilegemenuUser
+                    {
+                        FormName = (string)row[0],
+                        MenuId = (int)row[1],
+                        FormId = (int)row[2],
+                        PrivilegeAdd = (bool)row[3],
+                        PrivilegeDelete = (bool)row[4],
+                        PrivilegeUpdate = (bool)row[5],
+                        PrivilegeSelect = (bool)row[6],
+                        PrivilegeForm = (bool)row[7],
+                        UserTypeId = (int)row[8],
+
+                    };
+                    //PrivilegemenuUser per = new PrivilegemenuUser();
+
+                    //}
+                    GetAllMenuDetl.Add(privilegemenuUser); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return GetAllMenuDetl;
         }
         ///////////////////////////////// end OperarionPermissionUser/////////////////////////////////////
 
