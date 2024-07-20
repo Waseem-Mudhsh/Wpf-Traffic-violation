@@ -321,14 +321,18 @@ namespace Wpf_Traffic_violation.ViewModel
         bool CanSetPermission() => Currunt_User != null && PermissionUser.Add_opretion == true;
         void SavePermission()
         {
-            foreach (PermissionUser a in Grid_PermissionUsers)
+            if (Grid_formMenu == null)
             {
-                PermissionUserModel.OperarionPermissionUser(a, "Update");
-                // MessageBox.Show(a.Add_opretion.ToString());
+
             }
+            //foreach (FormModel a in Currunt_PermissionForm)
+            //{
+            PermissionUserModel.OperarionPermissionUser(Grid_formMenu, Selected_UserType.userTypeid, "Op");
+            //    // MessageBox.Show(a.Add_opretion.ToString());
+            //}
             // MessageBox.Show(selected_value);
         }
-        bool CanSavePermission() => Grid_PermissionUsers != null;
+        bool CanSavePermission() => Grid_formMenu != null;
         async Task Change()
         {
             SavePermission();

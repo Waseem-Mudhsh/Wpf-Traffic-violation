@@ -103,10 +103,10 @@
 
                     </StackPanel>
                     <Button  x:Name="But_Save_ParmissionSet" 
-                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
+                     Height="40" Uid="7" Command="{Binding SavePermissioncommand}"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSave" Margin="0 0 0 0" Width="24" Height="24" />
-                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">حفظ</TextBlock>
+                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0" >حفظ</TextBlock>
                         </StackPanel>
                     </Button>
 
@@ -118,7 +118,7 @@
             <StackPanel DockPanel.Dock="Top" Background="White" >
 
 
-                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_formMenu}" SelectedItem="{Binding Currunt_PermissionForm}" 
+                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_formMenu}"  
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="900" HorizontalAlignment="Left"
                         Height="480"  >
                     <DataGrid.Resources>
@@ -136,28 +136,48 @@
                         <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
 
                         <!-- set a max length to get an indicator in the editor -->
-                        <DataGridCheckBoxColumn Binding="{Binding Is_active}"
-                                        Header="نشط" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn  Binding="{Binding Add_opretion}"
-                                        Header="إضافة" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn Binding="{Binding Update_opretion}"
-                                        Header="تعديل" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn Binding="{Binding Delete_opretion}"
-                                        Header="حذف" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
+                        <DataGridTemplateColumn  Header="نشط" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding AddOperation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
 
-                        <DataGridCheckBoxColumn Binding="{Binding Select_opretion}"
-                                        Header="عرض" MaxWidth="80" MinWidth="60" 
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="إضافة" MaxWidth="80" MinWidth="60" 
                                          
-                                         />
+                                         >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Add_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn 
+                                        Header="تعديل" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Update_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
+                        <DataGridTemplateColumn 
+                                        Header="حذف" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Delete_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                                        Header="عرض" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Select_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                         <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 

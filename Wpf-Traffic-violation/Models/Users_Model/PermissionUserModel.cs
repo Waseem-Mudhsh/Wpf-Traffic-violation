@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
-using Wpf_Traffic_violation.Core.DataAccess;
-using Wpf_Traffic_violation.Models.Configurations_Model;
-using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
-using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models.Users_Model
 {
@@ -81,50 +74,56 @@ namespace Wpf_Traffic_violation.Models.Users_Model
 
         ///////////////////////////////// start OperarionPermissionGroup/////////////////////////////////////
 
-        public bool OperarionPermissionUser(PermissionUser PermissionUser, string operartion)
+        public bool OperarionPermissionUser(ObservableCollection<FormModel> data, int userid, string operartion)
         {
+
+
             Class_SqlConnection sql = new Class_SqlConnection();
 
-            SqlParameter[] param = new SqlParameter[8];
 
 
-            param[0] = new SqlParameter("@User_id", SqlDbType.Int)
+            foreach (var PermissionUser in data)
             {
-                Value = PermissionUser.User_id
-            };
-            param[1] = new SqlParameter("@Form_id", SqlDbType.Int)
-            {
-                Value = PermissionUser.Form_id
-            };
-            param[2] = new SqlParameter("@Add_opretion", SqlDbType.Bit)
-            {
-                Value = PermissionUser.Add_opretion
-            };
-            param[3] = new SqlParameter("@Delete_opretion", SqlDbType.Bit)
-            {
-                Value = PermissionUser.Delete_opretion
-            };
-            param[4] = new SqlParameter("@Update_opretion", SqlDbType.Bit)
-            {
-                Value = PermissionUser.Update_opretion
-            };
-            param[5] = new SqlParameter("@Select_opretion", SqlDbType.Bit)
-            {
-                Value = PermissionUser.Select_opretion
-            };
-            param[6] = new SqlParameter("@Form", SqlDbType.Bit)
-            {
-                Value = PermissionUser.Form
-            };
-            param[7] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
-            {
-                Value = operartion
-            };
+                SqlParameter[] param = new SqlParameter[8];
 
-            if (!sql.Operarion("opPermissionUser", param))
-            {
-                return false;
+                param[0] = new SqlParameter("@User_type_id", SqlDbType.Int)
+                {
+                    Value = userid
+                };
+                param[1] = new SqlParameter("@Form_id", SqlDbType.Int)
+                {
+                    Value = PermissionUser.FormId
+                };
+                param[2] = new SqlParameter("@Add_opretion", SqlDbType.Bit)
+                {
+                    Value = PermissionUser.Add_opretion
+                };
+                param[3] = new SqlParameter("@Delete_opretion", SqlDbType.Bit)
+                {
+                    Value = PermissionUser.Delete_opretion
+                };
+                param[4] = new SqlParameter("@Update_opretion", SqlDbType.Bit)
+                {
+                    Value = PermissionUser.Update_opretion
+                };
+                param[5] = new SqlParameter("@Select_opretion", SqlDbType.Bit)
+                {
+                    Value = PermissionUser.Select_opretion
+                };
+                param[6] = new SqlParameter("@Form", SqlDbType.Bit)
+                {
+                    Value = PermissionUser.Is_active
+                };
+                param[7] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
+                {
+                    Value = operartion
+                };
+                var result = sphelper.Operarion(param, sP_Query.SP_AddPrivlage, "SP_AddPrivlage");
+                if (result.Data == false)
+                {
+                    //return false;
 
+                }
             }
             return true;
         }

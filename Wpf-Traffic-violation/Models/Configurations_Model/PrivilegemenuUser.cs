@@ -34,6 +34,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
 
         protected bool SetProperty<T>(ref T member, T value, string propertyName)
         {
+
             if (EqualityComparer<T>.Default.Equals(member, value))
             {
                 return false;
