@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Models.Configurations_Model;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models.Users_Model
 {
