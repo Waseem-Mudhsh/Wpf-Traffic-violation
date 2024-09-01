@@ -18,7 +18,7 @@ namespace Wpf_Traffic_violation.Views.Reservation
             Button but = ((Button)sender);
             Changed_Background(but);
             int index = int.Parse(((Button)e.Source).Uid);
-            var permation = Properties.Settings.Default.Userpermission;
+            var permation = Properties.Settings.Default.permissionUser;
             switch (index)
             {
 

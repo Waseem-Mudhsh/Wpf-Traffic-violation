@@ -381,6 +381,7 @@
     <Compile Include="Core\DataAccess\configuration.cs" />
     <Compile Include="Core\DataAccess\Directorate.cs" />
     <Compile Include="Core\DataBase\Storedprocedures\OpreationSql.cs" />
+    <Compile Include="Core\helper\ConvertToTargetType.cs" />
     <Compile Include="Core\helper\ICacheManager.cs" />
     <Compile Include="Core\helper\PermissionHelper.cs" />
     <Compile Include="Core\helper\ResponseObject.cs" />
@@ -542,6 +543,7 @@
     <Compile Include="Models\Configurations_Model\FormModel.cs" />
     <Compile Include="Models\Configurations_Model\MenuDetail.cs" />
     <Compile Include="Models\Configurations_Model\MenuDto.cs" />
+    <Compile Include="Models\Configurations_Model\PermissionsEntity.cs" />
     <Compile Include="Models\Configurations_Model\PlateDetails.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense_Model.cs" />

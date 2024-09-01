@@ -267,7 +267,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
                 trafficMan.Update_Uesrid(Selected_TrafficMan, "Delete_User");
-                UserModel.OperarionUser(Currunt_User, "Delete");
+                userModel.OperarionUser(Currunt_User, "Delete");
                 Grid_Users.Remove(Currunt_User);
 
                 string message1 = "تمت عملية الحذف بنجاح";
@@ -307,10 +307,25 @@ namespace Wpf_Traffic_violation.ViewModel
             //////////////////////////////////////////////////////////
 
             Currunt_User.Usertype = selected_UserType.UserTypeid;
-            if (IsEditing && userModel.Check_Exsit(Currunt_User.Userid))
+            //var IsExsit = userModel.Check_Exsit(Currunt_User.Userid);
+            //if (IsExsit)
+            //{
+
+            //    string message = "رقم المستخدم موجود مسبقا";
+            //    string caption = "رسالة خطا";
+            //    MessageBoxImage icon = MessageBoxImage.Error;
+            //    MessageBoxButton buttons = MessageBoxButton.OK;
+            //    MessageBox.Show(message, caption, buttons, icon);
+
+            //    win.textBox_id.Focus();
+            //    win.textBox_id.SelectionStart = 0;
+            //    win.textBox_id.SelectionLength = win.textBox_id.Text.Length;
+
+            //}
+            if (IsEditing)
             {
 
-                UserModel.OperarionUser(Currunt_User, "Update");
+                userModel.OperarionUser(Currunt_User, "Update");
 
                 IsEditing = false;
                 close();
@@ -325,37 +340,40 @@ namespace Wpf_Traffic_violation.ViewModel
                 ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
             }
-            else if (userModel.Check_Exsit(Currunt_User.Userid))
-            {
-                string message = "رقم المستخدم موجود مسبقا";
-                string caption = "رسالة خطا";
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxButton buttons = MessageBoxButton.OK;
-                MessageBox.Show(message, caption, buttons, icon);
-
-                win.textBox_id.Focus();
-                win.textBox_id.SelectionStart = 0;
-                win.textBox_id.SelectionLength = win.textBox_id.Text.Length;
-            }
-
+            /*else*/ //if (userModel.Check_Exsit(Currunt_User.Userid))
             else
             {
+                try
+                {
+                    var result = userModel.OperarionUser(Currunt_User, "Insert");
+
+                    //trafficMan.Update_Uesrid(Selected_TrafficMan, "Updete_User");
+                    if (result)
+                    {
+                        Grid_Users.Add(Currunt_User);
+                        close();
+                        string message = "تمت عملية الإضافة بنجاح";
+                        string caption = "عملية الإضافة";
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+
+                        ////////////////////////////////////////////////////////////
+                        Current_Activity.Activity_operation_num = 1;
+                        ActivityModel.OperarionActivity(current_Activity, "Insert");
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch
+                {
+
+                }
 
 
-                UserModel.OperarionUser(Currunt_User, "Insert");
-                trafficMan.Update_Uesrid(Selected_TrafficMan, "Updete_User");
 
-                Grid_Users.Add(Currunt_User);
-                close();
-                string message = "تمت عملية الإضافة بنجاح";
-                string caption = "عملية الإضافة";
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxButton buttons = MessageBoxButton.OK;
-                MessageBox.Show(message, caption, buttons, icon);
-
-                ////////////////////////////////////////////////////////////
-                Current_Activity.Activity_operation_num = 1;
-                ActivityModel.OperarionActivity(current_Activity, "Insert");
                 ////////////////////////////////////////////////////////////
 
             }

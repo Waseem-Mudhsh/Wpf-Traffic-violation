@@ -10,6 +10,7 @@
 
 using System.Collections.Generic;
 using Wpf_Traffic_violation.Models;
+using Wpf_Traffic_violation.Models.Configurations_Model;
 using Wpf_Traffic_violation.Models.Users_Model;
 
 namespace Wpf_Traffic_violation.Properties {
@@ -121,7 +122,19 @@ namespace Wpf_Traffic_violation.Properties {
                 this["permission"] = value;
             }
         }
-        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public PermissionsEntity permissionUser
+        {
+            get
+            {
+                return ((PermissionsEntity)(this["permissionUser"]));
+            }
+            set
+            {
+                this["permissionUser"] = value;
+            }
+        }
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -156,15 +169,41 @@ namespace Wpf_Traffic_violation.Properties {
                 return ((string)(this["Traffic_Violation_ManagementConnectionString"]));
             }
         }
-        public List<PermissionUser> Userpermission
+        //public List<PermissionUser> Userpermission
+        //{
+        //    get
+        //    {
+        //        return allPermissions.getPermissionForUser();
+        //    }
+        //    set
+        //    {
+        //        this["Userpermission"] = value;
+        //    }
+
+        //}
+        //public List<MenuDetail> UserPrivlageMenu
+        //{
+        //    get
+        //    {
+        //        return allPermissions.GetMenuPermation();
+        //    }
+        //    set
+        //    {
+        //        this["Userpermission"] = value;
+        //    }
+        //}
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public int UserType
         {
             get
             {
-                return allPermissions.getPermissionForUser();
+                return ((int)(this["UserType"]));
             }
             set
             {
-                this["Userpermission"] = value;
+                this["UserType"] = value;
             }
         }
         [global::System.Configuration.ApplicationScopedSettingAttribute()]

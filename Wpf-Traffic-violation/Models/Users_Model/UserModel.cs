@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Windows;
 using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Core.helper;
 using Wpf_Traffic_violation.Models.Users_Model;
 using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
 using Wpf_Traffic_violation.Services.helper;
@@ -71,9 +72,8 @@ namespace Wpf_Traffic_violation.Models
 
 
 
-        public static bool OperarionUser(User user, string operartion)
+        public bool OperarionUser(User user, string operartion)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
 
             SqlParameter[] param = new SqlParameter[6];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
@@ -103,13 +103,18 @@ namespace Wpf_Traffic_violation.Models
                 Value = operartion
             };
 
-            if (!sql.Operarion("opUser", param))
+
+            //var result = sphelper.GetCollection(param, sP_Query.opUser, "opUser");
+            //if (!result)
+            //{
+            //    return false;
+
+            //}
+            Response<bool> result = sphelper.Operarion(param, sP_Query.opUser, "opUser");
+            if (!(result.Code == 1))
             {
                 return false;
-
             }
-
-
 
             return true;
         }

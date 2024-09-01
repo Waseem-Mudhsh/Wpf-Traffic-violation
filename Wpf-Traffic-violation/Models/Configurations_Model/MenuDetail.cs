@@ -10,15 +10,17 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
         public int menu_id { get; set; }
         public int User_type_id { get; set; }
         public bool is_active { get; set; }
+        public string name { get; set; }
 
         public MenuDetail() { }
 
-        public MenuDetail(int id, int menuId, int userTypeId, bool isActive)
+        public MenuDetail(int id, int menuId, int userTypeId, bool isActive, string name)
         {
             ID = id;
             menu_id = menuId;
             User_type_id = userTypeId;
             is_active = isActive;
+            this.name = name;
         }
 
 

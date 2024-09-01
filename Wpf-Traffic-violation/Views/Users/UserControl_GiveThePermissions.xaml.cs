@@ -29,5 +29,7 @@ namespace Wpf_Traffic_violation.Views
         {
             Panel_group.Visibility = Visibility.Visible;
         }
+
+
     }
 }

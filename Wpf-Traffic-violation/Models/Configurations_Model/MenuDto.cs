@@ -7,6 +7,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
     {
         private int menu_id { get; set; }
         private string menu_name { get; set; }
+        private string menu_name_AR { get; set; }
         public int Menu_id
         {
             get
@@ -34,6 +35,21 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                 {
                     menu_name = value;
                     RaisePropertyChanged("Menu_name");
+                }
+            }
+        }
+        public string Menu_name_AR
+        {
+            get
+            {
+                return menu_name_AR;
+            }
+            set
+            {
+                if (menu_name_AR != value)
+                {
+                    menu_name_AR = value;
+                    RaisePropertyChanged("Menu_name_AR");
                 }
             }
         }

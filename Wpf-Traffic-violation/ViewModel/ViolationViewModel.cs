@@ -22,7 +22,7 @@ namespace Wpf_Traffic_violation.ViewModel
     {
 
         #region Objects And Variables
-        List<PermissionUser> permation = Properties.Settings.Default.Userpermission;
+        PermissionsEntity permation = Properties.Settings.Default.permissionUser;
         Window_AddViolation win;
         ActivityModel ActivityModel = new ActivityModel();
         VoilationModel ViolationModel = new VoilationModel();

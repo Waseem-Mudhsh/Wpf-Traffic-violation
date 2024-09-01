@@ -32,8 +32,10 @@ namespace Wpf_Traffic_violation.Services
                 {
                     if (user.User_short_name == userName && user.User_password == Pasw)
                     {
+
                         Properties.Settings.Default.Userid = user.User_id;
                         Properties.Settings.Default.UserNameSystem = user.User_short_name;
+                        Properties.Settings.Default.UserType = user.User_type;
                         Properties.Settings.Default.Save();
                     }
 

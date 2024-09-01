@@ -42,7 +42,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
 
                 SqlCommand Command = new SqlCommand
                 {
-                    CommandType = CommandType.StoredProcedure,
+                    CommandType = System.Data.CommandType.StoredProcedure,
                     CommandText = "GetPermissionUser",
                     Connection = con
 
@@ -54,7 +54,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                 dataAdapter.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    foreach (DataRow row in dt.Rows)
+                    foreach (System.Data.DataRow row in dt.Rows)
                     {
                         PermissionUser per = new PermissionUser
                         {
@@ -91,6 +91,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
 
             foreach (var PermissionUser in data)
             {
+
                 SqlParameter[] param = new SqlParameter[8];
 
                 param[0] = new SqlParameter("@User_type_id", SqlDbType.Int)
@@ -101,19 +102,19 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                 {
                     Value = PermissionUser.FormId
                 };
-                param[2] = new SqlParameter("@Add_opretion", SqlDbType.Bit)
+                param[2] = new SqlParameter("@Addoperation", SqlDbType.Bit)
                 {
                     Value = PermissionUser.Add_opretion
                 };
-                param[3] = new SqlParameter("@Delete_opretion", SqlDbType.Bit)
+                param[3] = new SqlParameter("@Deleteoperation", SqlDbType.Bit)
                 {
                     Value = PermissionUser.Delete_opretion
                 };
-                param[4] = new SqlParameter("@Update_opretion", SqlDbType.Bit)
+                param[4] = new SqlParameter("@Updateoperation", SqlDbType.Bit)
                 {
                     Value = PermissionUser.Update_opretion
                 };
-                param[5] = new SqlParameter("@Select_opretion", SqlDbType.Bit)
+                param[5] = new SqlParameter("@Selectoperation", SqlDbType.Bit)
                 {
                     Value = PermissionUser.Select_opretion
                 };
@@ -142,12 +143,13 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             var response = sphelper.GetCollection(sP_Query.GetAllMenu, "GetAllMenu");
             if (response.Count > 0)
             {
-                foreach (DataRow row in response)
+                foreach (System.Data.DataRow row in response)
                 {
                     MenuDto per = new MenuDto
                     {
                         Menu_id = (int)row[0],
                         Menu_name = (string)row[1],
+                        Menu_name_AR = (string)row[2],
 
                     };
 
@@ -158,14 +160,14 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             }
             return GetAllMenu;
         }
-        public ObservableCollection<MenuDetail> GetMenuDetl()
+        public ObservableCollection<MenuDetail> GetMenuDetl(int userTypeId = 0)
         {
             ObservableCollection<MenuDetail> GetAllMenuDetl = new ObservableCollection<MenuDetail>();
 
             var response = sphelper.GetCollection(sP_Query.GetAllMenuDetl, "GetAllMenuDetl");
             if (response.Count > 0)
             {
-                foreach (DataRow row in response)
+                foreach (System.Data.DataRow row in response)
                 {
                     MenuDetail per = new MenuDetail
                     {
@@ -173,7 +175,9 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                         ID = (int)row[0],
                         menu_id = (int)row[1],
                         User_type_id = (int)row[2],
-                        is_active = (bool)row[3]
+                        is_active = (bool)row[3],
+                        name = (string)row[4],
+
 
 
                     };
@@ -195,7 +199,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             var result = sphelper.GetCollectionByParam(sP_Query.GetFormBymenuid, "GetFormBymenuid", getparam);
             if (result.Data.Count > 0)
             {
-                foreach (DataRow row in result.Data)
+                foreach (System.Data.DataRow row in result.Data)
                 {
                     FormModel per = new FormModel
                     {
@@ -214,7 +218,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             }
             return GetAllMenuDetl;
         }
-        public ObservableCollection<PrivilegemenuUser> GetPrivilegeUser(int menuId, int usertypeId)
+        public ObservableCollection<PrivilegemenuUser> GetPrivilegeUser(int menuId = 0, int usertypeId = 0)
         {
             ObservableCollection<PrivilegemenuUser> GetAllMenuDetl = new ObservableCollection<PrivilegemenuUser>();
 
@@ -225,7 +229,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             var result = sphelper.GetCollectionByParam(sP_Query.GetmenuPrivilegeUser, "GetmenuPrivilegeUser", getparam);
             if (result.Data.Count > 0)
             {
-                foreach (DataRow row in result.Data)
+                foreach (System.Data.DataRow row in result.Data)
                 {
                     PrivilegemenuUser privilegemenuUser = new PrivilegemenuUser
                     {
@@ -248,7 +252,30 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             }
             return GetAllMenuDetl;
         }
-        ///////////////////////////////// end OperarionPermissionUser/////////////////////////////////////
 
+        public bool addprivlageForMenu(int userTypeid, int menu_id, bool isSelectedmenu)
+        {
+            ObservableCollection<bool> result;
+            SqlParameter[] param = new SqlParameter[3];
+            //@user_id, @user_name, @user_pass, @user_type, @user_status
+            param[0] = new SqlParameter("@menuId", SqlDbType.Int)
+            {
+                Value = menu_id
+            };
+            param[1] = new SqlParameter("@usertypeId", SqlDbType.Int)
+            {
+                Value = userTypeid
+            };
+
+            param[2] = new SqlParameter("@isActive", SqlDbType.Bit)
+            {
+                Value = isSelectedmenu
+            };
+
+            var response = sphelper.Operarion(param, sP_Query.Sp_addprivlageForMenu, "Sp_addprivlageForMenu");
+
+            return response.Data;
+
+        }
     }
 }

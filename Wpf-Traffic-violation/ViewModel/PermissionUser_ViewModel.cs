@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Configurations_Model;
@@ -10,6 +11,7 @@ namespace Wpf_Traffic_violation.ViewModel
 {
     public class PermissionUser_ViewModel : BindableBase
     {
+
 
         #region Objects And Variables
         //Models.UserModel userModel = new UserModel();
@@ -27,6 +29,8 @@ namespace Wpf_Traffic_violation.ViewModel
         ObservableCollection<MenuDetail> grid_MenuDetl;
         ObservableCollection<FormModel> grid_formMenu;
         ObservableCollection<PrivilegemenuUser> gridmenuUser;
+
+        //bool IsSelectedmenu = false;
         ObservableCollection<PrivilegemenuUser> GridmenuForUser
         {
             get
@@ -76,6 +80,26 @@ namespace Wpf_Traffic_violation.ViewModel
                 }
             }
         }
+        bool isSelectedmenu;
+
+        public bool IsSelectedmenu
+        {
+            get
+            {
+                return isSelectedmenu;
+
+            }
+            set
+            {
+                if (isSelectedmenu != value)
+                {
+                    isSelectedmenu = value;
+                    RaisePropertyChanged("IsSelectedmenu");
+                    //changStatusForMenu();
+                }
+            }
+        }
+
         public ObservableCollection<FormModel> Grid_formMenu
         {
             get
@@ -169,8 +193,8 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 if (selected_Menu != value)
                 {
-                    checkedMenu(value);
                     selected_Menu = value;
+                    checkedMenu(value);
                     RaisePropertyChanged("Selected_Menu");
                 }
             }
@@ -292,7 +316,6 @@ namespace Wpf_Traffic_violation.ViewModel
             Comb.Add("التهيئة");
             Comb.Add("الإعدادات");
             Comb.Add("التقارير");
-
             Grid_Usertype = new ObservableCollection<User_type>();
             Grid_menu = new ObservableCollection<MenuDto>();
             Grid_Usertype = UserModel.GetUserType();
@@ -301,33 +324,64 @@ namespace Wpf_Traffic_violation.ViewModel
             // PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "setting", 1);
             Grid_User = new ObservableCollection<User>();
             Grid_User = UserModel.GetUsers();
-            Permissioncommand = new RelayCommand(par => SetPermission(), par => CanSetPermission());
+            Permissioncommand = new RelayCommand(par => SetPermissionMenu(), par => CanSetPermission());
             SavePermissioncommand = new RelayCommand(par => SavePermission(), par => CanSavePermission());
             Changecommad = new RelayCommand(par => Change());
-
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 31;
+            IsSelectedmenu = false;
 
         }
         #endregion
         #region Methodes And Events
-        void SetPermission()
+
+        void changStatusForMenu()
+        {
+            try
+            {
+                if (Selected_UserType != null && Selected_Menu != null)
+                {
+                    IsSelectedmenu = PermissionUserModel.addprivlageForMenu(Selected_UserType.UserTypeid, Selected_Menu.Menu_id, IsSelectedmenu);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+        void SetPermissionMenu()
         {
 
-            Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
-            Grid_PermissionUsers = PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid);
-            selected_value = "المخالفات";
+            //Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
+            //Grid_PermissionUsers = PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid);
+            //selected_value = "المخالفات";
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+
         }
         bool CanSetPermission() => Currunt_User != null && PermissionUser.Add_opretion == true;
         void SavePermission()
         {
+            changStatusForMenu();
+
             if (Grid_formMenu == null)
             {
 
             }
             //foreach (FormModel a in Currunt_PermissionForm)
             //{
-            PermissionUserModel.OperarionPermissionUser(Grid_formMenu, Selected_UserType.userTypeid, "Op");
+            PermissionUserModel.OperarionPermissionUser(Grid_formMenu, Selected_UserType.userTypeid, "OP");
             //    // MessageBox.Show(a.Add_opretion.ToString());
             //}
             // MessageBox.Show(selected_value);
@@ -386,36 +440,58 @@ namespace Wpf_Traffic_violation.ViewModel
             try
             {
                 ObservableCollection<FormModel> formsmenu = new ObservableCollection<FormModel>();
-                // get formmenu if the form have permation
-                GridmenuForUser = PermissionUserModel.GetPrivilegeUser(menuDto.Menu_id, Selected_UserType.userTypeid);
-                if (GridmenuForUser.Count > 0)
+
+                if (Selected_UserType == null || Selected_Menu == null)
                 {
-                    foreach (PrivilegemenuUser privilegemenu in GridmenuForUser)
-                    {
-
-                        FormModel formModel = new FormModel
-                        {
-                            FormId = privilegemenu.FormId,
-                            FormName = privilegemenu.FormName,
-                            Add_opretion = privilegemenu.PrivilegeAdd,
-                            Delete_opretion = privilegemenu.PrivilegeDelete,
-                            Select_opretion = privilegemenu.PrivilegeSelect,
-                            Update_opretion = privilegemenu.PrivilegeUpdate,
-                            Is_active = privilegemenu.PrivilegeForm,
-
-
-                        };
-                        formsmenu.Add(formModel);
-
-                    }
-                    Grid_formMenu = formsmenu;
-
+                    MessageBox.Show("يرجى اختيار الرول الشاشة اولا");
                 }
                 else
                 {
-                    Grid_formMenu = PermissionUserModel.GetFormBymenuid(menuDto.Menu_id);
+                    //get menu detale to check if active 
+                    var getmenuDetl = PermissionUserModel.GetMenuDetl();
+                    foreach (var o in getmenuDetl)
+                    {
+                        if (o.menu_id == Selected_Menu.Menu_id && o.User_type_id == Selected_UserType.UserTypeid)
+                        {
+                            IsSelectedmenu = o.is_active;
+                            break;
+                        }
+                    }
+
+                    // get formmenu if the form have permation
+                    GridmenuForUser = PermissionUserModel.GetPrivilegeUser(menuDto.Menu_id, Selected_UserType.userTypeid);
+                    if (GridmenuForUser.Count > 0)
+                    {
+                        foreach (PrivilegemenuUser privilegemenu in GridmenuForUser)
+                        {
+
+                            FormModel formModel = new FormModel
+                            {
+                                FormId = privilegemenu.FormId,
+                                FormName = privilegemenu.FormName,
+                                Add_opretion = privilegemenu.PrivilegeAdd,
+                                Delete_opretion = privilegemenu.PrivilegeDelete,
+                                Select_opretion = privilegemenu.PrivilegeSelect,
+                                Update_opretion = privilegemenu.PrivilegeUpdate,
+                                Is_active = privilegemenu.PrivilegeForm,
+
+
+                            };
+                            formsmenu.Add(formModel);
+
+                        }
+
+                        Grid_formMenu = formsmenu;
+
+                    }
+                    else
+                    {
+                        Grid_formMenu = PermissionUserModel.GetFormBymenuid(menuDto.Menu_id);
+
+                    }
 
                 }
+
 
             }
             catch (Exception e)
@@ -429,9 +505,10 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Commands
 
         public RelayCommand Permissioncommand { get; private set; }
-        public RelayCommand SavePermissioncommand { get; private set; }
+        public RelayCommand addmenuForUser { get; private set; }
         public RelayCommand Changecommad { get; private set; }
         public RelayCommand ValueSelectedMenu { get; private set; }
+        public RelayCommand SavePermissioncommand { get; private set; }
         //private ICommand _myCheckBoxCommand;
         //public ICommand IsCheckCommand
         //{

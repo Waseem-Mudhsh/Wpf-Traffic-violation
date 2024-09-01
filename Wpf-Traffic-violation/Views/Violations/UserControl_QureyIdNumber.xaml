@@ -339,7 +339,7 @@
                                 </TransformGroup>
                             </DataGrid.RenderTransform>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" 
+                                <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" x:Name="selectedviolation"
                                                     
                                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">

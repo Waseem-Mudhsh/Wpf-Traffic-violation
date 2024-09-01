@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using Wpf_Traffic_violation.Models.Violations_Model;
 
@@ -13,6 +14,15 @@ namespace Wpf_Traffic_violation.Views
         {
 
             InitializeComponent();
+            gridselected();
+
+
+        }
+        private void gridselected()
+        {
+            var permation = Properties.Settings.Default.permissionUser.FormPrevlg.Where(o => o.FormId == 1008).FirstOrDefault();
+
+            dataGrid.IsReadOnly = !permation.PrivilegeUpdate;// = permation.PrivilegeUpdate;
 
         }
 

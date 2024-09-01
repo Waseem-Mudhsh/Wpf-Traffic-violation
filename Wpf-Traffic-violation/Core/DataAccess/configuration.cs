@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.Core.helper;
 using Wpf_Traffic_violation.Services.helper;
 
@@ -316,7 +312,6 @@ namespace Wpf_Traffic_violation.Core.DataAccess
                                 };
                                 if (parameters != null)
                                 {
-                                    //Command.Parameters.Add(parameters);
                                     Command.Parameters.AddRange(parameters);
 
                                 }

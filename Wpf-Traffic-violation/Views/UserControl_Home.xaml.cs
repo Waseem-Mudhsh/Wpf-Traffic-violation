@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Wpf_Traffic_violation.Models;
-using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -28,8 +15,8 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_Home()
         {
             InitializeComponent();
-            
-           
+
+
             //violationtotal.Text = (s.GetStatisticViolation(fromviolation.Text.ToString(), toviolation.Text.ToString(), 1).ToString())=="" ? violationtotal.Text:null;
             //violationPayment.Text = s.GetStatisticViolation(fromviolation.Text.ToString(), toviolation.Text.ToString(), 2).ToString();
 
@@ -37,7 +24,7 @@ namespace Wpf_Traffic_violation.Views
             //commtotal.Text = sa.GetStatisticCommunication(commfrom.Text.ToString(), commto.Text.ToString(), 1).ToString();
             //commtotal1.Text = sa.GetStatisticCommunication(commfrom1.Text.ToString(), commto1.Text.ToString(), 2).ToString();
 
-           
+
             //Opjtotal.Text = O.GetStatisticOpjection(Opjfrom.Text.ToString(), Opjto.Text.ToString(), 1).ToString();
             //opjtotal1.Text = O.GetStatisticOpjection(Opjfrom1.Text.ToString(), Opjto1.Text.ToString(), 2).ToString();
             //Frame_home.Content = new UserControl1GridDataCommunications();
