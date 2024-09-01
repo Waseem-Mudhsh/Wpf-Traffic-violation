@@ -55,6 +55,10 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <TextBlock Text="أسم المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <TextBox       Height="40" Width="240" Text="{Binding Currunt_User.Username,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" 
+                        materialDesign:HintAssist.Hint="أسم المستخدم..."
+                         BorderThickness="1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="16  0 9 0" FontFamily="Tajawal" FontSize="14" TabIndex="2" />
+
                 <!--<ComboBox Name="trafficman"      Height="40" Width="240" ItemsSource="{Binding Get_Trafficman}" Margin="0,9,0,9"  
                             SelectedItem="{Binding Selected_TrafficMan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           
@@ -79,7 +83,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>-->
-                <ComboBox Name="trafficman" Width="240" Height="40" BorderThickness="1 1 1 1"
+                <!--<ComboBox Name="trafficman" Width="240" Height="40" BorderThickness="1 1 1 1"
                           ItemsSource="{Binding Grid_CombboxTraffic}"
                           SelectedItem="{Binding Selected_TrafficMan ,UpdateSourceTrigger=PropertyChanged}" 
                           Padding="10,10,0,0" Background="White" Margin="0 9" FontSize="14" FontFamily="Tajawal"  Foreground="Black"
@@ -89,7 +93,7 @@
                             <TextBlock Text="{Binding Traffic_man_name ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
-                </ComboBox>
+                </ComboBox>-->
 
                 <TextBlock Text="كلمة المرور :" Margin="40 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>
                 <TextBox       Height="40" Width="240" Text="{Binding Currunt_User.Userpassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" 
@@ -100,13 +104,18 @@
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <TextBlock Text="نوع المستخدم :" Margin="15 0 030 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <ComboBox  Width="240" Height="40" 
-                            Text="{Binding Currunt_User.String_usertype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           ItemsSource="{Binding Grid_Usertype}"
+                           SelectedItem="{Binding Selected_UserType,UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding Currunt_User.usertype,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          SelectedIndex="0" 
                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryAccentBrush}"
                           materialDesign:ColorZoneAssist.Mode="Standard"
                           Padding="10,10,0,0" Background="White" Foreground="Black"  Margin="0 0 25 0" FontFamily="Tajawal" FontSize="14" BorderThickness="1"  TabIndex="3">
-                    <ComboBoxItem IsSelected="True" >النظام</ComboBoxItem>
-                    <ComboBoxItem>التطبيق</ComboBoxItem>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding UserTypeName ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <TextBlock Text="نشط :" Margin="15,18,20,18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="99"/>

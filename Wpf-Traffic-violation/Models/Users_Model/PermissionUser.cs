@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models.Users_Model
@@ -155,7 +151,8 @@ namespace Wpf_Traffic_violation.Models.Users_Model
             }
         }
         string Form_name;
-        public string Nameform {
+        public string Nameform
+        {
             get
             {
                 return Form_name;
@@ -168,7 +165,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                     RaisePropertyChanged("Form_name");
                 }
             }
-           }
+        }
         string Code;
         public string Codeform
         {

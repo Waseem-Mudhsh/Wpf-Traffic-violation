@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf_Traffic_violation.Commands;
@@ -124,7 +121,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (grid_Citizen != value)
                 {
                     grid_Citizen = value;
-                   
+
                     RaisePropertyChanged("Grid_Citizen");
                 }
             }
@@ -141,7 +138,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 if (currunt_Citizen != value)
                 {
-                    
+
                     currunt_Citizen = value;
                     RaisePropertyChanged("Currunt_Citizen");
                     if (Currunt_Citizen != null)
@@ -207,13 +204,13 @@ namespace Wpf_Traffic_violation.ViewModel
 
             PermissionUser = new PermissionUser();
             PermissionUser.Form_id = 8;
-           
+
             PermissionUser1 = new PermissionUser();
             PermissionUser1.Form_id = 9;
             new AllPermissions().getPermission(PermissionUser1);
 
             Current_Activity = new Activity();
-            
+
 
         }
         #endregion
@@ -222,15 +219,15 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             Grid_Opjection = new ObservableCollection<Opjection>();
 
-            Grid_Opjection = await Task.Run(()=> OpjectionModel.GetOpjectionasync());
+            Grid_Opjection = await Task.Run(() => OpjectionModel.GetOpjectionasync());
             Grid_Citizen = new ObservableCollection<Citizen>();
 
-            Grid_Citizen= await Task.Run(()=>CitizenModel.GetCitizens());
+            Grid_Citizen = await Task.Run(() => CitizenModel.GetCitizens());
             Grid_ReasonsToObject = new ObservableCollection<ReasonsToObject>();
-            Grid_ReasonsToObject= await Task.Run(()=> ReasonsToObjection_Model.GetReasonToObjection());
-           
+            Grid_ReasonsToObject = await Task.Run(() => ReasonsToObjection_Model.GetReasonToObjection());
+
         }
-       
+
 
         public void Add()
         {
@@ -260,7 +257,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (a.Citizen_id == Currunt_Opjection.Identity_id)
                     Currunt_Citizen = a;
             }
-            
+
             win.citizenid.SelectedItem = Currunt_Citizen;
             win.citizenname.SelectedItem = Currunt_Citizen;
 
@@ -297,19 +294,19 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (a.Violation_id == Currunt_Opjection.Violation_id)
                     Selected_Violation = a;
             }
-            win1.violatinid.SelectedItem= Selected_Violation;
-            win1.violationname.SelectedItem= Selected_Violation;
+            win1.violatinid.SelectedItem = Selected_Violation;
+            win1.violationname.SelectedItem = Selected_Violation;
             if (Currunt_Opjection.Status == 1)
                 win1.RadioButton1.IsChecked = true;
             else if (Currunt_Opjection.Status == 2)
                 win1.RadioButton2.IsChecked = true;
-            
+
             win1.ShowDialog();
             //   MessageBox.Show(Currunt_Citizen.Citizen_name);
 
         }
         bool CanScan() => Currunt_Opjection != null && PermissionUser1.Form == true;
-       public void Delet()
+        public void Delet()
         {
             OpjectionModel.OperarionOpjection(Currunt_Opjection, "Delete");
             string message = "هل تريد الحذف ؟";
@@ -335,7 +332,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 // OpjectionModel.OperarionCitizen(Currunt_Citizen, "Delete");
                 Grid_Opjection.Remove(Currunt_Opjection);
 
-               
+
 
             }
             else
@@ -346,16 +343,16 @@ namespace Wpf_Traffic_violation.ViewModel
 
         }
         bool CanDelet() => Currunt_Opjection != null && PermissionUser.Delete_opretion == true;
-       public void Save()
+        public void Save()
         {
-            
+
             Currunt_Opjection.Identity_id = Currunt_Citizen.Citizen_id;
             Currunt_Opjection.String_Ciziten = Currunt_Citizen.Citizen_name;
             Currunt_Opjection.Violation_id = Selected_Violation.Violation_id;
             Currunt_Opjection.Status = 0;
 
 
-           
+
 
 
 
@@ -392,7 +389,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
                     close();
                 }
-              
+
                 else if (OpjectionModel.Check_Exsit(Currunt_Opjection.Interception_id))
                 {
                     //Currunt_Opjection.Reason_Interception = win.aa.Text.ToString();
@@ -446,8 +443,8 @@ namespace Wpf_Traffic_violation.ViewModel
 
             //Enable_Grid = false;
         }
-        bool CanSave() => Currunt_Opjection != null && !Currunt_Opjection.HasErrors  && Currunt_Citizen != null&&Selected_Violation!=null;
-       public void close()
+        bool CanSave() => Currunt_Opjection != null && !Currunt_Opjection.HasErrors && Currunt_Citizen != null && Selected_Violation != null;
+        public void close()
         {
             Currunt_Opjection = null;
             try { win.Close(); }
@@ -461,66 +458,66 @@ namespace Wpf_Traffic_violation.ViewModel
             Currunt_Opjection.Identity_id = Currunt_Citizen.Citizen_id;
             Currunt_Opjection.String_Ciziten = Currunt_Citizen.Citizen_name;
             Currunt_Opjection.Violation_id = Selected_Violation.Violation_id;
-           
+
 
             //MessageBox.Show(Currunt_Opjection.Interception_date);
 
 
-            
 
-                if (IsScaning && OpjectionModel.Check_Exsit(Currunt_Opjection.Interception_id))
-                {
-                    if (win1.RadioButton1.IsChecked == true)
+
+            if (IsScaning && OpjectionModel.Check_Exsit(Currunt_Opjection.Interception_id))
+            {
+                if (win1.RadioButton1.IsChecked == true)
                 {
                     Currunt_Opjection.Status = 1;
                 }
-                        
-                    else if (win1.RadioButton2.IsChecked == true)
-                        Currunt_Opjection.Status = 2;
-                    else
-                        Currunt_Opjection.Status = 0;
 
-                    OpjectionModel.OperarionOpjection(Currunt_Opjection, "Update");
-                    IsScaning = false;
-                    close();
-                    string message = "تمت عملية الفحص بنجاح";
-                    string caption = "عملية الفحص";
-                    MessageBoxImage icon = MessageBoxImage.Information;
-                    MessageBoxButton buttons = MessageBoxButton.OK;
+                else if (win1.RadioButton2.IsChecked == true)
+                    Currunt_Opjection.Status = 2;
+                else
+                    Currunt_Opjection.Status = 0;
 
-                    MessageBox.Show(message, caption, buttons, icon);
-                    asyncgetOpjection();
-                    //////////////////////////////////////////////////////////////
+                OpjectionModel.OperarionOpjection(Currunt_Opjection, "Update");
+                IsScaning = false;
+                close();
+                string message = "تمت عملية الفحص بنجاح";
+                string caption = "عملية الفحص";
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxButton buttons = MessageBoxButton.OK;
 
-                    Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
-                    Current_Activity.Activity_date = DateTime.Now.Date.ToString();
-                    Current_Activity.User_id = Properties.Settings.Default.Userid;
-                    Current_Activity.Form_id = 9;
-                    Current_Activity.Activity_record_num = Currunt_Opjection.Interception_id;
+                MessageBox.Show(message, caption, buttons, icon);
+                asyncgetOpjection();
+                //////////////////////////////////////////////////////////////
 
-                    //////////////////////////////////////////////////////////
-                    ////////////////////////////////////////////////////////////
-                    Current_Activity.Activity_operation_num = 4;
-                    ActivityModel.OperarionActivity(current_Activity, "Insert");
-                    ////////////////////////////////////////////////////////////
+                Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+                Current_Activity.Activity_date = DateTime.Now.Date.ToString();
+                Current_Activity.User_id = Properties.Settings.Default.Userid;
+                Current_Activity.Form_id = 9;
+                Current_Activity.Activity_record_num = Currunt_Opjection.Interception_id;
 
-                }
-                else if (OpjectionModel.Check_Exsit(Currunt_Opjection.Interception_id))
-                {
-                    //Currunt_Opjection.Reason_Interception = win.aa.Text.ToString();
-                    string message = "رقم المستخدم موجود مسبقا";
-                    string caption = "رسالة خطا";
-                    MessageBoxImage icon = MessageBoxImage.Error;
-                    MessageBoxButton buttons = MessageBoxButton.OK;
-                    MessageBox.Show(message, caption, buttons, icon);
-                }
-              
+                //////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////
+                Current_Activity.Activity_operation_num = 4;
+                ActivityModel.OperarionActivity(current_Activity, "Insert");
+                ////////////////////////////////////////////////////////////
 
-         
+            }
+            else if (OpjectionModel.Check_Exsit(Currunt_Opjection.Interception_id))
+            {
+                //Currunt_Opjection.Reason_Interception = win.aa.Text.ToString();
+                string message = "رقم المستخدم موجود مسبقا";
+                string caption = "رسالة خطا";
+                MessageBoxImage icon = MessageBoxImage.Error;
+                MessageBoxButton buttons = MessageBoxButton.OK;
+                MessageBox.Show(message, caption, buttons, icon);
+            }
+
+
+
 
             //Enable_Grid = false;
         }
-        bool CanSave_scan() => win1.RadioButton1.IsChecked==true||win1.RadioButton2.IsChecked==true ;
+        bool CanSave_scan() => win1.RadioButton1.IsChecked == true || win1.RadioButton2.IsChecked == true;
 
         #endregion
         #region Commands

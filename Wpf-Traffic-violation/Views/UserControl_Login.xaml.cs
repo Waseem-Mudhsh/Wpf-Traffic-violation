@@ -43,10 +43,11 @@ namespace Wpf_Traffic_violation.Views
                 var checkofUser = LoginModel.Login(username.Text, password.Password.ToString());
                 if (checkofUser)
                 {
+                    new AllPermissions().getAllPermissions();
+
                     UserControl_Main UserControl_Main = new UserControl_Main { DataContext = this };
                     Grid_Login.Children.Clear();
                     UserControl_Main.TextBlockUserName.Text = username.Text;
-                    new AllPermissions().getAllPermissions();
                     Grid_Login.Children.Add(UserControl_Main);
 
 

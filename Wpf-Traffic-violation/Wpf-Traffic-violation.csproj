@@ -12,7 +12,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>21</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -381,6 +381,7 @@
     <Compile Include="Core\DataAccess\configuration.cs" />
     <Compile Include="Core\DataAccess\Directorate.cs" />
     <Compile Include="Core\DataBase\Storedprocedures\OpreationSql.cs" />
+    <Compile Include="Core\helper\ConvertToTargetType.cs" />
     <Compile Include="Core\helper\ICacheManager.cs" />
     <Compile Include="Core\helper\PermissionHelper.cs" />
     <Compile Include="Core\helper\ResponseObject.cs" />
@@ -539,6 +540,10 @@
     <Compile Include="Models\AllPermissions.cs" />
     <Compile Include="Models\Communication_Model\Communication.cs" />
     <Compile Include="Models\Communication_Model\CommunicationModel.cs" />
+    <Compile Include="Models\Configurations_Model\FormModel.cs" />
+    <Compile Include="Models\Configurations_Model\MenuDetail.cs" />
+    <Compile Include="Models\Configurations_Model\MenuDto.cs" />
+    <Compile Include="Models\Configurations_Model\PermissionsEntity.cs" />
     <Compile Include="Models\Configurations_Model\PlateDetails.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense.cs" />
     <Compile Include="Models\Configurations_Model\DrivingLicense_Model.cs" />
@@ -549,6 +554,7 @@
     <Compile Include="Models\Class_SqlConnection.cs" />
     <Compile Include="Models\Configurations_Model\Plate.cs" />
     <Compile Include="Models\Configurations_Model\Plate_Model.cs" />
+    <Compile Include="Models\Configurations_Model\PrivilegemenuUser.cs" />
     <Compile Include="Models\Configurations_Model\Provinces_Model.cs" />
     <Compile Include="Models\Configurations_Model\Directorate.cs" />
     <Compile Include="Models\Configurations_Model\PlateOfType.cs" />
@@ -591,6 +597,7 @@
     <Compile Include="Models\Configurations_Model\VehicleModel.cs" />
     <Compile Include="Models\Configurations_Model\ViolationType.cs" />
     <Compile Include="Models\Configurations_Model\ViolationTypeModel.cs" />
+    <Compile Include="Models\Users_Model\User_type.cs" />
     <Compile Include="Models\Violations_Model\ExcelData.cs" />
     <Compile Include="Models\Violations_Model\ExtraDetailReportModel.cs" />
     <Compile Include="Models\Violations_Model\oldviolation.cs" />
@@ -648,6 +655,7 @@
     <Compile Include="ViewModel\Home_viewModel.cs" />
     <Compile Include="ViewModel\OpjectionViewModel.cs" />
     <Compile Include="ViewModel\PermissionSet_ViewModel.cs" />
+    <Compile Include="ViewModel\PermissionsUser.cs" />
     <Compile Include="ViewModel\PermissionUser_ViewModel.cs" />
     <Compile Include="ViewModel\PlateOfType_ViewModel.cs" />
     <Compile Include="ViewModel\Plate_ViewModel.cs" />
@@ -805,6 +813,15 @@
     </Compile>
     <Compile Include="Views\Reports\Violations\UserControl_Report_Violations.xaml.cs">
       <DependentUpon>UserControl_Report_Violations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\Enter_Reservation.xaml.cs">
+      <DependentUpon>Enter_Reservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\Exite_reservation.xaml.cs">
+      <DependentUpon>Exite_reservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\Main_reservation.xaml.cs">
+      <DependentUpon>Main_reservation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlForm1.xaml.cs">
       <DependentUpon>UserControlForm1.xaml</DependentUpon>
@@ -1206,6 +1223,18 @@
     <Page Include="Views\Reports\Violations\UserControl_Report_Violations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Reservation\Enter_Reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservation\Exite_reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservation\Main_reservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControlForm1.xaml">
       <SubType>Designer</SubType>

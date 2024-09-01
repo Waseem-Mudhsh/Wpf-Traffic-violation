@@ -63,7 +63,7 @@ public class ExcelReader
                         var violatiotype = violationTypeModel.GetViolationTypeByName(worksheet.Cells[row, 4].Text);
                         var platypeid = plateOfType_Model.GetPlateByName(plateName[0]).Plate_type_id;
                         var streetid = street_Model.GetStreetByName(worksheet.Cells[row, 5].Text);
-                        if (violatiotype == null || platypeid == 0 || streetid == null)
+                        if (violatiotype.Violation_type_id == 0 || platypeid == 0 || streetid.Street_id == 0)
                         {
                             MessageBox.Show("قد يكون هناك بيانات غير مهيئه في النظام " + row + "يرجى مراجعة البايانات في الصف ");
                             return false;

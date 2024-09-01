@@ -101,7 +101,7 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="خصم =" Foreground="DodgerBlue" FontFamily="Tajawal" FontSize="14" FontWeight="Bold" VerticalAlignment="Center" Margin="30 0 20 0"/>
-                                        <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt}"
+                                        <TextBox    x:Name="AmntDisconr"   Height="40" Width="240" Text="{Binding DiscontAmnt,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="0"
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,9" FontFamily="Tajawal" FontSize="14" />
 
@@ -339,7 +339,7 @@
                                 </TransformGroup>
                             </DataGrid.RenderTransform>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" 
+                                <DataGridCheckBoxColumn  Binding="{Binding Isselected , UpdateSourceTrigger=PropertyChanged}" x:Name="selectedviolation"
                                                     
                                                 ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
                                                 EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">

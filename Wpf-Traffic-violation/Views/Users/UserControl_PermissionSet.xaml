@@ -20,9 +20,6 @@
 
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center" >
-
-                    <!--top-->
-
                     <Button  x:Name="But_Permission"  Margin="50 0 0 0"  Command="{Binding Permissioncommand}" Click="But_Permission_Click"
                      Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" >
                         <StackPanel Orientation="Horizontal">
@@ -60,7 +57,7 @@
 
                 <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="10,5,5,0" ItemsSource="{Binding Grid_PermissionSets}" SelectedItem="{Binding Currunt_PermissionSet}"
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="400" HorizontalAlignment="Right"
-                      Height="480"    >
+                    Height="480"    >
                     <DataGrid.Resources>
 
                     </DataGrid.Resources>
@@ -93,7 +90,7 @@
 
             </StackPanel>
         </DockPanel>
-        <DockPanel Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft"  Visibility="Hidden" >
+        <DockPanel Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft"   >
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Left"  >
 

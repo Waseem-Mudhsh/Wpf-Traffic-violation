@@ -46,7 +46,7 @@
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,5" FontFamily="Tajawal" FontSize="14" 
                             >
 
-                
+
 
                 </TextBox>
                 <TextBlock Text="رقم السند" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
@@ -86,8 +86,8 @@
                         materialDesign:HintAssist.Hint="" 
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,5" FontFamily="Tajawal" FontSize="14" 
                             >
-                    
-                        <!--<TextBox.InputBindings>
+
+                    <!--<TextBox.InputBindings>
                         <KeyBinding Command="{Binding FilterViolation}" Key="Enter"  ></KeyBinding>
                     </TextBox.InputBindings>-->
 
@@ -120,22 +120,22 @@
             </StackPanel>
 
         </Border>
-        <StackPanel x:Name="trkSetWidthAdjust" Grid.Row="0" Grid.Column="0" Margin="20 20 20 20" Background="White" Height="auto" Width="auto">
-            <Grid Name="TrkAnalysisDataGrid" >
+        <StackPanel x:Name="trkSetWidthAdjust"  Margin="20 20 20 20" Background="White" Height="auto" Width="auto">
+            <Grid Name="TrkAnalysisDataGrid"  >
                 <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Background="White"  Height="480">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Background="White"  Height="auto"  Margin="152,0,0,0" Grid.Column="1">
                     <DataGrid  x:Name="GriddataViolation"
                            Style="{StaticResource Style_Datagrid}"
                            ItemsSource="{Binding Local_CollectionViolation}"  
                           SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Height="510" Width="1194" 
+                             Height="510" Width="auto" 
                            >
 
                         <DataGrid.Columns>
@@ -158,19 +158,19 @@
                                                        MinWidth="80"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <DataGridTextColumn   Binding="{Binding Plate_Num}"
-                                                           Header="رقم اللوحة"  MinWidth="80"
+                                                           Header="رقم اللوحة"  MinWidth="50"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <DataGridTextColumn   Binding="{Binding Plate_Type}"
                                                            Header="نوع اللوحة"  MinWidth="50"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <DataGridTextColumn   Binding="{Binding Provinceid}"
-                                                           Header="رمز المحافظة"  MinWidth="80"
+                                                           Header="رمز المحافظة"  MinWidth="20" Width="auto"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <DataGridTextColumn Binding="{Binding String_ViolationType}"
                                                         Header="نوع المخالفة" MinWidth="50"
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                             <DataGridTextColumn  Binding="{Binding Amount}"
-                                                           Header="المبلغ"  MinWidth="80"
+                                                           Header="المبلغ"  MinWidth="50"
                                                             
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <!--<materialDesign:DataGridTextColumn Binding="{Binding Description}"
@@ -182,7 +182,7 @@
                                                            MaxLength="255" 
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />-->
                             <DataGridTextColumn   Binding="{Binding String_Street}"
-                                                           Header="مكان المخالفة"  MinWidth="80"
+                                                           Header="مكان المخالفة"  MinWidth="50"
                                                           
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <!--<DataGridTextColumn Binding="{Binding String_TrafficMan}"
@@ -191,7 +191,7 @@
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />-->
 
                             <DataGridTextColumn   Binding="{Binding Notise}"
-                                                        Header="ملاحظة" MinWidth="100"
+                                                        Header="ملاحظة" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
                             <DataGridTextColumn   Binding="{Binding String_Status}"
@@ -204,17 +204,17 @@
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
                             <DataGridTextColumn   Binding="{Binding Receptid}"
                                                            Header="رقم السند"
-                                                       MinWidth="80"
+                                                       MinWidth="10"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
 
                         </DataGrid.Columns>
-                       
-                        
+
+
                     </DataGrid>
 
                 </StackPanel>
-                <StackPanel Grid.Row="1" Background="White"  >
-                    <StackPanel   Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="0"  DockPanel.Dock="Left"  Background="White" Margin="72,200,0,288" >
+                    <StackPanel   Orientation="Horizontal"  HorizontalAlignment="Center">
                         <Button  x:Name="BackPage" Command="{Binding BackPageComannd}" >
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0"></TextBlock>
@@ -234,7 +234,7 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-     
+
 
     </DockPanel>
 </UserControl>

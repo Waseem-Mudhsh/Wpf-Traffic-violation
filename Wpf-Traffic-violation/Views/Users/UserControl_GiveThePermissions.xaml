@@ -14,95 +14,55 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="929*"/>
-            <ColumnDefinition Width="431*"/>
+            <!--<ColumnDefinition Width="431*"/>-->
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="1">
-
-            <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
-                <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center" >
-
-                    <!--top-->
-
-
-
-                    
-
-                    <Button  x:Name="But_Add_Permission" Width="120" Command="{Binding Permissioncommand}" Click="RadioButton_Click"
-                     Height="40" Uid="7"   Padding="0" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="290,0,0,0"  >
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock  VerticalAlignment="Center" Margin="0 0 0 0" FontFamily="Tajawal">منح صلاحية</TextBlock>
-                            <materialDesign:PackIcon Kind="Award" Margin="5 0 0 0" Width="24" Height="24" />
-                        </StackPanel>
-                    </Button>
-
-                </StackPanel>
-
-            </Border>
-            <StackPanel DockPanel.Dock="Top" Background="White" >
-
-
-                <DataGrid  Style="{StaticResource Style_Datagrid}" Margin="10,5,5,0" ItemsSource="{Binding Grid_User}" SelectedItem="{Binding Currunt_User}"
-                          materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="450" HorizontalAlignment="Right"
-                         Height="475" >
-                  
-                    <DataGrid.Columns>
-
-                        <DataGridTextColumn Binding="{Binding Userid}"
-                                        Header="رقم المستخدم" MinWidth="100"
-                                         />
-                        <DataGridTextColumn Binding="{Binding Username}"
-                                                        Header="أسم المستخدم"  MinWidth="200"
-                                                        
-                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
-                           
-                             
-                        </DataGridTextColumn>
-                        <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
-
-                        <!-- set a max length to get an indicator in the editor -->
-                        <DataGridTextColumn Binding="{Binding String_userstatus}"
-                                                           Header="الحالة"
-                                                       MinWidth="100"
-                                                       
-                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-
-
-
-                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
-
-                    </DataGrid.Columns>
-                </DataGrid>
-
-            </StackPanel>
+        <DockPanel>
         </DockPanel>
-        <DockPanel  x:Name="DockPanel_Permission" Grid.Column="0" FlowDirection="RightToLeft"  Visibility="Hidden">
+        <DockPanel  x:Name="DockPanel_Permission"  FlowDirection="RightToLeft"  Visibility="Visible">
             <Border DockPanel.Dock="Top" BorderThickness="1 0 0 1" BorderBrush="Blue" Background="WhiteSmoke" Margin="3 0">
                 <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Left"  >
 
                     <!--top-->
-                    <RadioButton Style="{StaticResource MaterialDesignAccentRadioButton}"  Content="مجموعة "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="30 0" Click="RadioButton_Click_Cancel"/>
-                    <RadioButton Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="True"  Content="صلاحية "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Click="RadioButton_Click_Panel_group"/>
-                    <StackPanel Name="Panel_group" Visibility="Hidden"  Orientation="Horizontal" Margin="30 0 0 0">
-                        <TextBlock Text="أسم المجموعة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
-                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Comb}" SelectedItem="{Binding selected_value}" 
+                    <RadioButton Style="{StaticResource MaterialDesignAccentRadioButton}"  IsChecked="True" Content="الرول"  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Margin="30 0"/>
+                    <!--<RadioButton Style="{StaticResource MaterialDesignAccentRadioButton}" IsChecked="True"  Content="صلاحية "  FontFamily="Tajawal" FontSize="16" FontWeight="Bold" Click="RadioButton_Click_Panel_group"/>-->
+                    <StackPanel Name="Panel_group"   Orientation="Horizontal" Margin="30 0 0 0">
+                        <TextBlock Text="اختيار الرول  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
+                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Grid_Usertype}"
+                           SelectedItem="{Binding Selected_UserType,UpdateSourceTrigger=PropertyChanged}" 
                           Padding="10,10,0,0" Background="White" Margin="0 0 0 0"  FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding UserTypeName ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
+                  
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
-                    <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
-                    <ComboBox Width="150" Height="40"  ItemsSource="{Binding Comb}" SelectedItem="{Binding selected_value}" 
+                        <TextBlock Text="أسم القائمة  :" VerticalAlignment="Center" FontFamily="Tajawal" FontSize="16" Margin="10 0 10 0"  />
+                        <ComboBox Width="150" Height="40"  ItemsSource="{Binding Grid_menu}"
+                           SelectedItem="{Binding Selected_Menu,UpdateSourceTrigger=PropertyChanged }" 
                           Padding="10,10,0,0" Background="White" Margin="0 0 0 0"  FontFamily="Tajawal" FontSize="14" BorderThickness="1">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Menu_name_AR ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            
+                        </ComboBox>
+                        <CheckBox x:Name="but_status" Content="تفعيل القائمة" IsChecked="{Binding IsSelectedmenu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Margin="0  0 0 0" Width="53" TabIndex="4" />
+                        <!--<CheckBox IsChecked="{Binding IsSelectedmenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
-                    </ComboBox>
                     </StackPanel>
                     <Button  x:Name="But_Save_ParmissionSet" 
-                     Height="40" Uid="7"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
+                     Height="40" Uid="7" Command="{Binding SavePermissioncommand}"   Padding="4,2" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="30,0,0,0"  Width="80" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSave" Margin="0 0 0 0" Width="24" Height="24" />
-                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0">حفظ</TextBlock>
+                            <TextBlock  VerticalAlignment="Center" Margin="10 0 0 0" >حفظ</TextBlock>
                         </StackPanel>
                     </Button>
-                   
+
 
 
                 </StackPanel>
@@ -111,7 +71,7 @@
             <StackPanel DockPanel.Dock="Top" Background="White" >
 
 
-                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_PermissionUsers}" SelectedItem="{Binding Currunt_PermissionUser}" 
+                <DataGrid Style="{StaticResource Style_Datagrid}" Margin="5,5,0,0" ItemsSource="{Binding Grid_formMenu}"  
                           materialDesign:DataGridAssist.CellPadding="1 5 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" MaxWidth="900" HorizontalAlignment="Left"
                         Height="480"  >
                     <DataGrid.Resources>
@@ -120,7 +80,7 @@
                     <DataGrid.Columns>
 
 
-                        <DataGridTextColumn Binding="{Binding String_form}"
+                        <DataGridTextColumn Binding="{Binding FormName}"
                                                         Header="أسم الشاشة"  MinWidth="300"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" MaxWidth="300">
@@ -129,28 +89,48 @@
                         <!--if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn-->
 
                         <!-- set a max length to get an indicator in the editor -->
-                        <DataGridCheckBoxColumn Binding="{Binding Form}"
-                                        Header="نشط" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn Binding="{Binding Add_opretion}"
-                                        Header="إضافة" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn Binding="{Binding Update_opretion}"
-                                        Header="تعديل" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
-                        <DataGridCheckBoxColumn Binding="{Binding Delete_opretion}"
-                                        Header="حذف" MaxWidth="80" MinWidth="60" 
-                                         
-                                         />
+                        <DataGridTemplateColumn  Header="نشط" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Is_active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
 
-                        <DataGridCheckBoxColumn Binding="{Binding Select_opretion}"
-                                        Header="عرض" MaxWidth="80" MinWidth="60" 
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="إضافة" MaxWidth="80" MinWidth="60" 
                                          
-                                         />
+                                         >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Add_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn 
+                                        Header="تعديل" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Update_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
+                        <DataGridTemplateColumn 
+                                        Header="حذف" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Delete_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                                        Header="عرض" MaxWidth="80" MinWidth="60" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Select_opretion , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                         <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
 

@@ -530,6 +530,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Grid_Streets = Street_Model.GetStreets();
 
 
+
         }
         private void BackToPage()
         {
@@ -671,6 +672,7 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             AmountSelected = 0;
             Cuontviolation_selected = 0;
+
             Grid_Violation1 = new ObservableCollection<Violation>();
             if (Grid_Violation != null)
             {
@@ -683,6 +685,11 @@ namespace Wpf_Traffic_violation.ViewModel
                         AmountSelected += a.Violation_penalty;
                     }
                 }
+                //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
+                AmountSelected = (AmountSelected - discontAmnt);
+                if (AmountOfCountOldYar != 0)
+                    AmountSelected = (AmountSelected + AmountOfCountOldYar);
+
                 Current_Receipt = new Receipt
                 {
                     Account_id = 1,
@@ -693,8 +700,7 @@ namespace Wpf_Traffic_violation.ViewModel
                     Post_date = ""
 
                 };
-                //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
-                AmountSelected = (AmountSelected - discontAmnt);
+                //AmountSelected = (AmountSelected - discontAmnt);
 
             }
 
@@ -784,7 +790,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                                //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
                                 #endregion
                                 model.Add(ReciptPrint);
 
@@ -878,9 +884,9 @@ namespace Wpf_Traffic_violation.ViewModel
             finally
             {
                 Grid_Violation1 = null;
-                Cuontviolation_selected = 0;
-                AmountSelected = 0;
-                discontAmnt = 0;
+                //Cuontviolation_selected = 0;
+                //AmountSelected = 0;
+                //discontAmnt = 0;
 
             }
 
@@ -908,7 +914,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 ds = new ReportDataSource("DataSetReport", model);
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 900, 1169);
                 printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
                 //printerSettings.DefaultPageSettings.Landscape = true;
 
@@ -949,7 +955,8 @@ namespace Wpf_Traffic_violation.ViewModel
                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                ReciptPrint.CountAllviolation = ReciptPrint.CountOfType + SelectCountOldYar;
 
                 #endregion
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
@@ -963,7 +970,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
                 //System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
                 //printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
+                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 900, 1169);
                 printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
                 //printerSettings.DefaultPageSettings.Landscape = true;
                 ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
@@ -975,6 +982,11 @@ namespace Wpf_Traffic_violation.ViewModel
             }
 
             TotalAmount = 0;
+            discontAmnt = 0;
+            SelectCountOldYar = 0;
+            AmountOfCountOldYar = 0;
+            //AmountSelected = 0;
+
 
         }
         bool CanConfimpay() => true;

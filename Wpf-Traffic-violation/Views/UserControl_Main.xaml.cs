@@ -15,7 +15,10 @@ namespace Wpf_Traffic_violation.Views
         public UserControl_Main()
         {
             InitializeComponent();
+
             //GetUserControlData();
+
+
             Frame_main.Content = new UserControlForm1();
 
 

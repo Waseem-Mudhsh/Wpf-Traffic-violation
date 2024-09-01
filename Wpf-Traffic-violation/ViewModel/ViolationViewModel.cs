@@ -22,7 +22,7 @@ namespace Wpf_Traffic_violation.ViewModel
     {
 
         #region Objects And Variables
-        List<PermissionUser> permation = Properties.Settings.Default.Userpermission;
+        PermissionsEntity permation = Properties.Settings.Default.permissionUser;
         Window_AddViolation win;
         ActivityModel ActivityModel = new ActivityModel();
         VoilationModel ViolationModel = new VoilationModel();
@@ -781,7 +781,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 if (Current_Violation.Violation_id != 0)
                 {
                     Current_Violation.New_amount = 0;
-                    //IsEditing = true;
+                    IsEditing = true;
                     string filename1 = "Violation/" + Current_Violation.Violation_photo1 + ".jpg";
                     string filename2 = "Violation/" + Current_Violation.Violation_photo2 + ".jpg";
                     win = new Window_AddViolation { DataContext = this };

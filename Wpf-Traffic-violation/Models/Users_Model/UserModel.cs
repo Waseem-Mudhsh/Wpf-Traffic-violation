@@ -1,89 +1,70 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Traffic_violation.Core.DataAccess;
+using Wpf_Traffic_violation.Core.helper;
+using Wpf_Traffic_violation.Models.Users_Model;
+using Wpf_Traffic_violation.Services.DataBase.Storedprocedures;
+using Wpf_Traffic_violation.Services.helper;
 
 namespace Wpf_Traffic_violation.Models
 {
     public class UserModel
     {
+        Isphelper sphelper;
+        SP_Query sP_Query;
+        ValidationRegex validationRegex;
+        public UserModel()
+        {
+            validationRegex = new ValidationRegex();
+            sphelper = new configuration();
+            sP_Query = new SP_Query();
+        }
 
         ///////////////////////////////// start GetUsers/////////////////////////////////////
         ObservableCollection<User> Users = new ObservableCollection<User>();
+        ObservableCollection<User_type> UsersTypes = new ObservableCollection<User_type>();
 
 
         public ObservableCollection<User> GetUsers()
         {
-
-            SqlConnection con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            ObservableCollection<User> users = new ObservableCollection<User>();
+            var response = sphelper.GetCollection(sP_Query.getUsers, "getUsers");
+            if (response.Count > 0)
             {
-                try
+                foreach (DataRow row in response)
                 {
-                    con.Open();
-                }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Cant Open con");
-                }
-                //SqlCommand Command = new SqlCommand("Select * from Person", con);
-                SqlCommand Command = new SqlCommand
-                {
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "GetUsers",
-                    Connection = con
-
-                };
-                DataTable dt = new DataTable();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(Command);
-                dataAdapter.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
+                    User per = new User
                     {
-                        User per = new User
-                        {
-                            Userid = (int)row[0],
-                            Username = row[1].ToString(),
-                            Userpassword = row[2].ToString(),
-                            Usertype = (int)row[3],
-                            Userstatus = (bool)row[4]
+                        Userid = (int)row[0],
+                        Username = (string)row[1],
+                        Userpassword = (string)row[2],
+                        String_usertype = (string)row[3],
+                        Userstatus = Convert.ToBoolean(row[4])
 
 
-                        };
-                        if (per.Usertype == 1)
-                        {
-                            per.String_usertype = "النظام";
-                        }
-                        else
-                        {
-                            per.String_usertype = "التطبيق";
-                        }
-                        if (per.Userstatus == true)
-                        {
-                            per.String_userstatus = "نشط";
-                        }
-                        else
-                        {
-                            per.String_userstatus = "غير نشط";
-                        }
-
-                        //}
-                        Users.Add(per); //الي بنربطه مع الجريد فيو
+                    };
+                    if (per.Userstatus == true)
+                    {
+                        per.String_userstatus = "نشط";
                     }
+                    else
+                    {
+                        per.String_userstatus = "غير نشط";
+                    }
+
+                    //}
+                    Users.Add(per); //الي بنربطه مع الجريد فيو
                 }
-                return Users;
             }
+            return Users;
         }
+
+
         ///////////////////////////////// end GetUsers/////////////////////////////////////
 
 
@@ -91,9 +72,8 @@ namespace Wpf_Traffic_violation.Models
 
 
 
-        public static bool OperarionUser(User user, string operartion)
+        public bool OperarionUser(User user, string operartion)
         {
-            Class_SqlConnection sql = new Class_SqlConnection();
 
             SqlParameter[] param = new SqlParameter[6];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
@@ -123,13 +103,18 @@ namespace Wpf_Traffic_violation.Models
                 Value = operartion
             };
 
-            if (!sql.Operarion("opUser", param))
+
+            //var result = sphelper.GetCollection(param, sP_Query.opUser, "opUser");
+            //if (!result)
+            //{
+            //    return false;
+
+            //}
+            Response<bool> result = sphelper.Operarion(param, sP_Query.opUser, "opUser");
+            if (!(result.Code == 1))
             {
                 return false;
-
             }
-
-
 
             return true;
         }
@@ -238,6 +223,29 @@ namespace Wpf_Traffic_violation.Models
             }
 
             return Users;
+        }
+
+        public ObservableCollection<User_type> GetUserType()
+        {
+            ObservableCollection<User_type> users = new ObservableCollection<User_type>();
+            var response = sphelper.GetCollection(sP_Query.GetUsertype, "GetUsertype");
+            if (response.Count > 0)
+            {
+                foreach (DataRow row in response)
+                {
+                    User_type per = new User_type
+                    {
+                        UserTypeid = (int)row[0],
+                        UserTypeName = (string)row[1],
+                        Isactive = (bool)row[2],
+                    };
+
+
+                    //}
+                    UsersTypes.Add(per); //الي بنربطه مع الجريد فيو
+                }
+            }
+            return UsersTypes;
         }
         /////////////////////////////////evd GetExcel/////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

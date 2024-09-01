@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
+using Wpf_Traffic_violation.Models.Configurations_Model;
 using Wpf_Traffic_violation.Models.Users_Model;
 
 namespace Wpf_Traffic_violation.ViewModel
@@ -13,8 +12,10 @@ namespace Wpf_Traffic_violation.ViewModel
     public class PermissionUser_ViewModel : BindableBase
     {
 
-        #region Objects And Variables
 
+        #region Objects And Variables
+        //Models.UserModel userModel = new UserModel();
+        //public ICommand IsCheckCommand { get; set; }
 
         Models.Users_Model.PermissionUserModel PermissionUserModel = new Models.Users_Model.PermissionUserModel();
         UserModel UserModel = new UserModel();
@@ -23,6 +24,183 @@ namespace Wpf_Traffic_violation.ViewModel
         #endregion
         #region Proprties
         ObservableCollection<String> comb;
+        ObservableCollection<User_type> grid_Usertype;
+        ObservableCollection<MenuDto> grid_Menu;
+        ObservableCollection<MenuDetail> grid_MenuDetl;
+        ObservableCollection<FormModel> grid_formMenu;
+        ObservableCollection<PrivilegemenuUser> gridmenuUser;
+
+        //bool IsSelectedmenu = false;
+        ObservableCollection<PrivilegemenuUser> GridmenuForUser
+        {
+            get
+            {
+                return gridmenuUser;
+
+            }
+            set
+            {
+                if (gridmenuUser != value)
+                {
+                    gridmenuUser = value;
+                    RaisePropertyChanged("GridmenuForUser");
+                }
+            }
+
+        }
+        public ObservableCollection<MenuDto> Grid_menu
+        {
+            get
+            {
+                return grid_Menu;
+
+            }
+            set
+            {
+                if (grid_Menu != value)
+                {
+                    grid_Menu = value;
+                    RaisePropertyChanged("Grid_menu");
+                }
+            }
+        }
+        public ObservableCollection<MenuDetail> Grid_MenuDetl
+        {
+            get
+            {
+                return grid_MenuDetl;
+
+            }
+            set
+            {
+                if (grid_MenuDetl != value)
+                {
+                    grid_MenuDetl = value;
+                    RaisePropertyChanged("Grid_menuDetl");
+                }
+            }
+        }
+        bool isSelectedmenu;
+
+        public bool IsSelectedmenu
+        {
+            get
+            {
+                return isSelectedmenu;
+
+            }
+            set
+            {
+                if (isSelectedmenu != value)
+                {
+                    isSelectedmenu = value;
+                    RaisePropertyChanged("IsSelectedmenu");
+                    //changStatusForMenu();
+                }
+            }
+        }
+
+        public ObservableCollection<FormModel> Grid_formMenu
+        {
+            get
+            {
+                return grid_formMenu;
+
+            }
+            set
+            {
+                if (grid_formMenu != value)
+                {
+                    grid_formMenu = value;
+                    RaisePropertyChanged("Grid_formMenu");
+                }
+            }
+        }
+        FormModel currunt_PermissionForm;
+        public FormModel Currunt_PermissionForm
+        {
+            get
+            {
+                return currunt_PermissionForm;
+
+            }
+            set
+            {
+                if (currunt_PermissionForm != value)
+                {
+                    currunt_PermissionForm = value;
+                    RaisePropertyChanged("Currunt_PermissionForm");
+                }
+            }
+        }
+        MenuDetail seletedMenuDetl;
+
+        public MenuDetail SeletedMenuDetl
+        {
+            get
+            {
+                return seletedMenuDetl;
+
+            }
+            set
+            {
+                if (seletedMenuDetl != value)
+                {
+                    seletedMenuDetl = value;
+                    RaisePropertyChanged("SeletedMenuDetl");
+                }
+            }
+        }
+        public ObservableCollection<User_type> Grid_Usertype
+        {
+            get
+            {
+                return grid_Usertype;
+            }
+            set
+            {
+                if (grid_Usertype != value)
+                {
+                    grid_Usertype = value;
+                    RaisePropertyChanged("Grid_Usertype");
+                }
+            }
+        }
+        User_type selected_UserType;
+        public User_type Selected_UserType
+        {
+            get
+            {
+                return selected_UserType;
+            }
+            set
+            {
+                if (selected_UserType != value)
+                {
+                    selected_UserType = value;
+                    RaisePropertyChanged("Selected_UserType");
+                }
+            }
+        }
+        MenuDto selected_Menu;
+        public MenuDto Selected_Menu
+        {
+            get
+            {
+                return selected_Menu;
+            }
+            set
+            {
+                if (selected_Menu != value)
+                {
+                    selected_Menu = value;
+                    checkedMenu(value);
+                    RaisePropertyChanged("Selected_Menu");
+                }
+            }
+        }
+
+
         public ObservableCollection<String> Comb //يربط مع الجرد فيو 
         {
             get
@@ -138,94 +316,204 @@ namespace Wpf_Traffic_violation.ViewModel
             Comb.Add("التهيئة");
             Comb.Add("الإعدادات");
             Comb.Add("التقارير");
-
+            Grid_Usertype = new ObservableCollection<User_type>();
+            Grid_menu = new ObservableCollection<MenuDto>();
+            Grid_Usertype = UserModel.GetUserType();
+            Grid_menu = PermissionUserModel.GetMenu();
+            grid_MenuDetl = PermissionUserModel.GetMenuDetl();
             // PermissionGroupModel.GetPermisstionGroup(Grid_PermissionGroup, "setting", 1);
             Grid_User = new ObservableCollection<User>();
             Grid_User = UserModel.GetUsers();
-
-
-            Permissioncommand = new RelayCommand(par => SetPermission(), par => CanSetPermission());
+            Permissioncommand = new RelayCommand(par => SetPermissionMenu(), par => CanSetPermission());
             SavePermissioncommand = new RelayCommand(par => SavePermission(), par => CanSavePermission());
             Changecommad = new RelayCommand(par => Change());
-
             PermissionUser = new PermissionUser();
-            PermissionUser.Form_id =31;
-           
+            PermissionUser.Form_id = 31;
+            IsSelectedmenu = false;
+
         }
         #endregion
         #region Methodes And Events
-        void SetPermission()
+
+        void changStatusForMenu()
+        {
+            try
+            {
+                if (Selected_UserType != null && Selected_Menu != null)
+                {
+                    IsSelectedmenu = PermissionUserModel.addprivlageForMenu(Selected_UserType.UserTypeid, Selected_Menu.Menu_id, IsSelectedmenu);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+        void SetPermissionMenu()
         {
 
-            Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
-            Grid_PermissionUsers= PermissionUserModel.GetPermissionUser( "setting", Currunt_User.Userid);
-            selected_value = "المخالفات";
+            //Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
+            //Grid_PermissionUsers = PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid);
+            //selected_value = "المخالفات";
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+
         }
         bool CanSetPermission() => Currunt_User != null && PermissionUser.Add_opretion == true;
         void SavePermission()
         {
-            foreach (PermissionUser a in Grid_PermissionUsers)
+            changStatusForMenu();
+
+            if (Grid_formMenu == null)
             {
-                PermissionUserModel.OperarionPermissionUser(a, "Update");
-                // MessageBox.Show(a.Add_opretion.ToString());
+
             }
+            //foreach (FormModel a in Currunt_PermissionForm)
+            //{
+            PermissionUserModel.OperarionPermissionUser(Grid_formMenu, Selected_UserType.userTypeid, "OP");
+            //    // MessageBox.Show(a.Add_opretion.ToString());
+            //}
             // MessageBox.Show(selected_value);
         }
-        bool CanSavePermission() => Grid_PermissionUsers != null;
+        bool CanSavePermission() => Grid_formMenu != null;
         async Task Change()
         {
             SavePermission();
             Grid_PermissionUsers = new ObservableCollection<PermissionUser>();
 
             if (selected_value == "المخالفات")
-             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "violation", Currunt_User.Userid));
-                 
+            {
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("violation", Currunt_User.Userid));
+
             }
             else if (selected_value == "المستخدمين")
             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "user", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("user", Currunt_User.Userid));
             }
-            else if(selected_value == "الإعدادات")
+            else if (selected_value == "الإعدادات")
             {
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "setting", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("setting", Currunt_User.Userid));
 
             }
             else if (selected_value == "الإعتراضات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "interception", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("interception", Currunt_User.Userid));
             }
             else if (selected_value == "البلاغات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "communication", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("communication", Currunt_User.Userid));
             }
             else if (selected_value == "الحسابات")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "account", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("account", Currunt_User.Userid));
             }
             else if (selected_value == "التهيئة")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "format", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("format", Currunt_User.Userid));
             }
             else if (selected_value == "التقارير")
             {
 
-                Grid_PermissionUsers= await Task.Run(() => PermissionUserModel.GetPermissionUser( "report", Currunt_User.Userid));
+                Grid_PermissionUsers = await Task.Run(() => PermissionUserModel.GetPermissionUser("report", Currunt_User.Userid));
             }
 
 
 
         }
+        void checkedMenu(MenuDto menuDto)
+        {
+            try
+            {
+                ObservableCollection<FormModel> formsmenu = new ObservableCollection<FormModel>();
+
+                if (Selected_UserType == null || Selected_Menu == null)
+                {
+                    MessageBox.Show("يرجى اختيار الرول الشاشة اولا");
+                }
+                else
+                {
+                    //get menu detale to check if active 
+                    var getmenuDetl = PermissionUserModel.GetMenuDetl();
+                    foreach (var o in getmenuDetl)
+                    {
+                        if (o.menu_id == Selected_Menu.Menu_id && o.User_type_id == Selected_UserType.UserTypeid)
+                        {
+                            IsSelectedmenu = o.is_active;
+                            break;
+                        }
+                    }
+
+                    // get formmenu if the form have permation
+                    GridmenuForUser = PermissionUserModel.GetPrivilegeUser(menuDto.Menu_id, Selected_UserType.userTypeid);
+                    if (GridmenuForUser.Count > 0)
+                    {
+                        foreach (PrivilegemenuUser privilegemenu in GridmenuForUser)
+                        {
+
+                            FormModel formModel = new FormModel
+                            {
+                                FormId = privilegemenu.FormId,
+                                FormName = privilegemenu.FormName,
+                                Add_opretion = privilegemenu.PrivilegeAdd,
+                                Delete_opretion = privilegemenu.PrivilegeDelete,
+                                Select_opretion = privilegemenu.PrivilegeSelect,
+                                Update_opretion = privilegemenu.PrivilegeUpdate,
+                                Is_active = privilegemenu.PrivilegeForm,
+
+
+                            };
+                            formsmenu.Add(formModel);
+
+                        }
+
+                        Grid_formMenu = formsmenu;
+
+                    }
+                    else
+                    {
+                        Grid_formMenu = PermissionUserModel.GetFormBymenuid(menuDto.Menu_id);
+
+                    }
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
         #endregion
         #region Commands
 
         public RelayCommand Permissioncommand { get; private set; }
-        public RelayCommand SavePermissioncommand { get; private set; }
+        public RelayCommand addmenuForUser { get; private set; }
         public RelayCommand Changecommad { get; private set; }
+        public RelayCommand ValueSelectedMenu { get; private set; }
+        public RelayCommand SavePermissioncommand { get; private set; }
+        //private ICommand _myCheckBoxCommand;
+        //public ICommand IsCheckCommand
+        //{
+        //    get { return _myCheckBoxCommand ?? (_myCheckBoxCommand = new RelayCommand(HandleingCheckBox)); }
+        //}
         #endregion
 
 
