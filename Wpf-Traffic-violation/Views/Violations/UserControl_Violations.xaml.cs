@@ -25,11 +25,8 @@ namespace Wpf_Traffic_violation.Views
             foreach (var rol in permation)
 
             {
-
-
                 if (index == 1007)
                 {
-
                     UserControl_OperationViolation userControl_OperationViolation = new UserControl_OperationViolation();
                     userControl_OperationViolation.But_Add_Violation.IsEnabled = rol.PrivilegeAdd;
                     userControl_OperationViolation.But_Edit_Violation.IsEnabled = rol.PrivilegeUpdate;
@@ -95,11 +92,6 @@ namespace Wpf_Traffic_violation.Views
 
             but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
-
-
-
-
-
             //but.Foreground = Brushes.DarkOrange;
             but.Foreground = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
             //but.BorderBrush = Brushes.DarkOrange;

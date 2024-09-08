@@ -150,10 +150,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
                         Menu_id = (int)row[0],
                         Menu_name = (string)row[1],
                         Menu_name_AR = (string)row[2],
-
                     };
-
-
                     //}
                     GetAllMenu.Add(per); //الي بنربطه مع الجريد فيو
                 }

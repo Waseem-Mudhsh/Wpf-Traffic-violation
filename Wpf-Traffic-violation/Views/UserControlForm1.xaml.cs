@@ -137,6 +137,14 @@ namespace Wpf_Traffic_violation.Views
                 if (index == 1007)
                 {
                     Main_reservation main_Reservation = new Main_reservation();
+                    if (per.FormName == "عمليات الحجز")
+                        main_Reservation.but2_op.IsEnabled = per.PrivilegeForm;
+                    if (per.FormName == "خروج")
+                        main_Reservation.but2.IsEnabled = per.PrivilegeForm;
+                    if (per.FormName == "دخول")
+                        main_Reservation.but1.IsEnabled = per.PrivilegeForm;
+                    if (per.FormName == "تحصيل")
+                        main_Reservation.but2_pid.IsEnabled = per.PrivilegeForm;
                     userControl = main_Reservation;
 
                 }

@@ -25,6 +25,20 @@
                             <TextBlock    >دخول</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                        Uid="3" x:Name="but2_pid" Click="but_sub_ButtonClick" UseLayoutRounding="False" >
+                        <StackPanel Orientation="Vertical" Width="110" HorizontalAlignment="Center" >
+                            <materialDesign:PackIcon Kind="Cash"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                            <TextBlock    HorizontalAlignment="Center"><Run Text="تحصيل مالي"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                        Uid="4" x:Name="but2_op" Click="but_sub_ButtonClick" UseLayoutRounding="False" >
+                        <StackPanel Orientation="Vertical" Width="110" HorizontalAlignment="Center" >
+                            <materialDesign:PackIcon Kind="Menu"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                            <TextBlock    HorizontalAlignment="Center"><Run Text="عمليات الحجز"/></TextBlock>
+                        </StackPanel>
+                    </Button>
 
 
                 </StackPanel>

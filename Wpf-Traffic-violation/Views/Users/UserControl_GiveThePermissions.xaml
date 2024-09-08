@@ -50,7 +50,7 @@
                             </ComboBox.ItemTemplate>
                             
                         </ComboBox>
-                        <CheckBox x:Name="but_status" Content="تفعيل القائمة" IsChecked="{Binding IsSelectedmenu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        <CheckBox x:Name="but_status" Content="تفعيل" IsChecked="{Binding IsSelectedmenu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Margin="0  0 0 0" Width="53" TabIndex="4" />
                         <!--<CheckBox IsChecked="{Binding IsSelectedmenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 

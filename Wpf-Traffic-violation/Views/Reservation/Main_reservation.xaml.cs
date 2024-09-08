@@ -39,6 +39,26 @@ namespace Wpf_Traffic_violation.Views.Reservation
                         break;
 
                     }
+                case 3:
+                    {
+                        PaidReservation exite_reservation = new PaidReservation();
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        Frame_Violation.Content = exite_reservation;
+
+                        break;
+
+                    }
+                case 4:
+                    {
+                        OperationResrvation exite_reservation = new OperationResrvation();
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        //userControl_QureyIdNumber.searchBT1.IsEnabled = false;
+                        Frame_Violation.Content = exite_reservation;
+
+                        break;
+
+                    }
             }
         }
 

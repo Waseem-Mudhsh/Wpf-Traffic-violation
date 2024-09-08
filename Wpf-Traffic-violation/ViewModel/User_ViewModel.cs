@@ -227,11 +227,11 @@ namespace Wpf_Traffic_violation.ViewModel
             IsEditing = true;
             Selected_TrafficMan = new TrafficMan();
             win = new Window_AddUser { DataContext = this };
-            foreach (TrafficMan a in Grid_Trafficman)
-            {
-                if (a.User_id == Currunt_User.Userid)
-                    Selected_TrafficMan = a;
-            }
+            //foreach (TrafficMan a in Grid_Trafficman)
+            //{
+            //    if (a.User_id == Currunt_User.Userid)
+            //        Selected_TrafficMan = a;
+            //}
 
             //win.trafficman.SelectedItem = Selected_TrafficMan;
             //win.trafficman.IsEnabled = false;
