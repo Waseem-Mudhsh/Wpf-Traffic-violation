@@ -74,7 +74,19 @@ namespace Wpf_Traffic_violation.Views
 
                 }
 
+                if (index == 2017)
+                {
+                    UserControl_QureyViolation userControl_QureyNumber = new UserControl_QureyViolation();
+                    userControl_QureyNumber.butn_Query.IsEnabled = rol.PrivilegeSelect;
+                    userControl_QureyNumber.searchBT1.IsEnabled = rol.PrivilegeSelect;
+                    Frame_Violation.Content = userControl_QureyNumber;
 
+                    break;
+
+
+
+
+                }
             }
         }
 

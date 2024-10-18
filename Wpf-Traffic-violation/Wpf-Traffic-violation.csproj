@@ -12,7 +12,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -583,6 +583,8 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Objection_Model\Opjection.cs" />
     <Compile Include="Models\Objection_Model\OpjectionModel.cs" />
+    <Compile Include="Models\ReservationModel.cs" />
+    <Compile Include="Models\Reservation_Model\ReservationModel.cs" />
     <Compile Include="Models\RportAllModel.cs" />
     <Compile Include="Models\Searchviolation.cs" />
     <Compile Include="Models\StatisticCommunication_Model.cs" />
@@ -676,6 +678,7 @@
     <Compile Include="ViewModel\Report_objection_viewmodel.cs" />
     <Compile Include="ViewModel\Report_violation_ViowModel.cs" />
     <Compile Include="ViewModel\ReprtAcountViowModel.cs" />
+    <Compile Include="ViewModel\Reservation_ViewModel.cs" />
     <Compile Include="ViewModel\Streets_ViewModel.cs" />
     <Compile Include="ViewModel\Trafficman_ViewModel.cs" />
     <Compile Include="ViewModel\User_ViewModel.cs" />

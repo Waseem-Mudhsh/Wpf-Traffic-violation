@@ -1,12 +1,16 @@
 ﻿<UserControl x:Class="Wpf_Traffic_violation.Views.Reservation.Main_reservation"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ViewModel="clr-namespace:Wpf_Traffic_violation.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Traffic_violation.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
          d:DesignHeight="625" d:DesignWidth="1360">
+    <UserControl.DataContext>
+        <ViewModel:Reservation_ViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <DockPanel Background="Gray" >
             <StackPanel DockPanel.Dock="Top"  Background="White" Height="65">

@@ -10,6 +10,9 @@
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
       >
+    <UserControl.DataContext>
+        <ViewModel:Reservation_ViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue" Background="White" Width="1270">
             <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center">

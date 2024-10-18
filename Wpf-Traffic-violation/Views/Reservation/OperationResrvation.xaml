@@ -10,6 +10,9 @@
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
         >
+    <UserControl.DataContext>
+        <ViewModel:Reservation_ViewModel/>
+    </UserControl.DataContext>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="Blue" Background="White" Width="1261">
             <StackPanel  Height="60"  Orientation="Horizontal" HorizontalAlignment="Center">
@@ -123,7 +126,7 @@
                     <DataGrid  x:Name="GriddataViolation"
                            Style="{StaticResource Style_Datagrid}"
                            ItemsSource="{Binding Local_CollectionViolation}"  
-                          SelectedItem="{Binding Current_Violation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding Grid_Reservation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Height="510" Width="auto" 
                            >
 
@@ -136,55 +139,55 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>-->
 
-                            <DataGridTextColumn  Binding="{Binding VounchrNum}"
+                            <DataGridTextColumn  Binding="{Binding NameDriver}"
                                         Header="اسم السائق" MinWidth="100" 
                                          />
 
                             <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
                             <!-- set a max length to get an indicator in the editor -->
-                            <DataGridTextColumn   Binding="{Binding Violation_date}"
+                            <DataGridTextColumn   Binding="{Binding VehicleId}"
                                                            Header="رقم المركبة"
                                                        MinWidth="80"
                                             EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <DataGridTextColumn   Binding="{Binding Plate_Num}"
+                            <DataGridTextColumn   Binding="{Binding PlateTypeId}"
                                                            Header="نوع الرقم"  MinWidth="50"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <DataGridTextColumn   Binding="{Binding Plate_Type}"
+                            <DataGridTextColumn   Binding="{Binding VehicleType}"
                                                            Header="نوع المركبة"  MinWidth="50"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <DataGridTextColumn   Binding="{Binding Provinceid}"
+                            <DataGridTextColumn   Binding="{Binding ReasonReservation}"
                                                            Header="سبب الحجز"  MinWidth="20" Width="auto"
                                                            EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"  />
-                            <DataGridTextColumn Binding="{Binding String_ViolationType}"
+                            <DataGridTextColumn Binding="{Binding DateOfReservation}"
                                                         Header="تاريح الحجز" MinWidth="50"
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
 
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding DateOfRelease}"
                                                         Header="تايخ الافراج" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding ReceiptId}"
                                                         Header="رقم السند" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding DateOfreceipt}"
                                                         Header="تاريخ السند" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding Amount}"
                                                         Header="المبلغ" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding ReleaseSide}"
                                                         Header="جهة الافراج" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding SeatNumber}"
                                                         Header="رقم القعادة" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
 
-                            <DataGridTextColumn   Binding="{Binding Notise}"
+                            <DataGridTextColumn   Binding="{Binding Notes}"
                                                         Header="الملاحظة" MinWidth="80"
                                                         
                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
