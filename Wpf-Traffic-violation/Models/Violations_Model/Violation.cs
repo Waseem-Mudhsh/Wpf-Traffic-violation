@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models.Violations_Model
@@ -545,5 +546,33 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         }
 
 
+    }
+
+    public class FilterViolation
+    {
+        private List<KeyValuePair<string, int>> _violationsType = new List<KeyValuePair<string, int>>();
+
+        public int AmountprvoldOfViolatio { get; set; }
+        public int AmountOfCountOldYar { get; set; }
+        public int SelectCountOldYar { get; set; }
+        public int numberOfViolatio { get; set; }
+        public List<KeyValuePair<string, int>> ViolationType
+        {
+            get { return _violationsType; }
+            set
+            {
+                if (value.Count != 0)
+                {
+                    foreach (var i in value)
+                        _violationsType.Add(i);
+                    RaisePropertyChanged("ViolationType");
+                }
+            }
+        }
+
+        private void RaisePropertyChanged(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -25,11 +25,8 @@ namespace Wpf_Traffic_violation.Views
             foreach (var rol in permation)
 
             {
-
-
                 if (index == 1007)
                 {
-
                     UserControl_OperationViolation userControl_OperationViolation = new UserControl_OperationViolation();
                     userControl_OperationViolation.But_Add_Violation.IsEnabled = rol.PrivilegeAdd;
                     userControl_OperationViolation.But_Edit_Violation.IsEnabled = rol.PrivilegeUpdate;
@@ -42,9 +39,7 @@ namespace Wpf_Traffic_violation.Views
                 {
                     UserControl_QureyIdNumber userControl_QureyIdNumber = new UserControl_QureyIdNumber();
                     userControl_QureyIdNumber.butn_Query.IsEnabled = rol.PrivilegeUpdate;
-                    userControl_QureyIdNumber.AmntDisconr.IsEnabled = rol.PrivilegeUpdate;
                     userControl_QureyIdNumber.searchBT1.IsEnabled = rol.PrivilegeSelect;
-                    userControl_QureyIdNumber.but_PayViolation.IsEnabled = rol.PrivilegeAdd;
                     Frame_Violation.Content = userControl_QureyIdNumber;
 
                     break;
@@ -77,7 +72,21 @@ namespace Wpf_Traffic_violation.Views
 
                 }
 
+                if (index == 2017)
+                {
+                    UserControl_QureyViolation userControl_QureyNumber = new UserControl_QureyViolation();
+                    userControl_QureyNumber.butn_Query.IsEnabled = rol.PrivilegeSelect;
+                    userControl_QureyNumber.but_PayViolation.IsEnabled = rol.PrivilegeAdd;
+                    userControl_QureyNumber.AmntDisconr.IsEnabled = rol.PrivilegeUpdate;
+                    userControl_QureyNumber.searchBT1.IsEnabled = rol.PrivilegeSelect;
+                    Frame_Violation.Content = userControl_QureyNumber;
 
+                    break;
+
+
+
+
+                }
             }
         }
 
@@ -95,11 +104,6 @@ namespace Wpf_Traffic_violation.Views
 
             but1.BorderBrush = Brushes.White;
             but2.BorderBrush = Brushes.White;
-
-
-
-
-
             //but.Foreground = Brushes.DarkOrange;
             but.Foreground = new SolidColorBrush(Color.FromArgb(ColorforF.A, ColorforF.R, ColorforF.G, ColorforF.B));
             //but.BorderBrush = Brushes.DarkOrange;

@@ -19,6 +19,13 @@
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                                           Uid="2017" x:Name="but3" Margin="0,4,7,4" Click="but_sub_ButtonClick" UseLayoutRounding="False" >
+                    <StackPanel Orientation="Vertical" Width="110" HorizontalAlignment="Center" >
+                        <materialDesign:PackIcon Kind="Cash"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />
+                        <TextBlock    HorizontalAlignment="Center">التحصيل المالي</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
                                            Uid="1007" x:Name="but1" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="add"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />

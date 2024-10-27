@@ -259,7 +259,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.85807in</Top>
+        <Top>3.48307in</Top>
         <Left>4.13417in</Left>
         <Height>0.25in</Height>
         <Width>4.054in</Width>
@@ -282,9 +282,6 @@
             </TablixColumn>
             <TablixColumn>
               <Width>2.13006in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.20802in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.13006in</Width>
@@ -313,7 +310,6 @@
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -352,7 +348,6 @@
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -362,45 +357,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox20</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox11">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>المبلغ</Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -430,7 +386,6 @@
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -469,7 +424,6 @@
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -563,38 +517,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Violation_penalty">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Violation_penalty.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Violation_penalty</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="String_Street">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -667,7 +589,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -682,9 +603,9 @@
         </TablixRowHierarchy>
         <DataSetName>DataSetViolation</DataSetName>
         <Top>2.51958in</Top>
-        <Left>0.52083in</Left>
+        <Left>0.54544in</Left>
         <Height>0.5in</Height>
-        <Width>7.81662in</Width>
+        <Width>6.60862in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -797,7 +718,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>CountOfType</rd:DefaultName>
-        <Top>3.85807in</Top>
+        <Top>3.48307in</Top>
         <Left>3.13228in</Left>
         <Height>0.25in</Height>
         <Width>0.93245in</Width>
@@ -866,8 +787,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>4.2175in</Top>
-        <Left>1in</Left>
+        <Top>4.20362in</Top>
+        <Left>1.31092in</Left>
         <Height>0.25in</Height>
         <Width>1.23958in</Width>
         <ZIndex>13</ZIndex>
@@ -888,7 +809,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>عقيد/ عبده الحميري</Value>
+                <Value>عقيد/ عبد العزيزالحاج</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
@@ -908,7 +829,7 @@
         <Top>4.52306in</Top>
         <Left>1in</Left>
         <Height>0.25in</Height>
-        <Width>1.23958in</Width>
+        <Width>1.44791in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1034,11 +955,14 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>SumViolationTypcount</rd:DefaultName>
-        <Top>3.85807in</Top>
+        <Top>3.48307in</Top>
         <Left>0.95864in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>18</ZIndex>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1079,114 +1003,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="DetalsForOldViolation2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!DetalsForOldViolation.Value, "DataSetReport")</Value>
-                <Style>
-                  <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
-        <Top>3.15216in</Top>
-        <Left>4.83153in</Left>
-        <Height>0.25in</Height>
-        <Width>3.36151in</Width>
-        <ZIndex>20</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="DetalsForOldViolation3">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>اجمالي عدد محالفات جديدة</Value>
-                <Style>
-                  <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
-        <Top>3.4716in</Top>
-        <Left>6.04072in</Left>
-        <Height>0.25in</Height>
-        <Width>2.15232in</Width>
-        <ZIndex>21</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="DetalsForOldViolation4">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Sum(Fields!CountOfType.Value, "DataSetReport")</Value>
-                <Style>
-                  <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
-        <Top>3.4716in</Top>
-        <Left>4.83153in</Left>
-        <Height>0.25in</Height>
-        <Width>1.20919in</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox7">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1211,11 +1027,14 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>3.85807in</Top>
+        <Top>3.48307in</Top>
         <Left>1.9255in</Left>
         <Height>0.25in</Height>
         <Width>1.13542in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>20</ZIndex>
+        <Visibility>
+          <Hidden>true</Hidden>
+        </Visibility>
         <Style>
           <Border>
             <Style>Solid</Style>

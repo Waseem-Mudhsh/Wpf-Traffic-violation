@@ -13,7 +13,7 @@
 
 
 
-                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White"
+                <Button Style="{StaticResource subButton}" BorderThickness="0 0 0 2"  BorderBrush="White" IsEnabled="False"
                                            Uid="4" x:Name="but4" Margin="0,4,7,4" Click="but_sub_ButtonClick" >
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="TransferWithinAStation"   Width="24" Height="24"  HorizontalAlignment="Center" Margin="0 0 0 4" />

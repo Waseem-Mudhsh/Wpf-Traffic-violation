@@ -313,8 +313,11 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             ObservableCollection<ReceiptReportModel> result = new ObservableCollection<ReceiptReportModel>();
             try
             {
+                if (string.IsNullOrEmpty(to_date))
+                {
+                    to_date = from_date;
+                }
 
-                to_date = (to_date == null) ? from_date : to_date;
                 //var From = Convert.ToDateTime(from_date);
                 //var To = Convert.ToDateTime(to_date);
                 Hashtable key = new Hashtable();

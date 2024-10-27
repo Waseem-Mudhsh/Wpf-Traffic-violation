@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
-    <PublishUrl>C:\Users\Eng-Ibrahim.M.A\Desktop\New folder\New folder\Traffic-Violation\Finalviolation\Apps\</PublishUrl>
+    <PublishUrl>C:\Users\Eng-Ibrahim.M.A\Desktop\New folder\New folder\Traffic-Violation\App\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -12,7 +12,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -23,6 +23,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -577,6 +583,8 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Objection_Model\Opjection.cs" />
     <Compile Include="Models\Objection_Model\OpjectionModel.cs" />
+    <Compile Include="Models\ReservationModel.cs" />
+    <Compile Include="Models\Reservation_Model\ReservationModel.cs" />
     <Compile Include="Models\RportAllModel.cs" />
     <Compile Include="Models\Searchviolation.cs" />
     <Compile Include="Models\StatisticCommunication_Model.cs" />
@@ -670,6 +678,7 @@
     <Compile Include="ViewModel\Report_objection_viewmodel.cs" />
     <Compile Include="ViewModel\Report_violation_ViowModel.cs" />
     <Compile Include="ViewModel\ReprtAcountViowModel.cs" />
+    <Compile Include="ViewModel\Reservation_ViewModel.cs" />
     <Compile Include="ViewModel\Streets_ViewModel.cs" />
     <Compile Include="ViewModel\Trafficman_ViewModel.cs" />
     <Compile Include="ViewModel\User_ViewModel.cs" />
@@ -822,6 +831,12 @@
     </Compile>
     <Compile Include="Views\Reservation\Main_reservation.xaml.cs">
       <DependentUpon>Main_reservation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\OperationResrvation.xaml.cs">
+      <DependentUpon>OperationResrvation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservation\PaidReservation.xaml.cs">
+      <DependentUpon>PaidReservation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControlForm1.xaml.cs">
       <DependentUpon>UserControlForm1.xaml</DependentUpon>
@@ -1236,6 +1251,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Reservation\OperationResrvation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservation\PaidReservation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControlForm1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1574,6 +1597,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\Wpf_Traffic_violation.Models.Receipt.datasource" />
     <None Include="Properties\DataSources\Wpf_Traffic_violation.Models.Violations_Model.ExtraDetailReportModel.datasource" />
     <None Include="Properties\DataSources\Wpf_Traffic_violation.Models.Violations_Model.ReceiptPrintModel.datasource" />

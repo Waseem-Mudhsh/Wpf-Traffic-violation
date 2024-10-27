@@ -39,6 +39,8 @@ namespace Wpf_Traffic_violation.ViewModel
         VoilationModel VoilationModel;
         EntryModel EntryModel = new EntryModel();
         helper _helper;
+        //int numberOfViolatio = 0;
+        //int AmountprvoldOfViolatio = 0;
         #endregion
         #region Proprties
         ObservableCollection<Streets> grid_Streets;
@@ -603,7 +605,8 @@ namespace Wpf_Traffic_violation.ViewModel
                     MessageBox.Show("لايوجد بيانات");
                 }
 
-                Count = Grid_Violation.Count;
+
+
                 foreach (Violation a in Grid_Violation)
                 {
 
@@ -611,7 +614,11 @@ namespace Wpf_Traffic_violation.ViewModel
                     a.Isselected = true;
 
                 }
-                TotalAmount = AmountSelected;
+                var filter = ViolationFilter(Grid_Violation, Grid_ViolationType);
+
+                Count = (Grid_Violation.Count + filter.SelectCountOldYar) - filter.numberOfViolatio;
+                TotalAmount = (AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar;
+
             }
 
 
@@ -663,9 +670,6 @@ namespace Wpf_Traffic_violation.ViewModel
             //MessageBox.Show(date.Date.ToString());
             if (Cuontviolation_selected > 0)
                 win.ShowDialog();
-
-
-
         }
 
         public void prepareviolation()
@@ -685,10 +689,12 @@ namespace Wpf_Traffic_violation.ViewModel
                         AmountSelected += a.Violation_penalty;
                     }
                 }
+
+                var filter = ViolationFilter(Grid_Violation1, Grid_ViolationType);
                 //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
-                AmountSelected = (AmountSelected - discontAmnt);
-                if (AmountOfCountOldYar != 0)
-                    AmountSelected = (AmountSelected + AmountOfCountOldYar);
+                AmountSelected = (((AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar) - discontAmnt);
+                //if (AmountOfCountOldYar != 0)
+                //    AmountSelected = (AmountSelected + AmountOfCountOldYar);
 
                 Current_Receipt = new Receipt
                 {
@@ -743,6 +749,12 @@ namespace Wpf_Traffic_violation.ViewModel
                         var receiptid = ReceiptModel.CreateReceipt(Current_Receipt, Count);
                         if (receiptid.Receipt_id != 0)
                         {
+                            SelectCountOldYar = 0;
+                            int numberOfViolatio = 0;
+                            int AmountprvoldOfViolatio = 0;
+                            AmountOfCountOldYar = 0;
+                            var filter = ViolationFilter(Grid_Violation1, Grid_ViolationType);
+
                             foreach (Violation v in Grid_Violation1)
                             {
                                 //amount = v.Amount + v.Violation_penalty;
@@ -758,15 +770,28 @@ namespace Wpf_Traffic_violation.ViewModel
                                     ReciptPrint.ReceiptId = receiptid.Receipt_id;
                                     ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
                                     ReciptPrint.DateOfReceipt = (DateTime.Now).ToString("yyyy/MM/dd");
-                                    foreach (var type in Grid_ViolationType)
-                                    {
-                                        if (type.Violation_type_id == v.Violation_type_id)
-                                        {
-                                            ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                                            break;
-                                        }
 
-                                    }
+                                    //foreach (var type in Grid_ViolationType)
+                                    //{
+                                    //    if (type.Violation_type_id == v.Violation_type_id)
+                                    //    {
+                                    //        if (DateTime.TryParse(v.Violation_date, out DateTime parsedDate))
+                                    //        {
+                                    //            if (parsedDate.Year <= 2016)
+                                    //            {
+                                    //                AmountprvoldOfViolatio += type.Maximum_price;
+                                    //                AmountOfCountOldYar += (type.Maximum_price * int.Parse(v.Notise));
+                                    //                SelectCountOldYar += int.Parse(v.Notise);
+                                    //                numberOfViolatio++;
+
+                                    //            }
+                                    //        }
+
+                                    //        ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
+                                    //        break;
+                                    //    }
+
+                                    //}
 
                                     v.Payment_status = 1;
                                     //VoilationModel.OperarionViolation(v, "Update");
@@ -777,8 +802,8 @@ namespace Wpf_Traffic_violation.ViewModel
                             if (receiptid.Receipt_id != 0)
                             {
                                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
-                                ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
-                                ReciptPrint.ViolationPenalty = AmountSelected;
+                                ReciptPrint.CountOfType = Count;//(ReciptPrint.ViolationType.Count - numberOfViolatio);
+                                ReciptPrint.ViolationPenalty = ReciptPrint.ViolationPenalty;
                                 ReciptPrint.DateOfReceipt = DateTime.Now.ToString("yyyy/MM/dd");
                                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                                 ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
@@ -790,7 +815,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
-                                //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
+                                ReciptPrint.CountAllviolation = Count;// (ReciptPrint.ViolationType.Count + SelectCountOldYar) - numberOfViolatio;
                                 #endregion
                                 model.Add(ReciptPrint);
 
@@ -799,23 +824,33 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ShowReport.ReportViewerDemo.Reset();
                                 ds = new ReportDataSource("DataSetRecipt", model);
                                 ShowReport.ReportViewerDemo.LocalReport.DataSources.Add(ds);
-                                System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-                                printerSettings.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("A4", 827, 1169);
-                                printerSettings.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0); // set margins to zero
-                                                                                                                               //printerSettings.DefaultPageSettings.Landscape = true;
-                                ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
+                                var pageSettings = new System.Drawing.Printing.PageSettings
+                                {
+                                    PaperSize = new System.Drawing.Printing.PaperSize("A4", 900, 1169),
+                                    Margins = new System.Drawing.Printing.Margins(10, 10, 10, 10), // Set appropriate margins
+                                    Landscape = false // Set to true if needed
+                                };
+
+                                ShowReport.ReportViewerDemo.SetPageSettings(pageSettings);
+
+                                //ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
                                 ShowReport.ReportViewerDemo.RefreshReport();
                                 ShowReport.Show();
                             }
-                            oldviolation oldviolation = new oldviolation
+                            if (filter.SelectCountOldYar != 0)
                             {
-                                Amount = AmountOfCountOldYar,
-                                Counts = SelectCountOldYar,
-                                PlatNumber = Current_Violation.Plate_Num,
-                                Rceipt_Id = receiptid.Receipt_id
-                            };
-                            VoilationModel.AddOldViolation(oldviolation);
+                                oldviolation oldviolation = new oldviolation
+                                {
+                                    Amount = filter.AmountOfCountOldYar,
+                                    Counts = (filter.SelectCountOldYar - filter.numberOfViolatio),
+                                    PlatNumber = Current_Violation.Plate_Num,
+                                    Rceipt_Id = receiptid.Receipt_id
+                                };
+                                VoilationModel.AddOldViolation(oldviolation);
+
+                            }
+
                             MessageBox.Show("تمت عملية السداد بنجاح");
                             win.Close();
                             Grid_Violation.Clear();
@@ -900,7 +935,10 @@ namespace Wpf_Traffic_violation.ViewModel
             ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
             ReciptReportTemplate ShowReport = new ReciptReportTemplate();
             System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
-
+            SelectCountOldYar = 0;
+            int numberOfViolatio = 0;
+            int AmountprvoldOfViolatio = 0;
+            AmountOfCountOldYar = 0;
             if (Grid_Violation1.Count <= 0)
             {
                 ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
@@ -926,37 +964,29 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else
             {
-                foreach (Violation v in Grid_Violation1)
-                {
 
-                    foreach (var type in Grid_ViolationType)
-                    {
-                        if (type.Violation_type_id == v.Violation_type_id)
-                        {
-                            ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                            break;
-                        }
-
-                    }
-                }
+                var filters = ViolationFilter(Grid_Violation1, Grid_ViolationType);
+                ReciptPrint.ViolationType.AddRange(filters.ViolationType);
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
                 var dataTableForViolationtype = new ObservableCollection<ViolationType>();
                 var violationsTypeSelected = new List<KeyValuePair<string, int>>();
                 ReciptPrint.ViolationPenalty = AmountSelected;
                 ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
-                ReciptPrint.CountOfType = ReciptPrint.ViolationType.Count;
+                ReciptPrint.CountOfType = (ReciptPrint.ViolationType.Count - filters.numberOfViolatio);
                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                 ReciptPrint.To = System.DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.VehicleTypeName = (string)result.FirstOrDefault()?.Plate_Type + "/" + Convert.ToString(result.FirstOrDefault()?.Provinceid);
 
                 #region old violation
+                ///Get Number Of violation old from noties
+
                 StringBuilder detoldviolation = new StringBuilder();
                 string[] pattern = new string[] { "  مخالفة اعوام سابقه عدد", "   مبلغ" };
                 detoldviolation.AppendFormat("{0} مخالفة اعوام سابقه عدد", AmountOfCountOldYar);
                 detoldviolation.AppendFormat("{0} مبلغ", SelectCountOldYar);
                 ReciptPrint.DetalsForOldViolation = detoldviolation.ToString();
                 //ReciptPrint.ViolationPenalty += AmountOfCountOldYar;
-                ReciptPrint.CountAllviolation = ReciptPrint.CountOfType + SelectCountOldYar;
+                ReciptPrint.CountAllviolation = (ReciptPrint.ViolationType.Count + filters.SelectCountOldYar) - filters.numberOfViolatio;
 
                 #endregion
                 //ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
@@ -989,6 +1019,38 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
+        FilterViolation ViolationFilter(ObservableCollection<Violation> violations, ObservableCollection<ViolationType> violationTypes)
+        {
+            FilterViolation filterViolation = new FilterViolation();
+            filterViolation.numberOfViolatio = 0;
+            foreach (Violation v in violations)
+            {
+
+                foreach (var type in violationTypes)
+                {
+                    if (type.Violation_type_id == v.Violation_type_id)
+                    {
+                        if (DateTime.TryParse(v.Violation_date, out DateTime parsedDate))
+                        {
+                            if (parsedDate.Year <= 2016)
+                            {
+                                filterViolation.AmountprvoldOfViolatio += type.Maximum_price;
+                                filterViolation.AmountOfCountOldYar += (type.Maximum_price * int.Parse(v.Notise));
+                                filterViolation.SelectCountOldYar += int.Parse(v.Notise);
+                                filterViolation.numberOfViolatio++;
+
+                            }
+                        }
+
+                        filterViolation.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
+                        break;
+                    }
+
+                }
+            }
+            return filterViolation;
+        }
+
         bool CanConfimpay() => true;
         //Current_Receipt != null;
 
