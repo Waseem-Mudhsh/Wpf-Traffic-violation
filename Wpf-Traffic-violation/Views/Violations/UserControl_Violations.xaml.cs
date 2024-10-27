@@ -39,9 +39,7 @@ namespace Wpf_Traffic_violation.Views
                 {
                     UserControl_QureyIdNumber userControl_QureyIdNumber = new UserControl_QureyIdNumber();
                     userControl_QureyIdNumber.butn_Query.IsEnabled = rol.PrivilegeUpdate;
-                    userControl_QureyIdNumber.AmntDisconr.IsEnabled = rol.PrivilegeUpdate;
                     userControl_QureyIdNumber.searchBT1.IsEnabled = rol.PrivilegeSelect;
-                    userControl_QureyIdNumber.but_PayViolation.IsEnabled = rol.PrivilegeAdd;
                     Frame_Violation.Content = userControl_QureyIdNumber;
 
                     break;
@@ -78,6 +76,8 @@ namespace Wpf_Traffic_violation.Views
                 {
                     UserControl_QureyViolation userControl_QureyNumber = new UserControl_QureyViolation();
                     userControl_QureyNumber.butn_Query.IsEnabled = rol.PrivilegeSelect;
+                    userControl_QureyNumber.but_PayViolation.IsEnabled = rol.PrivilegeAdd;
+                    userControl_QureyNumber.AmntDisconr.IsEnabled = rol.PrivilegeUpdate;
                     userControl_QureyNumber.searchBT1.IsEnabled = rol.PrivilegeSelect;
                     Frame_Violation.Content = userControl_QureyNumber;
 

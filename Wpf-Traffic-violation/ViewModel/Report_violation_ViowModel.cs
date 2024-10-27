@@ -481,6 +481,12 @@ namespace Wpf_Traffic_violation.ViewModel
 
                 var typrviolation = (userControlviolationReceipt.RadioButton_all.IsChecked == true) ? "unPaid" : (userControlviolationReceipt.RadioButton_sub.IsChecked == true) ? "IsPaid" : "All";
                 ShowReport = new Show_Report();
+
+                if (string.IsNullOrEmpty(To_date))
+                {
+                    To_date = From_date;
+                }
+
                 var validationDate = ValidationData(typrviolation, From_date, To_date);
                 if (validationDate)
                 {

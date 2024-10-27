@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf_Traffic_violation.Models.Violations_Model;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -40,56 +39,56 @@ namespace Wpf_Traffic_violation.Views
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            int value = 0;
+        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    int value = 0;
 
-            var data = dataGrid.ItemsSource;
-            SelectedAmount.Text = "";
-            foreach (Violation item in data)
-            {
-                if (item.Isselected)
-                {
-                    //value = Convert.ToInt32(SelectedAmount.Text);
-                    value += item.Violation_penalty;
-                    SelectedAmount.Text = value.ToString();
+        //    var data = dataGrid.ItemsSource;
+        //    SelectedAmount.Text = "";
+        //    foreach (Violation item in data)
+        //    {
+        //        if (item.Isselected)
+        //        {
+        //            //value = Convert.ToInt32(SelectedAmount.Text);
+        //            value += item.Violation_penalty;
+        //            SelectedAmount.Text = value.ToString();
 
-                }
-            }
-            // Handle the Checked event here
-            // You can access the DataContext of the CheckBox to get the corresponding item in your ItemsSource
-            // For example:
-            //var checkBox = sender as DataGridCell;
+        //        }
+        //    }
+        //    // Handle the Checked event here
+        //    // You can access the DataContext of the CheckBox to get the corresponding item in your ItemsSource
+        //    // For example:
+        //    //var checkBox = sender as DataGridCell;
 
-            //if (checkBox != null)
-            //{
-            //    Violation model = checkBox.DataContext as Violation;
+        //    //if (checkBox != null)
+        //    //{
+        //    //    Violation model = checkBox.DataContext as Violation;
 
-            //    if (model.Isselected == true)
-            //    {
-            //        value = Convert.ToInt32(SelectedAmount.Text);
-            //        value += model.Violation_penalty;
-            //        SelectedAmount.Text = value.ToString();
-            //    }
-            //}
-        }
-        private void CheckBox_UNChecked(object sender, RoutedEventArgs e)
-        {
-            int value = 0;
+        //    //    if (model.Isselected == true)
+        //    //    {
+        //    //        value = Convert.ToInt32(SelectedAmount.Text);
+        //    //        value += model.Violation_penalty;
+        //    //        SelectedAmount.Text = value.ToString();
+        //    //    }
+        //    //}
+        //}
+        //private void CheckBox_UNChecked(object sender, RoutedEventArgs e)
+        //{
+        //    int value = 0;
 
-            var data = dataGrid.ItemsSource;
-            SelectedAmount.Text = "";
-            foreach (Violation item in data)
-            {
-                if (item.Isselected)
-                {
-                    //value = Convert.ToInt32(SelectedAmount.Text);
-                    value += item.Violation_penalty;
-                    SelectedAmount.Text = value.ToString();
+        //    var data = dataGrid.ItemsSource;
+        //    SelectedAmount.Text = "";
+        //    foreach (Violation item in data)
+        //    {
+        //        if (item.Isselected)
+        //        {
+        //            //value = Convert.ToInt32(SelectedAmount.Text);
+        //            value += item.Violation_penalty;
+        //            SelectedAmount.Text = value.ToString();
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         private void DataGridCell_Selected(object sender, RoutedEventArgs e)
         {

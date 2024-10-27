@@ -68,12 +68,14 @@ namespace Wpf_Traffic_violation.Views
 
             //}
             var permation = Properties.Settings.Default.permissionUser;
-            var result = permation.FormPrevlg.Where(o => o.MenuId == index).ToList();
 
-            foreach (var per in result)
+            var result = permation.MenuPrevlg.Where(o => o.menu_id == index).ToList();
+            //var result = permation.MenuPrevlg.Where(o => o.menu_id == index).ToList();
+            foreach (var perMenu in result)
             {
+                var per = permation.FormPrevlg.FirstOrDefault(o => o.MenuId == index);
 
-                if (index == 1009)
+                if (perMenu.menu_id == 1009)
                 {
 
                     UserControl_Violations UserControl_Violations = new UserControl_Violations();
@@ -84,7 +86,7 @@ namespace Wpf_Traffic_violation.Views
 
                     userControl = UserControl_Violations;
                 }
-                if (index == 2)
+                if (perMenu.menu_id == 2)
                 {
 
                     //UserControl_Objections UserControl_Objections = new UserControl_Objections();
@@ -104,7 +106,7 @@ namespace Wpf_Traffic_violation.Views
                     //GridPageFrom1.Content = UserControl_Objections;
 
                 }
-                if (index == 1004)
+                if (perMenu.menu_id == 1004)
                 {
                     UserControl_Configuration UserControl_Configuration = new UserControl_Configuration();
                     UserControl_Configuration.but1.IsEnabled = true;
@@ -119,7 +121,7 @@ namespace Wpf_Traffic_violation.Views
                     UserControl_Configuration.but10.IsEnabled = true;
                     userControl = UserControl_Configuration;
                 }
-                if (index == 1002)
+                if (perMenu.menu_id == 1002)
                 {
 
                     UserControl_Reports userControl_Reports = new UserControl_Reports();
@@ -134,7 +136,7 @@ namespace Wpf_Traffic_violation.Views
                     userControl = userControl_Reports;
 
                 }
-                if (index == 1007)
+                if (perMenu.menu_id == 1007)
                 {
                     Main_reservation main_Reservation = new Main_reservation();
                     if (per.FormName == "عمليات الحجز")
@@ -148,7 +150,7 @@ namespace Wpf_Traffic_violation.Views
                     userControl = main_Reservation;
 
                 }
-                if (index == 1005)
+                if (perMenu.menu_id == 1005)
                 {
                     UserControl_Users userControl_Users = new UserControl_Users();
 
@@ -163,7 +165,7 @@ namespace Wpf_Traffic_violation.Views
                     userControl = userControl_Users;
                     break;
                 }
-                if (index == 1003)
+                if (perMenu.menu_id == 1003)
 
                 {
                     UserControl_SystemMaintenance userControl_SystemMaintenance = new UserControl_SystemMaintenance();
@@ -183,11 +185,11 @@ namespace Wpf_Traffic_violation.Views
 
 
 
-        public bool HasPermission(string permission)
-        {
-            // Check if the current user has the required permission
-            return false;
-        }
+        //public bool HasPermission(string permission)
+        //{
+        //    // Check if the current user has the required permission
+        //    return false;
+        //}
         private void Changed_Backgroung(Button but)
         {
             Color ColorgroN = (Color)ColorConverter.ConvertFromString("#FF00008B");//color background
@@ -208,7 +210,7 @@ namespace Wpf_Traffic_violation.Views
             Violations.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
             Users.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
             Objections.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
-            Reports.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
+            //Reports.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
             Reports.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
             Incidents.Background = new SolidColorBrush(Color.FromArgb(ColorgroN.A, ColorgroN.R, ColorgroN.G, ColorgroN.B));
 

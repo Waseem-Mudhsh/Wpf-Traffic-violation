@@ -1,19 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Wpf_Traffic_violation.Views
 {
@@ -26,7 +12,24 @@ namespace Wpf_Traffic_violation.Views
         {
             InitializeComponent();
         }
+        private void But_OpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            // Use FolderBrowserDialog or SaveFileDialog
+            using (System.Windows.Forms.FolderBrowserDialog folderBrowser = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                folderBrowser.Description = "Select the folder to save the backup";
+                folderBrowser.ShowNewFolderButton = true;
 
-        
+                // Show the FolderBrowserDialog
+                System.Windows.Forms.DialogResult result = folderBrowser.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set the selected path to the TextBox
+                    //text_OpenFolder.Text = folderBrowser.SelectedPath;
+                }
+            }
+        }
+
     }
 }

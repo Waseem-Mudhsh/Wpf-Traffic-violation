@@ -1,22 +1,16 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Wpf_Traffic_violation.Models.Users_Model
 {
-   public class DataServerModel
+    public class DataServerModel
     {
         SqlConnection con;
 
         public DataServerModel()
         {
-             con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+            con = new SqlConnection(@"server=" + Properties.Settings.Default.ServerName + " ;DataBase=" + Properties.Settings.Default.DatabaseName + " ;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             try
             {
                 con.Open();
@@ -31,21 +25,30 @@ namespace Wpf_Traffic_violation.Models.Users_Model
         }
         public void setBackup(string filename)
         {
-           
+
             //Class_SqlConnection sql = new Class_SqlConnection();
-            using (con)
+            try
             {
-                
-                 SqlCommand Command = new SqlCommand
+                // Connection string to the database
+                //string connectionString = "Data Source=YourServerName;Initial Catalog=YourDatabaseName;Integrated Security=True";
+
+                // SQL backup command
+                string backupCommand = $"BACKUP DATABASE Traffic_Violation_Management TO DISK = '{filename}'";
+
+                // Execute the command
+                using (con)
                 {
-                    CommandType = CommandType.Text,
-                    CommandText = "BACKUP DATABASE Traffic_Violation_Management TO DISK='" + filename + ".bak'",
-                    Connection = con
+                    SqlCommand command = new SqlCommand(backupCommand, con);
+                    //con.Open();
+                    command.ExecuteNonQuery();
+                    con.Close();
+                }
 
-                };
-
-                 Command.ExecuteNonQuery();
-                     MessageBox.Show("تم عمل نسخة إحتياطي بنجاح" + filename);
+                MessageBox.Show("Database backup completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while backing up the database: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -56,7 +59,7 @@ namespace Wpf_Traffic_violation.Models.Users_Model
 
             try
             {
-                SqlCommand d = new SqlCommand("ALTER DATABASE Traffic_Violation_Management SET OFFLINE WITH ROLLBACK IMMEDIATE;RESTORE DATABASE Traffic_Violation_Management FROM DISK='" + filename+ "';ALTER DATABASE Traffic_Violation_Management SET ONLINE WITH ROLLBACK IMMEDIATE", con);
+                SqlCommand d = new SqlCommand("ALTER DATABASE Traffic_Violation_Management SET OFFLINE WITH ROLLBACK IMMEDIATE;RESTORE DATABASE Traffic_Violation_Management FROM DISK='" + filename + "';ALTER DATABASE Traffic_Violation_Management SET ONLINE WITH ROLLBACK IMMEDIATE", con);
                 d.ExecuteNonQuery();
                 MessageBox.Show("تم إستعادة النسخة الإحتياطي بنجاح" + filename);
             }

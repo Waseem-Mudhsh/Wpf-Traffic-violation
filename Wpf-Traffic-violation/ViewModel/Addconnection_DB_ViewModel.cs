@@ -1,15 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using Wpf_Traffic_violation.Commands;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Users_Model;
-using Wpf_Traffic_violation.Views;
 
 namespace Wpf_Traffic_violation.ViewModel
 {
@@ -61,8 +54,8 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Construcor
         public Addconnection_DB_ViewModel()
         {
-         
-               AddConnect = new RelayCommand(Par =>addConnects());//This Bind with Button Add\
+
+            AddConnect = new RelayCommand(Par => addConnects());//This Bind with Button Add\
             SaveConnect = new RelayCommand(Par => SaveValues());
             BackupConnect = new RelayCommand(Par => Backup());
             OpenConnect = new RelayCommand(Par => opendug());
@@ -78,12 +71,13 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public void addConnects()
         {
-            Current_DataServer = new DataServer {
+            Current_DataServer = new DataServer
+            {
                 ServerName = Properties.Settings.Default.ServerName,
-            DBName = Properties.Settings.Default.DatabaseName,
-            UserName = Properties.Settings.Default.UserName,
-            Pass = Properties.Settings.Default.Password
-        };
+                DBName = Properties.Settings.Default.DatabaseName,
+                UserName = Properties.Settings.Default.UserName,
+                Pass = Properties.Settings.Default.Password
+            };
         }
         public void SaveValues()
         {
@@ -99,7 +93,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Current_Activity.Activity_date = DateTime.Now.Date.ToString();
             Current_Activity.User_id = Properties.Settings.Default.Userid;
             Current_Activity.Form_id = 11;
-            Current_Activity.Activity_record_num =34;
+            Current_Activity.Activity_record_num = 34;
 
             //////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////
@@ -110,21 +104,22 @@ namespace Wpf_Traffic_violation.ViewModel
         public void Backup()
         {
             DataServerModel = new DataServerModel();
-
-            string filename = Current_DataServer.Backup+ DateTime.Now.ToShortDateString().Replace('/', '-') + "-" + DateTime.Now.ToLongTimeString().Replace(':', '-');
+            //Properties.Settings.Default.ba
+            //string filename = System.IO.Path.GetDirectoryName(Current_DataServer.Backup + DateTime.Now.ToString("yyyyMMddHHmmss") + ".bak");
+            string filename = "BackUpdatabase" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".bak";
             DataServerModel.setBackup(filename);
             //////////////////////////////////////////////////////////////
 
-            Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
-            Current_Activity.Activity_date = DateTime.Now.Date.ToString();
-            Current_Activity.User_id = Properties.Settings.Default.Userid;
-            Current_Activity.Form_id = 11;
-            Current_Activity.Activity_record_num = 35;
+            //Current_Activity.Activity_id = new Class_SqlConnection().Get_Max("Activity");
+            //Current_Activity.Activity_date = DateTime.Now.Date.ToString();
+            //Current_Activity.User_id = Properties.Settings.Default.Userid;
+            //Current_Activity.Form_id = 11;
+            //Current_Activity.Activity_record_num = 35;
 
-            //////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////
-            Current_Activity.Activity_operation_num = 1;
-            ActivityModel.OperarionActivity(current_Activity, "Insert");
+            //////////////////////////////////////////////////////////////
+            //Current_Activity.Activity_operation_num = 1;
+            //ActivityModel.OperarionActivity(current_Activity, "Insert");
             ////////////////////////////////////////////////////////////
         }
         public void Restor()
@@ -148,15 +143,15 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public void opendug()
         {
-           
-             choofdlog = new SaveFileDialog();
+
+            choofdlog = new SaveFileDialog();
             choofdlog.Filter = "All Files (*.*)|*.*";
             choofdlog.FilterIndex = 1;
-            
+
             if (choofdlog.ShowDialog() == true)
             {
                 Current_DataServer.Backup = choofdlog.FileName;
-                
+
                 //string[] arrAllFiles = choofdlog.FileNames; //used when Multiselect = true           
             }
 
