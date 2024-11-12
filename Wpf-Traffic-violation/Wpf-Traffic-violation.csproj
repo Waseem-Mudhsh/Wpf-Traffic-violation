@@ -387,6 +387,7 @@
     <Compile Include="Core\DataAccess\configuration.cs" />
     <Compile Include="Core\DataAccess\Directorate.cs" />
     <Compile Include="Core\DataBase\Storedprocedures\OpreationSql.cs" />
+    <Compile Include="Core\helper\ArabicNumberToTextConverter.cs" />
     <Compile Include="Core\helper\ConvertToTargetType.cs" />
     <Compile Include="Core\helper\ICacheManager.cs" />
     <Compile Include="Core\helper\PermissionHelper.cs" />

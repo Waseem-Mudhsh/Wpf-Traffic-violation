@@ -26,6 +26,7 @@ namespace Wpf_Traffic_violation.ViewModel
         #region Objects And Variables
 
         Models.ViolationTypeModel violationTypeModel = new ViolationTypeModel();
+        ArabicNumberToTextConverter arabicNumberToText = new ArabicNumberToTextConverter();
         PlateOfType_Model PlateOfType_Model = new PlateOfType_Model();
         Provinces_Model provinces_Model = new Provinces_Model();
         QureyIdNumberModel QureyIdNumberModel = new QureyIdNumberModel();
@@ -765,7 +766,8 @@ namespace Wpf_Traffic_violation.ViewModel
                                 if (isCreated.Receipt_detail_id != 0 || isCreated.Receipt_detail_id != null)
                                 {
                                     ReciptPrint.NameOfPaid = isCreated.NameOfPaid;
-                                    ReciptPrint.ReasonOfPaid = isCreated.ResonOfPaid;
+
+                                    //ReciptPrint.ReasonOfPaid = isCreated.ResonOfPaid;
                                     ReciptPrint.VehicleId = result.FirstOrDefault().Plate_Num;//Convert.ToInt32(v.Plate_Num);
                                     ReciptPrint.ReceiptId = receiptid.Receipt_id;
                                     ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
@@ -801,6 +803,8 @@ namespace Wpf_Traffic_violation.ViewModel
                             }
                             if (receiptid.Receipt_id != 0)
                             {
+                                string ArabicWord = arabicNumberToText.getArabicText(ReciptPrint.ViolationPenalty);
+                                ReciptPrint.ReasonOfPaid = ArabicWord;
                                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                                 ReciptPrint.CountOfType = Count;//(ReciptPrint.ViolationType.Count - numberOfViolatio);
                                 ReciptPrint.ViolationPenalty = ReciptPrint.ViolationPenalty;
