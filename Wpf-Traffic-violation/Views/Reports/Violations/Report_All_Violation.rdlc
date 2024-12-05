@@ -102,7 +102,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Traffic_Violation_ManagementDataSet5</rd:DataSetName>
-        <rd:SchemaPath>J:\الجامعة\المشروع\نسخة 15_9_2020\Wpf-Traffic-violation\Wpf-Traffic-violation\Traffic_Violation_ManagementDataSet5.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Eng-Ibrahim.M.A\Documents\GitHub\Wpf-Traffic-violation\Wpf-Traffic-violation\Traffic_Violation_ManagementDataSet5.xsd</rd:SchemaPath>
         <rd:TableName>Report_Violation</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -142,6 +142,18 @@
         <Field Name="IsScaning">
           <DataField>IsScaning</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ReportExtractName">
+          <DataField>ReportExtractName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumViolationPenaltyCount">
+          <DataField>SumViolationPenaltyCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SumViolationTypcount">
+          <DataField>SumViolationTypcount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="To_date">
           <DataField>To_date</DataField>
@@ -581,8 +593,77 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>مستخرج التقرير </Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>5.86458cm</Top>
+            <Left>19.98653cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.35416cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="To_date2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ReportExtractName.Value, "DataSet2")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>To_date</rd:DefaultName>
+            <Top>5.86458cm</Top>
+            <Left>17.40715cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.87042cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.37497in</Height>
+        <Height>2.61455in</Height>
         <Style>
           <Border>
             <Style>Solid</Style>

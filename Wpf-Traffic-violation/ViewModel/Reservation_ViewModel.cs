@@ -1,7 +1,5 @@
-﻿using Syncfusion.Linq;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Wpf_Traffic_violation.Models;
 using Wpf_Traffic_violation.Models.Reservation_Model;
 
@@ -21,9 +19,9 @@ namespace Wpf_Traffic_violation.ViewModel
 
         public Reservation_ViewModel()
         {
-            Grid_Reservation = new ObservableCollection<ReservationModel>(reservation.GetAllReservation());
-            Grid_ExReservation = Grid_Reservation.Select(x => { x.IsRelease = true; return x; }) as ObservableCollection<ReservationModel>;
-            Grid_ExReservation = Grid_Reservation.Select(x => { x.IsEnter = true; return x; }) as ObservableCollection<ReservationModel>;
+            //Grid_Reservation = new ObservableCollection<ReservationModel>(reservation.GetAllReservation());
+            //Grid_ExReservation = Grid_Reservation.Select(x => { x.IsRelease = true; return x; }) as ObservableCollection<ReservationModel>;
+            //Grid_ExReservation = Grid_Reservation.Select(x => { x.IsEnter = true; return x; }) as ObservableCollection<ReservationModel>;
 
 
         }

@@ -435,6 +435,7 @@ namespace Wpf_Traffic_violation.ViewModel
                     ExtraDetel.DateNow = System.DateTime.Parse(System.DateTime.Now.ToShortDateString(), CultureInfo.InvariantCulture).ToShortDateString();
                     ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
                     ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();
+                    ExtraDetel.ReportExtractName = Properties.Settings.Default.UserNameSystem;
                     extraDetailReportModels.Add(ExtraDetel);
                     var data = ViolationModel.GetAllViolationReport(typrviolation, From_date, To_date);
                     ShowReport.ReportViewerDemo.Reset();
@@ -501,6 +502,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         }
                         ExtraDetel.SumViolationTypcount = sumviolationType;
                         ExtraDetel.SumViolationPenaltyCount = sumamount;
+                        ExtraDetel.ReportExtractName = Properties.Settings.Default.UserNameSystem;
                         var date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();
                         ExtraDetel.From_date = System.DateTime.Parse(From_date, CultureInfo.InvariantCulture).ToShortDateString();//DateTime.ParseExact(DateTime.Now.ToString(),)
                         ExtraDetel.To_date = System.DateTime.Parse(To_date, CultureInfo.InvariantCulture).ToShortDateString();

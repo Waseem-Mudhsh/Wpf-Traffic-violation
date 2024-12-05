@@ -746,6 +746,7 @@ namespace Wpf_Traffic_violation.ViewModel
                         Current_Receipt.NameOfPaid = NameOfPaid;
                         Current_Receipt.ResonOfPaid = ResonOfPaid;
                         Current_Receipt.Receipt_amountwithdiscont = (AmountSelected - DiscontAmnt);
+                        Current_Receipt.UserId = Properties.Settings.Default.Userid;
                         VoilationModel = new VoilationModel();
                         var receiptid = ReceiptModel.CreateReceipt(Current_Receipt, Count);
                         if (receiptid.Receipt_id != 0)
@@ -808,6 +809,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                                 ReciptPrint.CountOfType = Count;//(ReciptPrint.ViolationType.Count - numberOfViolatio);
                                 ReciptPrint.ViolationPenalty = ReciptPrint.ViolationPenalty;
+                                ReciptPrint.NameCreatedby = Properties.Settings.Default.UserNameSystem;
                                 ReciptPrint.DateOfReceipt = DateTime.Now.ToString("yyyy/MM/dd");
                                 ReciptPrint.VounchrNum = (int)result.FirstOrDefault()?.VounchrNum;
                                 ReciptPrint.To = (DateTime.Now).AddDays(-30).ToString();
@@ -884,6 +886,7 @@ namespace Wpf_Traffic_violation.ViewModel
                                 vehicleId = Convert.ToInt32(Current_Violation.Plate_Num),
                                 violationprov = Convert.ToString(SelectedProvinces.Province_id),
                                 violationType = SelectedPlateType.Plate_type_name,
+                                Userid = Properties.Settings.Default.Userid,
                             };
                             var GetReviewOfplate = Plate_Model.GetReviewOfplate(rrivewViolation);
                             if (GetReviewOfplate != null)
@@ -947,7 +950,7 @@ namespace Wpf_Traffic_violation.ViewModel
             {
                 ReciptPrint.VehicleTypeName = SelectedPlateType.Plate_type_name + "/" + Convert.ToString(SelectedProvinces.Province_id);
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
-
+                ReciptPrint.NameCreatedby = Properties.Settings.Default.UserNameSystem;
                 ReciptPrint.DateOfReceipt = System.DateTime.Parse(System.DateTime.Now.ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 ReciptPrint.To = DateTime.Parse((System.DateTime.Now).AddDays(-30).ToString(), CultureInfo.InvariantCulture).ToShortDateString();
                 model.Add(ReciptPrint);
@@ -972,6 +975,7 @@ namespace Wpf_Traffic_violation.ViewModel
                 var filters = ViolationFilter(Grid_Violation1, Grid_ViolationType);
                 ReciptPrint.ViolationType.AddRange(filters.ViolationType);
                 ReciptPrint.VehicleId = Current_Violation.Plate_Num;
+                ReciptPrint.NameCreatedby = Properties.Settings.Default.UserNameSystem;
                 var dataTableForViolationtype = new ObservableCollection<ViolationType>();
                 var violationsTypeSelected = new List<KeyValuePair<string, int>>();
                 ReciptPrint.ViolationPenalty = AmountSelected;

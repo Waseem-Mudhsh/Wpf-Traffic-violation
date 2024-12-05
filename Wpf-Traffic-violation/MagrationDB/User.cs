@@ -26,6 +26,7 @@ namespace Wpf_Traffic_violation.MagrationDB
     
         public int User_id { get; set; }
         public string User_short_name { get; set; }
+        public string Full_Name { get; set; }
         public string User_password { get; set; }
         public int User_type { get; set; }
         public Nullable<int> Status { get; set; }

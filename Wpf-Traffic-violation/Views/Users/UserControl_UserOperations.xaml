@@ -92,10 +92,13 @@
                                         Header="أسم المستخدم" MaxWidth="300" MinWidth="100"
                                           
                                          />
+                    <DataGridTextColumn Binding="{Binding FullName}" 
+                                        Header="الاسم الكامل" MaxWidth="300" MinWidth="100"
+                                         />
                     
                     <DataGridTextColumn Binding="{Binding String_usertype}"
                                         Header="نوع المستخدم" MaxWidth="200" MinWidth="100"
-                                          
+                                        
                                          />
                     <DataGridCheckBoxColumn Binding="{Binding Userstatus}"
                                         Header="نشط" MaxWidth="80" MinWidth="60" 

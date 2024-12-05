@@ -323,8 +323,9 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
           <Property Name="Receipt_statement" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Receipt_amount" Type="int" Nullable="false" />
           <Property Name="Receipt_status" Type="bit" />
-          <Property Name="Post_date" Type="datetime" />
-        </EntityType>
+			<Property Name="Post_date" Type="datetime" />
+			<Property Name="user_id" Type="int" />
+		</EntityType>
         <EntityType Name="Receipt_detail">
           <Key>
             <PropertyRef Name="Receipt_detail_id" />
@@ -384,8 +385,9 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
             <PropertyRef Name="User_id" />
           </Key>
           <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_short_name" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="User_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+			<Property Name="User_short_name" Type="nvarchar" MaxLength="10" Nullable="false" />
+			<Property Name="Full_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+			<Property Name="User_password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="User_type" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" />
         </EntityType>
@@ -1443,9 +1445,11 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
           <Property Name="Account_id" Type="Int32" Nullable="false" />
           <Property Name="Receipt_statement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Receipt_amount" Type="Int32" Nullable="false" />
-          <Property Name="Receipt_status" Type="Boolean" />
-          <Property Name="Post_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Receipt_Account" FromRole="Receipt" ToRole="Account" />
+			<Property Name="Receipt_status" Type="Boolean" />
+			<Property Name="Post_date" Type="DateTime" Precision="3" />
+			<Property Name="user_id" Type="Int32" />
+
+			<NavigationProperty Name="Account" Relationship="Self.FK_Receipt_Account" FromRole="Receipt" ToRole="Account" />
           <NavigationProperty Name="Receipt_detail" Relationship="Self.FK_Receipt_detail_Receipt" FromRole="Receipt" ToRole="Receipt_detail" />
         </EntityType>
         <EntityType Name="Receipt_detail">
@@ -1514,8 +1518,9 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
             <PropertyRef Name="User_id" />
           </Key>
           <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_short_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+			<Property Name="User_short_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+			<Property Name="Full_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+			<Property Name="User_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="User_type" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_User" FromRole="User" ToRole="Activity" />
@@ -2605,8 +2610,9 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
                 <ScalarProperty Name="Receipt_statement" ColumnName="Receipt_statement" />
                 <ScalarProperty Name="Receipt_amount" ColumnName="Receipt_amount" />
                 <ScalarProperty Name="Receipt_status" ColumnName="Receipt_status" />
-                <ScalarProperty Name="Post_date" ColumnName="Post_date" />
-              </MappingFragment>
+				  <ScalarProperty Name="Post_date" ColumnName="Post_date" />
+				  <ScalarProperty Name="user_id" ColumnName="user_id" />
+			  </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Receipt_detail">
@@ -2672,8 +2678,9 @@ warning 6002: The table/view 'Traffic_Violation_Management.dbo.Privilege_user' d
             <EntityTypeMapping TypeName="Traffic_Violation_ManagementModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="User_short_name" ColumnName="User_short_name" />
-                <ScalarProperty Name="User_password" ColumnName="User_password" />
+				  <ScalarProperty Name="User_short_name" ColumnName="User_short_name" />
+				  <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+				  <ScalarProperty Name="User_password" ColumnName="User_password" />
                 <ScalarProperty Name="User_type" ColumnName="User_type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>

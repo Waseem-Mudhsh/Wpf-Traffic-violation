@@ -948,11 +948,78 @@
           </Border>
         </Style>
       </Image>
+      <Textbox Name="nameTraf">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!ReportExtractName.Value, "DataSet2")</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>12.13528cm</Top>
+        <Left>16.83379cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.42063cm</Width>
+        <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="boxofname">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>مستخرج التقرير </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>12.13528cm</Top>
+        <Left>19.07802cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.38944cm</Width>
+        <ZIndex>13</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>4.78125in</Height>
+    <Height>5.01389in</Height>
     <Style />
   </Body>
-  <Width>8.42398in</Width>
+  <Width>8.45176in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -1100,6 +1167,10 @@
         <Field Name="IsScaning">
           <DataField>IsScaning</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ReportExtractName">
+          <DataField>ReportExtractName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SumViolationPenaltyCount">
           <DataField>SumViolationPenaltyCount</DataField>

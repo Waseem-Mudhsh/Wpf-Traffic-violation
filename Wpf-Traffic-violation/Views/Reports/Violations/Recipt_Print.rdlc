@@ -447,14 +447,14 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="DetalsForOldViolation">
+      <Textbox Name="DetalsForOldViolation1">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>........................................................</Value>
+                <Value>=First(Fields!NameCreatedby.Value, "DataSetRecipt")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -467,7 +467,6 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>DetalsForOldViolation</rd:DefaultName>
         <Top>4.39444in</Top>
         <Left>3.42542in</Left>
         <Height>0.25in</Height>
@@ -1287,14 +1286,14 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="DetalsForOldViolation2">
+      <Textbox Name="DetalsForOldViolation">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>........................................................</Value>
+                <Value>=First(Fields!NameCreatedby.Value, "DataSetRecipt")</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>12pt</FontSize>
@@ -1371,6 +1370,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="CountAllviolation">
+          <DataField>CountAllviolation</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="CountOfType">
           <DataField>CountOfType</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -1402,6 +1405,10 @@
         <Field Name="IsScaning">
           <DataField>IsScaning</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="NameCreatedby">
+          <DataField>NameCreatedby</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NameOfPaid">
           <DataField>NameOfPaid</DataField>

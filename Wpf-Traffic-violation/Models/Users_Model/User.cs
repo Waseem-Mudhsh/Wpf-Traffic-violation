@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models
 {
     public class User : BindableBase
     {
-       
+
         int userid;
         public int Userid
         {
@@ -27,7 +23,7 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
         }
-       
+
 
         private void Combine()
         {
@@ -70,6 +66,24 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
         }
+        string fullName;
+        public string FullName
+        {
+            get
+            {
+                return fullName;
+            }
+            set
+            {
+                if (fullName != value)
+                {
+                    fullName = value;
+                    Combine();
+
+                    RaisePropertyChanged("FullName");
+                }
+            }
+        }
         string userpassword;
         public string Userpassword
         {
@@ -102,7 +116,7 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
         }
-        bool  userstatus;
+        bool userstatus;
         public bool Userstatus
         {
             get
@@ -150,11 +164,11 @@ namespace Wpf_Traffic_violation.Models
                 }
             }
         }
-        
 
 
-       
-            
+
+
+
 
 
 
@@ -165,7 +179,7 @@ namespace Wpf_Traffic_violation.Models
         public override void CollectErrors()
         {
             Errors.Clear();
-            if(Userid==0)
+            if (Userid == 0)
             {
                 Errors.Add("Userid", "يجب أن لايكون فارغ أو يحمل القيمة صفر");
             }
@@ -174,11 +188,11 @@ namespace Wpf_Traffic_violation.Models
             //    Errors.Add("Username", "يجب أن يكون نص ");
             //}
             if (String.IsNullOrWhiteSpace(Userpassword))
-            
+
             {
                 Errors.Add("Userpassword", "يجب أن لايكون فارغ ");
             }
-            
+
         }
     }
 }

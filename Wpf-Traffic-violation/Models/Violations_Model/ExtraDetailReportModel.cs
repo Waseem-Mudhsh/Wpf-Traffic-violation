@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models.Violations_Model
@@ -41,6 +37,24 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 }
             }
         }
+        string reportExtractName;
+
+        public string ReportExtractName
+        {
+            get
+            {
+
+                return reportExtractName;
+            }
+            set
+            {
+                if (reportExtractName != value)
+                {
+                    reportExtractName = value;
+                    RaisePropertyChanged("ReportExtractName");
+                }
+            }
+        }
         string dateNow;
         public string DateNow
         {
@@ -50,10 +64,10 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
             }
             set
             {
-                
-                    dateNow =Convert.ToString( DateTime.Now);
-                    RaisePropertyChanged("To_date");
-               
+
+                dateNow = Convert.ToString(DateTime.Now);
+                RaisePropertyChanged("To_date");
+
             }
         }
         public int SumViolationPenaltyCount

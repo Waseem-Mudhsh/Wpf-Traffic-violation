@@ -196,7 +196,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-	
       <Textbox Name="VehicleId">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -374,45 +373,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox15">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>عبدالكريم البورة</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox12</rd:DefaultName>
-        <Top>4.52306in</Top>
-        <Left>5.94478in</Left>
-        <Height>0.25in</Height>
-        <Width>1.23958in</Width>
-        <ZIndex>10</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox2">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -439,7 +399,7 @@
         <Left>1.14096in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -469,7 +429,7 @@
         <Left>0.11318in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -488,7 +448,7 @@
         <Left>3.10292in</Left>
         <Height>0.5in</Height>
         <Width>0.73958in</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -514,6 +474,36 @@
         <Left>6.07499in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
+        <ZIndex>13</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="NameCreatedby">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!NameCreatedby.Value, "DataSetReport")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>NameCreatedby</rd:DefaultName>
+        <Top>4.52306in</Top>
+        <Left>5.83208in</Left>
+        <Height>0.25in</Height>
+        <Width>1.60228in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -593,12 +583,20 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="CountAllviolation">
+          <DataField>CountAllviolation</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="CountOfType">
           <DataField>CountOfType</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="DateOfReceipt">
           <DataField>DateOfReceipt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DetalsForOldViolation">
+          <DataField>DetalsForOldViolation</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Error">
@@ -620,6 +618,10 @@
         <Field Name="IsScaning">
           <DataField>IsScaning</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="NameCreatedby">
+          <DataField>NameCreatedby</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NameOfPaid">
           <DataField>NameOfPaid</DataField>
