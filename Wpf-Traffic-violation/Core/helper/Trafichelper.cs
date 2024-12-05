@@ -1,5 +1,4 @@
-﻿
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -54,6 +53,7 @@ public class helper : IValueConverter
                 Post_date = System.Convert.ToDateTime(current_Receipt.Receipt_date),
                 Receipt_date = System.Convert.ToDateTime(current_Receipt.Receipt_date),
                 Account_id = 1,
+                user_id = current_Receipt.UserId,
                 //Post_date = Convert.ToDateTime(current_Receipt.Post_date),
                 Receipt_status = current_Receipt.Receipt_status,
                 Receipt_statement = $"مقابل عدد + {count} مخالفات ",

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wpf_Traffic_violation.ViewModel;
 
 namespace Wpf_Traffic_violation.Models
@@ -23,6 +19,22 @@ namespace Wpf_Traffic_violation.Models
                     receipt_id = value;
                     Combine();
                     RaisePropertyChanged("Receipt_id");
+                }
+            }
+        }
+        int userId;
+        public int UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                if (userId != value)
+                {
+                    userId = value;
+                    RaisePropertyChanged("UserId");
                 }
             }
         }
@@ -174,7 +186,7 @@ namespace Wpf_Traffic_violation.Models
             }
         }
         string resonOfPaid;
-   
+
         public string ResonOfPaid
         {
             get
@@ -185,7 +197,7 @@ namespace Wpf_Traffic_violation.Models
             {
                 if (resonOfPaid != value)
                 {
-                    resonOfPaid= value;
+                    resonOfPaid = value;
                     RaisePropertyChanged("resonOfPaid");
                 }
             }
@@ -201,13 +213,13 @@ namespace Wpf_Traffic_violation.Models
             {
                 if (nameOfPaid != value)
                 {
-                    nameOfPaid = value; 
+                    nameOfPaid = value;
                     RaisePropertyChanged("nameOfPaid");
                 }
             }
         }
         int receipt_amountwithdiscont;
-      
+
 
         public int Receipt_amountwithdiscont
         {

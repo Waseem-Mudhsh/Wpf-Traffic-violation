@@ -300,7 +300,7 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                 var result = isphelper.GetCollectionByParam(sP_Query.Getreviewviolation, "Getreviewviolation", param);
                 if (result.Data.Count <= 0)
                 {
-                    SqlParameter[] par = new SqlParameter[3];
+                    SqlParameter[] par = new SqlParameter[4];
 
                     par[0] = new SqlParameter("@vehicleId", SqlDbType.Int)
                     {
@@ -311,11 +311,16 @@ namespace Wpf_Traffic_violation.Models.Configurations_Model
                         Value = rrivewViolation.violationType,
 
                     };
+
                     par[2] = new SqlParameter("@violationprov", SqlDbType.NVarChar)
                     {
                         Value = rrivewViolation.violationprov,
                     };
+                    par[3] = new SqlParameter("@user_id", SqlDbType.NVarChar)
+                    {
+                        Value = rrivewViolation.Userid,
 
+                    };
                     var res = isphelper.Operarion(par, opreationSql.opReviewViolation, "opReviewViolation");
                     return null;
                 }

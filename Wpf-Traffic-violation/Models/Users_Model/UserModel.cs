@@ -44,7 +44,9 @@ namespace Wpf_Traffic_violation.Models
                         Username = (string)row[1],
                         Userpassword = (string)row[2],
                         String_usertype = (string)row[3],
-                        Userstatus = Convert.ToBoolean(row[4])
+                        FullName = (string)row[4],
+                        Userstatus = Convert.ToBoolean(row[5]),
+
 
 
                     };
@@ -75,7 +77,7 @@ namespace Wpf_Traffic_violation.Models
         public bool OperarionUser(User user, string operartion)
         {
 
-            SqlParameter[] param = new SqlParameter[6];
+            SqlParameter[] param = new SqlParameter[7];
             //@user_id, @user_name, @user_pass, @user_type, @user_status
 
             param[0] = new SqlParameter("@user_id", SqlDbType.Int)
@@ -98,7 +100,11 @@ namespace Wpf_Traffic_violation.Models
             {
                 Value = user.Userstatus
             };
-            param[5] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
+            param[5] = new SqlParameter("@fullname", SqlDbType.NVarChar, 250)
+            {
+                Value = user.FullName
+            };
+            param[6] = new SqlParameter("@Operation", SqlDbType.NVarChar, 50)
             {
                 Value = operartion
             };

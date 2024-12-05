@@ -16,7 +16,8 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
         private string _nameOfPaid;
         private string _reasonOfPaid;
         private string _to; private
-            string _dateOfReceipt;
+        string _dateOfReceipt;
+        string _nameCreatedby;
         private int _countOfType;
         private List<KeyValuePair<string, int>> _violationsType = new List<KeyValuePair<string, int>>();
 
@@ -49,7 +50,15 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 RaisePropertyChanged("VehicleId");
             }
         }
-
+        public string NameCreatedby
+        {
+            get { return _nameCreatedby; }
+            set
+            {
+                _nameCreatedby = value;
+                RaisePropertyChanged("NameCreatedby");
+            }
+        }
         public string VehicleTypeName
         {
             get { return _violationTypeName; }

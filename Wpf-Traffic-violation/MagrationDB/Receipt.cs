@@ -27,7 +27,8 @@ namespace Wpf_Traffic_violation.MagrationDB
         public int Receipt_amount { get; set; }
         public Nullable<bool> Receipt_status { get; set; }
         public Nullable<System.DateTime> Post_date { get; set; }
-    
+        public int user_id { get ; set; }
+
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Receipt_detail> Receipt_detail { get; set; }
