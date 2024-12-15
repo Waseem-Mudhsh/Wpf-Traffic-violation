@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Wpf_Traffic_violation.Views
@@ -28,6 +29,34 @@ namespace Wpf_Traffic_violation.Views
 
         }
 
+        private void filterSearchbytypplate_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender is AutoCompleteBox autoCompleteBox)
+            {
+                // Define a regex to allow only letters and digits
+                string regexPattern = @"[^a-zA-Z0-9\u0621-\u064A]+"; // This includes Arabic letters
+                string originalText = autoCompleteBox.Text;
 
+                // Remove spaces and special characters
+                string cleanedText = Regex.Replace(originalText, regexPattern, "");
+
+            }
+
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox autoCompleteBox)
+            {
+                // Define a regex to allow only letters and digits
+                string regexPattern = @"[^a-zA-Z0-9\u0621-\u064A]+"; // This includes Arabic letters
+                string originalText = autoCompleteBox.Text;
+
+                // Remove spaces and special characters
+                string cleanedText = Regex.Replace(originalText, regexPattern, "");
+
+            }
+
+        }
     }
 }
