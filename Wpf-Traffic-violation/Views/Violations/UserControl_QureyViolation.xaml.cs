@@ -33,12 +33,24 @@ namespace Wpf_Traffic_violation.Views
         {
             if (sender is AutoCompleteBox autoCompleteBox)
             {
-                // Define a regex to allow only letters and digits
-                string regexPattern = @"[^a-zA-Z0-9\u0621-\u064A]+"; // This includes Arabic letters
+                string pattern = @"[^a-zA-Z0-9\u0621-\u064A]"; // Match invalid characters
+
+                // Get the original text
                 string originalText = autoCompleteBox.Text;
 
-                // Remove spaces and special characters
-                string cleanedText = Regex.Replace(originalText, regexPattern, "");
+                // Clean invalid characters
+                string cleanedText = Regex.Replace(originalText, pattern, "");
+
+                if (originalText != cleanedText)
+                {
+                    // Show the warning only if there was invalid input
+                    MessageBox.Show("غير صحيح: يُسمح فقط بالحروف الإنجليزية، الحروف العربية، والأرقام.",
+                                    "تنبيه", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    // Update the text and reset the caret position
+                    autoCompleteBox.Text = cleanedText;
+                    //autoCompleteBox.SelectionStart = cleanedText.Length; // Move caret to end
+                }
 
             }
 
@@ -46,15 +58,27 @@ namespace Wpf_Traffic_violation.Views
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (sender is TextBox autoCompleteBox)
+            if (sender is TextBox textBox)
             {
-                // Define a regex to allow only letters and digits
-                string regexPattern = @"[^a-zA-Z0-9\u0621-\u064A]+"; // This includes Arabic letters
-                string originalText = autoCompleteBox.Text;
+                // Regular Expression: Allow Arabic letters, English letters, and numbers (no spaces or special characters)
+                string pattern = @"[^a-zA-Z0-9\u0621-\u064A]"; // Match invalid characters
 
-                // Remove spaces and special characters
-                string cleanedText = Regex.Replace(originalText, regexPattern, "");
+                // Get the original text
+                string originalText = textBox.Text;
 
+                // Clean invalid characters
+                string cleanedText = Regex.Replace(originalText, pattern, "");
+
+                if (originalText != cleanedText)
+                {
+                    // Show the warning only if there was invalid input
+                    MessageBox.Show("غير صحيح: يُسمح فقط بالحروف الإنجليزية، الحروف العربية، والأرقام.",
+                                    "تنبيه", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    // Update the text and reset the caret position
+                    textBox.Text = cleanedText;
+                    textBox.SelectionStart = cleanedText.Length; // Move caret to end
+                }
             }
 
         }
