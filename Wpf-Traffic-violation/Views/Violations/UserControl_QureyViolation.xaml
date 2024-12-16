@@ -16,14 +16,15 @@
             <StackPanel   Height="50"  Orientation="Horizontal" FlowDirection="RightToLeft" Background="White" HorizontalAlignment="Center" >
                 <TextBlock Text="رقم اللوحة :" Margin="30 0 15 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
                 <TextBox    x:Name="textBox" Width="216" Text="{Binding Current_Violation.Plate_Num}" 
-                        materialDesign:HintAssist.Hint="رقم اللوحة ..." 
+                        materialDesign:HintAssist.Hint="رقم اللوحة ..." TextChanged="textBox_TextChanged" 
                          BorderThickness="1,1,1,1" Padding="5,3,0,0"  UseLayoutRounding="False" Background="White" Margin="0,5" FontFamily="Tajawal" FontSize="14" />
                 <TextBlock Text="نوع اللوحة" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
                 <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35" ItemsSource="{Binding GridPlateType}"  Foreground="Black" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14"  Padding="10,10,0,0"
                                               ValueMemberPath="Plate_type_name" 
-                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
+                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="filterSearchbytypplate_TextChanged" 
+                                          Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
                                              
                                           />
 
