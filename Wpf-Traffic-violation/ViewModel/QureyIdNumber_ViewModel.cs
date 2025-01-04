@@ -40,6 +40,7 @@ namespace Wpf_Traffic_violation.ViewModel
         VoilationModel VoilationModel;
         EntryModel EntryModel = new EntryModel();
         helper _helper;
+        bool _canselect = false;
         //int numberOfViolatio = 0;
         //int AmountprvoldOfViolatio = 0;
         #endregion
@@ -507,7 +508,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Showcommand = new RelayCommand(Par => Show(), Par => CanShow());
             Paycommand = new RelayCommand(Par => Pay(), Par => CanPay());
             ConfimPaycommand = new RelayCommand(Par => Confimpay(1), Par => CanConfimpay());
-            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2));
+            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2), par => Canselect());
             ShowDetaileForViolationNull = new RelayCommand(Par => Confimpay(3));
 
             //Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -583,50 +584,64 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         async Task Show()
         {
+            // Reset state
             Grid_Violation = null;
             AmountSelected = 0;
-            if (SelectedProvinces == null || SelectedPlateType == null || Current_Violation.Plate_Num == null)
+            Count = 0; // Ensure Count is initialized
+
+            // Validate input fields
+            if (SelectedProvinces == null || SelectedPlateType == null || string.IsNullOrEmpty(Current_Violation.Plate_Num))
             {
-                MessageBox.Show("يجب تحديد رقم اللوحة و نوع اللوحة ورمز المحافظة لتتمكن من البحث بشكل اسرع😊");
+                MessageBox.Show("يجب تحديد رقم اللوحة و نوع اللوحة ورمز المحافظة لتتمكن من البحث بشكل أسرع😊");
+                return; // Exit the method if validation fails
             }
-            else
+
+            // Set properties based on selected values
+            Current_Violation.Provinceid = SelectedProvinces.Province_id;
+            Current_Violation.Plate_TypeId = SelectedPlateType.Plate_type_id;
+            TotalAmount = 0;
+
+            try
             {
-                Current_Violation.Provinceid = SelectedProvinces.Province_id;
-                Current_Violation.Plate_TypeId = SelectedPlateType.Plate_type_id;
-                TotalAmount = 0;
-                //Currunt_Vehicle = new Vehicle();
-                //Currunt_Vehicle= await Task.Run(() => QureyIdNumberModel.GetVehicleCard( Selected_Plate.Plate_id));
-                Grid_Violation = new ObservableCollection<Violation>();
+                // Initialize the violation collection asynchronously
                 Grid_Violation = await Task.Run(() => QureyIdNumberModel.GetViolationQurey(Current_Violation));
-                //Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
-                //_currentPage = 1;
 
-                if (Grid_Violation.Count <= 0)
+                // Handle empty data
+                if (Grid_Violation.Count == 0)
                 {
+                    _canselect = true;
+
                     MessageBox.Show("لايوجد بيانات");
+                    return; // Exit if no violations are found
                 }
 
-
-
-                foreach (Violation a in Grid_Violation)
+                // Calculate the total penalty and set selection flag
+                foreach (Violation violation in Grid_Violation)
                 {
-
-                    AmountSelected += a.Violation_penalty;
-                    a.Isselected = true;
-
+                    AmountSelected += violation.Violation_penalty;
+                    violation.Isselected = true; // Set selection flag
                 }
+
+                // Apply filter
                 var filter = ViolationFilter(Grid_Violation, Grid_ViolationType);
 
+                // Calculate counts and total amounts
                 Count = (Grid_Violation.Count + filter.SelectCountOldYar) - filter.numberOfViolatio;
                 TotalAmount = (AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar;
 
+                // Enable selection if there are results
+                if (Count != 0)
+                {
+                    _canselect = true;
+                }
             }
-
-
-
-
-
+            catch (Exception ex)
+            {
+                // Handle unexpected errors and log them
+                MessageBox.Show($"حدث خطأ أثناء التحميل: {ex.Message}");
+            }
         }
+
         void SeelctedAll()
         {
             // Set the IsSelected property for all items in your collection
@@ -637,7 +652,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
         }
         bool CanShow() => true;
-
+        bool Canselect() => _canselect;
         void Pay()
         {
             //AmountSelected = 0;
@@ -838,7 +853,6 @@ namespace Wpf_Traffic_violation.ViewModel
                                 };
 
                                 ShowReport.ReportViewerDemo.SetPageSettings(pageSettings);
-
                                 //ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
                                 ShowReport.ReportViewerDemo.RefreshReport();
@@ -934,7 +948,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
-        public void reviewViolationRecipt(ObservableCollection<Violation> result)
+        public async void reviewViolationRecipt(ObservableCollection<Violation> result)
         {
 
             var ReciptPrint = new ReceiptPrintModel();
@@ -1024,6 +1038,8 @@ namespace Wpf_Traffic_violation.ViewModel
             SelectCountOldYar = 0;
             AmountOfCountOldYar = 0;
             //AmountSelected = 0;
+            await asyncQureyIdNumber();
+
 
 
         }
@@ -1056,6 +1072,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
                 }
             }
+
             return filterViolation;
         }
 

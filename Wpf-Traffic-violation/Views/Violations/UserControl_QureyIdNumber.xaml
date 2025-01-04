@@ -26,7 +26,7 @@
                 <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35" ItemsSource="{Binding GridPlateType}"  Foreground="Black" 
                                               ItemTemplate="{StaticResource AutoId}" 
                                               FontSize="14"  Padding="10,10,0,0"
-                                              ValueMemberPath="Plate_type_name" TextChanged="filterSearchbytypplate_TextChanged"
+                                              ValueMemberPath="Plate_type_name" 
                                               SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
                                              
                                           />

@@ -328,6 +328,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 if (violations.Code == 3) return result = null;
                 foreach (DataRow item in violations.Data)
                 {
+
                     var model = new ReceiptReportModel
                     {
                         ReceiptId = (int)item[0],
