@@ -134,6 +134,7 @@ namespace Wpf_Traffic_violation.Models
             var result = sphelper.Operarion(param, opreationSql.OperationViolationtype, "opViolationType");
             if (!result.Data)
             {
+                cacheManager.Remove();
                 return false;
 
             }

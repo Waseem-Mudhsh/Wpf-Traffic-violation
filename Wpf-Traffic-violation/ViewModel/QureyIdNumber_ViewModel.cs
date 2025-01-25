@@ -40,6 +40,7 @@ namespace Wpf_Traffic_violation.ViewModel
         VoilationModel VoilationModel;
         EntryModel EntryModel = new EntryModel();
         helper _helper;
+        bool _canselect = false;
         //int numberOfViolatio = 0;
         //int AmountprvoldOfViolatio = 0;
         #endregion
@@ -507,7 +508,7 @@ namespace Wpf_Traffic_violation.ViewModel
             Showcommand = new RelayCommand(Par => Show(), Par => CanShow());
             Paycommand = new RelayCommand(Par => Pay(), Par => CanPay());
             ConfimPaycommand = new RelayCommand(Par => Confimpay(1), Par => CanConfimpay());
-            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2));
+            ShowDetaileForViolation = new RelayCommand(Par => Confimpay(2), par => Canselect());
             ShowDetaileForViolationNull = new RelayCommand(Par => Confimpay(3));
 
             //Editcommand = new RelayCommand(par => Edit(), par => CanEdit());
@@ -581,52 +582,76 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
-        async Task Show()
+        async void Show()
         {
+            // Reset state
+            var filter = new FilterViolation();
             Grid_Violation = null;
             AmountSelected = 0;
-            if (SelectedProvinces == null || SelectedPlateType == null || Current_Violation.Plate_Num == null)
-            {
-                MessageBox.Show("يجب تحديد رقم اللوحة و نوع اللوحة ورمز المحافظة لتتمكن من البحث بشكل اسرع😊");
-            }
-            else
-            {
-                Current_Violation.Provinceid = SelectedProvinces.Province_id;
-                Current_Violation.Plate_TypeId = SelectedPlateType.Plate_type_id;
-                TotalAmount = 0;
-                //Currunt_Vehicle = new Vehicle();
-                //Currunt_Vehicle= await Task.Run(() => QureyIdNumberModel.GetVehicleCard( Selected_Plate.Plate_id));
-                Grid_Violation = new ObservableCollection<Violation>();
-                Grid_Violation = await Task.Run(() => QureyIdNumberModel.GetViolationQurey(Current_Violation));
-                //Local_CollectionViolation = Grid_Violation.Take(_pageSize).ToObservableCollection<Violation>();
-                //_currentPage = 1;
+            Count = 0; // Ensure Count is initialized
 
-                if (Grid_Violation.Count <= 0)
+            // Validate input fields
+            if (SelectedProvinces == null || SelectedPlateType == null || string.IsNullOrEmpty(Current_Violation.Plate_Num))
+            {
+                MessageBox.Show("يجب تحديد رقم اللوحة و نوع اللوحة ورمز المحافظة لتتمكن من البحث بشكل أسرع😊");
+                return; // Exit the method if validation fails
+            }
+
+            // Set properties based on selected values
+            Current_Violation.Provinceid = SelectedProvinces.Province_id;
+            Current_Violation.Plate_TypeId = SelectedPlateType.Plate_type_id;
+            TotalAmount = 0;
+
+            try
+            {
+                // Initialize the violation collection asynchronously
+                Grid_Violation = QureyIdNumberModel.GetViolationQurey(Current_Violation);
+
+                // Handle empty data
+                if (Grid_Violation.Count == 0)
                 {
+                    _canselect = true;
+
                     MessageBox.Show("لايوجد بيانات");
+                    return; // Exit if no violations are found
                 }
+                Grid_Violation1 = new ObservableCollection<Violation>();
 
-
-
-                foreach (Violation a in Grid_Violation)
+                foreach (var violation in Grid_Violation) // Use ToList() to avoid modifying the collection while iterating
                 {
+                    Grid_Violation1.Add(violation);
+                }
+                // Calculate the total penalty and set selection flag
+                foreach (Violation violation in Grid_Violation)
+                {
+                    AmountSelected += violation.Violation_penalty;
+                    violation.Isselected = true; // Set selection flag
+                }
 
-                    AmountSelected += a.Violation_penalty;
-                    a.Isselected = true;
+                // Apply filter
+                if (Grid_Violation.Count != 0)
+                {
+                    filter = ViolationFilter(Grid_Violation, Grid_ViolationType);
+                    // Calculate counts and total amounts
+                    Count = (Grid_Violation.Count + filter.SelectCountOldYar) - filter.numberOfViolatio;
+                    TotalAmount = (AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar;
 
                 }
-                var filter = ViolationFilter(Grid_Violation, Grid_ViolationType);
 
-                Count = (Grid_Violation.Count + filter.SelectCountOldYar) - filter.numberOfViolatio;
-                TotalAmount = (AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar;
 
+                // Enable selection if there are results
+                if (Count != 0)
+                {
+                    _canselect = true;
+                }
             }
-
-
-
-
-
+            catch (Exception ex)
+            {
+                // Handle unexpected errors and log them
+                MessageBox.Show($"حدث خطأ أثناء التحميل: {ex.Message}");
+            }
         }
+
         void SeelctedAll()
         {
             // Set the IsSelected property for all items in your collection
@@ -637,33 +662,9 @@ namespace Wpf_Traffic_violation.ViewModel
 
         }
         bool CanShow() => true;
-
+        bool Canselect() => _canselect;
         void Pay()
         {
-            //AmountSelected = 0;
-            //Cuontviolation_selected = 0;
-            //Grid_Violation1 = new ObservableCollection<Violation>();
-            //foreach (Violation a in Grid_Violation)
-            //{
-            //    if (a.Isselected == true)
-            //    {
-            //        Grid_Violation1.Add(a);
-            //        Cuontviolation_selected += 1;
-            //        AmountSelected += a.Violation_penalty;
-            //    }
-            //}
-            //Current_Receipt = new Receipt
-            //{
-            //    Account_id = 1,
-            //    Receipt_amount = AmountSelected,
-            //    Receipt_amountwithdiscont = (AmountSelected - discontAmnt),
-            //    Receipt_status = false,
-            //    Receipt_date = DateTime.Now.ToString(),
-            //    Post_date = ""
-
-            //};
-            ////Update Amount Selected With Discount to Appeare On Window_PayViolation Win
-            //AmountSelected = (AmountSelected - discontAmnt);
             prepareviolation();
             win = new Window_PayViolation { DataContext = this };
             win.datep.Text = DateTime.Now.ToString();
@@ -673,8 +674,10 @@ namespace Wpf_Traffic_violation.ViewModel
                 win.ShowDialog();
         }
 
-        public void prepareviolation()
+        public async void prepareviolation()
         {
+            var filter = new FilterViolation();
+
             AmountSelected = 0;
             Cuontviolation_selected = 0;
 
@@ -691,9 +694,14 @@ namespace Wpf_Traffic_violation.ViewModel
                     }
                 }
 
-                var filter = ViolationFilter(Grid_Violation1, Grid_ViolationType);
+                if (Grid_Violation1.Count != 0)
+                {
+                    filter = ViolationFilter(Grid_Violation1, Grid_ViolationType);
+
+                    AmountSelected = (((AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar) - discontAmnt);
+
+                }
                 //Update Amount Selected With Discount to Appeare On Window_PayViolation Win
-                AmountSelected = (((AmountSelected - filter.AmountprvoldOfViolatio) + filter.AmountOfCountOldYar) - discontAmnt);
                 //if (AmountOfCountOldYar != 0)
                 //    AmountSelected = (AmountSelected + AmountOfCountOldYar);
 
@@ -714,21 +722,45 @@ namespace Wpf_Traffic_violation.ViewModel
         }
         bool CanPay() => Current_Violation != null;
 
-        public void Confimpay(int action)
+        public async void Confimpay(int action)
         {
             try
             {
                 ObservableCollection<Violation> result = new ObservableCollection<Violation>();
                 prepareviolation();
-
                 if (Cuontviolation_selected > 0)
                 {
                     foreach (var item in Grid_Violation1)
                     {
-                        item.Violation_date = System.DateTime.Parse(item.Violation_date, CultureInfo.InvariantCulture).ToShortDateString();
+                        try
+                        {
+                            // Use a specific date format for parsing
+                            string dateFormat = "dd/MM/yyyy"; // Replace with the actual expected date format
+                            item.Violation_date = DateTime.ParseExact(
+                                item.Violation_date,
+                                dateFormat,
+                                CultureInfo.InvariantCulture
+                            ).ToShortDateString();
+                        }
+                        catch (FormatException)
+                        {
+                            // Handle cases where the format doesn't match
+                            try
+                            {
+                                // Attempt parsing with the current culture as a fallback
+                                item.Violation_date = DateTime.Parse(
+                                    item.Violation_date,
+                                    CultureInfo.CurrentCulture
+                                ).ToShortDateString();
+                            }
+                            catch
+                            {
+                                // Handle the failure gracefully
+                                item.Violation_date = "Invalid Date";
+                            }
+                        }
                     }
                     result = Grid_Violation1;
-
                 }
                 int x = 1;
                 if (action == 1)
@@ -773,29 +805,6 @@ namespace Wpf_Traffic_violation.ViewModel
                                     ReciptPrint.ReceiptId = receiptid.Receipt_id;
                                     ReciptPrint.ViolationPenalty = (int)isCreated.Receipt_amountwithdiscont;
                                     ReciptPrint.DateOfReceipt = (DateTime.Now).ToString("yyyy/MM/dd");
-
-                                    //foreach (var type in Grid_ViolationType)
-                                    //{
-                                    //    if (type.Violation_type_id == v.Violation_type_id)
-                                    //    {
-                                    //        if (DateTime.TryParse(v.Violation_date, out DateTime parsedDate))
-                                    //        {
-                                    //            if (parsedDate.Year <= 2016)
-                                    //            {
-                                    //                AmountprvoldOfViolatio += type.Maximum_price;
-                                    //                AmountOfCountOldYar += (type.Maximum_price * int.Parse(v.Notise));
-                                    //                SelectCountOldYar += int.Parse(v.Notise);
-                                    //                numberOfViolatio++;
-
-                                    //            }
-                                    //        }
-
-                                    //        ReciptPrint.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                                    //        break;
-                                    //    }
-
-                                    //}
-
                                     v.Payment_status = 1;
                                     //VoilationModel.OperarionViolation(v, "Update");
                                     VoilationModel.updateVilation(v.Violation_id);
@@ -804,7 +813,7 @@ namespace Wpf_Traffic_violation.ViewModel
                             }
                             if (receiptid.Receipt_id != 0)
                             {
-                                string ArabicWord = arabicNumberToText.getArabicText(ReciptPrint.ViolationPenalty);
+                                string ArabicWord = arabicNumberToText.getArabicText(ReciptPrint.ViolationPenalty) + " " + "ريال فقط لاغير";
                                 ReciptPrint.ReasonOfPaid = ArabicWord;
                                 ObservableCollection<ReceiptPrintModel> model = new ObservableCollection<ReceiptPrintModel>();
                                 ReciptPrint.CountOfType = Count;//(ReciptPrint.ViolationType.Count - numberOfViolatio);
@@ -838,7 +847,6 @@ namespace Wpf_Traffic_violation.ViewModel
                                 };
 
                                 ShowReport.ReportViewerDemo.SetPageSettings(pageSettings);
-
                                 //ShowReport.ReportViewerDemo.SetPageSettings(printerSettings.DefaultPageSettings);
                                 ShowReport.ReportViewerDemo.LocalReport.ReportEmbeddedResource = "Wpf_Traffic_violation.Views.Reports.Violations.Recipt_Print.rdlc";
                                 ShowReport.ReportViewerDemo.RefreshReport();
@@ -860,6 +868,8 @@ namespace Wpf_Traffic_violation.ViewModel
                             MessageBox.Show("تمت عملية السداد بنجاح");
                             win.Close();
                             Grid_Violation.Clear();
+
+                            _canselect = false;
                         }
                         else
                         {
@@ -874,12 +884,16 @@ namespace Wpf_Traffic_violation.ViewModel
                 {
                     try
                     {
+
                         if (SelectedProvinces == null && SelectedPlateType == null)
                         {
                             MessageBox.Show("يجب ادخال البيانات");
                         }
                         else
                         {
+
+                            Show();
+
                             RrivewViolation rrivewViolation = new RrivewViolation
                             {
                                 DateReview = Convert.ToString(DateTime.Now),
@@ -907,6 +921,8 @@ namespace Wpf_Traffic_violation.ViewModel
                             {
                                 reviewViolationRecipt(result);
                             }
+                            _canselect = false;
+
                         }
 
                     }
@@ -934,7 +950,7 @@ namespace Wpf_Traffic_violation.ViewModel
 
 
         }
-        public void reviewViolationRecipt(ObservableCollection<Violation> result)
+        public async void reviewViolationRecipt(ObservableCollection<Violation> result)
         {
 
             var ReciptPrint = new ReceiptPrintModel();
@@ -971,6 +987,8 @@ namespace Wpf_Traffic_violation.ViewModel
             }
             else
             {
+                if (result.Count == 0)
+                    result = Grid_Violation1;
 
                 var filters = ViolationFilter(Grid_Violation1, Grid_ViolationType);
                 ReciptPrint.ViolationType.AddRange(filters.ViolationType);
@@ -1024,6 +1042,8 @@ namespace Wpf_Traffic_violation.ViewModel
             SelectCountOldYar = 0;
             AmountOfCountOldYar = 0;
             //AmountSelected = 0;
+            await asyncQureyIdNumber();
+
 
 
         }
@@ -1031,31 +1051,41 @@ namespace Wpf_Traffic_violation.ViewModel
         {
             FilterViolation filterViolation = new FilterViolation();
             filterViolation.numberOfViolatio = 0;
-            foreach (Violation v in violations)
+            try
             {
 
-                foreach (var type in violationTypes)
+                foreach (Violation v in violations)
                 {
-                    if (type.Violation_type_id == v.Violation_type_id)
-                    {
-                        if (DateTime.TryParse(v.Violation_date, out DateTime parsedDate))
-                        {
-                            if (parsedDate.Year <= 2016)
-                            {
-                                filterViolation.AmountprvoldOfViolatio += type.Maximum_price;
-                                filterViolation.AmountOfCountOldYar += (type.Maximum_price * int.Parse(v.Notise));
-                                filterViolation.SelectCountOldYar += int.Parse(v.Notise);
-                                filterViolation.numberOfViolatio++;
 
+                    foreach (var type in violationTypes)
+                    {
+                        if (type.Violation_type_id == v.Violation_type_id)
+                        {
+                            if (DateTime.TryParse(v.Violation_date, out DateTime parsedDate))
+                            {
+                                if (parsedDate.Year <= 2016)
+                                {
+                                    filterViolation.AmountprvoldOfViolatio += type.Maximum_price;
+                                    filterViolation.AmountOfCountOldYar += (type.Maximum_price * int.Parse(v.Notise));
+                                    filterViolation.SelectCountOldYar += int.Parse(v.Notise);
+                                    filterViolation.numberOfViolatio++;
+
+                                }
                             }
+
+                            filterViolation.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
+                            break;
                         }
 
-                        filterViolation.ViolationType.Add(new KeyValuePair<string, int>(type.Violation_type_name, type.Maximum_price));
-                        break;
                     }
-
                 }
             }
+            catch (Exception e)
+            {
+
+            }
+
+
             return filterViolation;
         }
 

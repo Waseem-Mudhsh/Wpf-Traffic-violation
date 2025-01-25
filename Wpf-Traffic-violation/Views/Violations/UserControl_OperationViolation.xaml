@@ -55,32 +55,87 @@
                             Command="{Binding FilterViolation}" materialDesign:ShadowAssist.ShadowDepth="Depth0" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Search" Width="32" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center"></materialDesign:PackIcon>
                 </Button>
-                <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35"  ItemsSource="{Binding GridPlateType}" 
-                                              ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14"  Padding="10,10,0,0"
-                                              ValueMemberPath="Plate_type_name" 
-                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
-                                             
-                                          >
+                <ComboBox Name="filterSearchbytypplate" 
+          Width="100" 
+          Height="35" 
+          ItemsSource="{Binding GridPlateType}" 
+          DisplayMemberPath="Plate_type_name" 
+          SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+          FontSize="16" 
+          Padding="10,5,10,10" 
+                          FontWeight="Bold"
+          Foreground="Black" 
+          Background="#F7F7F7" 
+          BorderBrush="#CCCCCC" 
+          BorderThickness="1" 
+          Margin="0,9">
+                    <ComboBox.Resources>
+                        <!-- Hover Effect Style -->
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Padding" Value="5"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#E0E0E0"/>
+                                    <!-- Light gray on hover -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#D6EAF8"/>
+                                    <!-- Light blue when selected -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Resources>
+                </ComboBox>
 
-                    <controls:AutoCompleteBox.InputBindings >
-                        <KeyBinding Command="{Binding FilterViolation}" Key="Enter"  ></KeyBinding>
-                    </controls:AutoCompleteBox.InputBindings>
-                </controls:AutoCompleteBox>
+
 
                 <TextBlock Text="نوع اللوحة" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
-                <controls:AutoCompleteBox Name="filterSearchbycode"   Width="100" Height="35"  ItemsSource="{Binding GridProvinces}" TextChanged="filterSearchbytypplate_TextChanged"
-                                              ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14"  Padding="10,10,0,0"
-                                              ValueMemberPath="Province_id" 
-                                              SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedProvinces.Province_id,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
-                                             
-                                          >
+                <ComboBox Name="filterSearchbycode" 
+          Width="100" 
+          Height="35" 
+          ItemsSource="{Binding GridProvinces}" 
+          DisplayMemberPath="Province_id" 
+          SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+          FontSize="16" 
+          FontWeight="Bold"
 
-                    <controls:AutoCompleteBox.InputBindings >
-                        <KeyBinding Command="{Binding FilterViolation}" Key="Enter"  ></KeyBinding>
-                    </controls:AutoCompleteBox.InputBindings>
-                </controls:AutoCompleteBox>
+          Padding="10,5,10,5" 
+          Foreground="Black" 
+          Background="#F7F7F7" 
+          BorderBrush="#CCCCCC" 
+          BorderThickness="1" 
+          Margin="0,9">
+                    <ComboBox.Resources>
+                        <!-- Hover Effect Style -->
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Padding" Value="5"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#E0E0E0"/>
+                                    <!-- Light gray on hover -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#D6EAF8"/>
+                                    <!-- Light blue when selected -->
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Resources>
+                </ComboBox>
+
+
                 <TextBlock Text="رمز المحافظه" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
                 <TextBox    x:Name="textBox" Width="100" Height="35" Text="{Binding SelectedPlatNum}" TextChanged="textBox_TextChanged"  
                         materialDesign:HintAssist.Hint="" 
