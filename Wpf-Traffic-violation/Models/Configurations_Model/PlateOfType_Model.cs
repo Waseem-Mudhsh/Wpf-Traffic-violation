@@ -108,7 +108,7 @@ namespace Wpf_Traffic_violation.Models
 
                 var result = isphelper.Operarion(param, opreationSql.Sp_PlateTypeOperation, validationRegex.nameOfSp(opreationSql.Sp_PlateTypeOperation));
 
-                if (!result.Data)
+                if (result.Data)
                 {
                     response = false;
 

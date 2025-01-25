@@ -22,27 +22,38 @@
            
                
                 <TextBlock Text="نوع اللوحة" Margin="10 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
-                    
-                <controls:AutoCompleteBox Name="filterSearchbytypplate"   Width="100" Height="35" ItemsSource="{Binding GridPlateType}"  Foreground="Black" 
-                                              ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14"  Padding="10,10,0,0"
-                                              ValueMemberPath="Plate_type_name" 
-                                              SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedPlateType.Plate_type_name,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
-                                             
-                                          />
+
+                <ComboBox Name="filterSearchbytypplate" 
+          Width="100" 
+          Height="35" 
+          ItemsSource="{Binding GridPlateType}" 
+          DisplayMemberPath="Plate_type_name" 
+          SelectedItem="{Binding SelectedPlateType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+          FontSize="14" 
+          Padding="10,10,0,0" 
+          Foreground="Black" 
+          Margin="0,9">
+                </ComboBox>
+
 
 
 
                 <TextBlock Text="رمز المحافظه" Margin="20 0 5 0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Tajawal" FontSize="14" FontWeight="Bold"/>
 
-             
-                <controls:AutoCompleteBox Name="filterSearchbycode"   Width="100" Height="35"  ItemsSource="{Binding GridProvinces}" Foreground="Black"  Background="White"
-                                              ItemTemplate="{StaticResource AutoId}" 
-                                              FontSize="14"  Padding="10,10,0,0"
-                                              ValueMemberPath="Province_id" 
-                                              SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Text="{Binding SelectedProvinces.Province_id,ValidatesOnDataErrors=True}" FilterMode="Contains" Margin="0 9"
-                                             
-                                          />
+
+                <ComboBox Name="filterSearchbycode" 
+          Width="100" 
+          Height="35" 
+          ItemsSource="{Binding GridProvinces}" 
+          DisplayMemberPath="Province_id" 
+          SelectedItem="{Binding SelectedProvinces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+          FontSize="14" 
+          Padding="10,10,0,0" 
+          Foreground="Black" 
+          Background="White" 
+          Margin="0,9">
+                </ComboBox>
+
                 <Button Width="40" Height="40" Padding="0" Command="{Binding Showcommand}" Name="searchBT1" Click="Button_Click" Background="OrangeRed" materialDesign:ShadowAssist.ShadowDepth="Depth1" >
                     <materialDesign:PackIcon Kind="Search" Foreground="White"  Width="24" Height="24" HorizontalAlignment="Center" />
                 </Button>

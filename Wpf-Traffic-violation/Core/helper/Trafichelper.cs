@@ -14,6 +14,13 @@ public class helper : IValueConverter
     public Wpf_Traffic_violation.MagrationDB.Violation CreateViolation(Wpf_Traffic_violation.Models.Violations_Model.Violation Violation)
     {
         byte[] img = null;
+        //string dateFormat = "dd/MM/yyyy"; // Replace with the actual expected date format
+
+        //string viol_Date = DateTime.ParseExact(
+        //                        Violation.Violation_date,
+        //                        dateFormat,
+        //                        CultureInfo.InvariantCulture
+        //                    ).ToShortDateString();
 
         var data = new Wpf_Traffic_violation.MagrationDB.Violation
         {

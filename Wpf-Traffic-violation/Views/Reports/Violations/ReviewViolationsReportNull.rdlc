@@ -110,7 +110,7 @@
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -149,7 +149,7 @@
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -204,7 +204,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!VehicleId.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -218,7 +220,7 @@
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -234,7 +236,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!VehicleTypeName.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -248,7 +252,7 @@
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -270,7 +274,6 @@
                   <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -283,7 +286,7 @@
         <Top>4.2175in</Top>
         <Left>0.25in</Left>
         <Height>0.25in</Height>
-        <Width>1.23958in</Width>
+        <Width>1.44791in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -302,7 +305,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>عقيد/ عبده الحميري</Value>
+                <Value>عقيد/ عبد العزيزالحاج</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
@@ -322,7 +325,7 @@
         <Top>4.52306in</Top>
         <Left>0.25in</Left>
         <Height>0.25in</Height>
-        <Width>1.23958in</Width>
+        <Width>1.44791in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -493,14 +496,16 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!NameCreatedby.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>NameCreatedby</rd:DefaultName>
-        <Top>4.52306in</Top>
+        <Top>4.50917in</Top>
         <Left>5.83208in</Left>
         <Height>0.25in</Height>
         <Width>1.60228in</Width>

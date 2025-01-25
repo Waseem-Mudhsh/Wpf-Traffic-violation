@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Wpf_Traffic_violation.MagrationDB;
 
 namespace Wpf_Traffic_violation.Services
@@ -14,24 +15,36 @@ namespace Wpf_Traffic_violation.Services
         }
         public Wpf_Traffic_violation.MagrationDB.Receipt CreateNewRecipt(Receipt receipt)
         {
-            var resoult = new Wpf_Traffic_violation.MagrationDB.Receipt();
+            var result = new Wpf_Traffic_violation.MagrationDB.Receipt();
             try
             {
-                resoult = objcontext.Receipts.Add(receipt);
-                var Iscommit = objcontext.SaveChanges();
-                if (Iscommit > 0)
+                // Retrieve the last ID
+                int lastId = objcontext.Receipts
+                                       .OrderByDescending(r => r.Receipt_id) // Assuming 'Id' is the primary key column
+                                       .Select(r => r.Receipt_id)
+                                       .FirstOrDefault();
+
+                // Assign a new ID
+                receipt.Receipt_id = lastId + 1;
+
+                // Add the new receipt
+                result = objcontext.Receipts.Add(receipt);
+
+                // Commit changes to the database
+                var isCommit = objcontext.SaveChanges();
+                if (isCommit > 0)
                 {
-                    return resoult;
+                    return result;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                // Handle exceptions (logging, re-throwing, etc.)
+                Console.WriteLine($"Error: {ex.Message}");
             }
-            return resoult;
-
-
+            return result;
         }
+
 
         public Wpf_Traffic_violation.MagrationDB.Receipt_detail CreateReciptDetail(Receipt_detail prpareModel)
         {

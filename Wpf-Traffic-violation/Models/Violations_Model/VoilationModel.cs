@@ -383,7 +383,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
             return excute;
         }
-        public bool ExcutOperarionViolation(Violation Violation, int operationType)
+        public bool ExcutOperarionViolation(Violation Violation, int operationType, MagrationDB.TrafficViolationEntitiesUat context = null)
         {
             bool excute;
             var violationData = _helper.CreateViolation(Violation);
@@ -391,7 +391,7 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
 
             if (operationType == 1)
             {
-                excute = violationServices.Insert(violationData);
+                excute = violationServices.Insert(violationData, context);
             }
             else if (operationType == 2)
             {
@@ -469,12 +469,14 @@ namespace Wpf_Traffic_violation.Models.Violations_Model
                 if (op.ShowDialog() == true)
                 {
                     var data = _excelReader.ReadExcelFile(op.FileName);
-                    if (data)
+                    if (!data)
                     {
-                        MessageBox.Show("تم اضافة المخالفات بنجاح");
-                        return true;
+                        MessageBox.Show("لم يتم ادخال اي بيانات يتم تصحيح البيانات ومعاودة الادخال  ");
+                        return false;
 
                     }
+                    MessageBox.Show("تم اضافة المخالفات بنجاح");
+                    return true;
 
 
                 }

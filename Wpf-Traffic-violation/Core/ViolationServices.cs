@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SqlClient;
-
 using System.Linq;
 using System.Windows;
 using Wpf_Traffic_violation.MagrationDB;
@@ -253,8 +252,6 @@ namespace Wpf_Traffic_violation.Services
                     return i;
                 }
 
-
-
             }
             var violationmodel = new Violation_type
             {
@@ -487,12 +484,12 @@ namespace Wpf_Traffic_violation.Services
         /// </summary>
         /// <param name="violation"></param>
         /// <returns></returns>
-        public bool Insert(MagrationDB.Violation violation)
+        public bool Insert(MagrationDB.Violation violation, TrafficViolationEntitiesUat context = null)
         {
             try
             {
-                objcontext.Violations.Add(violation);
-                var result = objcontext.SaveChanges();
+                context.Violations.Add(violation);
+                var result = context.SaveChanges();
                 if (result > 0)
                 {
                     return true;

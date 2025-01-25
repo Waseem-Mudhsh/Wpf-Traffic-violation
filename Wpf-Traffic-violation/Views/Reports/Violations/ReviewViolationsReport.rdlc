@@ -149,7 +149,7 @@
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -188,7 +188,7 @@
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -227,7 +227,7 @@
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -307,7 +307,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -345,7 +345,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -383,7 +383,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -421,7 +421,7 @@
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -461,7 +461,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Notise.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Times New Roman</FontFamily>
+                                <FontSize>12pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -493,7 +496,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Violation_date.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>times New Roman</FontFamily>
+                                <FontSize>12pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -525,7 +531,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!String_Street.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Times New Roman</FontFamily>
+                                <FontSize>12pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -557,7 +566,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!String_ViolationType.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Times New Roman</FontFamily>
+                                <FontSize>12pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -621,7 +633,10 @@
             <TextRuns>
               <TextRun>
                 <Value>=Sum(Fields!VounchrNum.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -635,7 +650,7 @@
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -651,7 +666,10 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!VehicleId.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -665,7 +683,7 @@
         <ZIndex>9</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -681,7 +699,10 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!VehicleTypeName.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>12pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -695,7 +716,7 @@
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -711,7 +732,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=Sum(Fields!CountAllviolation.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -1014,7 +1037,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!NameCreatedby.Value, "DataSetReport")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
